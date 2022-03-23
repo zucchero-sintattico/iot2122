@@ -21,5 +21,7 @@ void fade() {
 }
 
 void stopFade() {
-  digitalWrite(FADE_PIN, LOW);
+  brightness = 0;
+  fadeAmount = 5;
+  analogWrite(FADE_PIN, LOW);
 }

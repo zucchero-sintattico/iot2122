@@ -1,14 +1,18 @@
 #include "potentiometer.h"
 #include "fade.h"
-
-unsigned long time0 = 0;
-bool stopped = false;
+#include "sleep.h"
 
 void setup() {
   Serial.begin(9600);
-  fadeSetup();
+  pinMode(2, INPUT);
+  attachInterrupt(digitalPinToInterrupt(2), wakeUp, RISING);
 }
 
 void loop() {
   fade();
+  sleep();
+}
+
+void wakeUp(){
+  Serial.println("Ciao mi sono svegliato");
 }

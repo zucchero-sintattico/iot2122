@@ -3,3 +3,7 @@
 
 #define FADE_PIN 9
 #define FADE_INTERVAL 10
+
+#define BUTTONS_NUMBER 4
+#define BASE_BUTTON_PIN 2
+#define SECONDS_TO_SLEEP 10
