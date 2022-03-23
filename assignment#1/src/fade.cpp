@@ -1,17 +1,25 @@
 #include "fade.h"
 
-int value = 0;
-bool inc = true;
+int brightness = 0;
+int fadeAmount = 5;
 unsigned long prevOperationTimestamp = 0;
+
+void fadeSetup() {
+  pinMode(FADE_PIN, OUTPUT);
+}
 
 void fade() {
   unsigned long newOperationTimestamp = millis();
   if (newOperationTimestamp - prevOperationTimestamp > FADE_INTERVAL) {
     prevOperationTimestamp = newOperationTimestamp;
-    analogWrite(FADE_PIN, value);
-    value += inc ? 1 : -1;
-    if (value >= 255 || value <= 0) {
-      inc = !inc;
+    analogWrite(FADE_PIN, brightness);
+    brightness += fadeAmount;
+    if (brightness >= 255 || brightness <= 0) {
+      fadeAmount = -fadeAmount;
     }
   }
+}
+
+void stopFade() {
+  digitalWrite(FADE_PIN, LOW);
 }

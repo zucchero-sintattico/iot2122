@@ -2,4 +2,4 @@
 #define DIFFICULTY_LEVELS 8
 
 #define FADE_PIN 9
-#define FADE_INTERVAL 2
+#define FADE_INTERVAL 10

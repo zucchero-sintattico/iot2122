@@ -1,14 +1,14 @@
 #include "potentiometer.h"
 #include "fade.h"
 
-
+unsigned long time0 = 0;
+bool stopped = false;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(FADE_PIN, OUTPUT); // TODO: meglio metterlo come fadeSetup()?
+  fadeSetup();
 }
 
 void loop() {
-  Serial.println("ciao");
-  delay(1000);
+  fade();
 }
