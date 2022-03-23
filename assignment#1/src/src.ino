@@ -9,5 +9,6 @@ void setup() {
 }
 
 void loop() {
-  fade();
+  Serial.println("ciao");
+  delay(1000);
 }
