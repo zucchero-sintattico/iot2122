@@ -5,13 +5,9 @@
 #include "fade/fade.h"
 //#include "sleep/sleep.h"
 
-#include "game/game-state.h"
+#include "game/game-data.h"
 
-GameState currentGameState = WAITING;
-
-int T1 = 0;
-int T2 = 0;
-int S = 0;
+GameData gameData;
 
 void setup() {
   Serial.begin(9600);
@@ -21,7 +17,7 @@ void setup() {
 }
 
 void loop() {
-  switch (currentGameState) {
+  switch (gameData.currentGameState) {
     case WAITING: onWaitingState(); break;
     case SLEEP: onSleepState(); break;
     case GAME_STARTING: onRoundStartingState(); break;
@@ -36,26 +32,26 @@ void loop() {
 void onWaitingState() {
   //TODO: fade
   //TODO: Check if 10 seconds has passed
-    currentGameState = SLEEP;
+    gameData.currentGameState = SLEEP;
 
   //TODO: Check if button 1 is pressed
-    currentGameState = GAME_STARTING;
+    gameData.currentGameState = GAME_STARTING;
 }
 
 void onSleepState() {
   //TODO: goToSleep();
-  currentGameState = WAITING;
+  gameData.currentGameState = WAITING;
 }
 
 void onGameStartingState() {
   // TODO: Setup game variables (S, T2, Score)
-  currentGameState = ROUND_STARTING;
+  gameData.currentGameState = ROUND_STARTING;
 }
 
 
 void onRoundStartingState() {
   // TODO: Select a Random T1
-  currentGameState = MOVING_BALL;
+  gameData.currentGameState = MOVING_BALL;
 }
 
 void onMovingBallState() {
@@ -63,7 +59,7 @@ void onMovingBallState() {
     // TODO: every S velocity
       // TODO: move ball to the next one
 
-  currentGameState = STOPPED_BALL;
+  gameData.currentGameState = STOPPED_BALL;
 }
 
 
@@ -72,23 +68,23 @@ void onStoppedBallState() {
     // TODO: Check if a button is pressed
       
       // TODO: if the button was correct:
-        currentGameState = END_OF_ROUND;
+        gameData.currentGameState = END_OF_ROUND;
       // TODO: else:
-        currentGameState = END_OF_GAME;
+        gameData.currentGameState = END_OF_GAME;
 
   // TODO: else:
-    currentGameState = END_OF_GAME;
+    gameData.currentGameState = END_OF_GAME;
 }
 
 void onEndOfRoundState() {
   // TODO: Increase S and decrease T2 
   // TODO: Increase Score
-  currentGameState = ROUND_STARTING;
+  gameData.currentGameState = ROUND_STARTING;
 }
 
 void onEndOfGameState() {
   // TODO: print results
-  currentGameState = WAITING;
+  gameData.currentGameState = WAITING;
 }
 
 void wakeUp(){
