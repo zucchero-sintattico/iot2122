@@ -1,4 +1,6 @@
 #include "SleepManager.h"
+
+#include <EnableInterrupt.h>
 #include <Arduino.h>
 #include <avr/sleep.h>
 

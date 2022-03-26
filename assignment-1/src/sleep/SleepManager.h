@@ -1,7 +1,7 @@
 #ifndef SLEEP_MANAGER_H
 #define SLEEP_MANAGER_H
 
-#include <EnableInterrupt.h>
+#include <stdint.h>
 
 class SleepManager {
 

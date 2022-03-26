@@ -1,22 +1,17 @@
-#define LIBCALL_ENABLEINTERRUPT
-
 #include <Arduino.h>
-#include "config.h"
 
-//#include "fade/FadeManager.h"
+#include "config.h"
+#include "fade/FadeManager.h"
 #include "sleep/SleepManager.h"
 
 
-uint8_t wakeUpPins[4] = {5, 6, 7, 8};
-
-//FadeManager *fadeManager = new FadeManager(9, 10, 5);
-SleepManager *sleepManager = new SleepManager(wakeUpPins);
+FadeManager *fadeManager = new FadeManager(9, 10, 5);
+SleepManager *sleepManager = new SleepManager((uint8_t[4]){5, 6, 7, 8});
 
 void setup() {
   Serial.begin(SERIAL_VELOCITY);
-  Serial.println("SETUPP");
   sleepManager->setup();
-  //fadeManager->setup();
+  fadeManager->setup();
 }
 
 void loop() {
