@@ -13,7 +13,7 @@ class PotentiometerManager {
         PotentiometerManager(uint8_t potentiometerPin, uint8_t difficultyLevels);
         void setup();
         int readPotentiometer();
-        uint8_t getDifficulty();
+        uint8_t getDifficultyFactor();
 
 };
 

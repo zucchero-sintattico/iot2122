@@ -9,6 +9,11 @@
 class Game {
 
     private:
+
+        int defaultStoppedBallTime = 5000;
+        int minBallMovingTime = 3000;
+
+        GameState currentGameState = WELCOME;
         GameData *gameData;
         FadeManager *fadeManager;
         SleepManager *sleepManager;
@@ -19,13 +24,14 @@ class Game {
         unsigned long prevOperationTimestamp;
 
     public:
-        Game(GameData *gameData, FadeManager *fadeManager, SleepManager *sleepManager, PotentiometerManager *potentiometerManager);
+        Game(FadeManager *fadeManager, SleepManager *sleepManager, PotentiometerManager *potentiometerManager);
         void setup();
         void computeIteration();
 
     private:
         void changeState(GameState newState);
 
+        void onWelcomeState();
         void onWaitingState();
         void onSleepState();
         void onGameStartingState();

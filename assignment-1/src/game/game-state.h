@@ -4,6 +4,9 @@
  */
 enum GameState {
 
+    /// The welcome state.
+    WELCOME,
+
     /// The game is waiting for the player to press the first button.
     SLEEP,
 

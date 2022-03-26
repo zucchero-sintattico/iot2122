@@ -2,8 +2,7 @@
 
 #include <Arduino.h>
 
-Game::Game(GameData *gameData, FadeManager *fadeManager, SleepManager *sleepManager, PotentiometerManager *potentiometerManager) {
-  this->gameData = gameData;
+Game::Game(FadeManager *fadeManager, SleepManager *sleepManager, PotentiometerManager *potentiometerManager) {
   this->fadeManager = fadeManager;
   this->sleepManager = sleepManager;
   this->potentiometerManager = potentiometerManager;
@@ -19,7 +18,8 @@ void Game::setup() {
 }
 
 void Game::computeIteration() {
-  switch (this->gameData->currentGameState) {
+  switch (this->currentGameState) {
+    case WELCOME: this->onWelcomeState(); break;
     case WAITING: this->onWaitingState(); break;
     case SLEEP: this->onSleepState(); break;
     case GAME_STARTING: this->onGameStartingState(); break;
@@ -32,7 +32,7 @@ void Game::computeIteration() {
 }
 
 void Game::changeState(GameState newState) {
-  this->gameData->currentGameState = newState;
+  this->currentGameState = newState;
 }
 
 bool Game::isWaitingTimeElapsed() {
@@ -41,6 +41,21 @@ bool Game::isWaitingTimeElapsed() {
 
 bool Game::hasStartingButtonBeenPressed() {
   // TODO: Implement
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// States
+////////////////////////////////////////////////////////////////////////////////
+
+void Game::onWelcomeState() {
+  Serial.println("Welcome to the Catch the Bouncing Led Ball Game. Press Key T1 to Start.");
+  this->changeState(WAITING);
+}
+
+void Game::onSleepState() {
+  this->sleepManager->sleep();
+  this->changeState(WELCOME);
 }
 
 void Game::onWaitingState() {
@@ -56,19 +71,24 @@ void Game::onWaitingState() {
 }
 
 
-void Game::onSleepState() {
-  this->sleepManager->sleep();
-  this->changeState(WAITING);
-}
-
 void Game::onGameStartingState() {
-  // TODO: Setup game variables (S, T2, Score)
+  this->gameData = new GameData({
+    ballMovingSpeed: 0,
+    ballMovingDuration: 0,
+    stoppedBallTime: this->defaultStoppedBallTime,
+    difficultyFactor: this->potentiometerManager->getDifficultyFactor(),
+    score: 0
+  });
+
+  Serial.println("GO!");
   this->changeState(ROUND_STARTING);
 }
 
 
 void Game::onRoundStartingState() {
   // TODO: Select a Random T1
+  this->gameData->ballMovingDuration = this->minBallMovingTime + random(2000 + 1);
+
   this->changeState(MOVING_BALL);
 }
 
@@ -96,7 +116,7 @@ void Game::onStoppedBallState() {
 
 void Game::onEndOfRoundState() {
   // TODO: Increase S and decrease T2 
-  // TODO: Increase Score
+  // TODO: Increase score
   this->changeState(ROUND_STARTING);
 }
 

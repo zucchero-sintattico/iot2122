@@ -5,18 +5,18 @@
 
 /**
  * Game data holder.
- * @param S: The amount of time;
- * @param T1: The time of the first button press;
- * @param T2: The time of the second button press;
- * @param Score: The score;
- * @param currentGameState: The current game state.
+ * @param ballMovingSpeed(S): The amount of time;
+ * @param ballMovingDuration(T1): The time of the first button press;
+ * @param stoppedBallTime(T2): The time of the second button press;
+ * @param difficultyFactor(F): The difficulty factor.
+ * @param score: The score;
  */
 struct GameData {
-    int S;
-    int T1;
-    int T2;
-    int Score;
-    GameState currentGameState;
+    float ballMovingSpeed;
+    int ballMovingDuration;
+    int stoppedBallTime;
+    uint8_t difficultyFactor;
+    int score;
 };
 
 #endif
