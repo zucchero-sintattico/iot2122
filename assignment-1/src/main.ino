@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include <EnableInterrupt.h>
+#include <avr/sleep.h>
 
 #include "config.h"
 
@@ -7,7 +9,7 @@
 #include "game/game.h"
 
 #include "fade/FadeManager.h"
-
+#include "sleep/SleepManager.h"
 /*
 ProgramConfig programConfig = {
   serialBaudRate: 9600
@@ -38,11 +40,16 @@ Game *game = new Game(gameData);
 
 FadeManager *fadeManager = new FadeManager(9, 10, 5);
 
+uint8_t wakeUpPins[4] = {2, 3, 4, 5};
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(SERIAL_VELOCITY);
+  SleepManager::setup(wakeUpPins);
   fadeManager->setup();
 }
 
 void loop() {
-  fadeManager->fade();
+  Serial.println("Going to sleep");
+  delay(500);
+  SleepManager::sleep();
+  Serial.println("Waked up");
 }

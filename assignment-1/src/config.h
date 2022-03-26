@@ -1,3 +1,4 @@
+#define SERIAL_VELOCITY 9600
 #define POT_PIN A0
 #define DIFFICULTY_LEVELS 8
 
