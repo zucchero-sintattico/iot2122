@@ -2,6 +2,8 @@
 #define FADE_MANAGER
 #include <stdint.h>
 
+//#define LIBCALL_ENABLEINTERRUPT
+
 /**
  * The Led Fader Manager
  */
