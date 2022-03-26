@@ -20,7 +20,7 @@ void loop() {
   switch (gameData.currentGameState) {
     case WAITING: onWaitingState(); break;
     case SLEEP: onSleepState(); break;
-    case GAME_STARTING: onRoundStartingState(); break;
+    case GAME_STARTING: onGameStartingState(); break;
     case ROUND_STARTING: onRoundStartingState(); break;
     case MOVING_BALL: onMovingBallState(); break;
     case STOPPED_BALL: onStoppedBallState(); break;
