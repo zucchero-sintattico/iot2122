@@ -1,12 +1,21 @@
 #include "game.h"
 
-Game::Game(GameData *gameData, FadeManager *fadeManager) {
+#include <Arduino.h>
+
+Game::Game(GameData *gameData, FadeManager *fadeManager, SleepManager *sleepManager, PotentiometerManager *potentiometerManager) {
   this->gameData = gameData;
   this->fadeManager = fadeManager;
+  this->sleepManager = sleepManager;
+  this->potentiometerManager = potentiometerManager;
 }
 
 void Game::setup() {
+  this->fadeManager->setup();
+  this->sleepManager->setup();
+  this->potentiometerManager->setup();
 
+  
+  this->prevOperationTimestamp = millis();
 }
 
 void Game::computeIteration() {
@@ -26,20 +35,29 @@ void Game::changeState(GameState newState) {
   this->gameData->currentGameState = newState;
 }
 
+bool Game::isWaitingTimeElapsed() {
+  return (millis() - this->prevOperationTimestamp) > this->waitingTime;
+}
+
+bool Game::hasStartingButtonBeenPressed() {
+  // TODO: Implement
+}
 
 void Game::onWaitingState() {
   this->fadeManager->fade();
-  
-  //TODO: Check if 10 seconds has passed
-    this->changeState(SLEEP);
 
-  //TODO: Check if button 1 is pressed
+  if (this->isWaitingTimeElapsed()) {
+    this->changeState(SLEEP);
+  }
+
+  if (this->hasStartingButtonBeenPressed()) {
     this->changeState(GAME_STARTING);
+  }
 }
 
 
 void Game::onSleepState() {
-  //TODO: goToSleep();
+  this->sleepManager->sleep();
   this->changeState(WAITING);
 }
 
