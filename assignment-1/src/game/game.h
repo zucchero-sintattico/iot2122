@@ -43,6 +43,9 @@ class Game {
 
         bool isWaitingTimeElapsed();
         bool hasStartingButtonBeenPressed();
+        bool isBallMovingTimeElapsed();
+        bool isStoppedBallWaitingTimeElapsed();
+        bool hasAnyButtonBeenPressed();
 
 };
 

@@ -12,8 +12,6 @@ void Game::setup() {
   this->fadeManager->setup();
   this->sleepManager->setup();
   this->potentiometerManager->setup();
-
-  
   this->prevOperationTimestamp = millis();
 }
 
@@ -31,6 +29,11 @@ void Game::computeIteration() {
   }
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Utilities
+///////////////////////////////////////////////////////////////////////////////
+
+
 void Game::changeState(GameState newState) {
   this->currentGameState = newState;
 }
@@ -42,6 +45,20 @@ bool Game::isWaitingTimeElapsed() {
 bool Game::hasStartingButtonBeenPressed() {
   // TODO: Implement
 }
+
+bool Game::isBallMovingTimeElapsed() {
+  return (millis() - this->prevOperationTimestamp) > this->gameData->ballMovingDuration;
+}
+
+
+bool Game::isStoppedBallWaitingTimeElapsed() {
+  return (millis() - this->prevOperationTimestamp) > this->gameData->stoppedBallTime;
+}
+
+bool Game::hasAnyButtonBeenPressed() {
+  // TODO: Implement
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +87,6 @@ void Game::onWaitingState() {
   }
 }
 
-
 void Game::onGameStartingState() {
   this->gameData = new GameData({
     ballMovingSpeed: 0,
@@ -84,39 +100,43 @@ void Game::onGameStartingState() {
   this->changeState(ROUND_STARTING);
 }
 
-
 void Game::onRoundStartingState() {
-  // TODO: Select a Random T1
   this->gameData->ballMovingDuration = this->minBallMovingTime + random(2000 + 1);
-
+  this->prevOperationTimestamp = millis();
   this->changeState(MOVING_BALL);
 }
 
 void Game::onMovingBallState() {
-  // TODO: until T1 seconds has passed
+  if (this->isBallMovingTimeElapsed()) {
+    // TODO: Do onExit
+    this->changeState(STOPPED_BALL);
+  } else {
     // TODO: every S velocity
       // TODO: move ball to the next one
-  
-  this->changeState(STOPPED_BALL);
+  }
 }
 
-
 void Game::onStoppedBallState() {
-  // TODO: until T2 seconds has passed
-    // TODO: Check if a button is pressed
-      
-      // TODO: if the button was correct:
-        this->changeState(END_OF_ROUND);
-      // TODO: else:
-        this->changeState(END_OF_GAME);
-
-  // TODO: else:
+  if (this->isStoppedBallWaitingTimeElapsed()) {
+    // TODO: onExit
     this->changeState(END_OF_GAME);
+  }else{
+    if (this->hasAnyButtonBeenPressed()) {
+      // TODO: this->getPressedButton() == this->ballManager->getCurrentBall()
+      if (1) {
+        // TODO: onCorrectButtonPressed
+        this->changeState(END_OF_ROUND);
+      } else {
+        this->changeState(END_OF_GAME);
+      }
+    }
+  }
 }
 
 void Game::onEndOfRoundState() {
-  // TODO: Increase S and decrease T2 
-  // TODO: Increase score
+  this->gameData->ballMovingSpeed *= (1.1 + this->gameData->difficultyFactor);
+  this->gameData->stoppedBallTime /= (1.1 + this->gameData->difficultyFactor);
+  this->gameData->score++;
   this->changeState(ROUND_STARTING);
 }
 
