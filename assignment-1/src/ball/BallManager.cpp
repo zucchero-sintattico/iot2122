@@ -15,6 +15,15 @@ void BallManager::setup() {
 
 void BallManager::start() {
     this->actualLedIndexPosition = -1;
+    this->prevLedIndexPosition = -1;
+    this->directionalIncrement = 1;
+}
+
+void BallManager::stop() {
+    this->actualLedIndexPosition = -1;
+    for (int i = 0; i < 4; i++) {
+        digitalWrite(this->ledPins[i], LOW);
+    }
 }
 
 void BallManager::nextBall() {
@@ -24,6 +33,10 @@ void BallManager::nextBall() {
     this->incrementPosition();
     this->turnOffPreviousLedIfPresent();
     this->turnOnActualLed();
+}
+
+uint8_t BallManager::getCurrentBallIndex() {
+    return this->actualLedIndexPosition;
 }
 
 bool BallManager::isDirectionChangeNeeded() {

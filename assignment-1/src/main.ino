@@ -1,33 +1,27 @@
 #include <Arduino.h>
-
-#include "config.h"
-
-#include "fade/FadeManager.h"
-#include "sleep/SleepManager.h"
-#include "potentiometer/PotentiometerManager.h"
-#include "ball/BallManager.h"
-
+#include <MemoryFree.h>
 #include "game/game.h"
+///////////////////////////////////////////////////////////////////////////////
+// Configuration
+///////////////////////////////////////////////////////////////////////////////
 
-FadeManager* fadeManager = new FadeManager(9, 10, 5);
-SleepManager* sleepManager = new SleepManager((uint8_t[4]) { 5, 6, 7, 8 });
-PotentiometerManager* potentiometerManager = new PotentiometerManager(A0, 5);
-BallManager* ballManager = new BallManager((uint8_t[4]) { 5, 6, 7, 8 });
+uint8_t potentiometerPin = A0;
+uint8_t ballLedPins[4] = { 2, 3, 4, 5 };
+uint8_t buttonPins[4] = { 6, 7, 8, 9 };
+uint8_t fadingLedPin = 10;
 
-Game* game = new Game(fadeManager, sleepManager, potentiometerManager, ballManager);
-
-unsigned int prevOperationTimestamp;
-float S = 1;
+///////////////////////////////////////////////////////////////////////////////
+// Game creation
+///////////////////////////////////////////////////////////////////////////////
+Game* game = new Game(fadingLedPin, potentiometerPin, ballLedPins, buttonPins);
 
 void setup() {
-  Serial.begin(SERIAL_VELOCITY);
+  Serial.begin(9600);
   game->setup();
-  prevOperationTimestamp = millis();
 }
 
+unsigned long lastIterationTimestamp = 0;
+
 void loop() {
-  if (millis() - prevOperationTimestamp > 1000 / S) {
-    ballManager->nextBall();
-    prevOperationTimestamp = millis();
-  }
+  game->computeIteration();
 }

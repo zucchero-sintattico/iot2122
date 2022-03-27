@@ -5,15 +5,15 @@
 
 class PotentiometerManager {
 
-    private: 
-        uint8_t potentiometerPin;
-        uint8_t difficultyLevels;
-    
+    private:
+    uint8_t potentiometerPin;
+    uint8_t difficultyLevels;
+
     public:
-        PotentiometerManager(uint8_t potentiometerPin, uint8_t difficultyLevels);
-        void setup();
-        int readPotentiometer();
-        uint8_t getDifficultyFactor();
+    PotentiometerManager(uint8_t potentiometerPin, uint8_t difficultyLevels = 8);
+    void setup();
+    int readPotentiometer();
+    uint8_t getDifficultyFactor();
 
 };
 

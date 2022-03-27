@@ -2,19 +2,32 @@
 
 #include <Arduino.h>
 
-Game::Game(FadeManager* fadeManager, SleepManager* sleepManager, PotentiometerManager* potentiometerManager, BallManager* ballManager) {
+Game::Game(uint8_t fadingLedPin, uint8_t potentiometerPin, uint8_t ballLedPins[4], uint8_t buttonPins[4]) {
+  this->fadeManager = new FadeManager(fadingLedPin);
+  this->sleepManager = new SleepManager(buttonPins);
+  this->potentiometerManager = new PotentiometerManager(potentiometerPin);
+  this->ballManager = new BallManager(ballLedPins);
+  this->buttonsManager = new ButtonsManager(buttonPins);
+}
+
+Game::Game(FadeManager* fadeManager, SleepManager* sleepManager, PotentiometerManager* potentiometerManager, BallManager* ballManager, ButtonsManager* buttonsManager) {
   this->fadeManager = fadeManager;
   this->sleepManager = sleepManager;
   this->potentiometerManager = potentiometerManager;
   this->ballManager = ballManager;
+  this->buttonsManager = buttonsManager;
 }
 
 void Game::setup() {
+  // Setup managers
   this->fadeManager->setup();
   this->sleepManager->setup();
   this->potentiometerManager->setup();
   this->ballManager->setup();
-  this->prevOperationTimestamp = millis();
+  this->buttonsManager->setup();
+
+
+  this->buttonsManager->start(); // enable buttons-interrupt
 }
 
 void Game::computeIteration() {
@@ -31,6 +44,7 @@ void Game::computeIteration() {
   }
 }
 
+#pragma region Utilities
 ///////////////////////////////////////////////////////////////////////////////
 // Utilities
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,30 +55,30 @@ void Game::changeState(GameState newState) {
 }
 
 bool Game::isWaitingTimeElapsed() {
-  return (millis() - this->prevOperationTimestamp) > this->waitingTime;
+  return (millis() - this->sleepWaitingStartTimestamp) > this->waitingTime;
 }
 
 bool Game::hasStartingButtonBeenPressed() {
-  // TODO: Implement
+  return this->buttonsManager->hasAnyButtonBeenPressed() && this->buttonsManager->getPressedButtonIndex() == 0;
 }
 
 bool Game::isBallMovingTimeElapsed() {
-  return (millis() - this->prevOperationTimestamp) > this->gameData->ballMovingDuration;
+  return (millis() - this->movingBallStartTimestamp) > this->gameData->ballMovingDuration;
 }
-
 
 bool Game::isStoppedBallWaitingTimeElapsed() {
-  return (millis() - this->prevOperationTimestamp) > this->gameData->stoppedBallTime;
-}
-
-bool Game::hasAnyButtonBeenPressed() {
-  // TODO: Implement
+  return (millis() - this->stoppedBallStartTimestamp) > this->gameData->stoppedBallTime;
 }
 
 bool Game::hasTimeBetweenBallMovingElapsed() {
-  return millis() - this->prevOperationTimestamp > 1000 / this->gameData->ballMovingDuration;
+  return (millis() - this->prevBallMovementTimestamp) > (1000 / this->gameData->ballMovingSpeed);
 }
 
+bool Game::hasUserPressedTheCorrectButton() {
+  return this->buttonsManager->getPressedButtonIndex() == this->ballManager->getCurrentBallIndex();
+}
+
+#pragma endregion
 
 ////////////////////////////////////////////////////////////////////////////////
 // States
@@ -72,11 +86,15 @@ bool Game::hasTimeBetweenBallMovingElapsed() {
 
 void Game::onWelcomeState() {
   Serial.println("Welcome to the Catch the Bouncing Led Ball Game. Press Key T1 to Start.");
+  this->sleepWaitingStartTimestamp = millis();
+  this->fadeManager->start();
+  this->buttonsManager->start();
   this->changeState(WAITING);
 }
 
 void Game::onSleepState() {
   this->sleepManager->sleep();
+  this->buttonsManager->start(); // re-enable buttons interrupts
   this->changeState(WELCOME);
 }
 
@@ -84,17 +102,24 @@ void Game::onWaitingState() {
   this->fadeManager->fade();
 
   if (this->isWaitingTimeElapsed()) {
+    Serial.println("Going to sleep...");
+    delay(100);
+    this->fadeManager->stopFade();
     this->changeState(SLEEP);
+    return;
   }
 
   if (this->hasStartingButtonBeenPressed()) {
+    this->fadeManager->stopFade();
     this->changeState(GAME_STARTING);
   }
+
+  this->buttonsManager->releasePressedButton();
 }
 
 void Game::onGameStartingState() {
   this->gameData = new GameData({
-    ballMovingSpeed: 0,
+    ballMovingSpeed: this->defaultBallMovingSpeed,
     ballMovingDuration : 0,
     stoppedBallTime : this->defaultStoppedBallTime,
     difficultyFactor : this->potentiometerManager->getDifficultyFactor(),
@@ -107,37 +132,41 @@ void Game::onGameStartingState() {
 
 void Game::onRoundStartingState() {
   this->gameData->ballMovingDuration = this->minBallMovingTime + random(2000 + 1);
-  this->prevOperationTimestamp = millis();
+  this->movingBallStartTimestamp = millis();
+  this->ballManager->start();
   this->changeState(MOVING_BALL);
 }
 
 void Game::onMovingBallState() {
   if (this->isBallMovingTimeElapsed()) {
+    Serial.println("Ball stopped!");
+    this->stoppedBallStartTimestamp = millis();
+    this->buttonsManager->releasePressedButton();
     this->changeState(STOPPED_BALL);
   }
   else {
     if (this->hasTimeBetweenBallMovingElapsed()) {
       this->ballManager->nextBall();
-      this->prevOperationTimestamp = millis();
+      this->prevBallMovementTimestamp = millis();
     }
   }
 }
 
 void Game::onStoppedBallState() {
   if (this->isStoppedBallWaitingTimeElapsed()) {
-    // TODO: onExit
+    this->ballManager->stop();
     this->changeState(END_OF_GAME);
   }
   else {
-    if (this->hasAnyButtonBeenPressed()) {
-      // TODO: this->getPressedButton() == this->ballManager->getCurrentBall()
-      if (1) {
-        // TODO: onCorrectButtonPressed
+    if (this->buttonsManager->hasAnyButtonBeenPressed()) {
+      if (this->hasUserPressedTheCorrectButton()) {
         this->changeState(END_OF_ROUND);
       }
       else {
         this->changeState(END_OF_GAME);
       }
+      this->ballManager->stop();
+      this->buttonsManager->releasePressedButton();
     }
   }
 }
@@ -150,6 +179,8 @@ void Game::onEndOfRoundState() {
 }
 
 void Game::onEndOfGameState() {
-  // TODO: print results
-  this->changeState(WAITING);
+  Serial.println("Game Over!");
+  Serial.println("Your score is: " + String(this->gameData->score));
+  this->buttonsManager->stop();
+  this->changeState(WELCOME);
 }

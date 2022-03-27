@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-PotentiometerManager::PotentiometerManager(uint8_t potentiometerPin, uint8_t difficultyLevels) {
+PotentiometerManager::PotentiometerManager(uint8_t potentiometerPin, uint8_t difficultyLevels = 8) {
     this->potentiometerPin = potentiometerPin;
     this->difficultyLevels = difficultyLevels;
 }

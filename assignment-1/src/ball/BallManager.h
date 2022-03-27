@@ -15,7 +15,9 @@ class BallManager {
     BallManager(uint8_t ledPins[4]);
     void setup();
     void start();
+    void stop();
     void nextBall();
+    uint8_t getCurrentBallIndex();
 
     private:
     bool isDirectionChangeNeeded();
