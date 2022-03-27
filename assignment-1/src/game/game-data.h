@@ -1,6 +1,7 @@
 #ifndef GAME_DATA
 #define GAME_DATA
 
+#include <stdint.h>
 #include "game-state.h"
 
 /**
@@ -13,8 +14,8 @@
  */
 struct GameData {
     float ballMovingSpeed;
-    int ballMovingDuration;
-    int stoppedBallTime;
+    unsigned int ballMovingDuration;
+    unsigned int stoppedBallTime;
     uint8_t difficultyFactor;
     int score;
 };

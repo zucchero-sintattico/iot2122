@@ -10,7 +10,7 @@ class Game {
 
     private:
 
-        int defaultStoppedBallTime = 5000;
+        unsigned int defaultStoppedBallTime = 5000;
         int minBallMovingTime = 3000;
 
         GameState currentGameState = WELCOME;
