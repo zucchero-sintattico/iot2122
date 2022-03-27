@@ -2,30 +2,32 @@
 
 #include <Arduino.h>
 
-Game::Game(FadeManager *fadeManager, SleepManager *sleepManager, PotentiometerManager *potentiometerManager) {
+Game::Game(FadeManager* fadeManager, SleepManager* sleepManager, PotentiometerManager* potentiometerManager, BallManager* ballManager) {
   this->fadeManager = fadeManager;
   this->sleepManager = sleepManager;
   this->potentiometerManager = potentiometerManager;
+  this->ballManager = ballManager;
 }
 
 void Game::setup() {
   this->fadeManager->setup();
   this->sleepManager->setup();
   this->potentiometerManager->setup();
+  this->ballManager->setup();
   this->prevOperationTimestamp = millis();
 }
 
 void Game::computeIteration() {
   switch (this->currentGameState) {
-    case WELCOME: this->onWelcomeState(); break;
-    case WAITING: this->onWaitingState(); break;
-    case SLEEP: this->onSleepState(); break;
-    case GAME_STARTING: this->onGameStartingState(); break;
-    case ROUND_STARTING: this->onRoundStartingState(); break;
-    case MOVING_BALL: this->onMovingBallState(); break;
-    case STOPPED_BALL: this->onStoppedBallState(); break;
-    case END_OF_ROUND: this->onEndOfRoundState(); break;
-    case END_OF_GAME: this->onEndOfGameState(); break;
+  case WELCOME: this->onWelcomeState(); break;
+  case WAITING: this->onWaitingState(); break;
+  case SLEEP: this->onSleepState(); break;
+  case GAME_STARTING: this->onGameStartingState(); break;
+  case ROUND_STARTING: this->onRoundStartingState(); break;
+  case MOVING_BALL: this->onMovingBallState(); break;
+  case STOPPED_BALL: this->onStoppedBallState(); break;
+  case END_OF_ROUND: this->onEndOfRoundState(); break;
+  case END_OF_GAME: this->onEndOfGameState(); break;
   }
 }
 
@@ -59,6 +61,9 @@ bool Game::hasAnyButtonBeenPressed() {
   // TODO: Implement
 }
 
+bool Game::hasTimeBetweenBallMovingElapsed() {
+  return millis() - this->prevOperationTimestamp > 1000 / this->gameData->ballMovingDuration;
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -90,11 +95,11 @@ void Game::onWaitingState() {
 void Game::onGameStartingState() {
   this->gameData = new GameData({
     ballMovingSpeed: 0,
-    ballMovingDuration: 0,
-    stoppedBallTime: this->defaultStoppedBallTime,
-    difficultyFactor: this->potentiometerManager->getDifficultyFactor(),
-    score: 0
-  });
+    ballMovingDuration : 0,
+    stoppedBallTime : this->defaultStoppedBallTime,
+    difficultyFactor : this->potentiometerManager->getDifficultyFactor(),
+    score : 0
+    });
 
   Serial.println("GO!");
   this->changeState(ROUND_STARTING);
@@ -108,11 +113,13 @@ void Game::onRoundStartingState() {
 
 void Game::onMovingBallState() {
   if (this->isBallMovingTimeElapsed()) {
-    // TODO: Do onExit
     this->changeState(STOPPED_BALL);
-  } else {
-    // TODO: every S velocity
-      // TODO: move ball to the next one
+  }
+  else {
+    if (this->hasTimeBetweenBallMovingElapsed()) {
+      this->ballManager->nextBall();
+      this->prevOperationTimestamp = millis();
+    }
   }
 }
 
@@ -120,13 +127,15 @@ void Game::onStoppedBallState() {
   if (this->isStoppedBallWaitingTimeElapsed()) {
     // TODO: onExit
     this->changeState(END_OF_GAME);
-  }else{
+  }
+  else {
     if (this->hasAnyButtonBeenPressed()) {
       // TODO: this->getPressedButton() == this->ballManager->getCurrentBall()
       if (1) {
         // TODO: onCorrectButtonPressed
         this->changeState(END_OF_ROUND);
-      } else {
+      }
+      else {
         this->changeState(END_OF_GAME);
       }
     }

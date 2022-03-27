@@ -9,21 +9,25 @@
 
 #include "game/game.h"
 
-FadeManager *fadeManager = new FadeManager(9, 10, 5);
-SleepManager *sleepManager = new SleepManager((uint8_t[4]){5, 6, 7, 8});
-PotentiometerManager *potentiometerManager = new PotentiometerManager(A0, 5);
-BallManager *ballManager = new BallManager((uint8_t[4]){5, 6, 7, 8});
+FadeManager* fadeManager = new FadeManager(9, 10, 5);
+SleepManager* sleepManager = new SleepManager((uint8_t[4]) { 5, 6, 7, 8 });
+PotentiometerManager* potentiometerManager = new PotentiometerManager(A0, 5);
+BallManager* ballManager = new BallManager((uint8_t[4]) { 5, 6, 7, 8 });
 
-Game *game = new Game(fadeManager, sleepManager, potentiometerManager);
+Game* game = new Game(fadeManager, sleepManager, potentiometerManager, ballManager);
+
+unsigned int prevOperationTimestamp;
+float S = 1;
 
 void setup() {
   Serial.begin(SERIAL_VELOCITY);
-  //game->setup();
-  ballManager->setup();
-  ballManager->start();
+  game->setup();
+  prevOperationTimestamp = millis();
 }
 
 void loop() {
-  ballManager->nextBall();
-  delay(300);
+  if (millis() - prevOperationTimestamp > 1000 / S) {
+    ballManager->nextBall();
+    prevOperationTimestamp = millis();
+  }
 }

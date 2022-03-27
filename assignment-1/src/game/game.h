@@ -5,47 +5,51 @@
 #include "fade/FadeManager.h"
 #include "sleep/SleepManager.h"
 #include "potentiometer/PotentiometerManager.h"
+#include "ball/BallManager.h"
 
 class Game {
 
     private:
 
-        unsigned int defaultStoppedBallTime = 5000;
-        int minBallMovingTime = 3000;
+    float defaultBallMovingSpeed = 1.0;
+    unsigned int defaultStoppedBallTime = 5000;
+    int minBallMovingTime = 3000;
 
-        GameState currentGameState = WELCOME;
-        GameData *gameData;
-        FadeManager *fadeManager;
-        SleepManager *sleepManager;
-        PotentiometerManager *potentiometerManager;
+    GameState currentGameState = WELCOME;
+    GameData* gameData;
+    FadeManager* fadeManager;
+    SleepManager* sleepManager;
+    PotentiometerManager* potentiometerManager;
+    BallManager* ballManager;
 
 
-        unsigned long waitingTime = 10000;
-        unsigned long prevOperationTimestamp;
+    unsigned long waitingTime = 10000;
+    unsigned long prevOperationTimestamp;
 
     public:
-        Game(FadeManager *fadeManager, SleepManager *sleepManager, PotentiometerManager *potentiometerManager);
-        void setup();
-        void computeIteration();
+    Game(FadeManager* fadeManager, SleepManager* sleepManager, PotentiometerManager* potentiometerManager, BallManager* ballManager);
+    void setup();
+    void computeIteration();
 
     private:
-        void changeState(GameState newState);
+    void changeState(GameState newState);
 
-        void onWelcomeState();
-        void onWaitingState();
-        void onSleepState();
-        void onGameStartingState();
-        void onRoundStartingState();
-        void onMovingBallState();
-        void onStoppedBallState();
-        void onEndOfRoundState();
-        void onEndOfGameState();
+    void onWelcomeState();
+    void onWaitingState();
+    void onSleepState();
+    void onGameStartingState();
+    void onRoundStartingState();
+    void onMovingBallState();
+    void onStoppedBallState();
+    void onEndOfRoundState();
+    void onEndOfGameState();
 
-        bool isWaitingTimeElapsed();
-        bool hasStartingButtonBeenPressed();
-        bool isBallMovingTimeElapsed();
-        bool isStoppedBallWaitingTimeElapsed();
-        bool hasAnyButtonBeenPressed();
+    bool isWaitingTimeElapsed();
+    bool hasStartingButtonBeenPressed();
+    bool isBallMovingTimeElapsed();
+    bool isStoppedBallWaitingTimeElapsed();
+    bool hasAnyButtonBeenPressed();
+    bool hasTimeBetweenBallMovingElapsed();
 
 };
 

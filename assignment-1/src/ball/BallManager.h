@@ -6,23 +6,23 @@
 class BallManager {
 
     private:
-        uint8_t ledPins[4];
-        int prevLedIndexPosition;
-        int actualLedIndexPosition;
-        int directionalIncrement = 1;
-    
+    uint8_t ledPins[4];
+    int prevLedIndexPosition;
+    int actualLedIndexPosition;
+    int directionalIncrement = 1;
+
     public:
-        BallManager(uint8_t ledPins[4]);
-        void setup();
-        void start();
-        void nextBall();
-    
+    BallManager(uint8_t ledPins[4]);
+    void setup();
+    void start();
+    void nextBall();
+
     private:
-        bool isDirectionChangeNeeded();
-        void changeDirection();
-        void incrementPosition();
-        void turnOffPreviousLedIfPresent();
-        void turnOnActualLed();
+    bool isDirectionChangeNeeded();
+    void changeDirection();
+    void incrementPosition();
+    void turnOffPreviousLedIfPresent();
+    void turnOnActualLed();
 };
 
 #endif
