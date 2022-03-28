@@ -49,7 +49,6 @@ void Game::computeIteration() {
 // Utilities
 ///////////////////////////////////////////////////////////////////////////////
 
-
 void Game::changeState(GameState newState) {
   this->currentGameState = newState;
 }
