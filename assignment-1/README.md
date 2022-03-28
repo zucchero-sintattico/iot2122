@@ -50,7 +50,7 @@ Before starting the game, the potentiometer Pot device can be used to set the di
 
 
 ## States
-<div style="text-align:center"><img alt = "gif" src="./img/uml.png" style=""/></div>
+<div style="text-align:center"><img alt = "gif" src="./uml.png" style=""/></div>
 
 ---
 ## Video
