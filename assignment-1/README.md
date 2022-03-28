@@ -50,5 +50,4 @@ Before starting the game, the potentiometer Pot device can be used to set the di
 
 ---
 ## Video
-<video src="https://github.com/zucchero-sintattico/iot2122/raw/main/assignment-1/img/video.mp4">
-</video>
+https://github.com/zucchero-sintattico/iot2122/raw/main/assignment-1/img/video.mp4
