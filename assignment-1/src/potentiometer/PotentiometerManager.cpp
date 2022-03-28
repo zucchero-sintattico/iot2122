@@ -15,6 +15,6 @@ int PotentiometerManager::readPotentiometer() {
     return analogRead(this->potentiometerPin);
 }
 
-uint8_t PotentiometerManager::getDifficultyFactor() {
+uint8_t PotentiometerManager::getDifficultyLevel() {
     return map(this->readPotentiometer(), 0, 1024, 0, this->difficultyLevels) + 1;
 }

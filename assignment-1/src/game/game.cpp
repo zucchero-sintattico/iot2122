@@ -121,7 +121,7 @@ void Game::onGameStartingState() {
     ballMovingSpeed: this->defaultBallMovingSpeed,
     ballMovingDuration : 0,
     stoppedBallTime : this->defaultStoppedBallTime,
-    difficultyFactor : this->potentiometerManager->getDifficultyFactor(),
+    difficultyFactor : this->potentiometerManager->getDifficultyLevel(),
     score : 0
     });
 
@@ -171,8 +171,8 @@ void Game::onStoppedBallState() {
 }
 
 void Game::onEndOfRoundState() {
-  this->gameData->ballMovingSpeed *= (1.1 + this->potentiometerManager->getDifficultyFactor());
-  this->gameData->stoppedBallTime /= (1.1 + this->potentiometerManager->getDifficultyFactor());
+  this->gameData->ballMovingSpeed *= (1.1 + this->potentiometerManager->getDifficultyLevel());
+  this->gameData->stoppedBallTime /= (1.1 + this->potentiometerManager->getDifficultyLevel());
   this->gameData->score++;
   this->changeState(ROUND_STARTING);
 }
