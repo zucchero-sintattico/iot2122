@@ -172,6 +172,8 @@ void Game::onEndOfRoundState() {
   this->gameData->ballMovingSpeed *= (1.1 + (this->gameData->difficultyFactor / 4.0));
   this->gameData->stoppedBallTime /= (1.1 + (this->gameData->difficultyFactor / 4.0));
   this->gameData->score++;
+  Serial.println("Score: " + String(this->gameData->score));
+  Serial.println("Moving to next round...");
   this->changeState(ROUND_STARTING);
 }
 
