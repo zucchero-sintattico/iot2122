@@ -48,6 +48,10 @@ Before starting the game, the potentiometer Pot device can be used to set the di
 ## Schemas
 <div style="text-align:center"><img alt = "gif" src="./img/schema-1.jpeg" style=""/></div>
 
+
+## States
+<div style="text-align:center"><img alt = "gif" src="./img/uml.png" style=""/></div>
+
 ---
 ## Video
 https://github.com/zucchero-sintattico/iot2122/blob/main/assignment-1/img/video.mp4
