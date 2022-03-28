@@ -44,7 +44,6 @@ void Game::computeIteration() {
   }
 }
 
-#pragma region Utilities
 ///////////////////////////////////////////////////////////////////////////////
 // Utilities
 ///////////////////////////////////////////////////////////////////////////////
@@ -76,8 +75,6 @@ bool Game::hasTimeBetweenBallMovingElapsed() {
 bool Game::hasUserPressedTheCorrectButton() {
   return this->buttonsManager->getPressedButtonIndex() == this->ballManager->getCurrentBallIndex();
 }
-
-#pragma endregion
 
 ////////////////////////////////////////////////////////////////////////////////
 // States
@@ -125,6 +122,7 @@ void Game::onGameStartingState() {
     score : 0
     });
 
+  Serial.println("Difficulty level selected: " + String(this->gameData->difficultyFactor));
   Serial.println("GO!");
   this->changeState(ROUND_STARTING);
 }
