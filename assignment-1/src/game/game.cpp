@@ -169,8 +169,8 @@ void Game::onStoppedBallState() {
 }
 
 void Game::onEndOfRoundState() {
-  this->gameData->ballMovingSpeed *= (1.1 + this->potentiometerManager->getDifficultyLevel());
-  this->gameData->stoppedBallTime /= (1.1 + this->potentiometerManager->getDifficultyLevel());
+  this->gameData->ballMovingSpeed *= (1.1 + (this->gameData->difficultyFactor / 4.0));
+  this->gameData->stoppedBallTime /= (1.1 + (this->gameData->difficultyFactor / 4.0));
   this->gameData->score++;
   this->changeState(ROUND_STARTING);
 }
