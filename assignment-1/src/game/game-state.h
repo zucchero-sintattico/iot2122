@@ -4,30 +4,30 @@
  */
 enum GameState {
 
-    /// The welcome state.
+    /// Print welcome message.
     WELCOME,
 
-    /// The game is waiting for the player to press the first button.
+    /// Arduino goes in deep sleep and wait for interrupt.
     SLEEP,
 
-    /// The game is waiting for the player to press the second button.
+    /// The led is fading and waiting for user input to start the game.
     WAITING,
 
-    /// The game is waiting for the player to release the first button.
+    /// The game is starting, setup variables. 
     GAME_STARTING,
 
-    /// The game is waiting for the player to release the second button.
+    /// A round is starting, setup variables and start the round.
     ROUND_STARTING,
 
-    /// The game is waiting for the player to release the second button.
+    /// The ball is moving.
     MOVING_BALL,
 
-    /// The game is waiting for the player to release the second button.
+    /// The ball is stopped on a led and waiting for user to press a button.
     STOPPED_BALL,
 
-    /// The game is waiting for the player to release the second button.
+    /// The user pressed the correct button and the round is ending. 
     END_OF_ROUND,
 
-    /// The game is waiting for the player to release the second button.
+    /// The user make an error and the game is ending.
     END_OF_GAME
 };

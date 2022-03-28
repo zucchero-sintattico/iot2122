@@ -10,34 +10,38 @@
 
 class Game {
 
-    private:
+private:
 
+    // default values
+    unsigned long waitingTime = 10000;
     float defaultBallMovingSpeed = 1.0;
     unsigned int defaultStoppedBallTime = 5000;
     long minBallMovingTime = 3000;
 
+    // Status and data variables
     GameState currentGameState = WELCOME;
     GameData* gameData;
+
+    // Managers
     FadeManager* fadeManager;
     SleepManager* sleepManager;
     PotentiometerManager* potentiometerManager;
     BallManager* ballManager;
     ButtonsManager* buttonsManager;
 
-
-    unsigned long waitingTime = 10000;
+    // Timestamps for synchronization
     unsigned long sleepWaitingStartTimestamp = 0;
     unsigned long movingBallStartTimestamp = 0;
     unsigned long stoppedBallStartTimestamp = 0;
     unsigned long prevBallMovementTimestamp = 0;
 
-    public:
+public:
     Game(uint8_t fadingLedPin, uint8_t potentiometerPin, uint8_t ballLedPins[4], uint8_t buttonPins[4]);
     Game(FadeManager* fadeManager, SleepManager* sleepManager, PotentiometerManager* potentiometerManager, BallManager* ballManager, ButtonsManager* buttonsManager);
     void setup();
     void computeIteration();
 
-    private:
+private:
     void changeState(GameState newState);
 
     void onWelcomeState();
