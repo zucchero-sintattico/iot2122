@@ -80,7 +80,6 @@ uint8_t ButtonsManager::getPressedButtonIndex() {
 }
 
 void ButtonsManager::releasePressedButton() {
-    noInterrupts();
     for (int i = 0; i < 4; i++) {
         noInterrupts();
         this->buttonStates[i] = false;
