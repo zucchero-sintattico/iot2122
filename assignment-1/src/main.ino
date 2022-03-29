@@ -1,3 +1,10 @@
+/**
+ * Gruppo:
+ *  - Alessandro Mazzoli
+ *  - Manuel Andruccioli
+ *  - Alex Testa
+ */
+
 #include <Arduino.h>
 #include "game/game.h"
 
