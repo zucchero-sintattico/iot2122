@@ -3,13 +3,6 @@
 #include <Arduino.h>
 #include "scheduling/strategy/period-based-scheduling-strategy/period-based-scheduling-strategy.h"
 
-
-BlinkTask::BlinkTask() {}
-
-BlinkTask::BlinkTask(int period) {
-    this->setSchedulingStrategy(new PeriodBasedSchedulingStrategy(period));
-}
-
 void BlinkTask::init() {
     pinMode(LED_BUILTIN, OUTPUT);
     this->state = OFF;

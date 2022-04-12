@@ -7,9 +7,9 @@ void Scheduler::init(int period) {
     nTasks = 0;
 }
 
-bool Scheduler::addTask(Task* task) {
+bool Scheduler::addTask(Task* task, SchedulingStrategy* schedulingStrategy) {
     if (nTasks < MAX_TASKS - 1) {
-        taskList[nTasks] = task;
+        this->tasks[nTasks] = new TaskWrapper(task, schedulingStrategy);
         nTasks++;
         return true;
     }
@@ -19,12 +19,12 @@ bool Scheduler::addTask(Task* task) {
 }
 
 void Scheduler::schedule() {
-    timer.waitForNextTick();
+    this->timer.waitForNextTick();
     for (int i = 0; i < nTasks; i++) {
-        taskList[i]->schedulingStrategy->addElapsedTime(this->period);
-        if (taskList[i]->schedulingStrategy->hasToBeExecuted()) {
-            taskList[i]->schedulingStrategy->resetElapsedTime();
-            taskList[i]->tick();
+        this->tasks[i]->getStrategy()->addElapsedTime(this->period);
+        if (this->tasks[i]->getStrategy()->hasToBeExecuted()) {
+            this->tasks[i]->getStrategy()->resetElapsedTime();
+            this->tasks[i]->getTask()->tick();
         }
     }
 }

@@ -7,7 +7,7 @@ class PeriodBasedSchedulingStrategy : public SchedulingStrategy {
 
     int period;
 
-    public:
+public:
     PeriodBasedSchedulingStrategy(int period);
     virtual bool hasToBeExecuted();
 

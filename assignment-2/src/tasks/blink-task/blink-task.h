@@ -8,8 +8,6 @@ class BlinkTask : public Task {
     enum { ON, OFF } state;
 
     public:
-    BlinkTask();
-    BlinkTask(int period);
     void init();
     void tick();
 };

@@ -2,13 +2,12 @@
 #define _SCHEDULING_STRATEGY_H_
 
 #include <Arduino.h>
-
 class SchedulingStrategy {
 
-    protected:
+protected:
     int elapsedTime = 0;
 
-    public:
+public:
 
     void addElapsedTime(int time) {
         this->elapsedTime += time;

@@ -4,7 +4,7 @@
 #include "scheduling/task/task.h"
 
 #include "tasks/blink-task/blink-task.h"
-#include "scheduling/strategy/period-based-scheduling-strategy/period-based-scheduling-strategy.h"
+#include "scheduling/strategy/scheduling-strategies.h"
 
 
 Scheduler* scheduler = new Scheduler();
@@ -16,14 +16,13 @@ void setup() {
     Serial.begin(9600);
 
     // Scheduler initialization
-    scheduler->init(100);
+    scheduler->init(50);
 
     // Tasks initialization
-    blinkTask->setSchedulingStrategy(new PeriodBasedSchedulingStrategy(200));
     blinkTask->init();
 
     // Add tasks to scheduler
-    scheduler->addTask(blinkTask);
+    scheduler->addTask(blinkTask, SchedulingStrategies::FromPeriod(100));
 
 }
 

@@ -6,11 +6,6 @@
 class Task {
 
     public:
-    SchedulingStrategy* schedulingStrategy;
-
-    void setSchedulingStrategy(SchedulingStrategy* schedulingStrategy) {
-        this->schedulingStrategy = schedulingStrategy;
-    }
 
     virtual void init() = 0;
     virtual void tick() = 0;
