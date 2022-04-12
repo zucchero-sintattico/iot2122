@@ -8,7 +8,7 @@
  */
 class ButtonsManager {
 
-private:
+    private:
 
     /// The current ButtonsManager instance.
     static ButtonsManager* currentManager;
@@ -28,7 +28,7 @@ private:
      */
     static bool isBouncingInterrupt();
 
-private:
+    private:
 
     /// The buttons' pins.
     uint8_t buttonPins[4];
@@ -36,7 +36,7 @@ private:
     /// The states of the buttons.
     volatile bool buttonStates[4];
 
-public:
+    public:
     /**
      * Create a new ButtonsManager.
      * @param buttonPins the pins of the buttons.
@@ -76,7 +76,7 @@ public:
      */
     void releasePressedButton();
 
-private:
+    private:
     /**
      * Set the pressed state of a button.
      * @param index the index of the button.
