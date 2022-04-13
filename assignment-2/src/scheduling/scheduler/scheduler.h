@@ -8,14 +8,15 @@
 #include "scheduling/task/task.h"
 
 
-
+/**
+ * @brief A scheduler is a class that manages the execution of tasks.
+ */
 class Scheduler {
 
     static const int MAX_TASKS = 10;
 
     int period;
     int nTasks;
-
     TaskWithSchedulingStrategy* tasks[MAX_TASKS];
     Timer timer;
 
