@@ -9,7 +9,7 @@ void Scheduler::init(int period) {
 
 bool Scheduler::addTask(Task* task, SchedulingStrategy* schedulingStrategy) {
     if (nTasks < MAX_TASKS - 1) {
-        this->tasks[nTasks] = new TaskWrapper(task, schedulingStrategy);
+        this->tasks[nTasks] = new TaskWithSchedulingStrategy(task, schedulingStrategy);
         nTasks++;
         return true;
     }

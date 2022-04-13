@@ -1,36 +1,17 @@
 #ifndef _SCHEDULER_H_
 #define _SCHEDULER_H_
 
+#include "utils/pair/pair.h"
+#include "task-with-scheduling-strategy/task-with-scheduling-strategy.h"
 #include "scheduling/timer/timer.h"
 #include "scheduling/strategy/scheduling-strategy.h"
 #include "scheduling/task/task.h"
 
-#define MAX_TASKS 10
-
-template <class L, class R>
-class Pair {
-public:
-    L* left;
-    R* right;
-
-    Pair(L* l, R* r) : left(l), right(r) {}
-};
-
-class TaskWithSchedulingStrategy : public Pair<Task, SchedulingStrategy> {
-public:
-    TaskWithSchedulingStrategy(Task* t, SchedulingStrategy* s) : Pair<Task, SchedulingStrategy>(t, s) {}
-
-    Task* getTask() {
-        return left;
-    }
-
-    SchedulingStrategy* getStrategy() {
-        return right;
-    }
-};
 
 
 class Scheduler {
+
+    static const int MAX_TASKS = 10;
 
     int period;
     int nTasks;
