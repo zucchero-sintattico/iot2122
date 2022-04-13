@@ -16,9 +16,9 @@ public:
     Pair(L* l, R* r) : left(l), right(r) {}
 };
 
-class TaskWrapper : public Pair<Task, SchedulingStrategy> {
+class TaskWithSchedulingStrategy : public Pair<Task, SchedulingStrategy> {
 public:
-    TaskWrapper(Task* t, SchedulingStrategy* s) : Pair<Task, SchedulingStrategy>(t, s) {}
+    TaskWithSchedulingStrategy(Task* t, SchedulingStrategy* s) : Pair<Task, SchedulingStrategy>(t, s) {}
 
     Task* getTask() {
         return left;
@@ -35,7 +35,7 @@ class Scheduler {
     int period;
     int nTasks;
 
-    TaskWrapper* tasks[MAX_TASKS];
+    TaskWithSchedulingStrategy* tasks[MAX_TASKS];
     Timer timer;
 
 public:
