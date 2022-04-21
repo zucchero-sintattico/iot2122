@@ -1,10 +1,10 @@
 #include <Arduino.h>
 
-#include "scheduling/scheduler/scheduler.h"
-#include "scheduling/task/task.h"
+#include "scheduling/scheduler/Scheduler.h"
+#include "scheduling/task/Task.h"
 
-#include "tasks/blink-task/blink-task.h"
-#include "scheduling/strategy/scheduling-strategies.h"
+#include "tasks/blink-task/BlinkTask.h"
+#include "scheduling/strategy/SchedulingStrategies.h"
 
 
 Scheduler* scheduler = new Scheduler();

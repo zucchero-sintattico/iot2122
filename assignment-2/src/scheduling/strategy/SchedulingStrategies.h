@@ -2,7 +2,7 @@
 #define _SCHEDULING_STRATEGIES_H_
 
 
-#include "scheduling/strategy/scheduling-strategy.h"
+#include "scheduling/strategy/SchedulingStrategy.h"
 
 class SchedulingStrategies {
 public:

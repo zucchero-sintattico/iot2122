@@ -3,9 +3,9 @@
 #define _TASK_WITH_SCHEDULING_STRATEGY_H_
 
 
-#include "utils/pair/pair.h"
-#include "scheduling/task/task.h"
-#include "scheduling/strategy/scheduling-strategy.h"
+#include "utils/pair/Pair.h"
+#include "scheduling/task/Task.h"
+#include "scheduling/strategy/SchedulingStrategy.h"
 
 class TaskWithSchedulingStrategy : public Pair<Task, SchedulingStrategy> {
 public:

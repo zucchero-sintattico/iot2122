@@ -1,7 +1,7 @@
 #ifndef _PERIOD_BASED_SCHEDULING_STRATEGY_H_
 #define _PERIOD_BASED_SCHEDULING_STRATEGY_H_
 
-#include "scheduling/strategy/scheduling-strategy.h"
+#include "scheduling/strategy/SchedulingStrategy.h"
 
 class PeriodBasedSchedulingStrategy : public SchedulingStrategy {
 

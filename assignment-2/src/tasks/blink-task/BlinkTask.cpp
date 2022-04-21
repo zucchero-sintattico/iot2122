@@ -1,7 +1,7 @@
-#include "blink-task.h"
+#include "BlinkTask.h"
 
 #include <Arduino.h>
-#include "scheduling/strategy/period-based-scheduling-strategy/period-based-scheduling-strategy.h"
+#include "scheduling/strategy/period-based-scheduling-strategy/PeriodBasedSchedulingStrategy.h"
 
 void BlinkTask::init() {
     pinMode(LED_BUILTIN, OUTPUT);

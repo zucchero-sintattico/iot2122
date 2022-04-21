@@ -1,4 +1,4 @@
-#include "period-based-scheduling-strategy.h"
+#include "PeriodBasedSchedulingStrategy.h"
 
 #include <Arduino.h>
 

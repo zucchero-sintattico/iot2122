@@ -1,7 +1,7 @@
 #ifndef _RANDOM_SCHEDULING_STRATEGY_H_
 #define _RANDOM_SCHEDULING_STRATEGY_H_
 
-#include "scheduling/strategy/scheduling-strategy.h"
+#include "scheduling/strategy/SchedulingStrategy.h"
 
 class RandomSchedulingStrategy : public SchedulingStrategy {
 public:

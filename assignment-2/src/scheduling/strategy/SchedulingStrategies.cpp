@@ -1,8 +1,8 @@
-#include "scheduling-strategies.h"
+#include "SchedulingStrategies.h"
 
 
-#include "scheduling/strategy/period-based-scheduling-strategy/period-based-scheduling-strategy.h"
-#include "scheduling/strategy/random-scheduling-strategy/random-scheduling-strategy.h"
+#include "scheduling/strategy/period-based-scheduling-strategy/PeriodBasedSchedulingStrategy.h"
+#include "scheduling/strategy/random-scheduling-strategy/RandomSchedulingStrategy.h"
 
 SchedulingStrategy* SchedulingStrategies::FromPeriod(int period) {
     return new PeriodBasedSchedulingStrategy(period);

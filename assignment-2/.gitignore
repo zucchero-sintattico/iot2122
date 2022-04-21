@@ -3,3 +3,8 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+cmake-build-debug
+cmake-build-uno
+CMakeLists.txt
+CMakeListsPrivate.txt
+.idea

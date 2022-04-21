@@ -1,11 +1,11 @@
 #ifndef _SCHEDULER_H_
 #define _SCHEDULER_H_
 
-#include "utils/pair/pair.h"
-#include "task-with-scheduling-strategy/task-with-scheduling-strategy.h"
-#include "scheduling/timer/timer.h"
-#include "scheduling/strategy/scheduling-strategy.h"
-#include "scheduling/task/task.h"
+#include "utils/pair/Pair.h"
+#include "scheduling/scheduler/task-with-scheduling-strategy/TaskWithSchedulingStrategy.h"
+#include "scheduling/timer/Timer.h"
+#include "scheduling/strategy/SchedulingStrategy.h"
+#include "scheduling/task/Task.h"
 
 
 /**
