@@ -9,9 +9,9 @@ using FunctionalPredicate = FunctionalFunction<X, bool>;
 template<class T>
 class Predicate {
 private:
-    FunctionalPredicate<T> predicateFunction;
+    FunctionalPredicate<T> functionalPredicate;
 public:
-    explicit Predicate(FunctionalPredicate<T> predicateFunction) : predicateFunction(predicateFunction) {};
+    explicit Predicate(FunctionalPredicate<T> predicateFunction) : functionalPredicate(predicateFunction) {};
 
     bool test(T elem);
 
