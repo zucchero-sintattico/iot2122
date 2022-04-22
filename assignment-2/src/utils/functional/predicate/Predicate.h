@@ -1,7 +1,7 @@
 #ifndef _PREDICATE_H_
 #define _PREDICATE_H_
 
-#include "../function/Function.h"
+#include "utils/functional/function/Function.h"
 
 template<class X>
 using FunctionalPredicate = FunctionalFunction<X, bool>;

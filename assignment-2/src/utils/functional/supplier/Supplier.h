@@ -1,6 +1,8 @@
 #ifndef _SUPPLIER_H_
 #define _SUPPLIER_H_
 
+#include "../function/Function.h"
+
 template<class T>
 using FunctionalSupplier = T (*)();
 

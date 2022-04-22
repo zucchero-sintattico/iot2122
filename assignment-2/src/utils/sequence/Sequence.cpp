@@ -42,7 +42,7 @@ Sequence<T> *Sequence<T>::filter(Predicate<T> predicate) {
 
 template<class T>
 template<class O>
-O *Sequence<T>::reduce(O initialValue, BiFunction<O, T, O> reducer) {
+O *Sequence<T>::reduce(O initialValue, Function<O, T, O> reducer) {
     O result = initialValue;
     for (int i = 0; i < this->size; i++) {
         result = reducer.apply(result, this->elements[i]);
@@ -52,7 +52,7 @@ O *Sequence<T>::reduce(O initialValue, BiFunction<O, T, O> reducer) {
 
 template<class T>
 template<class O>
-O *Sequence<T>::reduce(O initialValue, BiFunctionFunction<O, T, O> reducer) {
-    return this->reduce(initialValue, new BiFunction<O, T, O>(reducer));
+O *Sequence<T>::reduce(O initialValue, BiFunctionFunction <O, T, O> reducer) {
+    return this->reduce(initialValue, new Function<O, T, O>(reducer));
 }
 

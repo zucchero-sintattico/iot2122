@@ -1,8 +1,10 @@
 #ifndef _CONSUMER_H_
 #define _CONSUMER_H_
 
+#include "../function/Function.h"
+
 template<class T>
-using FunctionalConsumer = void (*)(T);
+using FunctionalConsumer = FunctionalFunction<T, void>;
 
 template<class T>
 class Consumer {
@@ -16,7 +18,7 @@ public:
     Consumer<T> AndThen(Consumer<T> after);
 
     Consumer<T> AndThen(FunctionalConsumer<T> after) { return AndThen(new Consumer<T>(after)); };
-    
+
 };
 
 

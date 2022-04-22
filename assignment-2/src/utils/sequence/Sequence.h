@@ -25,10 +25,10 @@ public:
     Sequence<T> *filter(Predicate<T> predicate);
 
     template<class O>
-    O *reduce(O initialValue, BiFunction<O, T, O> reducer);
+    O *reduce(O initialValue, Function<O, T, O> reducer);
 
     template<class O>
-    O *reduce(O initialValue, BiFunctionFunction<O, T, O> reducer);
+    O *reduce(O initialValue, BiFunctionFunction <O, T, O> reducer);
 
     /*
      * CONVERSIONS
