@@ -1,58 +1,128 @@
 #include "Sequence.h"
 
-template<class T>
-Sequence<T>::Sequence(T *elems, int size) {
-    this->elements = elems;
-    this->size = size;
-}
+template<class T, class O>
+class MapperIterable : public Iterable<O> {
+private:
+    Iterable<T> *source;
+    Function<T, O> *mapper;
+public:
+    MapperIterable(Iterable<T> *source, Function<T, O> *mapper) : source(source), mapper(mapper) {};
 
-template<class T>
-Sequence<T> *Sequence<T>::of(T *elems, int size) {
-    return new Sequence<T>(elems, size);
-}
-
-template<class T>
-void Sequence<T>::foreach(Consumer<T> consumer) {
-    for (int i = 0; i < this->size; i++) {
-        consumer(elements[i]);
+    bool hasNext() {
+        return this->source->hasNext();
     }
-}
 
-template<class T>
-template<class O>
-Sequence<O> *Sequence<T>::map(Function<T, O> mapper) {
-    O *newElements = new O[this->size];
-    for (int i = 0; i < this->size; i++) {
-        newElements[i] = mapper.apply(elements[i]);
+    O get() {
+        return this->mapper->apply(this->source->next());
     }
-    return Sequence<O>::of(newElements, this->size);
-}
+};
 
 template<class T>
-Sequence<T> *Sequence<T>::filter(Predicate<T> predicate) {
-    T *newElements = new T[this->size];
-    int newElementsIndex = 0;
-    for (int i = 0; i < this->size; i++) {
-        if (predicate.test(elements[i])) {
-            newElements[newElementsIndex++] = elements[i];
+class FilterIterable : public Iterable<T> {
+private:
+    Iterable<T> *source;
+    Predicate<T> *filter;
+    T nextElement;
+public:
+    FilterIterable(Iterable<T> *source, Predicate<T> *filter) : source(source), filter(filter) {};
+
+    bool hasNext() {
+        if (!this->source->hasNext()) {
+            return false;
         }
+        this->nextElement = this->source->next();
+        while (!this->filter->test(this->nextElement)) {
+            if (!this->source->hasNext()) return false;
+            this->nextElement = this->source->next();
+        }
+        return true;
     }
-    return Sequence<T>::of(newElements, newElementsIndex);
+
+    T get() {
+        return this->nextElement;
+    }
+};
+
+template<class T>
+class SupplierIterable : public Iterable<T> {
+private:
+    Supplier<T> *supplier;
+public:
+    explicit SupplierIterable(Supplier<T> *supplier) : supplier(supplier) {};
+
+    bool hasNext() {
+        return true;
+    }
+
+    T get() {
+        return this->supplier->get();
+    }
+};
+
+template<class T>
+class IterateIterable : public Iterable<T> {
+private:
+    T value;
+    UnaryOperator<T> *unaryOperator;
+public:
+    IterateIterable(T seed, UnaryOperator<T> *unaryOperator) : value(seed), unaryOperator(unaryOperator) {};
+
+    bool hasNext() {
+        return true;
+    }
+
+    T get() {
+        this->value = this->unaryOperator->apply(this->value);
+    }
+};
+
+template<class T>
+void Sequence<T>::foreach(Consumer<T> *consumer) {
+    while (this->source->hasNext()) consumer->accept(this->source->next());
 }
 
 template<class T>
 template<class O>
-O *Sequence<T>::reduce(O initialValue, Function<O, T, O> reducer) {
+Sequence<O> *Sequence<T>::map(Function<T, O> *mapper) {
+    return new Sequence<O>(new MapperIterable<T, O>(this->source, mapper));
+}
+
+template<class T>
+Sequence<T> *Sequence<T>::filter(Predicate<T> *predicate) {
+    return new Sequence<T>(new FilterIterable<T>(this->source, predicate));
+}
+
+template<class T>
+template<class O>
+O *Sequence<T>::reduce(O initialValue, BiFunction<O, T, O> *reducer) {
     O result = initialValue;
-    for (int i = 0; i < this->size; i++) {
-        result = reducer.apply(result, this->elements[i]);
+    while (this->source->hasNext()) {
+        result = reducer->apply(result, this->source->next());
     }
     return result;
 }
 
+/*
+ * STATIC METHODS
+ */
+
+
 template<class T>
-template<class O>
-O *Sequence<T>::reduce(O initialValue, BiFunctionFunction <O, T, O> reducer) {
-    return this->reduce(initialValue, new Function<O, T, O>(reducer));
+Sequence<T> *Sequence<T>::of(Iterable<T> *source) { return new Sequence<T>(source); }
+
+template<class T>
+Sequence<T> *Sequence<T>::of(T *elems, int size) { return of(new IterableArray<T>(elems, size)); }
+
+template<class T>
+Sequence<T> *Sequence<T>::generate(Supplier<T> *supplier) {
+    return new Sequence<T>(new SupplierIterable<T>(supplier));
 }
+
+template<class T>
+Sequence<T> *Sequence<T>::iterate(T seed, UnaryOperator<T> *unaryOperator) {
+    return new Sequence<T>(new IterateIterable<T>(seed, unaryOperator));
+}
+
+
+
 

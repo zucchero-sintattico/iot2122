@@ -6,11 +6,14 @@
 #include "tasks/blink-task/BlinkTask.h"
 #include "scheduling/strategy/SchedulingStrategies.h"
 #include "utils/sequence/Sequence.h"
+#include "utils/functional/unary-operator/UnaryOperator.h"
+
 
 Scheduler *scheduler = new Scheduler();
 TaskWithSchedulingStrategy tasks[] = {
         TaskWithSchedulingStrategy(new BlinkTask(), SchedulingStrategies::FromPeriod(500))
 };
+Sequence<TaskWithSchedulingStrategy> *tasksSequence = Sequence<TaskWithSchedulingStrategy>::of(tasks, 1);
 
 void setup() {
     // Setup serial
@@ -18,8 +21,6 @@ void setup() {
 
     // Scheduler initialization
     scheduler->init(50);
-
-    Sequence<TaskWithSchedulingStrategy> *tasksSequence = Sequence<TaskWithSchedulingStrategy>::of(tasks, 1);
 
     // Tasks initialization
     tasksSequence->foreach([](TaskWithSchedulingStrategy task) {
@@ -31,12 +32,6 @@ void setup() {
         scheduler->addTask(task.getTask(), task.getStrategy());
     });
 
-    FunctionalPredicate<int> isEven = [](int elem) { return elem % 2 == 0; };
-
-    Predicate<int> evenPredicate = Predicate<int>(isEven);
-    Predicate<int> oddPredicate = evenPredicate.negate();
-    Predicate<int> oddOrEvenPredicate = evenPredicate.Or(oddPredicate);
-    Predicate<int> oddAndEvenPredicate = evenPredicate.And(oddPredicate);
 }
 
 void loop() {
