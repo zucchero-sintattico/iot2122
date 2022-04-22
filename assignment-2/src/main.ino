@@ -5,7 +5,7 @@
 
 #include "tasks/blink-task/BlinkTask.h"
 #include "scheduling/strategy/SchedulingStrategies.h"
-#include "utils/jstream/JStream.h"
+#include "utils/sequence/Sequence.h"
 
 Scheduler *scheduler = new Scheduler();
 TaskWithSchedulingStrategy tasks[] = {
@@ -19,30 +19,17 @@ void setup() {
     // Scheduler initialization
     scheduler->init(50);
 
-    JStream<TaskWithSchedulingStrategy> *taskStream = JStream<TaskWithSchedulingStrategy>::of(tasks, 1);
+    Sequence<TaskWithSchedulingStrategy> *tasksSequence = Sequence<TaskWithSchedulingStrategy>::of(tasks, 1);
 
     // Tasks initialization
-    taskStream->foreach([](TaskWithSchedulingStrategy task) {
+    tasksSequence->foreach([](TaskWithSchedulingStrategy task) {
         task.getTask()->init();
     });
 
     // Add tasks to scheduler
-    taskStream->foreach([](TaskWithSchedulingStrategy task) {
+    tasksSequence->foreach([](TaskWithSchedulingStrategy task) {
         scheduler->addTask(task.getTask(), task.getStrategy());
     });
-
-
-    int elems[] = {1, 2, 3};
-    JStream<int>::of(elems, 3)
-            ->map<int>([](int elem) {
-                return elem * 2;
-            })
-            ->filter([](int elem) {
-                return elem >= 4;
-            })
-            ->foreach([](int elem) {
-                Serial.println(elem);
-            });
 }
 
 void loop() {

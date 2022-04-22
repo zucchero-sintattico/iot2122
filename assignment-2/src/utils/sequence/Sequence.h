@@ -1,19 +1,19 @@
-#ifndef _JSTREAM_H_
-#define _JSTREAM_H_
+#ifndef _SEQUENCE_H_
+#define _SEQUENCE_H_
 
 template<class T>
-class JStream {
-    private:
-    T* elements;
+class Sequence {
+private:
+    T *elements;
     int size;
 
-    JStream(T* elems, int size) {
+    Sequence(T *elems, int size) {
         this->elements = elems;
         this->size = size;
     }
 
-    public:
-    static JStream* of(T* elems, int size) {
+public:
+    static Sequence *of(T *elems, int size) {
         return new JStream<T>(elems, size);
     }
 
@@ -24,23 +24,23 @@ class JStream {
     }
 
     template<class O>
-    JStream<O>* map(O(*func)(T)) {
-        O* newElements = new O[this->size];
+    Sequence<O> *map(O(*func)(T)) {
+        O *newElements = new O[this->size];
         for (int i = 0; i < this->size; i++) {
             newElements[i] = func(elements[i]);
         }
-        return JStream<O>::of(newElements, this->size);
+        return Sequence<O>::of(newElements, this->size);
     }
 
-    JStream<T>* filter(bool(*func)(T)) {
-        T* newElements = new T[this->size];
+    Sequence<T> *filter(bool(*func)(T)) {
+        T *newElements = new T[this->size];
         int newElementsIndex = 0;
         for (int i = 0; i < this->size; i++) {
             if (func(elements[i])) {
                 newElements[newElementsIndex++] = elements[i];
             }
         }
-        return JStream<T>::of(newElements, newElementsIndex);
+        return Sequence<T>::of(newElements, newElementsIndex);
     }
 
 };
