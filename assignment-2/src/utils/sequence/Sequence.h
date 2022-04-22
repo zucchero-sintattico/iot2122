@@ -1,47 +1,46 @@
 #ifndef _SEQUENCE_H_
 #define _SEQUENCE_H_
 
+#include "utils/functional/consumer/Consumer.h"
+#include "utils/functional/function/Function.h"
+#include "utils/functional/BiFunction.h"
+#include "utils/functional/predicate/Predicate.h"
+
 template<class T>
 class Sequence {
 private:
     T *elements;
-    int size;
+    int size{};
 
-    Sequence(T *elems, int size) {
-        this->elements = elems;
-        this->size = size;
-    }
+    Sequence(T *elems, int size);
 
 public:
-    static Sequence *of(T *elems, int size) {
-        return new JStream<T>(elems, size);
-    }
+    static Sequence<T> *of(T *elems, int size);
 
-    void foreach(void (*func)(T)) {
-        for (int i = 0; i < this->size; i++) {
-            func(elements[i]);
-        }
-    }
+    void foreach(Consumer<T> consumer);
 
     template<class O>
-    Sequence<O> *map(O(*func)(T)) {
-        O *newElements = new O[this->size];
-        for (int i = 0; i < this->size; i++) {
-            newElements[i] = func(elements[i]);
-        }
-        return Sequence<O>::of(newElements, this->size);
-    }
+    Sequence<O> *map(Function<T, O> mapper);
 
-    Sequence<T> *filter(bool(*func)(T)) {
-        T *newElements = new T[this->size];
-        int newElementsIndex = 0;
-        for (int i = 0; i < this->size; i++) {
-            if (func(elements[i])) {
-                newElements[newElementsIndex++] = elements[i];
-            }
-        }
-        return Sequence<T>::of(newElements, newElementsIndex);
-    }
+    Sequence<T> *filter(Predicate<T> predicate);
+
+    template<class O>
+    O *reduce(O initialValue, BiFunction<O, T, O> reducer);
+
+    template<class O>
+    O *reduce(O initialValue, BiFunctionFunction<O, T, O> reducer);
+
+    /*
+     * CONVERSIONS
+     */
+
+    void foreach(FunctionalConsumer<T> functionalConsumer) { this->foreach(new Consumer<T>(functionalConsumer)); }
+
+    template<class O>
+    Sequence<O> *map(FunctionalFunction<T, O> mapper) { return this->map(new Function<T, O>(mapper)); };
+
+    Sequence<T> *filter(FunctionalPredicate<T> predicate) { return this->filter(new Predicate<T>(predicate)); };
+
 
 };
 

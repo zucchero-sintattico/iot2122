@@ -30,6 +30,13 @@ void setup() {
     tasksSequence->foreach([](TaskWithSchedulingStrategy task) {
         scheduler->addTask(task.getTask(), task.getStrategy());
     });
+
+    FunctionalPredicate<int> isEven = [](int elem) { return elem % 2 == 0; };
+
+    Predicate<int> evenPredicate = Predicate<int>(isEven);
+    Predicate<int> oddPredicate = evenPredicate.negate();
+    Predicate<int> oddOrEvenPredicate = evenPredicate.Or(oddPredicate);
+    Predicate<int> oddAndEvenPredicate = evenPredicate.And(oddPredicate);
 }
 
 void loop() {
