@@ -10,16 +10,22 @@ using FunctionalBiFunction = O(*)(I1, I2);
 
 template<class I1, class I2, class O>
 class BiFunction {
-private:
+    private:
     FunctionalBiFunction<I1, I2, O> functionalBiFunction;
-public:
+    public:
     explicit BiFunction(FunctionalBiFunction<I1, I2, O> functionalBiFunction) : functionalBiFunction(
-            functionalBiFunction) {};
+        functionalBiFunction) {};
 
-    O apply(I1 i1, I2 i2);
+    O apply(I1 i1, I2 i2) {
+        return this->functionalBiFunction(i1, i2);
+    }
 
     template<class X>
-    BiFunction<I1, I2, X> AndThen(Function<O, X> after);
+    BiFunction<I1, I2, X> AndThen(Function<O, X>* after) {
+        return new BiFunction<I1, I2, X>([&](I1 i1, I2 i2) {
+            return after->apply(this->apply(i1, i2));
+            });
+    }
 
     template<class X>
     BiFunction<I1, I2, X> AndThen(FunctionalFunction<O, X> after) { return AndThen(new Function<O, X>(after)); };

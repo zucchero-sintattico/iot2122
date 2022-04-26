@@ -8,22 +8,36 @@ using FunctionalPredicate = FunctionalFunction<X, bool>;
 
 template<class T>
 class Predicate {
-private:
+    private:
     FunctionalPredicate<T> functionalPredicate;
-public:
+    public:
     explicit Predicate(FunctionalPredicate<T> predicateFunction) : functionalPredicate(predicateFunction) {};
 
-    bool test(T elem);
+    bool test(T elem) {
+        return this->functionalPredicate(elem);
+    }
 
-    Predicate<T> And(Predicate<T> otherPredicate);
+    Predicate<T> And(Predicate<T> otherPredicate) {
+        return new Predicate<T>([&](T elem) {
+            return this->test(elem) && otherPredicate.test(elem);
+            });
+    };
 
     Predicate<T> And(FunctionalPredicate<T> otherPredicate) { return And(new Predicate<T>(otherPredicate)); };
 
-    Predicate<T> Or(Predicate<T> otherPredicate);
+    Predicate<T> Or(Predicate<T> otherPredicate) {
+        return new Predicate<T>([&](T elem) {
+            return this->test(elem) || otherPredicate.test(elem);
+            });
+    }
 
     Predicate<T> Or(FunctionalPredicate<T> otherPredicate) { return Or(new Predicate<T>(otherPredicate)); };
 
-    Predicate<T> negate();
+    Predicate<T> negate() {
+        return new Predicate<T>([&](T elem) {
+            return !this->test(elem);
+            });
+    };
 };
 
 

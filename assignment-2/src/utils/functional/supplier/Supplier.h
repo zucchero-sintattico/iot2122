@@ -4,16 +4,18 @@
 #include "../function/Function.h"
 
 template<class T>
-using FunctionalSupplier = T (*)();
+using FunctionalSupplier = T(*)();
 
 template<class T>
 class Supplier {
-private:
+    private:
     FunctionalSupplier<T> functionalSupplier;
-public:
+    public:
     explicit Supplier(FunctionalSupplier<T> functionalSupplier) : functionalSupplier(functionalSupplier) {};
 
-    T get();
+    T get() {
+        return this->functionalSupplier();
+    }
 };
 
 

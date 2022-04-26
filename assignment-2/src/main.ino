@@ -2,20 +2,22 @@
 
 #include "scheduling/scheduler/Scheduler.h"
 #include "scheduling/task/Task.h"
-
 #include "tasks/blink-task/BlinkTask.h"
 #include "scheduling/strategy/SchedulingStrategies.h"
+
+
 #include "utils/sequence/Sequence.h"
-#include "utils/functional/unary-operator/UnaryOperator.h"
 
-
-Scheduler *scheduler = new Scheduler();
+Scheduler* scheduler = new Scheduler();
 TaskWithSchedulingStrategy tasks[] = {
         TaskWithSchedulingStrategy(new BlinkTask(), SchedulingStrategies::FromPeriod(500))
 };
-Sequence<TaskWithSchedulingStrategy> *tasksSequence = Sequence<TaskWithSchedulingStrategy>::of(tasks, 1);
 
 void setup() {
+
+
+    auto* tasksSequence = Sequence<TaskWithSchedulingStrategy>::of(tasks, 1);
+
     // Setup serial
     Serial.begin(9600);
 
@@ -25,13 +27,8 @@ void setup() {
     // Tasks initialization
     tasksSequence->foreach([](TaskWithSchedulingStrategy task) {
         task.getTask()->init();
-    });
-
-    // Add tasks to scheduler
-    tasksSequence->foreach([](TaskWithSchedulingStrategy task) {
         scheduler->addTask(task.getTask(), task.getStrategy());
-    });
-
+        });
 }
 
 void loop() {

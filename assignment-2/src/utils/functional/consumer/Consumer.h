@@ -1,25 +1,31 @@
 #ifndef _CONSUMER_H_
 #define _CONSUMER_H_
 
-#include "../function/Function.h"
+#include "utils/functional/function/Function.h"
 
 template<class T>
 using FunctionalConsumer = FunctionalFunction<T, void>;
 
-template<class T>
+template<typename T>
 class Consumer {
-private:
+    private:
     FunctionalConsumer<T> functionalConsumer;
-public:
-    explicit Consumer(FunctionalConsumer<T> functionalConsumer) : functionalConsumer(functionalConsumer) {};
+    public:
+    Consumer(FunctionalConsumer<T> functionalConsumer) : functionalConsumer(functionalConsumer) {};
 
-    void accept(T elem);
+    void accept(T elem) {
+        this->functionalConsumer(elem);
+    }
 
-    Consumer<T> AndThen(Consumer<T> after);
+    Consumer<T>* AndThen(Consumer<T>* after) {
+        return new Consumer<T>([&](T elem) {
+            this->accept(elem);
+            after->accept(elem);
+            });
+    }
 
-    Consumer<T> AndThen(FunctionalConsumer<T> after) { return AndThen(new Consumer<T>(after)); };
+    Consumer<T>* AndThen(FunctionalConsumer<T>* after) { return AndThen(new Consumer<T>(after)); };
 
 };
-
 
 #endif
