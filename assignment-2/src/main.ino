@@ -1,21 +1,32 @@
 #include <Arduino.h>
 
+// Scheduling import
 #include "scheduling/scheduler/Scheduler.h"
-#include "scheduling/task/Task.h"
-#include "tasks/blink-task/BlinkTask.h"
 #include "scheduling/strategy/SchedulingStrategies.h"
 
+// Tasks import
+#include "tasks/presence/PresenceTask.h"
+#include "tasks/self-check/SelfCheckTask.h"
+#include "tasks/application-communicator/ApplicationCommunicatorTask.h"
+#include "tasks/beverage-selector/BeverageSelectorTask.h"
+#include "tasks/beverage-maker/BeverageMakerTask.h"
 
+// Utilities import
 #include "utils/sequence/Sequence.h"
 
 Scheduler* scheduler = new Scheduler();
-TaskWithSchedulingStrategy tasks[] = {
-        TaskWithSchedulingStrategy(new BlinkTask(), SchedulingStrategies::FromPeriod(500))
+
+size_t nTasks = 5;
+PeriodBasedTask* tasks[] = {
+    new PresenceTask(),
+    new SelfCheckTask(),
+    new ApplicationCommunicatorTask(),
+    new BeverageSelectorTask(),
+    new BeverageMakerTask()
 };
 
-void setup() {
 
-    auto* tasksSequence = Sequence<TaskWithSchedulingStrategy>::of(tasks, 1);
+void setup() {
 
     // Setup serial
     Serial.begin(9600);
@@ -24,10 +35,13 @@ void setup() {
     scheduler->init(50);
 
     // Tasks initialization
-    tasksSequence->foreach([](TaskWithSchedulingStrategy task) {
-        task.getTask()->init();
-        scheduler->addTask(task.getTask(), task.getStrategy());
-        });
+    for (size_t i = 0; i < nTasks; i++)
+    {
+        PeriodBasedTask* task = tasks[i];
+        task->init();
+        scheduler->addPeriodBasedTask(task);
+    }
+
 }
 
 void loop() {

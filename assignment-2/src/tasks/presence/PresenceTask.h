@@ -1,11 +1,13 @@
 #ifndef _PRESENCE_TASK_H_
 #define _PRESENCE_TASK_H_
 
-#include "scheduling/task/Task.h"
+#include "scheduling/task/PeriodBasedTask.h"
 
-class PresenceTask : public Task {
+class PresenceTask : public PeriodBasedTask {
 
-public:
+    public:
+    static const int period = 10000;
+
     void init();
     void tick();
 };

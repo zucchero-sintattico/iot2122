@@ -1,6 +1,8 @@
 #include "Scheduler.h"
 #include <Arduino.h>
 
+#include "scheduling/strategy/SchedulingStrategies.h"
+
 void Scheduler::init(int period) {
     this->period = period;
     timer.setupPeriod(period);
@@ -17,6 +19,10 @@ bool Scheduler::addTask(Task* task, SchedulingStrategy* schedulingStrategy) {
     else {
         return false;
     }
+}
+
+bool Scheduler::addPeriodBasedTask(PeriodBasedTask* task) {
+    this->addTask(task, SchedulingStrategies::FromPeriod(task->period));
 }
 
 void Scheduler::schedule() {

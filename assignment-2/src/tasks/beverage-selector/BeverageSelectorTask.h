@@ -1,9 +1,9 @@
-#ifndef _SELF_CHECK_TASK_H_
-#define _SELF_CHECK_TASK_H_
+#ifndef _BEVERAGE_SELECTOR_TASK_H_
+#define _BEVERAGE_SELECTOR_TASK_H_
 
 #include "scheduling/task/PeriodBasedTask.h"
 
-class SelfCheckTask : public PeriodBasedTask {
+class BeverageSelectorTask : public PeriodBasedTask {
 
     public:
     static const int period = 10000;

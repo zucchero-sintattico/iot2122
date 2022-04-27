@@ -6,7 +6,7 @@
 #include "scheduling/timer/Timer.h"
 #include "scheduling/strategy/SchedulingStrategy.h"
 #include "scheduling/task/Task.h"
-
+#include "scheduling/task/PeriodBasedTask.h"
 
 /**
  * @brief A scheduler is a class that manages the execution of tasks.
@@ -20,11 +20,12 @@ class Scheduler {
     TaskWithSchedulingStrategy* tasks[MAX_TASKS];
     Timer timer;
 
-public:
+    public:
 
-    virtual void init(int period);
-    virtual bool addTask(Task* task, SchedulingStrategy* schedulingStrategy);
-    virtual void schedule();
+    void init(int period);
+    bool addTask(Task* task, SchedulingStrategy* schedulingStrategy);
+    bool addPeriodBasedTask(PeriodBasedTask* task);
+    void schedule();
 
 };
 
