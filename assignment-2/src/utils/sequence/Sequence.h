@@ -1,27 +1,27 @@
 #ifndef _SEQUENCE_H_
 #define _SEQUENCE_H_
 
-#include "utils/functional/consumer/Consumer.h"
-#include "utils/functional/function/Function.h"
-#include "utils/functional/bifunction/BiFunction.h"
-#include "utils/functional/predicate/Predicate.h"
-#include "utils/functional/supplier/Supplier.h"
-#include "utils/functional/unary-operator/UnaryOperator.h"
-#include "utils/sequence/iterable/Iterable.h"
+#include "../functional/consumer/Consumer.h"
+#include "../functional/function/Function.h"
+#include "../functional/bifunction/BiFunction.h"
+#include "../functional/predicate/Predicate.h"
+#include "../functional/supplier/Supplier.h"
+#include "../functional/unary-operator/UnaryOperator.h"
+#include "./iterable/Iterable.h"
 
-#include "utils/sequence/iterable/IterableArray.h"
-#include "utils/sequence/iterable/FilterIterable.h"
-#include "utils/sequence/iterable/IterateIterable.h"
-#include "utils/sequence/iterable/MapperIterable.h"
-#include "utils/sequence/iterable/SupplierIterable.h"
+#include "./iterable/IterableArray.h"
+#include "./iterable/FilterIterable.h"
+#include "./iterable/IterateIterable.h"
+#include "./iterable/MapperIterable.h"
+#include "./iterable/SupplierIterable.h"
 
 template<class T>
 class Sequence {
-    private:
+private:
     Iterable<T>* source;
 
 
-    public:
+public:
 
     Sequence(Iterable<T>* source) : source(source) {};
 

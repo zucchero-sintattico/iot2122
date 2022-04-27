@@ -15,7 +15,6 @@ TaskWithSchedulingStrategy tasks[] = {
 
 void setup() {
 
-
     auto* tasksSequence = Sequence<TaskWithSchedulingStrategy>::of(tasks, 1);
 
     // Setup serial

@@ -9,9 +9,11 @@ using FunctionalFunction = R(*)(T);
 
 template<class T, class R>
 class Function {
-    private:
+
+private:
     FunctionalFunction<T, R>* functionalFunction;
-    public:
+
+public:
     explicit Function(FunctionalFunction<T, R>* functionalFunction) : functionalFunction(functionalFunction) {};
 
     R apply(T elem) {

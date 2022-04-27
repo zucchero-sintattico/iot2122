@@ -1,0 +1,3 @@
+1) quanto nel dettaglio il diagramma del singolo task?
+2) Il self check non deve interrompere il programma?
+3) 

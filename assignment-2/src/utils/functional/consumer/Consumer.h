@@ -1,16 +1,16 @@
 #ifndef _CONSUMER_H_
 #define _CONSUMER_H_
 
-#include "utils/functional/function/Function.h"
+#include "../function/Function.h"
 
 template<class T>
 using FunctionalConsumer = FunctionalFunction<T, void>;
 
 template<typename T>
 class Consumer {
-    private:
+private:
     FunctionalConsumer<T> functionalConsumer;
-    public:
+public:
     Consumer(FunctionalConsumer<T> functionalConsumer) : functionalConsumer(functionalConsumer) {};
 
     void accept(T elem) {
