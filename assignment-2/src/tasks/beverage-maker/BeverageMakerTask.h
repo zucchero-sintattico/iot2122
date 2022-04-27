@@ -1,12 +1,20 @@
 #ifndef _BEVERAGE_MAKER_TASK_H_
 #define _BEVERAGE_MAKER_TASK_H_
 
-#include "scheduling/task/PeriodBasedTask.h"
+#include "../PeriodBasedTaskWithFSM.h"
 
-class BeverageMakerTask : public PeriodBasedTask {
+enum BeverageMakerTaskState {
+    IDLE,
+    MAKING,
+    WAITING
+};
 
-    public:
+class BeverageMakerTask : public PeriodBasedTaskWithFSM<BeverageMakerTaskState> {
+
+public:
     static const int period = 50;
+
+    BeverageMakerTask() : PeriodBasedTaskWithFSM(BeverageMakerTaskState::IDLE) {}
 
     void init();
     void tick();

@@ -1,12 +1,21 @@
 #ifndef _BEVERAGE_SELECTOR_TASK_H_
 #define _BEVERAGE_SELECTOR_TASK_H_
 
-#include "scheduling/task/PeriodBasedTask.h"
+#include "../PeriodBasedTaskWithFSM.h"
 
-class BeverageSelectorTask : public PeriodBasedTask {
+enum BeverageSelectorTaskState {
+    IDLE,
+    READY,
+    SELECTING,
+    SELECTED,
+    ASSISTANCE
+};
 
-    public:
+class BeverageSelectorTask : public PeriodBasedTaskWithFSM<BeverageSelectorTaskState> {
+
+public:
     static const int period = 50;
+    BeverageSelectorTask() : PeriodBasedTaskWithFSM(BeverageSelectorTaskState::IDLE) {}
 
     void init();
     void tick();

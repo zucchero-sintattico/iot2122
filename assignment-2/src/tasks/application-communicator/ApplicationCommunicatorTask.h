@@ -1,12 +1,21 @@
 #ifndef _APPLICATION_COMMUNICATOR_TASK_H_
 #define _APPLICATION_COMMUNICATOR_TASK_H_
 
-#include "scheduling/task/PeriodBasedTask.h"
+#include "../PeriodBasedTaskWithFSM.h"
 
-class ApplicationCommunicatorTask : public PeriodBasedTask {
+enum ApplicationCommunicatorTaskState {
+    IDLE,
+    SENDING,
+    FIX,
+    REFILL
+};
 
-    public:
+class ApplicationCommunicatorTask : public PeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState> {
+
+public:
     static const int period = 50;
+
+    ApplicationCommunicatorTask() : PeriodBasedTaskWithFSM(ApplicationCommunicatorTaskState::IDLE) {}
 
     void init();
     void tick();

@@ -12,10 +12,10 @@ enum PresenceTaskState {
 
 class PresenceTask : public PeriodBasedTaskWithFSM<PresenceTaskState> {
 
-    public:
+public:
     static const int period = 500;
 
-    PresenceTask() : PeriodBasedTaskWithFSM(EMPTY) {}
+    PresenceTask() : PeriodBasedTaskWithFSM(PresenceTaskState::EMPTY) {}
 
     void init();
     void tick();

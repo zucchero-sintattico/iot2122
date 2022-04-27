@@ -4,6 +4,7 @@
 #include "scheduling/task/PeriodBasedTask.h"
 #include "finite-state-machine/FiniteStateMachine.h"
 
+
 template<class S>
 class PeriodBasedTaskWithFSM : public PeriodBasedTask, public FiniteStateMachine<S> {
 
