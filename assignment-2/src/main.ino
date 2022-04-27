@@ -16,8 +16,8 @@
 
 Scheduler* scheduler = new Scheduler();
 
-size_t nTasks = 5;
-PeriodBasedTask* tasks[] = {
+const size_t nTasks = 5;
+PeriodBasedTask* tasks[nTasks] = {
     new PresenceTask(),
     new SelfCheckTask(),
     new ApplicationCommunicatorTask(),
