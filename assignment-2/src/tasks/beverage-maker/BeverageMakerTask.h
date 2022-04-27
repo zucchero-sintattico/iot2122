@@ -6,7 +6,7 @@
 class BeverageMakerTask : public PeriodBasedTask {
 
     public:
-    static const int period = 10000;
+    static const int period = 50;
 
     void init();
     void tick();

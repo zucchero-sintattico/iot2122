@@ -13,6 +13,7 @@
  */
 class Scheduler {
 
+    private:
     static const int MAX_TASKS = 10;
 
     int period;
