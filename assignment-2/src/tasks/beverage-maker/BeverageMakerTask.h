@@ -1,7 +1,8 @@
 #ifndef _BEVERAGE_MAKER_TASK_H_
 #define _BEVERAGE_MAKER_TASK_H_
 
-#include "../PeriodBasedTaskWithFSM.h"
+#include "config/MessageType.h"
+#include "../CommunicablePeriodBasedTaskWithFSM.h"
 
 enum BeverageMakerTaskState {
     IDLE,
@@ -9,12 +10,12 @@ enum BeverageMakerTaskState {
     WAITING
 };
 
-class BeverageMakerTask : public PeriodBasedTaskWithFSM<BeverageMakerTaskState> {
+class BeverageMakerTask : public CommunicablePeriodBasedTaskWithFSM<BeverageMakerTaskState, MessageType> {
 
 public:
     static const int period = 50;
 
-    BeverageMakerTask() : PeriodBasedTaskWithFSM(BeverageMakerTaskState::IDLE) {}
+    BeverageMakerTask(MessageBus<MessageType>* messageBus) : CommunicablePeriodBasedTaskWithFSM(messageBus, BeverageMakerTaskState::IDLE) {}
 
     void init();
     void tick();

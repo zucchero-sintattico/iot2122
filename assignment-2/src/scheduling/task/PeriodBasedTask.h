@@ -5,7 +5,7 @@
 
 class PeriodBasedTask : public Task {
 
-    public:
+public:
     static const int period;
     virtual void init() = 0;
     virtual void tick() = 0;

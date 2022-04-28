@@ -1,7 +1,8 @@
 #ifndef _SELF_CHECK_TASK_H_
 #define _SELF_CHECK_TASK_H_
 
-#include "../PeriodBasedTaskWithFSM.h"
+#include "config/MessageType.h"
+#include "../CommunicablePeriodBasedTaskWithFSM.h"
 
 enum SelfCheckTaskState {
     IDLE,
@@ -10,11 +11,11 @@ enum SelfCheckTaskState {
     ASSISTANCE
 };
 
-class SelfCheckTask : public PeriodBasedTaskWithFSM<SelfCheckTaskState> {
+class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskState, MessageType> {
 
 public:
     static const int period = 50;
-    SelfCheckTask() : PeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {}
+    SelfCheckTask(MessageBus<MessageType>* messageBus) : CommunicablePeriodBasedTaskWithFSM(messageBus, SelfCheckTaskState::IDLE) {}
 
     void init();
     void tick();

@@ -12,17 +12,19 @@
 #include "tasks/beverage-maker/BeverageMakerTask.h"
 
 // Utilities import
-#include "utils/sequence/Sequence.h"
+#include "communication/MessageBus.h"
+#include "config/MessageType.h"
 
 Scheduler* scheduler = new Scheduler();
+MessageBus<MessageType>* messageBus = new MessageBus<MessageType>();
 
 const size_t nTasks = 5;
-PeriodBasedTask* tasks[nTasks] = {
-    new PresenceTask(),
-    new SelfCheckTask(),
-    new ApplicationCommunicatorTask(),
-    new BeverageSelectorTask(),
-    new BeverageMakerTask()
+CommunicablePeriodBasedTask<MessageType>* tasks[nTasks] = {
+    new PresenceTask(messageBus),
+    new SelfCheckTask(messageBus),
+    new ApplicationCommunicatorTask(messageBus),
+    new BeverageSelectorTask(messageBus),
+    new BeverageMakerTask(messageBus)
 };
 
 
