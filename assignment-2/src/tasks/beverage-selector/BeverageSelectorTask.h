@@ -6,18 +6,18 @@
 #include "../CommunicablePeriodBasedTaskWithFSM.h"
 
 enum BeverageSelectorTaskState {
-    IDLE,
-    READY,
-    SELECTING,
-    SELECTED,
-    ASSISTANCE
+    BEVERAGE_SELECTOR_STATE_IDLE,
+    BEVERAGE_SELECTOR_STATE_READY,
+    BEVERAGE_SELECTOR_STATE_SELECTING,
+    BEVERAGE_SELECTOR_STATE_SELECTED,
+    BEVERAGE_SELECTOR_STATE_ASSISTANCE
 };
 
 class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageSelectorTaskState, MessageType> {
 
 public:
-    static const int period = 50;
-    BeverageSelectorTask(MessageBus<MessageType>* messageBus) : CommunicablePeriodBasedTaskWithFSM(messageBus, BeverageSelectorTaskState::IDLE) {}
+    int period = 50;
+    BeverageSelectorTask() : CommunicablePeriodBasedTaskWithFSM(BEVERAGE_SELECTOR_STATE_IDLE) {}
 
     void init();
     void tick();

@@ -13,7 +13,7 @@
  */
 class Scheduler {
 
-    private:
+private:
     static const int MAX_TASKS = 10;
 
     int period;
@@ -21,11 +21,11 @@ class Scheduler {
     TaskWithSchedulingStrategy* tasks[MAX_TASKS];
     Timer timer;
 
-    public:
+public:
 
     void init(int period);
-    bool addTask(Task* task, SchedulingStrategy* schedulingStrategy);
-    bool addPeriodBasedTask(PeriodBasedTask* task);
+    virtual bool addTask(Task* task, SchedulingStrategy* schedulingStrategy);
+    virtual bool addPeriodBasedTask(PeriodBasedTask* task);
     void schedule();
 
 };

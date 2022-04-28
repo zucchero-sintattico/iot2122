@@ -8,7 +8,7 @@ class Communicable {
 private:
     MessageBus<M>* messageBus;
 public:
-    Communicable(MessageBus<M>* messageBus) {
+    void attachMessageBus(MessageBus<M>* messageBus) {
         this->messageBus = messageBus;
     }
     MessageBus<M>* getMessageBus() {

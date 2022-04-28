@@ -6,10 +6,10 @@
 template<class S>
 class FiniteStateMachine {
 
-    private:
+private:
     S state;
 
-    public:
+public:
     FiniteStateMachine(S initialState) : state(initialState) {}
 
     void setState(S newState) {

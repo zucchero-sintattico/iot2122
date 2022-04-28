@@ -7,11 +7,9 @@
 template<class M>
 class CommunicablePeriodBasedTask : public CommunicableTask<M>, public PeriodBasedTask {
 
-public:
-    CommunicablePeriodBasedTask(MessageBus<M>* messageBus) : CommunicableTask<M>(messageBus) {}
-
+    public:
     // Inherited from PeriodBasedTask
-    static const int period;
+    int period;
     virtual void init() = 0;
     virtual void tick() = 0;
 

@@ -1,16 +1,14 @@
 #ifndef _COMMUNICABLE_TASK_H_
 #define _COMMUNICABLE_TASK_H_
 
-#include "./Task.h"
 #include "communication/Communicable.h"
+#include "./Task.h"
 
 template<class M>
-class CommunicableTask : public Task, public Communicable<M> {
+class CommunicableTask : public Communicable<M>, public Task {
 
-public:
-    CommunicablePeriodBasedTask(MessageBus<M>* messageBus) : Communicable<M>(messageBus) {}
-
-    // Inherited from Task
+    public:
+    // Inherited from PeriodBasedTask
     virtual void init() = 0;
     virtual void tick() = 0;
 

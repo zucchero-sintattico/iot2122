@@ -5,18 +5,18 @@
 #include "../CommunicablePeriodBasedTaskWithFSM.h"
 
 enum PresenceTaskState {
-    EMPTY,
-    SOMEONE,
-    PRE_SLEEP,
-    SLEEP
+    PRESENCE_STATE_IDLE,
+    PRESENCE_STATE_EMPTY,
+    PRESENCE_STATE_SOMEONE,
+    PRESENCE_STATE_SLEEP
 };
 
 class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState, MessageType> {
 
 public:
-    static const int period = 500;
+    int period = 500;
 
-    PresenceTask(MessageBus<MessageType>* messageBus) : CommunicablePeriodBasedTaskWithFSM(messageBus, PresenceTaskState::EMPTY) {}
+    PresenceTask() : CommunicablePeriodBasedTaskWithFSM(PRESENCE_STATE_IDLE) {}
 
     void init();
     void tick();

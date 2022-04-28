@@ -5,17 +5,17 @@
 #include "../CommunicablePeriodBasedTaskWithFSM.h"
 
 enum BeverageMakerTaskState {
-    IDLE,
-    MAKING,
-    WAITING
+    BEVERAGE_MAKER_STATE_IDLE,
+    BEVERAGE_MAKER_STATE_MAKING,
+    BEVERAGE_MAKER_STATE_WAITING
 };
 
 class BeverageMakerTask : public CommunicablePeriodBasedTaskWithFSM<BeverageMakerTaskState, MessageType> {
 
 public:
-    static const int period = 50;
+    int period = 50;
 
-    BeverageMakerTask(MessageBus<MessageType>* messageBus) : CommunicablePeriodBasedTaskWithFSM(messageBus, BeverageMakerTaskState::IDLE) {}
+    BeverageMakerTask() : CommunicablePeriodBasedTaskWithFSM(BEVERAGE_MAKER_STATE_IDLE) {}
 
     void init();
     void tick();

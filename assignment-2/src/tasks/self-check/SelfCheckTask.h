@@ -5,17 +5,17 @@
 #include "../CommunicablePeriodBasedTaskWithFSM.h"
 
 enum SelfCheckTaskState {
-    IDLE,
-    MECHANIC_CHECK,
-    TEMPERATURE_CHECK,
-    ASSISTANCE
+    SELF_CHECK_STATE_IDLE,
+    SELF_CHECK_STATE_MECHANIC_CHECK,
+    SELF_CHECK_STATE_TEMPERATURE_CHECK,
+    SELF_CHECK_STATE_ASSISTANCE
 };
 
 class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskState, MessageType> {
 
 public:
-    static const int period = 50;
-    SelfCheckTask(MessageBus<MessageType>* messageBus) : CommunicablePeriodBasedTaskWithFSM(messageBus, SelfCheckTaskState::IDLE) {}
+    int period = 50;
+    SelfCheckTask() : CommunicablePeriodBasedTaskWithFSM(SELF_CHECK_STATE_IDLE) {}
 
     void init();
     void tick();

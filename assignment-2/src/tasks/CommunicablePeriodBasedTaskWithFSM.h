@@ -9,7 +9,7 @@ template<class S, class M>
 class CommunicablePeriodBasedTaskWithFSM : public CommunicablePeriodBasedTask<M>, public FiniteStateMachine<S> {
 
 public:
-    CommunicablePeriodBasedTaskWithFSM(MessageBus<M>* messageBus, S initialState) : CommunicablePeriodBasedTask<M>(messageBus) : FiniteStateMachine(initialState) {}
+    CommunicablePeriodBasedTaskWithFSM(S initialState) : FiniteStateMachine<S>(initialState) {}
 
     // Inherited from CommunicablePeriodBasedTask
     static const int period;

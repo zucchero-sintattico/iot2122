@@ -5,18 +5,18 @@
 #include "../CommunicablePeriodBasedTaskWithFSM.h"
 
 enum ApplicationCommunicatorTaskState {
-    IDLE,
-    SENDING,
-    FIX,
-    REFILL
+    APPLICATION_COMMUNICATOR_STATE_IDLE,
+    APPLICATION_COMMUNICATOR_STATE_SENDING,
+    APPLICATION_COMMUNICATOR_STATE_FIX,
+    APPLICATION_COMMUNICATOR_STATE_REFILL
 };
 
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
 
 public:
-    static const int period = 50;
+    int period = 50;
 
-    ApplicationCommunicatorTask(MessageBus<MessageType>* messageBus) : CommunicablePeriodBasedTaskWithFSM(messageBus, ApplicationCommunicatorTaskState::IDLE) {}
+    ApplicationCommunicatorTask() : CommunicablePeriodBasedTaskWithFSM(APPLICATION_COMMUNICATOR_STATE_IDLE) {}
 
     void init();
     void tick();
