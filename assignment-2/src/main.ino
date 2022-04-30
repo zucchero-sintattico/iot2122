@@ -19,10 +19,10 @@
 #include "config/MessageType.h"
 
 // Pin configurations
-uint8_t potentiometerPin = A0;
-uint8_t buttonUpPin = 2;
-uint8_t buttonDownPin = 3;
-uint8_t buttonMakePin = 4;
+const uint8_t potentiometerPin = A0;
+const uint8_t buttonUpPin = 2;
+const uint8_t buttonDownPin = 3;
+const uint8_t buttonMakePin = 4;
 
 // Sensors configurations
 SugarManager* sugarManager = new SugarManager(potentiometerPin);
