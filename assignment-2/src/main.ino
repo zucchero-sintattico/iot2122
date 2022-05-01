@@ -1,22 +1,22 @@
 #include <Arduino.h>
 
 // Scheduling import
-#include "scheduling/scheduler/SchedulerWithMessageBus.h"
-#include "scheduling/strategy/SchedulingStrategies.h"
+#include "iot/scheduling/scheduler/SchedulerWithMessageBus.h"
+#include "iot/scheduling/strategy/SchedulingStrategies.h"
 
 // Tasks import
-#include "tasks/presence/PresenceTask.h"
-#include "tasks/self-check/SelfCheckTask.h"
-#include "tasks/application-communicator/ApplicationCommunicatorTask.h"
-#include "tasks/beverage-selector/BeverageSelectorTask.h"
-#include "tasks/beverage-maker/BeverageMakerTask.h"
+#include "smart-coffee-machine/tasks/presence/PresenceTask.h"
+#include "smart-coffee-machine/tasks/self-check/SelfCheckTask.h"
+#include "smart-coffee-machine/tasks/application-communicator/ApplicationCommunicatorTask.h"
+#include "smart-coffee-machine/tasks/beverage-selector/BeverageSelectorTask.h"
+#include "smart-coffee-machine/tasks/beverage-maker/BeverageMakerTask.h"
 
 // Sensors import
-#include "sensor/sugar/SugarManager.h"
-#include "sensor/button/ButtonManager.h"
+#include "smart-coffee-machine/sensors/sugar/SugarManager.h"
+#include "smart-coffee-machine/sensors/button/ButtonManager.h"
 
 // Utilities import
-#include "config/MessageType.h"
+#include "smart-coffee-machine/config/MessageType.h"
 
 // Pin configurations
 const uint8_t potentiometerPin = A0;
@@ -24,22 +24,9 @@ const uint8_t buttonUpPin = 2;
 const uint8_t buttonDownPin = 3;
 const uint8_t buttonMakePin = 4;
 
-// Sensors configurations
-SugarManager* sugarManager = new SugarManager(potentiometerPin);
-ButtonManager* buttonUpManager = new ButtonManager(buttonUpPin);
-ButtonManager* buttonDownManager = new ButtonManager(buttonDownPin);
-ButtonManager* buttonMakeManager = new ButtonManager(buttonMakePin);
-
-const size_t nSensor = 4;
-SensorManager* sensorManagers[nSensor] = {
-    sugarManager,
-    buttonUpManager,
-    buttonDownManager,
-    buttonMakeManager
-};
-
 // Scheduler and Tasks configurations
 SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>();
+
 const size_t nTasks = 5;
 CommunicablePeriodBasedTask<MessageType>* tasks[nTasks] = {
     new PresenceTask(),
@@ -67,10 +54,5 @@ void setup() {
 }
 
 void loop() {
-    for (size_t i = 0; i < nSensor; i++)
-    {
-        SensorManager* sensorManager = sensorManagers[i];
-        sensorManager->computeRead();
-    }
     scheduler->schedule();
 }
