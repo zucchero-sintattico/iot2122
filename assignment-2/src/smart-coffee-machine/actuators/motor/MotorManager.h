@@ -1,6 +1,7 @@
 #ifndef _MOTOR_MANAGER_H_
 #define _MOTOR_MANAGER_H_
 #include "iot/actuator/Actuator.h"
+#include <Arduino.h>
 
 class MotorManager : public Actuator {
 

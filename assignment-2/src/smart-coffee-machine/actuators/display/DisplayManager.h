@@ -2,13 +2,13 @@
 #define _DISPLAY_MANAGER_H_
 #define DEFAULT_WIDTH  16
 #define DEFAULT_HEIGHT  2
+#include "iot/actuator/Actuator.h"
 #include <Arduino.h>
 #include <String.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#include "../Setuppable.h"
 
-class DisplayManager : public Setuppable{
+class DisplayManager : public Actuator{
     private:
         int address = 0x27;
         int column = 0;

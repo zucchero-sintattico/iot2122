@@ -1,5 +1,4 @@
 #include "MotorManager.h"
-#include <Arduino.h>
 
 MotorManager::MotorManager(int pin) {
     this->pin = pin;
