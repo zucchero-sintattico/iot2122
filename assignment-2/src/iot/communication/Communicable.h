@@ -1,7 +1,7 @@
 #ifndef _COMMUNICABLE_H_
 #define _COMMUNICABLE_H_
 
-#include "MessageBus.h"
+#include "./MessageBus.h"
 
 template<class M>
 class Communicable {
