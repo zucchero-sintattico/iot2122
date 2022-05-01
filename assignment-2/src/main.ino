@@ -11,6 +11,7 @@
 #include "smart-coffee-machine/tasks/beverage-maker/BeverageMakerTask.h"
 
 // Configurations import
+#include "smart-coffee-machine/config/data/AppData.h"
 #include "smart-coffee-machine/config/MessageType.h"
 
 // Pin configurations
@@ -18,6 +19,9 @@ const uint8_t potentiometerPin = A0;
 const uint8_t buttonUpPin = 2;
 const uint8_t buttonDownPin = 3;
 const uint8_t buttonMakePin = 4;
+
+// Application data
+AppData* appData = new AppData();
 
 // Scheduler and Tasks configurations
 SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>();
