@@ -7,6 +7,13 @@ enum MessageType {
     ACTIVATE_PRESENCE_TASK,
     DEACTIVATE_PRESENCE_TASK,
 
+    // Beverage's messages
+    ACTIVATE_BEVERAGE_MAKER_TASK,
+    ACTIVATE_BEVERAGE_SELECTOR_TASK,
+
+    // ApplicationCommunicatorTask's messages
+    REFILL,
+    RECOVER,
 
 };
 
