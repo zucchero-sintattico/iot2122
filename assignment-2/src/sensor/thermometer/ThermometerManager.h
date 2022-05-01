@@ -5,18 +5,18 @@
 #include "../SensorManager.h"
 #include "../Setuppable.h"
 
-class ThermometerManager : public SensorManager{
+class ThermometerManager : public SensorManager {
 
     private:
-        int pin;
-        uint8_t temperature;
-    
+    int pin;
+    uint8_t temperature;
+
     public:
-        ThermometerManager(int pin);
-        void setup();
-        void computeRead();
-        uint8_t getThemperature();
-        String toString();
+    ThermometerManager(int pin);
+    void setup();
+    void computeRead();
+    uint8_t getThemperature();
+    String toString();
 };
 
 
