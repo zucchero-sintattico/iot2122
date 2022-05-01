@@ -4,10 +4,10 @@
 #include "smart-coffee-machine/config/MessageType.h"
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 
-enum BeverageMakerTaskState {
-    BEVERAGE_MAKER_STATE_IDLE,
-    BEVERAGE_MAKER_STATE_MAKING,
-    BEVERAGE_MAKER_STATE_WAITING
+enum class BeverageMakerTaskState {
+    IDLE,
+    MAKING,
+    WAITING
 };
 
 class BeverageMakerTask : public CommunicablePeriodBasedTaskWithFSM<BeverageMakerTaskState, MessageType> {
@@ -15,7 +15,7 @@ class BeverageMakerTask : public CommunicablePeriodBasedTaskWithFSM<BeverageMake
     public:
     int period = 50;
 
-    BeverageMakerTask() : CommunicablePeriodBasedTaskWithFSM(BEVERAGE_MAKER_STATE_IDLE) {}
+    BeverageMakerTask() : CommunicablePeriodBasedTaskWithFSM(BeverageMakerTaskState::IDLE) {}
 
     void init();
     void computeRead();

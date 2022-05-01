@@ -19,7 +19,6 @@ class SchedulerWithMessageBus : public Scheduler {
     SchedulerWithMessageBus(MessageBus<M>* messageBus) : messageBus(messageBus) {}
 
     bool addTask(CommunicableTask<M>* task, SchedulingStrategy* schedulingStrategy) {
-        Serial.println("ATTACH BUS");
         task->attachMessageBus(messageBus);
         return Scheduler::addTask(task, schedulingStrategy);
     }

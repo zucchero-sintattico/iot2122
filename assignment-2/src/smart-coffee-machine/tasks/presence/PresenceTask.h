@@ -4,11 +4,11 @@
 #include "smart-coffee-machine/config/MessageType.h"
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 
-enum PresenceTaskState {
-    PRESENCE_STATE_IDLE,
-    PRESENCE_STATE_EMPTY,
-    PRESENCE_STATE_SOMEONE,
-    PRESENCE_STATE_SLEEP
+enum class PresenceTaskState {
+    IDLE,
+    EMPTY,
+    SOMEONE,
+    SLEEP
 };
 
 class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState, MessageType> {
@@ -16,7 +16,7 @@ class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState
     public:
     int period = 500;
 
-    PresenceTask() : CommunicablePeriodBasedTaskWithFSM(PRESENCE_STATE_IDLE) {}
+    PresenceTask() : CommunicablePeriodBasedTaskWithFSM(PresenceTaskState::IDLE) {}
 
     void init();
     void computeRead();

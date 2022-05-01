@@ -4,11 +4,11 @@
 #include "smart-coffee-machine/config/MessageType.h"
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 
-enum ApplicationCommunicatorTaskState {
-    APPLICATION_COMMUNICATOR_STATE_IDLE,
-    APPLICATION_COMMUNICATOR_STATE_SENDING,
-    APPLICATION_COMMUNICATOR_STATE_FIX,
-    APPLICATION_COMMUNICATOR_STATE_REFILL
+enum class ApplicationCommunicatorTaskState {
+    IDLE,
+    SENDING,
+    FIX,
+    REFILL
 };
 
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
@@ -16,7 +16,7 @@ class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<Ap
     public:
     int period = 50;
 
-    ApplicationCommunicatorTask() : CommunicablePeriodBasedTaskWithFSM(APPLICATION_COMMUNICATOR_STATE_IDLE) {}
+    ApplicationCommunicatorTask() : CommunicablePeriodBasedTaskWithFSM(ApplicationCommunicatorTaskState::IDLE) {}
 
     void init();
     void computeRead();
