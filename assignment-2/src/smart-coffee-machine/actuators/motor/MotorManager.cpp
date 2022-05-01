@@ -1,26 +1,36 @@
 #include "MotorManager.h"
+#include <Arduino.h>
 
 MotorManager::MotorManager(int pin) {
     this->pin = pin;
 }
 
 void MotorManager::setup() {
-    pinMode(pin, OUTPUT);
+    servo.attach(this->pin);
 }
 
-bool MotorManager::rotateTo(int angle) {
-    digitalWrite(pin, HIGH);
-    delayMicroseconds(angle);
-}
-
-bool MotorManager::returnToStart() {
-    if (current_angle != 0) {
-        rotateTo(0);
+void MotorManager::rotateTo(int angle) {
+    if(angle >= 0 && angle <= 180){
+     for (pos = 0; pos <= angle; pos += 1) {
+        servo.write(pos);
+        Serial.println(pos);
+        delay(15);
+      }
     }
 }
 
-bool MotorManager::goToEnd() {
-    if (current_angle != 180) {
-        rotateTo(180);
-    }
+void MotorManager::returnToStart() {
+  if(pos != 0){
+     for (pos; pos >= 0; pos -= 1) {
+        servo.write(pos);
+        Serial.println(pos);
+        delay(15);
+     } 
+  }
+}
+
+void MotorManager::goToEnd() {
+    if(pos != 180){
+      this -> rotateTo(180); 
+  }
 }

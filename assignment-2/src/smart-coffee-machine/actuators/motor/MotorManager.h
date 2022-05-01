@@ -1,20 +1,21 @@
 #ifndef _MOTOR_MANAGER_H_
 #define _MOTOR_MANAGER_H_
-#include "iot/actuator/Actuator.h"
-#include <Arduino.h>
+#include "iot/actuator/actuator.h"
+#include <Servo.h>
 
 class MotorManager : public Actuator {
 
     private:
     int pin;
-    int current_angle;
+    int pos = 0;
+    Servo servo;
 
     public:
     MotorManager(int pin);
     void setup();
-    bool rotateTo(int angle);
-    bool returnToStart();
-    bool goToEnd();
+    void rotateTo(int angle);
+    void returnToStart();
+    void goToEnd();
 };
 
 #endif // _MOTOR_MANAGER_
