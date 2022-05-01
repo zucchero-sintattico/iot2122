@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-01T14:17:57.009Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="GghGOS_5gdH4Q9rdHRy2" version="17.4.6" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-05-01T14:19:09.281Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="_evMvzx0VG11deWdiogn" version="17.4.6" type="github" pages="4">
   <diagram id="Om2Yw1UXd5m7-ycpb1zF" name="General State">
     <mxGraphModel dx="3555" dy="2995" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -286,7 +286,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="bp0mwMo7cnhgV10kYrG3" name="Tasks">
-    <mxGraphModel dx="1185" dy="1732" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="569" dy="1403" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -436,7 +436,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-35" value="ASSISTANCE" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="MKb-jN0t4XkgZHRTPnL1-37" vertex="1">
-          <mxGeometry x="80" y="330" width="90" height="90" as="geometry" />
+          <mxGeometry x="65" y="350" width="90" height="90" as="geometry" />
         </mxCell>
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-45" value="B_x pressed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="MKb-jN0t4XkgZHRTPnL1-37" source="EKUFZtFYOPPtRK7uZ2_z-40" target="EKUFZtFYOPPtRK7uZ2_z-44" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -444,8 +444,8 @@
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-54" value="no prod" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="MKb-jN0t4XkgZHRTPnL1-37" source="EKUFZtFYOPPtRK7uZ2_z-40" target="EKUFZtFYOPPtRK7uZ2_z-35" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="EKUFZtFYOPPtRK7uZ2_z-40" value="READY&lt;br&gt;do / display READY" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="MKb-jN0t4XkgZHRTPnL1-37" vertex="1">
-          <mxGeometry x="80" y="180" width="90" height="90" as="geometry" />
+        <mxCell id="EKUFZtFYOPPtRK7uZ2_z-40" value="READY&lt;br&gt;entry / send START_PRES&lt;br&gt;message&lt;br&gt;do / display READY&lt;br&gt;exit / send &lt;br&gt;STOP_PRES&lt;br&gt;message" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="MKb-jN0t4XkgZHRTPnL1-37" vertex="1">
+          <mxGeometry x="40" y="155" width="140" height="140" as="geometry" />
         </mxCell>
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-42" value="ENTRY" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="MKb-jN0t4XkgZHRTPnL1-37" source="MKb-jN0t4XkgZHRTPnL1-37" target="EKUFZtFYOPPtRK7uZ2_z-40" edge="1">
           <mxGeometry relative="1" as="geometry" />
