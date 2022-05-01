@@ -7,7 +7,8 @@ class ButtonManager : public SensorManager {
 
     private:
     int pin;
-    bool isButtonPressed;
+    bool isButtonPressed = false;
+    bool prevValue = false;
 
     public:
     ButtonManager(int pin);

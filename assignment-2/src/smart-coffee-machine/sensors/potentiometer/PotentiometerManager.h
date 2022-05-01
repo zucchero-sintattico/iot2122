@@ -8,11 +8,11 @@ class PotentiometerManager : public SensorManager {
 
     private:
     int pin;
-    uint8_t potentiometerValue;
+    int potentiometerValue;
 
     public:
     PotentiometerManager(int pin);
-    uint8_t getValue();
+    int getValue();
 
     void setup();
     void computeRead();

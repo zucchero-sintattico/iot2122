@@ -12,6 +12,6 @@ void PotentiometerManager::computeRead() {
     this->potentiometerValue = analogRead(this->pin);
 }
 
-uint8_t PotentiometerManager::getValue() {
+int PotentiometerManager::getValue() {
     return this->potentiometerValue;
 }

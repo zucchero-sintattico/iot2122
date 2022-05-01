@@ -10,7 +10,14 @@ void ButtonManager::setup() {
 }
 
 void ButtonManager::computeRead() {
-    this->isButtonPressed = digitalRead(this->pin);
+    bool value = digitalRead(this->pin);
+    if (value == LOW && this->prevValue == HIGH) {
+        this->isButtonPressed = true;
+    }
+    else {
+        this->isButtonPressed = false;
+    }
+    this->prevValue = value;
 }
 
 bool ButtonManager::isPressed() {

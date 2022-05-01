@@ -2,6 +2,6 @@
 
 SugarManager::SugarManager(int pin) : PotentiometerManager(pin) {}
 
-double SugarManager::getPercentage() {
+int SugarManager::getPercentage() {
     return map(this->getValue(), 0, 1023, 0, 100);
 }

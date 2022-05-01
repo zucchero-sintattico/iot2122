@@ -7,7 +7,7 @@ class SugarManager : public PotentiometerManager {
 
     public:
     SugarManager(int pin);
-    double getPercentage();
+    int getPercentage();
 
 };
 #endif

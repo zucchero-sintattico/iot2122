@@ -26,18 +26,21 @@ AppData* appData = new AppData();
 // Scheduler and Tasks configurations
 SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>();
 
-const size_t nTasks = 5;
+const size_t nTasks = 1;
 CommunicablePeriodBasedTask<MessageType>* tasks[nTasks] = {
-    new PresenceTask(),
-    new SelfCheckTask(),
-    new ApplicationCommunicatorTask(),
-    new BeverageSelectorTask(),
-    new BeverageMakerTask()
+    //new PresenceTask(),
+    //new SelfCheckTask(),
+    //new ApplicationCommunicatorTask(),
+    new BeverageSelectorTask(buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin),
+    //new BeverageMakerTask()
 };
 
 void setup() {
+
+    Serial.begin(9600);
+
     // Scheduler initialization
-    scheduler->init(50);
+    scheduler->init(10);
 
     // Tasks initialization
     for (size_t i = 0; i < nTasks; i++)
