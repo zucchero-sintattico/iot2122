@@ -2,7 +2,6 @@
 
 // Scheduling import
 #include "iot/scheduling/scheduler/SchedulerWithMessageBus.h"
-#include "iot/scheduling/strategy/SchedulingStrategies.h"
 
 // Tasks import
 #include "smart-coffee-machine/tasks/presence/PresenceTask.h"
@@ -11,11 +10,7 @@
 #include "smart-coffee-machine/tasks/beverage-selector/BeverageSelectorTask.h"
 #include "smart-coffee-machine/tasks/beverage-maker/BeverageMakerTask.h"
 
-// Sensors import
-#include "smart-coffee-machine/sensors/sugar/SugarManager.h"
-#include "smart-coffee-machine/sensors/button/ButtonManager.h"
-
-// Utilities import
+// Configurations import
 #include "smart-coffee-machine/config/MessageType.h"
 
 // Pin configurations
@@ -36,11 +31,7 @@ CommunicablePeriodBasedTask<MessageType>* tasks[nTasks] = {
     new BeverageMakerTask()
 };
 
-
 void setup() {
-    // Setup serial
-    Serial.begin(9600);
-
     // Scheduler initialization
     scheduler->init(50);
 

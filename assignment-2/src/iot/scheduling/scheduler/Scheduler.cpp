@@ -10,7 +10,6 @@ void Scheduler::init(int period) {
 }
 
 bool Scheduler::addTask(Task* task, SchedulingStrategy* schedulingStrategy) {
-    Serial.println("ADD TASK");
     if (nTasks < MAX_TASKS - 1) {
         this->tasks[nTasks] = new TaskWithSchedulingStrategy(task, schedulingStrategy);
         nTasks++;
