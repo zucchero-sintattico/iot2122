@@ -3,10 +3,8 @@
 #define DEFAULT_WIDTH  16
 #define DEFAULT_HEIGHT  2
 #include "iot/actuator/Actuator.h"
-#include <Arduino.h>
 #include <String.h>
-#include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+
 
 class DisplayManager : public Actuator{
     private:

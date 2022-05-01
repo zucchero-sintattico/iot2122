@@ -1,3 +1,5 @@
+#define START_POSITION 0
+#define END_POSITION 180
 #include "MotorManager.h"
 #include <Arduino.h>
 
@@ -11,26 +13,20 @@ void MotorManager::setup() {
 
 void MotorManager::rotateTo(int angle) {
     if(angle >= 0 && angle <= 180){
-     for (pos = 0; pos <= angle; pos += 1) {
-        servo.write(pos);
-        Serial.println(pos);
+        servo.write(angle);
         delay(15);
-      }
     }
 }
 
 void MotorManager::returnToStart() {
-  if(pos != 0){
-     for (pos; pos >= 0; pos -= 1) {
-        servo.write(pos);
-        Serial.println(pos);
+  if(current_angle != 0){
+        servo.write(START_POSITION);
         delay(15);
-     } 
   }
 }
 
 void MotorManager::goToEnd() {
-    if(pos != 180){
-      this -> rotateTo(180); 
+    if(current_angle != 180){
+      this -> rotateTo(END_POSITION); 
   }
 }
