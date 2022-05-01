@@ -8,7 +8,7 @@ class MotorManager : public Actuator {
 
     private:
     int pin;
-    int pos = 0;
+    int current_angle = 0;
     ServoTimer2 servo;
 
     public:
