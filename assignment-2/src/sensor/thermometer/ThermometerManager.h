@@ -15,7 +15,7 @@ class ThermometerManager : public SensorManager {
     ThermometerManager(int pin);
     void setup();
     void computeRead();
-    uint8_t getThemperature();
+    uint8_t getTemperature();
     String toString();
 };
 
