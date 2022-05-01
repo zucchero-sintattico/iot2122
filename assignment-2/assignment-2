@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-01T14:19:09.281Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="_evMvzx0VG11deWdiogn" version="17.4.6" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-05-01T14:20:51.348Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="4pt8N5NIEaWqHFRVb4ud" version="17.4.6" type="github" pages="4">
   <diagram id="Om2Yw1UXd5m7-ycpb1zF" name="General State">
     <mxGraphModel dx="3555" dy="2995" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -286,7 +286,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="bp0mwMo7cnhgV10kYrG3" name="Tasks">
-    <mxGraphModel dx="569" dy="1403" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="813" dy="1533" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -435,7 +435,7 @@
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-55" value="refill" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="MKb-jN0t4XkgZHRTPnL1-37" source="EKUFZtFYOPPtRK7uZ2_z-35" target="EKUFZtFYOPPtRK7uZ2_z-40" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="EKUFZtFYOPPtRK7uZ2_z-35" value="ASSISTANCE" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="MKb-jN0t4XkgZHRTPnL1-37" vertex="1">
+        <mxCell id="EKUFZtFYOPPtRK7uZ2_z-35" value="ASSISTANCE&lt;br&gt;do / wait for REFILL message" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="MKb-jN0t4XkgZHRTPnL1-37" vertex="1">
           <mxGeometry x="65" y="350" width="90" height="90" as="geometry" />
         </mxCell>
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-45" value="B_x pressed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="MKb-jN0t4XkgZHRTPnL1-37" source="EKUFZtFYOPPtRK7uZ2_z-40" target="EKUFZtFYOPPtRK7uZ2_z-44" edge="1">
@@ -596,13 +596,13 @@
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-105" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="4H4KP3whWeTb32gsJAZ8-13" source="EKUFZtFYOPPtRK7uZ2_z-103" target="4H4KP3whWeTb32gsJAZ8-15" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="EKUFZtFYOPPtRK7uZ2_z-103" value="REFILL&lt;br&gt;do / refill beverage" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="4H4KP3whWeTb32gsJAZ8-13" vertex="1">
+        <mxCell id="EKUFZtFYOPPtRK7uZ2_z-103" value="REFILL&lt;br&gt;do / send REFILL message" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="4H4KP3whWeTb32gsJAZ8-13" vertex="1">
           <mxGeometry x="187.52" y="267.49" width="94.97" height="94.97" as="geometry" />
         </mxCell>
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-108" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="4H4KP3whWeTb32gsJAZ8-13" source="EKUFZtFYOPPtRK7uZ2_z-106" target="4H4KP3whWeTb32gsJAZ8-15" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="EKUFZtFYOPPtRK7uZ2_z-106" value="FIX&lt;br&gt;do / exit from assistance" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="4H4KP3whWeTb32gsJAZ8-13" vertex="1">
+        <mxCell id="EKUFZtFYOPPtRK7uZ2_z-106" value="FIX&lt;br&gt;do / send RECOVER message" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="4H4KP3whWeTb32gsJAZ8-13" vertex="1">
           <mxGeometry x="367.52" y="110" width="94.97" height="94.97" as="geometry" />
         </mxCell>
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-111" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="4H4KP3whWeTb32gsJAZ8-13" source="EKUFZtFYOPPtRK7uZ2_z-109" target="4H4KP3whWeTb32gsJAZ8-15" edge="1">
@@ -682,7 +682,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MKb-jN0t4XkgZHRTPnL1-24" value="ASSISTANCE&lt;br&gt;entry / display message" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="MKb-jN0t4XkgZHRTPnL1-10" vertex="1">
+        <mxCell id="MKb-jN0t4XkgZHRTPnL1-24" value="ASSISTANCE&lt;br&gt;entry / display message&lt;br&gt;do / wait RECOVER message" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="MKb-jN0t4XkgZHRTPnL1-10" vertex="1">
           <mxGeometry x="177.5" y="250" width="150" height="150" as="geometry" />
         </mxCell>
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-123" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=open;endFill=0;" parent="MKb-jN0t4XkgZHRTPnL1-10" source="MKb-jN0t4XkgZHRTPnL1-10" target="MKb-jN0t4XkgZHRTPnL1-12" edge="1">
