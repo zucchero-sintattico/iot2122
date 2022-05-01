@@ -12,12 +12,13 @@ enum BeverageMakerTaskState {
 
 class BeverageMakerTask : public CommunicablePeriodBasedTaskWithFSM<BeverageMakerTaskState, MessageType> {
 
-public:
+    public:
     int period = 50;
 
     BeverageMakerTask() : CommunicablePeriodBasedTaskWithFSM(BEVERAGE_MAKER_STATE_IDLE) {}
 
     void init();
+    void computeRead();
     void tick();
 
 };

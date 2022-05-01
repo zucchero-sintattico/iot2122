@@ -4,6 +4,10 @@ void PresenceTask::init() {
     // do stuff...
 }
 
+void PresenceTask::computeRead() {
+    // do stuff...
+}
+
 void PresenceTask::tick() {
     // do stuff...
 }

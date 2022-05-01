@@ -15,11 +15,12 @@ enum BeverageSelectorTaskState {
 
 class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageSelectorTaskState, MessageType> {
 
-public:
+    public:
     int period = 50;
     BeverageSelectorTask() : CommunicablePeriodBasedTaskWithFSM(BEVERAGE_SELECTOR_STATE_IDLE) {}
 
     void init();
+    void computeRead();
     void tick();
 
 };

@@ -3,8 +3,9 @@
 
 class Task {
 
-public:
+    public:
     virtual void init() = 0;
+    virtual void computeRead() = 0;
     virtual void tick() = 0;
 
 };

@@ -13,11 +13,12 @@ enum SelfCheckTaskState {
 
 class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskState, MessageType> {
 
-public:
+    public:
     int period = 50;
     SelfCheckTask() : CommunicablePeriodBasedTaskWithFSM(SELF_CHECK_STATE_IDLE) {}
 
     void init();
+    void computeRead();
     void tick();
 
 };

@@ -31,6 +31,7 @@ void Scheduler::schedule() {
         this->tasks[i]->getStrategy()->addElapsedTime(this->period);
         if (this->tasks[i]->getStrategy()->hasToBeExecuted()) {
             this->tasks[i]->getStrategy()->resetElapsedTime();
+            this->tasks[i]->getTask()->computeRead();
             this->tasks[i]->getTask()->tick();
         }
     }
