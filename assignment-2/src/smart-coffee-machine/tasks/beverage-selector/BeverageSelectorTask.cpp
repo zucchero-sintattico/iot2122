@@ -33,11 +33,30 @@ void BeverageSelectorTask::tick() {
 }
 
 void BeverageSelectorTask::onIdleState() {
-    Serial.println("BeverageSelectorTask::onIdleState");
+    if (this->getMessageBus()->isMessagePresent(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK)) {
+        this->getMessageBus()->removeMessage(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK);
+        this->getMessageBus()->push(MessageType::ACTIVATE_PRESENCE_TASK);
+        this->setState(BeverageSelectorTaskState::READY);
+    }
+}
+
+
+bool BeverageSelectorTask::isAnyButtonPressed() {
+    return this->buttonUpManager->isPressed() || this->buttonDownManager->isPressed() || this->buttonMakeManager->isPressed();
 }
 
 void BeverageSelectorTask::onReadyState() {
-    Serial.println("BeverageSelectorTask::onReadyState");
+    if (this->appData->isRefillNeeded()) {
+        this->setState(BeverageSelectorTaskState::ASSISTANCE);
+        return;
+    }
+
+    // Print READY to display
+
+    if (this->isAnyButtonPressed()) {
+        this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);
+        this->setState(BeverageSelectorTaskState::SELECTING);
+    }
 }
 
 void BeverageSelectorTask::onSelectingState() {
@@ -45,5 +64,12 @@ void BeverageSelectorTask::onSelectingState() {
 }
 
 void BeverageSelectorTask::onAssistanceState() {
-    Serial.println("BeverageSelectorTask::onAssistanceState");
+
+    // Display ASSISTANCE REQUIRED message
+
+    if (this->getMessageBus()->isMessagePresent(MessageType::REFILL)) {
+        this->getMessageBus()->removeMessage(MessageType::REFILL);
+        this->appData->refill();
+        this->setState(BeverageSelectorTaskState::READY);
+    }
 }

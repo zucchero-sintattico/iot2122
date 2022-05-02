@@ -4,7 +4,7 @@
 
 class AppData {
 
-    private:
+private:
 
     static const int MAX_AVAILABLE_COFFEE = 10;
     static const int MAX_AVAILABLE_TEA = 10;
@@ -14,7 +14,9 @@ class AppData {
     int availableTea = MAX_AVAILABLE_TEA;
     int availableChocolate = MAX_AVAILABLE_CHOCOLATE;
 
-    public:
+public:
+
+    bool isRefillNeeded();
 
     int getAvailableCoffee();
     int getAvailableTea();

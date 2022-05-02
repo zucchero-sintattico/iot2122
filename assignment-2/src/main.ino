@@ -31,7 +31,7 @@ CommunicablePeriodBasedTask<MessageType>* tasks[nTasks] = {
     //new PresenceTask(),
     //new SelfCheckTask(),
     //new ApplicationCommunicatorTask(),
-    new BeverageSelectorTask(buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin),
+    new BeverageSelectorTask(appData, buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin),
     //new BeverageMakerTask()
 };
 

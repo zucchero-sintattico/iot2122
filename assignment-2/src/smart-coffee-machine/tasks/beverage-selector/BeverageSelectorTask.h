@@ -6,6 +6,7 @@
 #include "smart-coffee-machine/config/MessageType.h"
 #include "smart-coffee-machine/sensors/button/ButtonManager.h"
 #include "smart-coffee-machine/sensors/sugar/SugarManager.h"
+#include "smart-coffee-machine/config/data/AppData.h"
 
 enum class BeverageSelectorTaskState {
     IDLE,
@@ -16,9 +17,10 @@ enum class BeverageSelectorTaskState {
 
 class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageSelectorTaskState, MessageType> {
 
-    public:
+public:
     int period = 50;
 
+private:
     // Configuration
     int buttonUpPin;
     int buttonDownPin;
@@ -30,7 +32,12 @@ class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageS
     ButtonManager* buttonMakeManager;
     SugarManager* sugarManager;
 
-    BeverageSelectorTask(int buttonUpPin, int buttonDownPin, int buttonMakePin, int potentiometerSugarPin) : CommunicablePeriodBasedTaskWithFSM(BeverageSelectorTaskState::IDLE) {
+    AppData* appData;
+
+public:
+    BeverageSelectorTask(AppData* appData, int buttonUpPin, int buttonDownPin, int buttonMakePin, int potentiometerSugarPin) : CommunicablePeriodBasedTaskWithFSM(BeverageSelectorTaskState::IDLE) {
+        this->appData = appData;
+
         this->buttonUpPin = buttonUpPin;
         this->buttonDownPin = buttonDownPin;
         this->buttonMakePin = buttonMakePin;
@@ -46,10 +53,13 @@ class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageS
     void computeRead();
     void tick();
 
+private:
     void onIdleState();
     void onReadyState();
     void onSelectingState();
     void onAssistanceState();
+
+    bool isAnyButtonPressed();
 
 };
 

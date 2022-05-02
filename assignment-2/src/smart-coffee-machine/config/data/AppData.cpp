@@ -1,5 +1,9 @@
 #include "AppData.h"
 
+bool AppData::isRefillNeeded() {
+    return availableCoffee == 0 && availableTea == 0 && availableChocolate == 0;
+}
+
 int AppData::getAvailableCoffee() {
     return this->availableCoffee;
 }
