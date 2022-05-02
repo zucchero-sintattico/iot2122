@@ -24,7 +24,6 @@ public:
     }
 
     bool addPeriodBasedTask(CommunicablePeriodBasedTask<M>* task) {
-        Serial.println("Adding task with PERIOD = " + String(task->getPeriod()));
         return this->addTask(task, SchedulingStrategies::FromPeriod(task->getPeriod()));
     }
 

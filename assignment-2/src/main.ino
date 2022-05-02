@@ -46,7 +46,6 @@ void setup() {
     for (size_t i = 0; i < nTasks; i++)
     {
         CommunicablePeriodBasedTask<MessageType>* task = tasks[i];
-        Serial.println(task->getPeriod());
         task->init();
         scheduler->addPeriodBasedTask(task);
     }
