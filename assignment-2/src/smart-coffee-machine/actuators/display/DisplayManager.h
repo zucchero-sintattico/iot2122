@@ -4,6 +4,8 @@
 #define DEFAULT_HEIGHT  2
 #include "iot/actuator/Actuator.h"
 #include <String.h>
+#include <LiquidCrystal_I2C.h>
+
 
 
 class DisplayManager : public Actuator{

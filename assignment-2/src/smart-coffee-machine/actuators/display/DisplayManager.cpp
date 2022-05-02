@@ -1,6 +1,5 @@
 #include "DisplayManager.h"
 #include <Arduino.h>
-#include <LiquidCrystal_I2C.h>
 
 DisplayManager::DisplayManager(int address, int width, int height){
     this->address = address;
