@@ -14,14 +14,12 @@ void MotorManager::setup() {
 void MotorManager::rotateTo(int angle) {
   if (angle >= 0 && angle <= 180) {
     servo.write(angle);
-    delay(15);
   }
 }
 
 void MotorManager::returnToStart() {
   if (current_angle != 0) {
     servo.write(START_POSITION);
-    delay(15);
   }
 }
 
