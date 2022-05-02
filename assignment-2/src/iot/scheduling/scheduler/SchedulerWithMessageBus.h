@@ -10,9 +10,9 @@
 template<class M>
 class SchedulerWithMessageBus : public Scheduler {
 
-    private:
+private:
     MessageBus<M>* messageBus;
-    public:
+public:
     SchedulerWithMessageBus() {
         this->messageBus = new MessageBus<M>();
     }
@@ -24,7 +24,8 @@ class SchedulerWithMessageBus : public Scheduler {
     }
 
     bool addPeriodBasedTask(CommunicablePeriodBasedTask<M>* task) {
-        return this->addTask(task, SchedulingStrategies::FromPeriod(task->period));
+        Serial.println("Adding task with PERIOD = " + String(task->getPeriod()));
+        return this->addTask(task, SchedulingStrategies::FromPeriod(task->getPeriod()));
     }
 
 };

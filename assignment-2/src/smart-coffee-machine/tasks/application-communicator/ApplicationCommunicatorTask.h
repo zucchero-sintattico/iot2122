@@ -13,10 +13,14 @@ enum class ApplicationCommunicatorTaskState {
 
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
 
-    public:
-    int period = 50;
+private:
+    int _period = 75;
 
-    ApplicationCommunicatorTask() : CommunicablePeriodBasedTaskWithFSM(ApplicationCommunicatorTaskState::IDLE) {}
+public:
+
+    ApplicationCommunicatorTask() : CommunicablePeriodBasedTaskWithFSM(ApplicationCommunicatorTaskState::IDLE) {
+        this->setPeriod(this->_period);
+    }
 
     void init();
     void computeRead();

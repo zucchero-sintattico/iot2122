@@ -7,9 +7,8 @@
 template<class M>
 class CommunicablePeriodBasedTask : public CommunicableTask<M>, public PeriodBasedTask {
 
-    public:
+public:
     // Inherited from PeriodBasedTask
-    int period;
     virtual void init() = 0;
     virtual void computeRead() = 0;
     virtual void tick() = 0;

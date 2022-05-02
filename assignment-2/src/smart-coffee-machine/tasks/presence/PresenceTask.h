@@ -13,10 +13,13 @@ enum class PresenceTaskState {
 
 class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState, MessageType> {
 
-    public:
-    int period = 500;
+private:
+    int _period = 500;
 
-    PresenceTask() : CommunicablePeriodBasedTaskWithFSM(PresenceTaskState::IDLE) {}
+public:
+    PresenceTask() : CommunicablePeriodBasedTaskWithFSM(PresenceTaskState::IDLE) {
+        this->setPeriod(this->_period);
+    }
 
     void init();
     void computeRead();

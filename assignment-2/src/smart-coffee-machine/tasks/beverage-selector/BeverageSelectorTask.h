@@ -17,10 +17,9 @@ enum class BeverageSelectorTaskState {
 
 class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageSelectorTaskState, MessageType> {
 
-public:
-    int period = 50;
-
 private:
+    int _period = 50;
+
     // Configuration
     int buttonUpPin;
     int buttonDownPin;
@@ -36,6 +35,7 @@ private:
 
 public:
     BeverageSelectorTask(AppData* appData, int buttonUpPin, int buttonDownPin, int buttonMakePin, int potentiometerSugarPin) : CommunicablePeriodBasedTaskWithFSM(BeverageSelectorTaskState::IDLE) {
+        this->setPeriod(50);
         this->appData = appData;
 
         this->buttonUpPin = buttonUpPin;
