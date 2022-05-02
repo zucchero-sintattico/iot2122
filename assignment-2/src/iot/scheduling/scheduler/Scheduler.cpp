@@ -21,7 +21,7 @@ bool Scheduler::addTask(Task* task, SchedulingStrategy* schedulingStrategy) {
 }
 
 bool Scheduler::addPeriodBasedTask(PeriodBasedTask* task) {
-    return this->addTask(task, SchedulingStrategies::FromPeriod(task->period));
+    return this->addTask(task, SchedulingStrategies::FromPeriod(task->getPeriod()));
 }
 
 void Scheduler::schedule() {

@@ -5,8 +5,15 @@
 
 class PeriodBasedTask : public Task {
 
-    public:
+private:
     int period;
+public:
+    void setPeriod(int period) {
+        this->period = period;
+    }
+    int getPeriod() {
+        return this->period;
+    }
     virtual void init() = 0;
     virtual void computeRead() = 0;
     virtual void tick() = 0;

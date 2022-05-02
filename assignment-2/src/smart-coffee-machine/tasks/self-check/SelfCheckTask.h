@@ -13,9 +13,13 @@ enum class SelfCheckTaskState {
 
 class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskState, MessageType> {
 
-    public:
-    int period = 50;
-    SelfCheckTask() : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {}
+private:
+    int _period = 100;
+
+public:
+    SelfCheckTask() : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
+        this->setPeriod(_period);
+    }
 
     void init();
     void computeRead();

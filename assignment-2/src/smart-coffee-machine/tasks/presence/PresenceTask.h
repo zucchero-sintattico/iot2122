@@ -14,18 +14,17 @@ enum class PresenceTaskState {
 };
 
 class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState, MessageType> {
-
-    public:
-        int period = 50;
     
     private:
         int pirPin;
         PirManager* pirManager;
+        int _period = 500;
 
     public:
     PresenceTask(int pirPin) : CommunicablePeriodBasedTaskWithFSM(PresenceTaskState::IDLE) {
         this->pirPin = pirPin;
         this->pirManager = new PirManager(pirPin);
+        this->setPeriod(this->_period);
     }
 
     void init();
