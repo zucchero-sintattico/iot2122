@@ -20,6 +20,9 @@ class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState
         PirManager* pirManager;
         int _period = 500;
 
+        const int tickToSleep = 20;
+        int elapsedTickNooneDetected = 0;
+
     public:
     PresenceTask(int pirPin) : CommunicablePeriodBasedTaskWithFSM(PresenceTaskState::IDLE) {
         this->pirPin = pirPin;

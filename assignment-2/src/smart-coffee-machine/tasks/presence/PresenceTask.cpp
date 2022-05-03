@@ -15,7 +15,7 @@ void PresenceTask::tick() {
         this->onIdleState();
         break;
     case PresenceTaskState::NOONE:
-        this->onIdleState();
+        this->onNooneState();
         break;
     case PresenceTaskState::SOMEONE:
         this->onSomeoneState();
@@ -25,19 +25,27 @@ void PresenceTask::tick() {
         break;
     }
 }
-#include <time.h>
-unsigned long t0 = millis();
+
 void PresenceTask::onIdleState() {
-    /*Serial.println(String(millis() - t0));
-    t0 = millis();*/
+    // TODO: implement
 }
 
 void PresenceTask::onNooneState() {
-    // TODO: implement
+    if (this->pirManager->isSomeoneDetected()) {
+        this->setState(PresenceTaskState::SOMEONE);
+    } else {
+        this->elapsedTickNooneDetected++;
+        if (this->elapsedTickNooneDetected >= this->tickToSleep) {
+            this->setState(PresenceTaskState::SLEEP);
+        }
+    }
 }
 
 void PresenceTask::onSomeoneState() {
-    // TODO: implement
+    this->elapsedTickNooneDetected = 0;
+    if (!this->pirManager->isSomeoneDetected()) {
+        this->setState(PresenceTaskState::NOONE);
+    }
 }
 
 void PresenceTask::onSleepState() {
