@@ -40,6 +40,7 @@ class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState
     void onSomeoneState();
     void onSleepState();
 
+    bool needIdleState();
 };
 
 #endif

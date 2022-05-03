@@ -30,10 +30,22 @@ void PresenceTask::tick() {
 }
 
 void PresenceTask::onIdleState() {
-    // TODO: implement
+    if (this->getMessageBus()->isMessagePresent(MessageType::ACTIVATE_PRESENCE_TASK)) {
+        this->getMessageBus()->removeMessage(MessageType::ACTIVATE_PRESENCE_TASK);
+        if (this->pirManager->isSomeoneDetected()) {
+            this->setState(PresenceTaskState::SOMEONE);
+        } else {
+            this->setState(PresenceTaskState::NOONE);
+        }
+    }
 }
 
 void PresenceTask::onNooneState() {
+    if (this->needIdleState()) {
+        this->setState(PresenceTaskState::IDLE);
+        return; 
+    }
+
     if (this->pirManager->isSomeoneDetected()) {
         this->setState(PresenceTaskState::SOMEONE);
     } else {
@@ -46,9 +58,23 @@ void PresenceTask::onNooneState() {
 
 void PresenceTask::onSomeoneState() {
     this->elapsedTickNooneDetected = 0;
+
+    if (this->needIdleState()) {
+        this->setState(PresenceTaskState::IDLE);
+        return; 
+    }
+
     if (!this->pirManager->isSomeoneDetected()) {
         this->setState(PresenceTaskState::NOONE);
     }
+}
+
+bool PresenceTask::needIdleState() {
+    if (this->getMessageBus()->isMessagePresent(MessageType::DEACTIVATE_PRESENCE_TASK)) {
+        this->getMessageBus()->removeMessage(MessageType::DEACTIVATE_PRESENCE_TASK);
+        return true;
+    }
+    return false;
 }
 
 void emptyFunc() {}
