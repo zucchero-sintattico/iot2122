@@ -20,7 +20,7 @@ class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState
         PirManager* pirManager;
         int _period = 500;
 
-        const int tickToSleep = 20;
+        const int tickToSleep = 20;     // 20 tick * 500ms = 10s
         int elapsedTickNooneDetected = 0;
 
     public:

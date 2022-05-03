@@ -1,5 +1,8 @@
 #include "PresenceTask.h"
 
+#include <EnableInterrupt.h>
+#include <avr/sleep.h>
+
 void PresenceTask::init() {
     this->pirManager->setup();
 }
@@ -48,7 +51,14 @@ void PresenceTask::onSomeoneState() {
     }
 }
 
-void PresenceTask::onSleepState() {
-    // TODO: implement
-}
+void emptyFunc() {}
 
+void PresenceTask::onSleepState() {
+    enableInterrupt(this->pirPin, &emptyFunc, RISING);
+    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+    sleep_enable();
+    sleep_mode();
+    sleep_disable();
+    disableInterrupt(this->pirPin);
+    this->setState(PresenceTaskState::SOMEONE);
+}
