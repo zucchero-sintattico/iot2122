@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-05-02T18:06:30.052Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="ZScyBg-g-GYIoqvTmyad" version="17.5.0" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-05-03T16:23:24.094Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="vw3zpSLhdv51SOpFqNsk" version="17.5.0" type="github" pages="4">
   <diagram id="Om2Yw1UXd5m7-ycpb1zF" name="General State">
-    <mxGraphModel dx="1999" dy="2044" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2332" dy="2308" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -286,7 +286,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="bp0mwMo7cnhgV10kYrG3" name="Tasks">
-    <mxGraphModel dx="1166" dy="1651" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="799" dy="1514" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -344,8 +344,8 @@
         <mxCell id="EKUFZtFYOPPtRK7uZ2_z-117" value="IN" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;" parent="4H4KP3whWeTb32gsJAZ8-2" source="4H4KP3whWeTb32gsJAZ8-3" target="4H4KP3whWeTb32gsJAZ8-4" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="140" y="240" />
-              <mxPoint x="140" y="240" />
+              <mxPoint x="170" y="240" />
+              <mxPoint x="170" y="240" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -355,7 +355,7 @@
         <mxCell id="4H4KP3whWeTb32gsJAZ8-3" value="NOONE&lt;br&gt;p = false" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="4H4KP3whWeTb32gsJAZ8-2" vertex="1">
           <mxGeometry x="30" y="210" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="EKUFZtFYOPPtRK7uZ2_z-119" value="!IN / reset T&lt;sub&gt;idle&lt;/sub&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;" parent="4H4KP3whWeTb32gsJAZ8-2" source="4H4KP3whWeTb32gsJAZ8-4" target="4H4KP3whWeTb32gsJAZ8-3" edge="1">
+        <mxCell id="EKUFZtFYOPPtRK7uZ2_z-119" value="!IN" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;" parent="4H4KP3whWeTb32gsJAZ8-2" source="4H4KP3whWeTb32gsJAZ8-4" target="4H4KP3whWeTb32gsJAZ8-3" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="150" y="270" />
@@ -363,8 +363,8 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="4H4KP3whWeTb32gsJAZ8-4" value="SOMEONE&lt;br&gt;p = true" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="4H4KP3whWeTb32gsJAZ8-2" vertex="1">
-          <mxGeometry x="230" y="210" width="80" height="80" as="geometry" />
+        <mxCell id="4H4KP3whWeTb32gsJAZ8-4" value="SOMEONE&lt;br&gt;p = true&lt;br&gt;entry /&amp;nbsp;&lt;span style=&quot;font-size: 11px ; background-color: rgb(255 , 255 , 255)&quot;&gt;reset T&lt;/span&gt;&lt;sub&gt;idle&lt;/sub&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="4H4KP3whWeTb32gsJAZ8-2" vertex="1">
+          <mxGeometry x="210" y="190" width="120" height="120" as="geometry" />
         </mxCell>
         <mxCell id="4H4KP3whWeTb32gsJAZ8-8" value="IN = Pir Input Pin" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="4H4KP3whWeTb32gsJAZ8-2" vertex="1">
           <mxGeometry x="175" y="30" width="110" height="20" as="geometry" />
