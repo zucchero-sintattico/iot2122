@@ -1,6 +1,11 @@
 # vscode
 .vscode/
 
+# java
+out/
+.idea/
+*.iml
+
 # Prerequisites
 *.d
 
