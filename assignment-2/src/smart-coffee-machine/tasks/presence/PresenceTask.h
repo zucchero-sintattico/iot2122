@@ -15,15 +15,15 @@ enum class PresenceTaskState {
 
 class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState, MessageType> {
     
-    private:
-        int pirPin;
-        PirManager* pirManager;
-        int _period = 500;
+private:
+    int pirPin;
+    PirManager* pirManager;
+    int _period = 500;
 
-        const int tickToSleep = 20;     // 20 tick * 500ms = 10s
-        int elapsedTickNooneDetected = 0;
+    const int tickToSleep = 20;     // 20 tick * 500ms = 10s
+    int elapsedTickNooneDetected = 0;
 
-    public:
+public:
     PresenceTask(int pirPin) : CommunicablePeriodBasedTaskWithFSM(PresenceTaskState::IDLE) {
         this->pirPin = pirPin;
         this->pirManager = new PirManager(pirPin);
@@ -34,7 +34,7 @@ class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState
     void computeRead();
     void tick();
 
-    private:
+private:
     void onIdleState();
     void onNooneState();
     void onSomeoneState();
