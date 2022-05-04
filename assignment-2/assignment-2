@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-05-03T16:23:24.094Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="vw3zpSLhdv51SOpFqNsk" version="17.5.0" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-05-04T15:45:34.430Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="__Pjlwp1j1xRv6Z4giNS" version="17.5.0" type="github" pages="4">
   <diagram id="Om2Yw1UXd5m7-ycpb1zF" name="General State">
-    <mxGraphModel dx="2332" dy="2308" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1399" dy="1825" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -286,7 +286,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="bp0mwMo7cnhgV10kYrG3" name="Tasks">
-    <mxGraphModel dx="799" dy="1514" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="965" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -690,21 +690,6 @@
             <Array as="points">
               <mxPoint y="140" />
             </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="oT8R3whxN5ff9--ymZqq-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;strokeColor=#000000;" parent="MKb-jN0t4XkgZHRTPnL1-10" source="MKb-jN0t4XkgZHRTPnL1-12" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="104" y="150" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="140" y="110" />
-              <mxPoint x="140" y="150" />
-              <mxPoint x="104" y="150" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="oT8R3whxN5ff9--ymZqq-3" value="reset T&lt;sub&gt;check&lt;/sub&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="oT8R3whxN5ff9--ymZqq-2" connectable="0" vertex="1">
-          <mxGeometry x="0.0371" y="-1" relative="1" as="geometry">
-            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="q6V6gjuRUYVH4NwD9eAi-8" value="!ready" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;endArrow=open;endFill=0;" parent="1" source="4H4KP3whWeTb32gsJAZ8-4" edge="1">
