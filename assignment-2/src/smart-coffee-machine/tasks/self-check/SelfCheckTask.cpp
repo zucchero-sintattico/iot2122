@@ -1,13 +1,45 @@
 #include "SelfCheckTask.h"
 
 void SelfCheckTask::init() {
-    // do stuff...
+    this->thermometerManager->setup();
+    this->motorManager->setup();
 }
 
 void SelfCheckTask::computeRead() {
-    // do stuff...
+    if (this->getState() == SelfCheckTaskState::TEMPERATURE_CHECK) {
+        this->thermometerManager->computeRead();
+    }
 }
 
 void SelfCheckTask::tick() {
-    // do stuff...
+    switch (this->getState()) {
+        case SelfCheckTaskState::IDLE:
+            onIdleState();
+            break;
+        case SelfCheckTaskState::MECHANIC_CHECK:
+            onMechanicCheckState();
+            break;
+        case SelfCheckTaskState::TEMPERATURE_CHECK:
+            onTemperatureCheckState();
+            break;
+        case SelfCheckTaskState::ASSISTANCE:
+            onAssistanceState();
+            break;
+    }
+}
+
+void SelfCheckTask::onIdleState() {
+    // TODO: implement
+}
+
+void SelfCheckTask::onMechanicCheckState() {
+    // TODO: implement
+}
+
+void SelfCheckTask::onTemperatureCheckState() {
+    // TODO: implement
+}
+
+void SelfCheckTask::onAssistanceState() {
+    // TODO: implement
 }
