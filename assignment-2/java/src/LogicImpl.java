@@ -1,24 +1,33 @@
-import javax.swing.*;
+import java.util.function.Consumer;
 
 public class LogicImpl implements Logic {
 
-    private final JLabel modalityLabel;
-    private final JLabel productLabel;
-    private final JLabel selfCheckLabel;
+    private final Consumer<String> modalityConsumer;
+    private final Consumer<String> coffeeConsumer;
+    private final Consumer<String> teaConsumer;
+    private final Consumer<String> chocolateConsumer;
+    private final Consumer<String> selfCheckConsumer;
 
-    LogicImpl(JLabel modalityLabel, JLabel productLabel, JLabel selfCheckLabel) {
-        this.modalityLabel = modalityLabel;
-        this.productLabel = productLabel;
-        this.selfCheckLabel = selfCheckLabel;
+    public LogicImpl(Consumer<String> modalityConsumer,
+                     Consumer<String> coffeeConsumer,
+                     Consumer<String> teaConsumer,
+                     Consumer<String> chocolateConsumer,
+                     Consumer<String> selfCheckConsumer) {
+        this.modalityConsumer = modalityConsumer;
+        this.coffeeConsumer = coffeeConsumer;
+        this.teaConsumer = teaConsumer;
+        this.chocolateConsumer = chocolateConsumer;
+        this.selfCheckConsumer = selfCheckConsumer;
     }
+
 
     @Override
     public void onRefill() {
-
+        // TODO: implement
     }
 
     @Override
     public void onRecover() {
-
+        // TODO: implement
     }
 }
