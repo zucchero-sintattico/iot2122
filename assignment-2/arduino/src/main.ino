@@ -28,8 +28,8 @@ SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<Me
 
 const size_t nTasks = 4;
 CommunicablePeriodBasedTask<MessageType>* tasks[nTasks] = {
-    new PresenceTask(),
-    new SelfCheckTask(),
+    // new PresenceTask(),
+    // new SelfCheckTask(),
     new ApplicationCommunicatorTask(),
     new BeverageSelectorTask(appData, buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin),
     //new BeverageMakerTask()
