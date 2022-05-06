@@ -1,47 +1,76 @@
 #include "AppData.h"
 
+
+void AppData::setSugarLevel(int sugarLevel) {
+    this->sugarLevel = sugarLevel;
+}
+
+int AppData::getSugarLevel() {
+    return this->sugarLevel;
+}
+
+
+int AppData::getAvailableItemCount(Beverage beverage) {
+    return availableItemCount[beverage];
+}
+
+bool AppData::consumeItem(Beverage beverage) {
+    if (getAvailableItemCount(beverage) == 0) {
+        return false;
+    }
+
+    availableItemCount[beverage]--;
+    return true;
+}
+
+bool AppData::selectNextBeverage() {
+    if (isRefillNeeded()) {
+        return false;
+    }
+
+    switch (this->selectedBeverage)
+    {
+    case COFFEE:
+        this->selectedBeverage = TEA;
+        break;
+    case TEA:
+        this->selectedBeverage = CHOCOLATE;
+        break;
+    case CHOCOLATE:
+        this->selectedBeverage = COFFEE;
+        break;
+    }
+    return getAvailableItemCount(this->selectedBeverage) > 0 ? true : selectNextBeverage();
+}
+
+bool AppData::selectPreviousBeverage() {
+    if (isRefillNeeded()) {
+        return false;
+    }
+
+    switch (this->selectedBeverage)
+    {
+    case COFFEE:
+        this->selectedBeverage = CHOCOLATE;
+        break;
+    case TEA:
+        this->selectedBeverage = COFFEE;
+        break;
+    case CHOCOLATE:
+        this->selectedBeverage = TEA;
+        break;
+    }
+    return getAvailableItemCount(this->selectedBeverage) > 0 ? true : selectPreviousBeverage();
+}
+
 bool AppData::isRefillNeeded() {
-    return availableCoffee == 0 && availableTea == 0 && availableChocolate == 0;
-}
-
-int AppData::getAvailableCoffee() {
-    return this->availableCoffee;
-}
-
-int AppData::getAvailableTea() {
-    return this->availableTea;
-}
-
-int AppData::getAvailableChocolate() {
-    return this->availableChocolate;
-}
-
-bool AppData::consumeCoffee() {
-    if (this->availableCoffee > 0) {
-        this->availableCoffee--;
-        return true;
-    }
-    return false;
-}
-
-bool AppData::consumeTea() {
-    if (this->availableTea > 0) {
-        this->availableTea--;
-        return true;
-    }
-    return false;
-}
-
-bool AppData::consumeChocolate() {
-    if (this->availableChocolate > 0) {
-        this->availableChocolate--;
-        return true;
-    }
-    return false;
+    return getAvailableItemCount(COFFEE) == 0 &&
+        getAvailableItemCount(TEA) == 0 &&
+        getAvailableItemCount(CHOCOLATE) == 0;
 }
 
 void AppData::refill() {
-    this->availableCoffee = MAX_AVAILABLE_COFFEE;
-    this->availableTea = MAX_AVAILABLE_TEA;
-    this->availableChocolate = MAX_AVAILABLE_CHOCOLATE;
+    availableItemCount[COFFEE] = MAX_ITEM_COUNT;
+    availableItemCount[TEA] = MAX_ITEM_COUNT;
+    availableItemCount[CHOCOLATE] = MAX_ITEM_COUNT;
 }

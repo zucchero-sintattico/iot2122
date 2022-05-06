@@ -35,7 +35,6 @@ private:
     // Actuators
     CoffeeDisplayI2C* display;
 
-
     AppData* appData;
 
 public:

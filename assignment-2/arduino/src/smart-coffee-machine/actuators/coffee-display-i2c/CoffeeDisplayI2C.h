@@ -9,7 +9,11 @@ public:
     CoffeeDisplayI2C() : DisplayI2C() {};
     CoffeeDisplayI2C(int width, int height) : DisplayI2C(width, height) {};
     CoffeeDisplayI2C(int address, int width, int height) : DisplayI2C(address, width, height) {};
+
+
     void printReadyMessage();
+    void printSelectingInfoMessage();
+    void printSelectingAssistanceMessage();
 };
 
 #endif

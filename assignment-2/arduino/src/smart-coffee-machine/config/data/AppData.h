@@ -1,31 +1,35 @@
 #ifndef _APP_DATA_H_
 #define _APP_DATA_H_
 
+#define BEVERAGE_COUNT 3
+enum Beverage {
+    COFFEE,
+    TEA,
+    CHOCOLATE
+};
 
 class AppData {
 
 private:
 
-    static const int MAX_AVAILABLE_COFFEE = 10;
-    static const int MAX_AVAILABLE_TEA = 10;
-    static const int MAX_AVAILABLE_CHOCOLATE = 10;
+    static const int MAX_ITEM_COUNT = 3;
 
-    int availableCoffee = MAX_AVAILABLE_COFFEE;
-    int availableTea = MAX_AVAILABLE_TEA;
-    int availableChocolate = MAX_AVAILABLE_CHOCOLATE;
+    int availableItemCount[BEVERAGE_COUNT] = { MAX_ITEM_COUNT, MAX_ITEM_COUNT, MAX_ITEM_COUNT };
+    Beverage selectedBeverage = COFFEE;
+    int sugarLevel = 0; // 0 - 10
 
 public:
 
+    void setSugarLevel(int sugarLevel);
+    int getSugarLevel();
+
+    int getAvailableItemCount(Beverage beverage);
+    bool consumeItem(Beverage beverage);
+
+    bool selectNextBeverage();
+    bool selectPreviousBeverage();
+
     bool isRefillNeeded();
-
-    int getAvailableCoffee();
-    int getAvailableTea();
-    int getAvailableChocolate();
-
-    bool consumeCoffee();
-    bool consumeTea();
-    bool consumeChocolate();
-
     void refill();
 
 };
