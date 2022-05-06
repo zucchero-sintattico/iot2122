@@ -5,7 +5,6 @@
 #include "../strategy/SchedulingStrategies.h"
 #include "../../communication/MessageBus.h"
 #include "../task/CommunicablePeriodBasedTask.h"
-#include "../task/CommunicableTask.h"
 
 template<class M>
 class SchedulerWithMessageBus : public Scheduler {
@@ -13,13 +12,12 @@ class SchedulerWithMessageBus : public Scheduler {
 private:
     MessageBus<M>* messageBus;
 public:
-    SchedulerWithMessageBus() {
-        this->messageBus = new MessageBus<M>();
-    }
+    SchedulerWithMessageBus() : SchedulerWithMessageBus(new MessageBus<M>()) {}
+
     SchedulerWithMessageBus(MessageBus<M>* messageBus) : messageBus(messageBus) {}
 
-    bool addTask(CommunicableTask<M>* task, SchedulingStrategy* schedulingStrategy) {
-        task->attachMessageBus(messageBus);
+    bool addTask(CommunicablePeriodBasedTask<M>* task, SchedulingStrategy* schedulingStrategy) {
+        task->attachMessageBus(this->messageBus);
         return Scheduler::addTask(task, schedulingStrategy);
     }
 

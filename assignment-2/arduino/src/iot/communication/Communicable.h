@@ -5,9 +5,9 @@
 
 template<class M>
 class Communicable {
-    private:
+private:
     MessageBus<M>* messageBus;
-    public:
+public:
     void attachMessageBus(MessageBus<M>* messageBus) {
         this->messageBus = messageBus;
     }

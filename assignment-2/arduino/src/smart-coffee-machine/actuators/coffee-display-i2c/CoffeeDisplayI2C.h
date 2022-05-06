@@ -15,6 +15,8 @@ public:
     virtual void printReadyMessage() = 0;
     virtual void printSelectingInfoMessage(AppData* appData) = 0;
     virtual void printSelectingAssistanceMessage() = 0;
+    virtual void printMakingInfo(AppData* appData, int percentage) = 0;
+    virtual void printWaitingForRetireMessage() = 0;
 };
 
 #endif

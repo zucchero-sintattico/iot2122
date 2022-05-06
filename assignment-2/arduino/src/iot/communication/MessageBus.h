@@ -1,61 +1,47 @@
 #ifndef _MESSAGE_QUEUE_H_
 #define _MESSAGE_QUEUE_H_
+#include <Arduino.h>
 
-template<class M>
+
+template<typename M>
 class MessageBus {
-    private:
-    struct Node {
-        M message;
-        Node* next;
-    };
-    Node* first = nullptr;
-    Node* last = nullptr;
+private:
+    M messages[100];
     int size = 0;
-    public:
+public:
+
+    void print() {
+        Serial.print("Messages: ");
+        for (int i = 0; i < size; i++) {
+            Serial.print(messages[i]);
+            Serial.print(", ");
+        }
+        Serial.println();
+    }
 
     void push(M message) {
-        Node* node = new Node();
-        node->message = message;
-        node->next = nullptr;
-        if (first == nullptr) {
-            first = node;
-            last = node;
-        }
-        else {
-            last->next = node;
-            last = node;
-        }
-        this->size++;
+        messages[size] = message;
+        size++;
     }
 
     bool isMessagePresent(M message) {
-        Node* current = this->first;
-        while (current != nullptr) {
-            if (current->message == message) {
+        for (int i = 0; i < size; i++) {
+            if (messages[i] == message) {
                 return true;
             }
-            current = current->next;
         }
         return false;
     }
 
     void removeMessage(M message) {
-        Node* current = this->first;
-        Node* previous = nullptr;
-        while (current != nullptr) {
-            if (current->message == message) {
-                if (previous == nullptr) {
-                    this->first = current->next;
+        for (int i = 0; i < size; i++) {
+            if (messages[i] == message) {
+                for (int j = i; j < size - 1; j++) {
+                    messages[j] = messages[j + 1];
                 }
-                else {
-                    previous->next = current->next;
-                }
-                delete current;
-                this->size--;
+                size--;
                 return;
             }
-            previous = current;
-            current = current->next;
         }
     }
 

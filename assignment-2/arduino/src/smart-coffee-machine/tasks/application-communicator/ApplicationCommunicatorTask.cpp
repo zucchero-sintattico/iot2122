@@ -9,5 +9,6 @@ void ApplicationCommunicatorTask::computeRead() {
 }
 
 void ApplicationCommunicatorTask::tick() {
-    // do stuff...
+    this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);
+    this->getMessageBus()->print();
 }

@@ -47,6 +47,7 @@ bool BeverageSelectorTask::isAnyButtonPressed() {
 
 void BeverageSelectorTask::onReadyState() {
     if (appData->isRefillNeeded()) {
+        this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);
         this->setState(BeverageSelectorTaskState::ASSISTANCE);
         return;
     }
@@ -84,18 +85,16 @@ void BeverageSelectorTask::onSelectingState() {
 
     this->display->printSelectingInfoMessage(this->appData);
 
-    if (buttonMake->isPressed()) {
-        this->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_MAKER_TASK);
-        this->setState(BeverageSelectorTaskState::IDLE);
-        Serial.println("Start making beverage");
-        return;
-    }
-
-
     if (isSelectingTimeElapsed()) {
         this->getMessageBus()->push(MessageType::ACTIVATE_PRESENCE_TASK);
         this->setState(BeverageSelectorTaskState::READY);
         Serial.println("Selecting time elapsed");
+        return;
+    }
+
+    if (buttonMake->isPressed()) {
+        this->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_MAKER_TASK);
+        this->setState(BeverageSelectorTaskState::IDLE);
     }
 
 }

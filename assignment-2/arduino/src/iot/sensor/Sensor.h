@@ -6,7 +6,6 @@
 class Sensor : public Setuppable {
 
 public:
-    virtual void setup() = 0;
     virtual void computeRead() = 0;
 };
 

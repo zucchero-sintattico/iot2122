@@ -19,20 +19,26 @@ const uint8_t potentiometerPin = A0;
 const uint8_t buttonMakePin = 2;
 const uint8_t buttonUpPin = 3;
 const uint8_t buttonDownPin = 4;
+const uint8_t sonarEchoPin = 5;
+const uint8_t sonarTrigPin = 6;
+const uint8_t servoPin = 7;
 
 // Application data
 AppData* appData = new AppData();
 
 // Scheduler and Tasks configurations
-SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>();
+MessageBus<MessageType>* messageBus = new MessageBus<MessageType>();
+SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>(messageBus);
 
-const size_t nTasks = 1;
+static const size_t nTasks = 2;
+BeverageSelectorTask* beverageSelectorTask = new BeverageSelectorTask(appData, buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin);
+BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, sonarTrigPin, sonarEchoPin, servoPin);
 CommunicablePeriodBasedTask<MessageType>* tasks[nTasks] = {
+    beverageSelectorTask,
+    beverageMakerTask,
     // new PresenceTask(),
     // new SelfCheckTask(),
-    // new ApplicationCommunicatorTask(),
-    new BeverageSelectorTask(appData, buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin),
-    //new BeverageMakerTask()
+    //new ApplicationCommunicatorTask()
 };
 
 void setup() {
@@ -40,7 +46,7 @@ void setup() {
     Serial.begin(9600);
 
     // Scheduler initialization
-    scheduler->init(25);
+    scheduler->init(50);
 
     // Tasks initialization
     for (size_t i = 0; i < nTasks; i++)
@@ -50,7 +56,7 @@ void setup() {
         scheduler->addPeriodBasedTask(task);
     }
 
-    tasks[0]->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK);
+    messageBus->push(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK);
 }
 
 void loop() {

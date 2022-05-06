@@ -26,5 +26,5 @@ void Sonar::computeRead() {
 }
 
 float Sonar::getDistanceInCM() {
-    return this->distance;
+    return this->distance * 100;
 }

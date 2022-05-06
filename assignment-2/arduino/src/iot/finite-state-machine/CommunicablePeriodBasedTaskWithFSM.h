@@ -10,11 +10,6 @@ class CommunicablePeriodBasedTaskWithFSM : public CommunicablePeriodBasedTask<M>
 
 public:
     CommunicablePeriodBasedTaskWithFSM(S initialState) : FiniteStateMachine<S>(initialState) {}
-
-    // Inherited from CommunicablePeriodBasedTask
-    virtual void init() = 0;
-    virtual void computeRead() = 0;
-    virtual void tick() = 0;
 };
 
 #endif

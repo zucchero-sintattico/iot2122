@@ -50,20 +50,32 @@ public:
         this->buttonDown = new Button(buttonDownPin);
         this->buttonMake = new Button(buttonMakePin);
         this->sugarManager = new Sugar(potentiometerSugarPin);
-        this->display = new FakeCoffeeDisplayI2C();
+        this->display = FakeCoffeeDisplayI2C::getInstance();
     }
 
+    // Inherited from task
     void init();
     void computeRead();
     void tick();
 
 private:
+
     void onIdleState();
     void onReadyState();
     void onSelectingState();
     void onAssistanceState();
 
+    /**
+     * @brief Check if any button has been pressed.
+     *
+     * @return true if any button has been pressed, false otherwise.
+     */
     bool isAnyButtonPressed();
+
+    /**
+     * @brief Check if the time elapsed since the last iteraction is greater than the max selecting time.
+     * @return true if the time is elapsed, false otherwise.
+     */
     bool isSelectingTimeElapsed();
 
 };

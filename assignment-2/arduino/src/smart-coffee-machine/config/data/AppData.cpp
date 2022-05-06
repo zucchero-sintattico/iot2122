@@ -16,6 +16,8 @@ String AppData::getSelectedBeverageToString() {
     case CHOCOLATE:
         return "Chocolate";
         break;
+    default:
+        return "";
     };
 }
 

@@ -3,10 +3,6 @@
 
 #include "../sensor/Setuppable.h"
 
-class Actuator : public Setuppable {
-    public:
-    // Inherited from Setuppable
-    virtual void setup() = 0;
-};
+class Actuator : public Setuppable {};
 
 #endif
