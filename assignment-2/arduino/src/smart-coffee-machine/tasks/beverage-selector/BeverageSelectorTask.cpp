@@ -56,32 +56,51 @@ void BeverageSelectorTask::onReadyState() {
     if (isAnyButtonPressed()) {
         this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);
         this->setState(BeverageSelectorTaskState::SELECTING);
+        this->lastIteractionTime = millis();
         return;
     }
 }
 
+bool BeverageSelectorTask::isSelectingTimeElapsed() {
+    return millis() - this->lastIteractionTime > MAX_SELECTING_TIME;
+}
+
 void BeverageSelectorTask::onSelectingState() {
 
-    this->appData->setSugarLevel(this->sugarManager->getPercentage());
+    if (this->appData->getSugarLevel() != this->sugarManager->getPercentage()) {
+        this->lastIteractionTime = millis();
+        this->appData->setSugarLevel(this->sugarManager->getPercentage());
+    }
 
     if (buttonUp->isPressed()) {
+        this->lastIteractionTime = millis();
         this->appData->selectNextBeverage();
     }
 
     if (buttonDown->isPressed()) {
+        this->lastIteractionTime = millis();
         this->appData->selectPreviousBeverage();
     }
+
+    this->display->printSelectingInfoMessage(this->appData);
 
     if (buttonMake->isPressed()) {
         this->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_MAKER_TASK);
         this->setState(BeverageSelectorTaskState::IDLE);
+        Serial.println("Start making beverage");
+        return;
     }
 
-    this->display->printSelectingInfoMessage();
+
+    if (isSelectingTimeElapsed()) {
+        this->getMessageBus()->push(MessageType::ACTIVATE_PRESENCE_TASK);
+        this->setState(BeverageSelectorTaskState::READY);
+        Serial.println("Selecting time elapsed");
+    }
+
 }
 
 void BeverageSelectorTask::onAssistanceState() {
-
     this->display->printSelectingAssistanceMessage();
 
     if (this->getMessageBus()->isMessagePresent(MessageType::REFILL)) {

@@ -16,9 +16,9 @@
 
 // Pin configurations
 const uint8_t potentiometerPin = A0;
-const uint8_t buttonUpPin = 2;
-const uint8_t buttonDownPin = 3;
-const uint8_t buttonMakePin = 4;
+const uint8_t buttonMakePin = 2;
+const uint8_t buttonUpPin = 3;
+const uint8_t buttonDownPin = 4;
 
 // Application data
 AppData* appData = new AppData();
@@ -26,11 +26,11 @@ AppData* appData = new AppData();
 // Scheduler and Tasks configurations
 SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>();
 
-const size_t nTasks = 4;
+const size_t nTasks = 1;
 CommunicablePeriodBasedTask<MessageType>* tasks[nTasks] = {
     // new PresenceTask(),
     // new SelfCheckTask(),
-    new ApplicationCommunicatorTask(),
+    // new ApplicationCommunicatorTask(),
     new BeverageSelectorTask(appData, buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin),
     //new BeverageMakerTask()
 };
@@ -49,6 +49,8 @@ void setup() {
         task->init();
         scheduler->addPeriodBasedTask(task);
     }
+
+    tasks[0]->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK);
 }
 
 void loop() {

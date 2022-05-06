@@ -1,5 +1,23 @@
 #include "AppData.h"
 
+Beverage AppData::getSelectedBeverage() {
+    return this->selectedBeverage;
+}
+
+String AppData::getSelectedBeverageToString() {
+    switch (this->selectedBeverage)
+    {
+    case COFFEE:
+        return "Coffee";
+        break;
+    case TEA:
+        return "Tea";
+        break;
+    case CHOCOLATE:
+        return "Chocolate";
+        break;
+    };
+}
 
 void AppData::setSugarLevel(int sugarLevel) {
     this->sugarLevel = sugarLevel;

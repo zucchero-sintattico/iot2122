@@ -10,6 +10,7 @@
 
 // Actuators
 #include "smart-coffee-machine/actuators/proxy-coffee-display-i2c/ProxyCoffeeDisplayI2C.h"
+#include "smart-coffee-machine/actuators/fake-coffee-display-i2c/FakeCoffeeDisplayI2C.h"
 
 // Data
 #include "smart-coffee-machine/config/data/AppData.h"
@@ -24,6 +25,7 @@ enum class BeverageSelectorTaskState {
 class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageSelectorTaskState, MessageType> {
 
 private:
+    static const unsigned long MAX_SELECTING_TIME = 5000;
     int _period = 50;
 
     // Sensors
@@ -37,6 +39,9 @@ private:
 
     AppData* appData;
 
+    long lastIteractionTime;
+
+
 public:
     BeverageSelectorTask(AppData* appData, int buttonUpPin, int buttonDownPin, int buttonMakePin, int potentiometerSugarPin) : CommunicablePeriodBasedTaskWithFSM(BeverageSelectorTaskState::IDLE) {
         PeriodBasedTask::setPeriod(this->_period);
@@ -45,7 +50,7 @@ public:
         this->buttonDown = new Button(buttonDownPin);
         this->buttonMake = new Button(buttonMakePin);
         this->sugarManager = new Sugar(potentiometerSugarPin);
-        this->display = new ProxyCoffeeDisplayI2C();
+        this->display = new FakeCoffeeDisplayI2C();
     }
 
     void init();
@@ -59,6 +64,7 @@ private:
     void onAssistanceState();
 
     bool isAnyButtonPressed();
+    bool isSelectingTimeElapsed();
 
 };
 

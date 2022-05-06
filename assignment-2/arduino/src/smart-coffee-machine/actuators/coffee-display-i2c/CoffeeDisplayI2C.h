@@ -2,6 +2,7 @@
 #define _COFFEE_DISPLAY_I2C_H_
 
 #include "iot/actuator/display-i2c/DisplayI2C.h"
+#include "../../config/data/AppData.h"
 
 class CoffeeDisplayI2C : public DisplayI2C {
 
@@ -11,9 +12,9 @@ public:
     CoffeeDisplayI2C(int address, int width, int height) : DisplayI2C(address, width, height) {};
 
 
-    void printReadyMessage();
-    void printSelectingInfoMessage();
-    void printSelectingAssistanceMessage();
+    virtual void printReadyMessage() = 0;
+    virtual void printSelectingInfoMessage(AppData* appData) = 0;
+    virtual void printSelectingAssistanceMessage() = 0;
 };
 
 #endif

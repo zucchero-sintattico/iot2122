@@ -1,6 +1,7 @@
 #ifndef _APP_DATA_H_
 #define _APP_DATA_H_
 
+#include <Arduino.h>
 #define BEVERAGE_COUNT 3
 enum Beverage {
     COFFEE,
@@ -19,6 +20,9 @@ private:
     int sugarLevel = 0; // 0 - 10
 
 public:
+
+    Beverage getSelectedBeverage();
+    String getSelectedBeverageToString();
 
     void setSugarLevel(int sugarLevel);
     int getSugarLevel();
