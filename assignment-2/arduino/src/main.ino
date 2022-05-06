@@ -30,7 +30,7 @@ AppData* appData = new AppData();
 MessageBus<MessageType>* messageBus = new MessageBus<MessageType>();
 SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>(messageBus);
 
-static const size_t nTasks = 2;
+static const size_t nTasks = 3;
 BeverageSelectorTask* beverageSelectorTask = new BeverageSelectorTask(appData, buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin);
 BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, sonarTrigPin, sonarEchoPin, servoPin);
 CommunicablePeriodBasedTask<MessageType>* tasks[nTasks] = {
@@ -38,7 +38,7 @@ CommunicablePeriodBasedTask<MessageType>* tasks[nTasks] = {
     beverageMakerTask,
     // new PresenceTask(),
     // new SelfCheckTask(),
-    //new ApplicationCommunicatorTask()
+    new ApplicationCommunicatorTask()
 };
 
 void setup() {

@@ -1,5 +1,7 @@
 #include "ApplicationCommunicatorTask.h"
 
+#include "iot/utils/memory/FreeMemory.h"
+
 void ApplicationCommunicatorTask::init() {
     // do stuff...
 }
@@ -9,6 +11,5 @@ void ApplicationCommunicatorTask::computeRead() {
 }
 
 void ApplicationCommunicatorTask::tick() {
-    this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);
-    this->getMessageBus()->print();
+    Serial.println("Free Memory: " + String(freeMemory()));
 }
