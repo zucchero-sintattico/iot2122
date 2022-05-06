@@ -1,16 +1,16 @@
 #include "BeverageSelectorTask.h"
 
 void BeverageSelectorTask::init() {
-    this->buttonUpManager->setup();
-    this->buttonDownManager->setup();
-    this->buttonMakeManager->setup();
+    this->buttonUp->setup();
+    this->buttonDown->setup();
+    this->buttonMake->setup();
     this->sugarManager->setup();
 }
 
 void BeverageSelectorTask::computeRead() {
-    this->buttonUpManager->computeRead();
-    this->buttonDownManager->computeRead();
-    this->buttonMakeManager->computeRead();
+    this->buttonUp->computeRead();
+    this->buttonDown->computeRead();
+    this->buttonMake->computeRead();
     this->sugarManager->computeRead();
 }
 
@@ -42,7 +42,7 @@ void BeverageSelectorTask::onIdleState() {
 
 
 bool BeverageSelectorTask::isAnyButtonPressed() {
-    return this->buttonUpManager->isPressed() || this->buttonDownManager->isPressed() || this->buttonMakeManager->isPressed();
+    return this->buttonUp->isPressed() || this->buttonDown->isPressed() || this->buttonMake->isPressed();
 }
 
 void BeverageSelectorTask::onReadyState() {
@@ -51,7 +51,7 @@ void BeverageSelectorTask::onReadyState() {
         return;
     }
 
-    // Print READY to display
+    this->display->printReadyMessage();
 
     if (this->isAnyButtonPressed()) {
         this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);

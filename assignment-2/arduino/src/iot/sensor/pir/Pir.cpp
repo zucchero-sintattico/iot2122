@@ -1,19 +1,19 @@
-#include "PirManager.h"
+#include "Pir.h"
 #include <Arduino.h>
 
-PirManager::PirManager(int pin) {
+Pir::Pir(int pin) {
     this->pin = pin;
 }
 
-void PirManager::setup() {
+void Pir::setup() {
     pinMode(this->pin, INPUT);
     delay(calibrationTimeMS);   // Wait for calibration
 }
 
-void PirManager::computeRead() {
+void Pir::computeRead() {
     this->detection = digitalRead(this->pin);
 }
 
-bool PirManager::isSomeoneDetected() {
+bool Pir::isSomeoneDetected() {
     return this->detection;
 }

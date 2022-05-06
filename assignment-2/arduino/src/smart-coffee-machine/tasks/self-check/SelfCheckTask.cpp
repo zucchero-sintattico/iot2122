@@ -2,7 +2,7 @@
 
 void SelfCheckTask::init() {
     this->thermometerManager->setup();
-    this->motorManager->setup();
+    this->servoManager->setup();
 }
 
 void SelfCheckTask::computeRead() {

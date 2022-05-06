@@ -1,25 +1,25 @@
-#include "ThermometerManager.h"
+#include "Thermometer.h"
 
-ThermometerManager::ThermometerManager(int pin) {
+Thermometer::Thermometer(int pin) {
     this->pin = pin;
 }
 
-void ThermometerManager::setup() {
+void Thermometer::setup() {
     temperature = 0;
     pinMode(pin, INPUT);
 }
 
-void ThermometerManager::computeRead() {
+void Thermometer::computeRead() {
     int current_temperature = analogRead(this->pin);
     float voltage = current_temperature * AREF_VOLTAGE;
     voltage /= 1024.0;
     temperature = (voltage - 0.5) * 100;
 }
 
-uint8_t ThermometerManager::getTemperature() {
+uint8_t Thermometer::getTemperature() {
     return this->temperature;
 }
 
-String ThermometerManager::toString() {
+String Thermometer::toString() {
     return getTemperature() + "°C";
 }

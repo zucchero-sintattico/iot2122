@@ -1,15 +1,15 @@
-#include "ButtonManager.h"
+#include "Button.h"
 #include <Arduino.h>
 
-ButtonManager::ButtonManager(int pin) {
+Button::Button(int pin) {
     this->pin = pin;
 }
 
-void ButtonManager::setup() {
+void Button::setup() {
     pinMode(this->pin, INPUT);
 }
 
-void ButtonManager::computeRead() {
+void Button::computeRead() {
     bool value = digitalRead(this->pin);
     if (value == LOW && this->prevValue == HIGH) {
         this->isButtonPressed = true;
@@ -20,6 +20,6 @@ void ButtonManager::computeRead() {
     this->prevValue = value;
 }
 
-bool ButtonManager::isPressed() {
+bool Button::isPressed() {
     return this->isButtonPressed;
 }

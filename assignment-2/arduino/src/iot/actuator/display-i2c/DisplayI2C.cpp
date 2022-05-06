@@ -1,26 +1,26 @@
-#include "DisplayManager.h"
+#include "DisplayI2C.h"
 #include <Arduino.h>
 
-DisplayManager::DisplayManager(int address, int width, int height) {
+DisplayI2C::DisplayI2C(int address, int width, int height) {
     this->address = address;
     this->lcd = LiquidCrystal_I2C(this->address, width, height);
 }
 
-void DisplayManager::setup() {
+void DisplayI2C::setup() {
     lcd.init();
     lcd.backlight();
 }
 
-void DisplayManager::changeCursor(int column, int row) {
+void DisplayI2C::changeCursor(int column, int row) {
     this->column = column;
     this->row = row;
 }
 
-void DisplayManager::print(String message) {
+void DisplayI2C::print(String message) {
     lcd.setCursor(this->column, this->row);
     lcd.print(message);
 }
 
-void DisplayManager::clear() {
+void DisplayI2C::clear() {
     lcd.clear();
 }

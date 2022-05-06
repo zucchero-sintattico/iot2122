@@ -4,8 +4,8 @@
 #include "smart-coffee-machine/config/MessageType.h"
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 
-#include "smart-coffee-machine/sensors/thermometer/ThermometerManager.h"
-#include "smart-coffee-machine/actuators/motor/MotorManager.h"
+#include "iot/sensor/thermometer/Thermometer.h"
+#include "iot/actuator/servo/Servo.h"
 
 enum class SelfCheckTaskState {
     IDLE,
@@ -21,14 +21,14 @@ private:
     const int tickForSelfCheck = 1000;
     int elapsedTicks = 0;
 
-    MotorManager* motorManager;
-    ThermometerManager* thermometerManager;
+    Servo* servoManager;
+    Thermometer* thermometerManager;
 
 public:
     SelfCheckTask(int motorPin, int thermometer) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
         this->setPeriod(_period);
-        this->motorManager = new MotorManager(motorPin);
-        this->thermometerManager = new ThermometerManager(thermometer);
+        this->servoManager = new Servo(motorPin);
+        this->thermometerManager = new Thermometer(thermometer);
     }
 
     void init();

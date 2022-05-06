@@ -2,10 +2,16 @@
 #define _BEVERAGE_SELECTOR_TASK_H_
 
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
-
 #include "smart-coffee-machine/config/MessageType.h"
-#include "smart-coffee-machine/sensors/button/ButtonManager.h"
-#include "smart-coffee-machine/sensors/sugar/SugarManager.h"
+
+// Sensors
+#include "iot/sensor/button/Button.h"
+#include "smart-coffee-machine/sensors/sugar/Sugar.h"
+
+// Actuators
+#include "smart-coffee-machine/actuators/proxy-coffee-display-i2c/ProxyCoffeeDisplayI2C.h"
+
+// Data
 #include "smart-coffee-machine/config/data/AppData.h"
 
 enum class BeverageSelectorTaskState {
@@ -20,33 +26,27 @@ class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageS
 private:
     int _period = 50;
 
-    // Configuration
-    int buttonUpPin;
-    int buttonDownPin;
-    int buttonMakePin;
-    int potentiometerSugarPin;
+    // Sensors
+    Button* buttonUp;
+    Button* buttonDown;
+    Button* buttonMake;
+    Sugar* sugarManager;
 
-    ButtonManager* buttonUpManager;
-    ButtonManager* buttonDownManager;
-    ButtonManager* buttonMakeManager;
-    SugarManager* sugarManager;
+    // Actuators
+    CoffeeDisplayI2C* display;
+
 
     AppData* appData;
 
 public:
     BeverageSelectorTask(AppData* appData, int buttonUpPin, int buttonDownPin, int buttonMakePin, int potentiometerSugarPin) : CommunicablePeriodBasedTaskWithFSM(BeverageSelectorTaskState::IDLE) {
-        this->setPeriod(50);
+        PeriodBasedTask::setPeriod(this->_period);
         this->appData = appData;
-
-        this->buttonUpPin = buttonUpPin;
-        this->buttonDownPin = buttonDownPin;
-        this->buttonMakePin = buttonMakePin;
-        this->potentiometerSugarPin = potentiometerSugarPin;
-
-        this->buttonUpManager = new ButtonManager(buttonUpPin);
-        this->buttonDownManager = new ButtonManager(buttonDownPin);
-        this->buttonMakeManager = new ButtonManager(buttonMakePin);
-        this->sugarManager = new SugarManager(potentiometerSugarPin);
+        this->buttonUp = new Button(buttonUpPin);
+        this->buttonDown = new Button(buttonDownPin);
+        this->buttonMake = new Button(buttonMakePin);
+        this->sugarManager = new Sugar(potentiometerSugarPin);
+        this->display = new ProxyCoffeeDisplayI2C();
     }
 
     void init();

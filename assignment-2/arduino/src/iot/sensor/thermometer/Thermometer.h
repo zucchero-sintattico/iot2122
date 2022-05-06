@@ -2,17 +2,17 @@
 #define _THERMOMETER_H_
 
 #include <Arduino.h>
-#include "iot/sensor/SensorManager.h"
+#include "../Sensor.h"
 #define AREF_VOLTAGE 3.3
 
-class ThermometerManager : public SensorManager {
+class Thermometer : public Sensor {
 
-    private:
+private:
     int pin;
     uint8_t temperature;
 
-    public:
-    ThermometerManager(int pin);
+public:
+    Thermometer(int pin);
     void setup();
     void computeRead();
     uint8_t getTemperature();

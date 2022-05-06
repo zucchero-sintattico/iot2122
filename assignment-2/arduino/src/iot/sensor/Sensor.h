@@ -1,11 +1,11 @@
-#ifndef _SENSOR_MANAGER_H_
-#define _SENSOR_MANAGER_H_
+#ifndef _SENSOR_H_
+#define _SENSOR_H_
 
 #include "./Setuppable.h"
 
-class SensorManager : public Setuppable {
+class Sensor : public Setuppable {
 
-    public:
+public:
     virtual void setup() = 0;
     virtual void computeRead() = 0;
 };
