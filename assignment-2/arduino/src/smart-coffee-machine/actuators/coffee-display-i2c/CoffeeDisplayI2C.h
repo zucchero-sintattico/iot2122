@@ -1,6 +1,5 @@
 #ifndef _COFFEE_DISPLAY_I2C_H_
 #define _COFFEE_DISPLAY_I2C_H_
-
 #include "iot/actuator/display-i2c/DisplayI2C.h"
 #include "../../config/data/AppData.h"
 
