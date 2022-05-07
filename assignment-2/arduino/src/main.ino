@@ -33,23 +33,24 @@ AppData* appData = new AppData();
 MessageBus<MessageType>* messageBus = new MessageBus<MessageType>();
 SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>(messageBus);
 
-#define NTASKS 5
+#define NTASKS 6
 
 MemoryCheckTask* memoryCheckTask = new MemoryCheckTask();
 BootTask* bootTask = new BootTask();
 BeverageSelectorTask* beverageSelectorTask = new BeverageSelectorTask(appData, buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin);
 BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, sonarTrigPin, sonarEchoPin, servoPin);
 SelfCheckTask* selfCheckTask = new SelfCheckTask(servoPin, thermometerPin);
+ApplicationCommunicatorTask* applicationCommunicatorTask = new ApplicationCommunicatorTask(appData);
 
 CommunicablePeriodBasedTask<MessageType>* tasks[NTASKS] = {
     memoryCheckTask,
     bootTask,
     beverageSelectorTask,
     beverageMakerTask,
-    selfCheckTask
+    selfCheckTask,
+    applicationCommunicatorTask
     // new PresenceTask(),
     // new SelfCheckTask(),
-    // new ApplicationCommunicatorTask()
 };
 
 void setup() {
