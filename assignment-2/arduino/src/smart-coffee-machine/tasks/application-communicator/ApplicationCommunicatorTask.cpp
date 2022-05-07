@@ -32,8 +32,13 @@ void ApplicationCommunicatorTask::tick() {
 
 
 void ApplicationCommunicatorTask::onIdleState() {
-    // TODO: implement
+    if (this->commandToExecute != "") {
+        if (this->commandToExecute == "fix") {
+            this->setState(ApplicationCommunicatorTaskState::FIX);
+        }
+    }
 }
+
 void ApplicationCommunicatorTask::onSendingState() {
     // TODO: implement
 }
