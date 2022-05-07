@@ -94,3 +94,19 @@ void AppData::refill() {
     availableItemCount[TEA] = MAX_ITEM_COUNT;
     availableItemCount[CHOCOLATE] = MAX_ITEM_COUNT;
 }
+
+void AppData::setStatus(Status status) {
+    this->status = status;
+}
+
+Status AppData::getStatus() {
+    return this->status;
+}
+
+void AppData::increaseSelfCheckPerformed() {
+    this->selfCheckPerformedCount++;
+}
+
+int AppData::getSelfCheckPerformedCount() {
+    return this->selfCheckPerformedCount;
+}

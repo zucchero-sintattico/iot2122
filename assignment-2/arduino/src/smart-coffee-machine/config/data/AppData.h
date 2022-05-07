@@ -11,12 +11,20 @@ enum Beverage : uint8_t {
     CHOCOLATE
 };
 
+enum Status : uint8_t {
+    IDLE,
+    WORKING,
+    ASSISTANCE
+};
+
 class AppData {
 
 private:
     uint8_t availableItemCount[BEVERAGE_COUNT] = { MAX_ITEM_COUNT, MAX_ITEM_COUNT, MAX_ITEM_COUNT };
     Beverage selectedBeverage = COFFEE;
     uint8_t sugarLevel = 0; // 0 - 100
+    Status status = Status::IDLE;
+    int selfCheckPerformedCount = 0;
 
 public:
 
@@ -35,6 +43,11 @@ public:
     bool isRefillNeeded();
     void refill();
 
+    void setStatus(Status status);
+    Status getStatus();
+
+    void increaseSelfCheckPerformed();
+    int getSelfCheckPerformedCount();
 };
 
 #endif
