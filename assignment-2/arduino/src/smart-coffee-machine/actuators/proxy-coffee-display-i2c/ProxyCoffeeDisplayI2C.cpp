@@ -1,5 +1,13 @@
 #include "ProxyCoffeeDisplayI2C.h"
 
+ProxyCoffeeDisplayI2C* ProxyCoffeeDisplayI2C::_instance = nullptr;
+ProxyCoffeeDisplayI2C* ProxyCoffeeDisplayI2C::getInstance() {
+    if (_instance == nullptr) {
+        _instance = new ProxyCoffeeDisplayI2C();
+    }
+    return _instance;
+}
+
 void ProxyCoffeeDisplayI2C::printBootMessage() {
     if (this->lastMessage != BOOT) {
         this->lastMessage = BOOT;
@@ -18,10 +26,10 @@ void ProxyCoffeeDisplayI2C::printSelectingInfoMessage(AppData* appData) {
     CoffeeDisplayI2C::printSelectingInfoMessage(appData);
 }
 
-void ProxyCoffeeDisplayI2C::printSelectingAssistanceMessage() {
+void ProxyCoffeeDisplayI2C::printAssistanceMessage() {
     if (this->lastMessage != SELECTING_ASSISTANCE) {
         this->lastMessage = SELECTING_ASSISTANCE;
-        CoffeeDisplayI2C::printSelectingAssistanceMessage();
+        CoffeeDisplayI2C::printAssistanceMessage();
     }
 }
 

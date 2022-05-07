@@ -64,6 +64,7 @@ void SelfCheckTask::onTemperatureCheckState() {
 }
 
 void SelfCheckTask::onAssistanceState() {
+    this->display->printAssistanceMessage();
     if (this->getMessageBus()->isMessagePresent(MessageType::RECOVER)) {
         this->getMessageBus()->removeMessage(MessageType::RECOVER);
         this->setState(SelfCheckTaskState::IDLE);

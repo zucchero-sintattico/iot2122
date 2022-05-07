@@ -40,7 +40,7 @@ void CoffeeDisplayI2C::printSelectingInfoMessage(AppData* appData) {
     this->print(SUGAR + String(appData->getSugarLevel()) + PERCENTAGE_SYMBOL);
 }
 
-void CoffeeDisplayI2C::printSelectingAssistanceMessage() {
+void CoffeeDisplayI2C::printAssistanceMessage() {
     this->clear();
     this->changeCursor(0, 1);
     this->print(ASSISTANCE_MESSAGE);

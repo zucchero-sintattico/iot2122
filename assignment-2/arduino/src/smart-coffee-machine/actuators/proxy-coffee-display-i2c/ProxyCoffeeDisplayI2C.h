@@ -16,6 +16,11 @@ enum ProxyMessage {
 class ProxyCoffeeDisplayI2C : public CoffeeDisplayI2C {
 
     private:
+    static ProxyCoffeeDisplayI2C* _instance;
+    public:
+    static ProxyCoffeeDisplayI2C* getInstance();
+
+    private:
     ProxyMessage lastMessage;
     public:
     ProxyCoffeeDisplayI2C() : CoffeeDisplayI2C() {};
@@ -25,7 +30,7 @@ class ProxyCoffeeDisplayI2C : public CoffeeDisplayI2C {
     virtual void printBootMessage();
     virtual void printReadyMessage();
     virtual void printSelectingInfoMessage(AppData* appData);
-    virtual void printSelectingAssistanceMessage();
+    virtual void printAssistanceMessage();
     virtual void printMakingInfo(AppData* appData, int percentage);
     virtual void printWaitingForRetireMessage();
 };
