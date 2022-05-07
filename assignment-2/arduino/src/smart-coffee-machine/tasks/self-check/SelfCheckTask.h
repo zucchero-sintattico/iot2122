@@ -7,6 +7,8 @@
 #include "iot/sensor/thermometer/Thermometer.h"
 #include "iot/actuator/motor/Motor.h"
 
+#define MAX_PERIOD 3000
+
 enum class SelfCheckTaskState {
     IDLE,
     MECHANIC_CHECK,
@@ -18,7 +20,7 @@ class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskSta
 
 private:
     int _period = 100;
-
+    int tempo = 0;
     const int tickForSelfCheck = 1000;
     int elapsedTicks = 0;
 

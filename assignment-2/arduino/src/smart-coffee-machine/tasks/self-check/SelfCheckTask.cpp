@@ -1,4 +1,9 @@
 #include "SelfCheckTask.h"
+#define MAX_TEMPERATURE 24
+#define MIN_TEMPERATURE 17
+#define MIN_ANGLE 0
+#define MAX_ANGLE 180
+
 
 void SelfCheckTask::init() {
     this->thermometerManager->setup();
@@ -29,17 +34,42 @@ void SelfCheckTask::tick() {
 }
 
 void SelfCheckTask::onIdleState() {
-    // TODO: implement
+    this->tempo += this -> getPeriod();
+    if(this->tempo == MAX_PERIOD){
+        this->setState(SelfCheckTaskState::MECHANIC_CHECK);
+    }
 }
 
 void SelfCheckTask::onMechanicCheckState() {
-    // TODO: implement
+    this->tempo += this -> getPeriod();
+    this -> motor -> returnToStart();
+    for(int i = 0; i < MAX_ANGLE; i++){
+        this -> motor -> rotateTo(i);
+    }
+
+    for(int i = MAX_ANGLE; i < 0; i--){
+        this -> motor -> rotateTo(i);
+    }
+
+    this->setState(SelfCheckTaskState::TEMPERATURE_CHECK);
 }
 
 void SelfCheckTask::onTemperatureCheckState() {
-    // TODO: implement
+    this->tempo += this -> getPeriod();
+    if(this->thermometerManager -> getTemperature() >= MIN_TEMPERATURE && 
+       this->thermometerManager -> getTemperature() <= MAX_TEMPERATURE) {
+           this->setState(SelfCheckTaskState::IDLE);
+           this->tempo = 0;
+    }else{
+           this->setState(SelfCheckTaskState::ASSISTANCE);
+    }
 }
 
 void SelfCheckTask::onAssistanceState() {
-    // TODO: implement
+    this->tempo += this -> getPeriod();
+    if(this -> getMessageBus()-> isMessagePresent(MessageType::RECOVER)){
+        this -> getMessageBus()->removeMessage(MessageType::RECOVER);
+        this -> setState(SelfCheckTaskState::IDLE);
+        this->tempo = 0;
+    }
 }
