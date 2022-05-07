@@ -14,9 +14,11 @@ enum class SelfCheckTaskState {
     ASSISTANCE
 };
 
+#define TIME 3000
+
 class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskState, MessageType> {
 
-private:
+    private:
     int _period = 100;
 
     const int tickForSelfCheck = 1000;
@@ -25,7 +27,7 @@ private:
     Motor* motor;
     Thermometer* thermometerManager;
 
-public:
+    public:
     SelfCheckTask(uint8_t motorPin, uint8_t thermometer) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
         this->setPeriod(_period);
         this->motor = new Motor(motorPin);
@@ -36,7 +38,7 @@ public:
     void computeRead();
     void tick();
 
-private:
+    private:
     void onIdleState();
     void onMechanicCheckState();
     void onTemperatureCheckState();
