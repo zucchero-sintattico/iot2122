@@ -37,12 +37,8 @@ void MsgServiceClass::sendMsg(const String& msg) {
 void serialEvent() {
   /* reading the content */
   while (Serial.available() && !MsgService.msgAvailable) {
-<<<<<<< HEAD
     char ch = (char) Serial.read();
     if (ch == '\r') continue;
-=======
-    char ch = (char)Serial.read();
->>>>>>> 753403f015bb0421419ee50bbfe08abfeba9976c
     if (ch == '\n') {
       MsgService.currentMsg = new Msg(content);
       MsgService.msgAvailable = true;
