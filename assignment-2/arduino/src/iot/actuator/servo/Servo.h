@@ -2,17 +2,17 @@
 #ifndef _SERVO_H_
 #define _SERVO_H_
 #include "iot/actuator/actuator.h"
-#include "iot/utils/servo-timer-2/ServoTimer2.h"
+#include <Servo.h>
 
-class Servo : public Actuator {
+class Motor : public Actuator {
 
 private:
     int pin;
     int current_angle = 0;
-    ServoTimer2 servo;
+    Servo servo;
 
 public:
-    Servo(int pin);
+    Motor(int pin);
     void setup();
     void rotateTo(int angle);
     void returnToStart();

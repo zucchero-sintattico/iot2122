@@ -22,13 +22,13 @@ private:
     const int tickForSelfCheck = 1000;
     int elapsedTicks = 0;
 
-    Servo* servoManager;
+    Motor* servoManager;
     Thermometer* thermometerManager;
 
 public:
     SelfCheckTask(uint8_t motorPin, uint8_t thermometer) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
         this->setPeriod(_period);
-        this->servoManager = new Servo(motorPin);
+        this->servoManager = new Motor(motorPin);
         this->thermometerManager = new Thermometer(thermometer);
     }
 

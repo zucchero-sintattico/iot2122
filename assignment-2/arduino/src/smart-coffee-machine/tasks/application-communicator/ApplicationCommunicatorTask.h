@@ -12,6 +12,16 @@ enum class ApplicationCommunicatorTaskState : uint8_t {
     REFILL
 };
 
+// App -> Arduino
+#define REFILL_MESSAGE "REFILL"
+#define RECOVER_MESSAGE "RECOVER"
+
+// Arduino -> App
+#define IDLE_MESSAGE "IDLE"
+#define WORKING_MESSAGE "WORKING"
+#define ASSISTANCE_MESSAGE "ASSISTANCE"
+#define INFO(COFFEE, TEA, CHOCOLATE) "INFO:" + String(COFFEE) + "," + String(TEA) + "," + String(CHOCOLATE)
+
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
 
 private:

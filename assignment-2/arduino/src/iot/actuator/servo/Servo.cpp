@@ -4,27 +4,27 @@
 #define START_POSITION 0
 #define END_POSITION 180
 
-Servo::Servo(int pin) {
+Motor::Motor(int pin) {
   this->pin = pin;
 }
 
-void Servo::setup() {
+void Motor::setup() {
   servo.attach(this->pin);
 }
 
-void Servo::rotateTo(int angle) {
+void Motor::rotateTo(int angle) {
   if (angle >= 0 && angle <= 180) {
     servo.write(angle);
   }
 }
 
-void Servo::returnToStart() {
+void Motor::returnToStart() {
   if (current_angle != 0) {
     servo.write(START_POSITION);
   }
 }
 
-void Servo::goToEnd() {
+void Motor::goToEnd() {
   if (current_angle != 180) {
     this->rotateTo(END_POSITION);
   }
