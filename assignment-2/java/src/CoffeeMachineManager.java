@@ -19,8 +19,7 @@ public class CoffeeMachineManager {
         final Consumer<String> chocolateConsumer = newModality -> chocolateLabel.setText(newModality);
         final Consumer<String> selfCheckConsumer = newModality -> selfCheckLabel.setText(newModality);
 
-
-        Logic logic = new LogicImpl(modalityConsumer, coffeeConsumer, teaConsumer, chocolateConsumer, selfCheckConsumer);
+        //Logic logic = new LogicImpl(modalityConsumer, coffeeConsumer, teaConsumer, chocolateConsumer, selfCheckConsumer);
 
         //Creating the Frame
         JFrame frame = new JFrame("Coffer Machine Manager");
@@ -30,9 +29,8 @@ public class CoffeeMachineManager {
         // SOUTH Panel
         JPanel southPanel = new JPanel();
         JButton refill = new JButton("Refill");
-        refill.addActionListener(e -> logic.onRefill());
+
         JButton recover = new JButton("Recover");
-        recover.addActionListener(e -> logic.onRecover());
 
         southPanel.add(refill);
         southPanel.add(recover);
@@ -82,9 +80,30 @@ public class CoffeeMachineManager {
         centerPanel.add(selfCheckPanel);
 
 
+
+        // EAST Panel
+        JPanel eastPanel = new JPanel();
+        eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.PAGE_AXIS));
+        JTextField textField = new JTextField();
+        JButton startButton = new JButton("Start");
+        startButton.addActionListener(e -> {
+            try {
+                Logic logic = new LogicImpl(textField.getText(), modalityConsumer, coffeeConsumer, teaConsumer, chocolateConsumer, selfCheckConsumer);
+                refill.addActionListener(ev -> logic.onRefill());
+                recover.addActionListener(ev -> logic.onRecover());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        eastPanel.add(textField);
+        eastPanel.add(startButton);
+
+
         //Adding Components to the frame.
         frame.getContentPane().add(BorderLayout.SOUTH, southPanel);
         frame.getContentPane().add(BorderLayout.CENTER, centerPanel);
+        frame.getContentPane().add(BorderLayout.EAST, eastPanel);
         frame.setVisible(true);
     }
 
