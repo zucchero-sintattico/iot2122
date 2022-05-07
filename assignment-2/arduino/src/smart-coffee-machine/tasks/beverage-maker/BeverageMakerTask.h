@@ -5,11 +5,12 @@
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 
 #include "iot/sensor/sonar/Sonar.h"
-//#include "iot/actuator/servo/Servo.h"
+#include "iot/actuator/motor/Motor.h"
 
 #include "smart-coffee-machine/actuators/fake-coffee-display-i2c/FakeCoffeeDisplayI2C.h"
 
-
+// Data
+#include "smart-coffee-machine/config/data/AppData.h"
 
 enum class BeverageMakerTaskState {
     IDLE,
@@ -32,7 +33,7 @@ private:
 
     // Actuators
     CoffeeDisplayI2C* display;
-    // Servo* servo;
+    Motor* motor;
 
     uint8_t progressPercentage = 0;
 
@@ -45,7 +46,7 @@ public:
         this->appData = appData;
 
         this->sonar = new Sonar(trigPin, echoPin);
-        //this->servo = new Servo(servoPin);
+        this->motor = new Motor(servoPin);
         this->display = FakeCoffeeDisplayI2C::getInstance();
     }
 

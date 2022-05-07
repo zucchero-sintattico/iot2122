@@ -37,6 +37,7 @@ void BeverageMakerTask::onIdleState() {
 
 void BeverageMakerTask::onMakingState() {
     this->progressPercentage += INCREMENT_PERCENTAGE;
+    this->motor->rotateTo(map(this->progressPercentage, 0, 100, 0, 180));
     this->display->printMakingInfo(this->appData, this->progressPercentage);
     if (this->progressPercentage == 100) {
         this->setState(BeverageMakerTaskState::WAITING);

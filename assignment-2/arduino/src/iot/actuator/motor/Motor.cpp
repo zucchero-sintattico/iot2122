@@ -1,10 +1,9 @@
-#include "Servo.h"
-#include <Arduino.h>
+#include "Motor.h"
 
 #define START_POSITION 0
 #define END_POSITION 180
 
-Motor::Motor(int pin) {
+Motor::Motor(uint8_t pin) {
   this->pin = pin;
 }
 
@@ -12,7 +11,7 @@ void Motor::setup() {
   servo.attach(this->pin);
 }
 
-void Motor::rotateTo(int angle) {
+void Motor::rotateTo(uint8_t angle) {
   if (angle >= 0 && angle <= 180) {
     servo.write(angle);
   }

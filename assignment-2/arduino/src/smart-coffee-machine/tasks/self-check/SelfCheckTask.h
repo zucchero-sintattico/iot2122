@@ -5,7 +5,7 @@
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 
 #include "iot/sensor/thermometer/Thermometer.h"
-#include "iot/actuator/servo/Servo.h"
+#include "iot/actuator/motor/Motor.h"
 
 enum class SelfCheckTaskState {
     IDLE,
@@ -22,13 +22,13 @@ private:
     const int tickForSelfCheck = 1000;
     int elapsedTicks = 0;
 
-    Motor* servoManager;
+    Motor* motor;
     Thermometer* thermometerManager;
 
 public:
     SelfCheckTask(uint8_t motorPin, uint8_t thermometer) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
         this->setPeriod(_period);
-        this->servoManager = new Motor(motorPin);
+        this->motor = new Motor(motorPin);
         this->thermometerManager = new Thermometer(thermometer);
     }
 
