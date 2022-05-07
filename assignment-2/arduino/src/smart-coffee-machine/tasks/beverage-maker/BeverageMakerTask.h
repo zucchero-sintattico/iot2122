@@ -20,6 +20,7 @@ enum class BeverageMakerTaskState {
 
 #define MAX_DISTANCE_IN_CM 40
 #define INCREMENT_PERCENTAGE 1
+#define MAX_WAITING_TIME_IN_MS 3000
 
 class BeverageMakerTask : public CommunicablePeriodBasedTaskWithFSM<BeverageMakerTaskState, MessageType> {
 
@@ -36,6 +37,7 @@ private:
     Motor* motor;
 
     uint8_t progressPercentage = 0;
+    long elapsedWaitingTime = 0;
 
 public:
 

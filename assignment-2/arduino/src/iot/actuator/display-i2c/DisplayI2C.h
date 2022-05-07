@@ -2,7 +2,6 @@
 #define _DISPLAY_I2C_H_
 
 #include "iot/actuator/Actuator.h"
-#include <String.h>
 #include <LiquidCrystal_I2C.h>
 #include <Arduino.h>
 
