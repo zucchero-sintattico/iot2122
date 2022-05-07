@@ -18,8 +18,13 @@ void BootTask::tick() {
 
 void BootTask::onBootState() {
     this->coffeeDisplay->printBootMessage();
-    this->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK);
-    this->setState(BootTaskState::IDLE);
+    this->elapsed += this->_period;
+    if (this->elapsed >= this->duration) {
+        this->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK);
+        this->setState(BootTaskState::IDLE);
+    }
 }
 
-void BootTask::onIdleState() {}
+void BootTask::onIdleState() {
+    this->elapsed = 0;
+}

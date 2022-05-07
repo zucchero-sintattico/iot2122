@@ -20,6 +20,8 @@ private:
     int _period = 100;
 
     CoffeeDisplayI2C* coffeeDisplay;
+    long duration = 3000;
+    long elapsed = 0;
 
 public:
     BootTask() : CommunicablePeriodBasedTaskWithFSM(BootTaskState::BOOT) {
