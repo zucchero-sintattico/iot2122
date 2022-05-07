@@ -2,7 +2,7 @@
 
 void BeverageMakerTask::init() {
     this->sonar->setup();
-    // this->servo->setup();
+    this->motor->setup();
 }
 
 void BeverageMakerTask::computeRead() {

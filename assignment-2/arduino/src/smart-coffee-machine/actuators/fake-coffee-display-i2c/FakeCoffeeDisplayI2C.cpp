@@ -39,7 +39,7 @@ void FakeCoffeeDisplayI2C::printSelectingInfoMessage(AppData* appData) {
     Serial.print("\rBeverage: " + appData->getSelectedBeverageToString() + spaces + "Sugar: " + String(appData->getSugarLevel()) + "%   ");
 }
 
-void FakeCoffeeDisplayI2C::printSelectingAssistanceMessage() {
+void FakeCoffeeDisplayI2C::printAssistanceMessage() {
     if (lastMessage != SELECTING_ASSISTANCE_MESSAGE) {
         Serial.println("");
         lastMessage = SELECTING_ASSISTANCE_MESSAGE;

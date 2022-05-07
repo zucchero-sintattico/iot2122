@@ -14,21 +14,21 @@ enum Messages {
 
 class FakeCoffeeDisplayI2C : public CoffeeDisplayI2C {
 
-private:
+    private:
     static FakeCoffeeDisplayI2C* instance;
 
-public:
+    public:
     static FakeCoffeeDisplayI2C* getInstance();
 
-private:
+    private:
     Messages lastMessage;
-public:
+    public:
     FakeCoffeeDisplayI2C() {};
 
     void printBootMessage();
     void printReadyMessage();
     void printSelectingInfoMessage(AppData* appData);
-    void printSelectingAssistanceMessage();
+    void printAssistanceMessage();
     void printMakingInfo(AppData* appData, int percentage);
     void printWaitingForRetireMessage();
 

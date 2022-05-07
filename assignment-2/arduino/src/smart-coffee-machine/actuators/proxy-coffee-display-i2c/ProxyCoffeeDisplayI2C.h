@@ -3,12 +3,35 @@
 
 #include "../coffee-display-i2c/CoffeeDisplayI2C.h"
 
+
+enum ProxyMessage {
+    BOOT,
+    READY,
+    SELECTING_INFO,
+    SELECTING_ASSISTANCE,
+    MAKING_INFO,
+    WAITING_FOR_RETIRE
+};
+
 class ProxyCoffeeDisplayI2C : public CoffeeDisplayI2C {
 
-public:
+    private:
+    static ProxyCoffeeDisplayI2C* _instance;
+    public:
+    static ProxyCoffeeDisplayI2C* getInstance();
+
+    private:
+    ProxyMessage lastMessage;
+    public:
     ProxyCoffeeDisplayI2C() : CoffeeDisplayI2C() {};
     ProxyCoffeeDisplayI2C(int width, int height) : CoffeeDisplayI2C(width, height) {};
     ProxyCoffeeDisplayI2C(int address, int width, int height) : CoffeeDisplayI2C(address, width, height) {};
 
+    virtual void printBootMessage();
+    virtual void printReadyMessage();
+    virtual void printSelectingInfoMessage(AppData* appData);
+    virtual void printAssistanceMessage();
+    virtual void printMakingInfo(AppData* appData, int percentage);
+    virtual void printWaitingForRetireMessage();
 };
 #endif
