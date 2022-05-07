@@ -34,42 +34,38 @@ void SelfCheckTask::tick() {
 }
 
 void SelfCheckTask::onIdleState() {
-    this->tempo += this -> getPeriod();
-    if(this->tempo == MAX_PERIOD){
+    this->elapsedTime += this->getPeriod();
+    if (this->elapsedTime == MAX_PERIOD) {
+        this->elapsedTime = 0;
         this->setState(SelfCheckTaskState::MECHANIC_CHECK);
     }
 }
 
 void SelfCheckTask::onMechanicCheckState() {
-    this->tempo += this -> getPeriod();
-    this -> motor -> returnToStart();
-    for(int i = 0; i < MAX_ANGLE; i++){
-        this -> motor -> rotateTo(i);
+    this->angle += this->increment;
+    this->motor->rotateTo(this->angle);
+    if (this->angle == MAX_ANGLE) {
+        this->increment = -1;
     }
-
-    for(int i = MAX_ANGLE; i < 0; i--){
-        this -> motor -> rotateTo(i);
+    else if (this->angle == MIN_ANGLE) {
+        this->increment = 1;
+        this->setState(SelfCheckTaskState::TEMPERATURE_CHECK);
     }
-
-    this->setState(SelfCheckTaskState::TEMPERATURE_CHECK);
 }
 
 void SelfCheckTask::onTemperatureCheckState() {
-    this->tempo += this -> getPeriod();
-    if(this->thermometerManager -> getTemperature() >= MIN_TEMPERATURE && 
-       this->thermometerManager -> getTemperature() <= MAX_TEMPERATURE) {
-           this->setState(SelfCheckTaskState::IDLE);
-           this->tempo = 0;
-    }else{
-           this->setState(SelfCheckTaskState::ASSISTANCE);
+    if (this->thermometerManager->getTemperature() >= MIN_TEMPERATURE &&
+        this->thermometerManager->getTemperature() <= MAX_TEMPERATURE) {
+        this->setState(SelfCheckTaskState::IDLE);
+    }
+    else {
+        this->setState(SelfCheckTaskState::ASSISTANCE);
     }
 }
 
 void SelfCheckTask::onAssistanceState() {
-    this->tempo += this -> getPeriod();
-    if(this -> getMessageBus()-> isMessagePresent(MessageType::RECOVER)){
-        this -> getMessageBus()->removeMessage(MessageType::RECOVER);
-        this -> setState(SelfCheckTaskState::IDLE);
-        this->tempo = 0;
+    if (this->getMessageBus()->isMessagePresent(MessageType::RECOVER)) {
+        this->getMessageBus()->removeMessage(MessageType::RECOVER);
+        this->setState(SelfCheckTaskState::IDLE);
     }
 }

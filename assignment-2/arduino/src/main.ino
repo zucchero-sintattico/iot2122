@@ -18,6 +18,7 @@
 
 // Pin configurations
 #define potentiometerPin A0
+#define thermometerPin A1
 #define buttonMakePin 2
 #define buttonUpPin 3
 #define buttonDownPin 4
@@ -32,18 +33,20 @@ AppData* appData = new AppData();
 MessageBus<MessageType>* messageBus = new MessageBus<MessageType>();
 SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>(messageBus);
 
-#define NTASKS 4
+#define NTASKS 5
 
 MemoryCheckTask* memoryCheckTask = new MemoryCheckTask();
 BootTask* bootTask = new BootTask();
 BeverageSelectorTask* beverageSelectorTask = new BeverageSelectorTask(appData, buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin);
 BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, sonarTrigPin, sonarEchoPin, servoPin);
+SelfCheckTask* selfCheckTask = new SelfCheckTask(servoPin, thermometerPin);
 
 CommunicablePeriodBasedTask<MessageType>* tasks[NTASKS] = {
     memoryCheckTask,
     bootTask,
     beverageSelectorTask,
     beverageMakerTask,
+    selfCheckTask
     // new PresenceTask(),
     // new SelfCheckTask(),
     // new ApplicationCommunicatorTask()

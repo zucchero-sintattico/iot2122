@@ -21,17 +21,20 @@ enum class SelfCheckTaskState {
 class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskState, MessageType> {
 
     private:
-    int _period = 100;
-    int tempo = 0;
+    int _period = 25;
+    int elapsedTime = 0;
     const int tickForSelfCheck = 1000;
     int elapsedTicks = 0;
+
+    uint8_t angle = 0;
+    uint8_t increment = 1;
 
     Motor* motor;
     Thermometer* thermometerManager;
 
     public:
     SelfCheckTask(uint8_t motorPin, uint8_t thermometer) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
-        this->setPeriod(_period);
+        PeriodBasedTask::setPeriod(_period);
         this->motor = new Motor(motorPin);
         this->thermometerManager = new Thermometer(thermometer);
     }
