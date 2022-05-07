@@ -37,16 +37,20 @@ void BeverageMakerTask::onIdleState() {
 
 void BeverageMakerTask::onMakingState() {
     this->progressPercentage += INCREMENT_PERCENTAGE;
+    this->motor->rotateTo(map(this->progressPercentage, 0, 100, 0, 180));
     this->display->printMakingInfo(this->appData, this->progressPercentage);
     if (this->progressPercentage == 100) {
+        this->appData->consumeItem(this->appData->getSelectedBeverage());
+        this->elapsedWaitingTime = 0;
         this->setState(BeverageMakerTaskState::WAITING);
     }
 
 }
 
 void BeverageMakerTask::onWaitingState() {
+    this->elapsedWaitingTime += this->getPeriod();
     this->display->printWaitingForRetireMessage();
-    if (this->sonar->getDistanceInCM() > MAX_DISTANCE_IN_CM) {
+    if (this->sonar->getDistanceInCM() > MAX_DISTANCE_IN_CM || this->elapsedWaitingTime > MAX_WAITING_TIME_IN_MS) {
         this->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK);
         this->setState(BeverageMakerTaskState::IDLE);
     }

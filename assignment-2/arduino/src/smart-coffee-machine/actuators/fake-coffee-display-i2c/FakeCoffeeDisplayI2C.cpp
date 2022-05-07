@@ -16,7 +16,7 @@ void FakeCoffeeDisplayI2C::printBootMessage() {
         Serial.println("");
         lastMessage = BOOT_MESSAGE;
     }
-    Serial.println("\rWelcome to Smart Coffee Machine!");
+    Serial.print("\rWelcome to Smart Coffee Machine!");
 }
 
 

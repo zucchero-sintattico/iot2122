@@ -57,6 +57,9 @@ void BeverageSelectorTask::onReadyState() {
     if (isAnyButtonPressed()) {
         this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);
         this->setState(BeverageSelectorTaskState::SELECTING);
+        if (appData->getAvailableItemCount(appData->getSelectedBeverage()) == 0) {
+            this->appData->selectNextBeverage();
+        }
         this->lastIteractionTime = millis();
         return;
     }
@@ -88,7 +91,6 @@ void BeverageSelectorTask::onSelectingState() {
     if (isSelectingTimeElapsed()) {
         this->getMessageBus()->push(MessageType::ACTIVATE_PRESENCE_TASK);
         this->setState(BeverageSelectorTaskState::READY);
-        Serial.println("Selecting time elapsed");
         return;
     }
 
