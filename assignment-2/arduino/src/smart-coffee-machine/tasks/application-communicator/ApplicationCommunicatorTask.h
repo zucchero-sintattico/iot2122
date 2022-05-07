@@ -3,8 +3,9 @@
 
 #include "smart-coffee-machine/config/MessageType.h"
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
+#include <Arduino.h>
 
-enum class ApplicationCommunicatorTaskState {
+enum class ApplicationCommunicatorTaskState : uint8_t {
     IDLE,
     SENDING,
     FIX,

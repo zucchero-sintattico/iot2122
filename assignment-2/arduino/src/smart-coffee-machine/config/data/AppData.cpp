@@ -21,16 +21,16 @@ String AppData::getSelectedBeverageToString() {
     };
 }
 
-void AppData::setSugarLevel(int sugarLevel) {
+void AppData::setSugarLevel(uint8_t sugarLevel) {
     this->sugarLevel = sugarLevel;
 }
 
-int AppData::getSugarLevel() {
+uint8_t AppData::getSugarLevel() {
     return this->sugarLevel;
 }
 
 
-int AppData::getAvailableItemCount(Beverage beverage) {
+uint8_t AppData::getAvailableItemCount(Beverage beverage) {
     return availableItemCount[beverage];
 }
 

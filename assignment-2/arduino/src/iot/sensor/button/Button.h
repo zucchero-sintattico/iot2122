@@ -2,16 +2,17 @@
 #define _BUTTON_H
 
 #include "../Sensor.h"
+#include <Arduino.h>
 
 class Button : public Sensor {
 
 private:
-    int pin;
+    uint8_t pin;
     bool isButtonPressed = false;
     bool prevValue = false;
 
 public:
-    Button(int pin);
+    Button(uint8_t pin);
     bool isPressed();
 
     void setup();

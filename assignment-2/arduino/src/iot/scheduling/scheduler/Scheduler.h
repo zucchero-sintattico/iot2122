@@ -6,21 +6,22 @@
 #include "../strategy/SchedulingStrategy.h"
 #include "../task/Task.h"
 #include "../task/PeriodBasedTask.h"
+#include <Arduino.h>
 
 /**
  * @brief A scheduler is a class that manages the execution of tasks.
  */
 class Scheduler {
 
-    private:
+private:
     static const int MAX_TASKS = 10;
 
     int period;
-    int nTasks;
+    uint8_t nTasks;
     TaskWithSchedulingStrategy* tasks[MAX_TASKS];
     Timer timer;
 
-    public:
+public:
 
     void init(int period);
     virtual bool addTask(Task* task, SchedulingStrategy* schedulingStrategy);

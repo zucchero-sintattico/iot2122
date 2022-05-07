@@ -34,7 +34,8 @@ void PresenceTask::onIdleState() {
         this->getMessageBus()->removeMessage(MessageType::ACTIVATE_PRESENCE_TASK);
         if (this->pirManager->isSomeoneDetected()) {
             this->setState(PresenceTaskState::SOMEONE);
-        } else {
+        }
+        else {
             this->setState(PresenceTaskState::NOONE);
         }
     }
@@ -43,12 +44,13 @@ void PresenceTask::onIdleState() {
 void PresenceTask::onNooneState() {
     if (this->needIdleState()) {
         this->setState(PresenceTaskState::IDLE);
-        return; 
+        return;
     }
 
     if (this->pirManager->isSomeoneDetected()) {
         this->setState(PresenceTaskState::SOMEONE);
-    } else {
+    }
+    else {
         this->elapsedTickNooneDetected++;
         if (this->elapsedTickNooneDetected >= this->tickToSleep) {
             this->setState(PresenceTaskState::SLEEP);
@@ -61,7 +63,7 @@ void PresenceTask::onSomeoneState() {
 
     if (this->needIdleState()) {
         this->setState(PresenceTaskState::IDLE);
-        return; 
+        return;
     }
 
     if (!this->pirManager->isSomeoneDetected()) {

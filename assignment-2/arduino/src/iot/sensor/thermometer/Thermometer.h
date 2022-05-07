@@ -8,11 +8,11 @@
 class Thermometer : public Sensor {
 
 private:
-    int pin;
+    uint8_t pin;
     uint8_t temperature;
 
 public:
-    Thermometer(int pin);
+    Thermometer(uint8_t pin);
     void setup();
     void computeRead();
     uint8_t getTemperature();

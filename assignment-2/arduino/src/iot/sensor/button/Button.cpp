@@ -1,7 +1,7 @@
 #include "Button.h"
 #include <Arduino.h>
 
-Button::Button(int pin) {
+Button::Button(uint8_t pin) {
     this->pin = pin;
 }
 

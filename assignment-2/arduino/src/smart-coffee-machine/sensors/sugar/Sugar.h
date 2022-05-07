@@ -6,7 +6,7 @@
 class Sugar : public Potentiometer {
 
 public:
-    Sugar(int pin);
+    Sugar(uint8_t pin);
     int getPercentage();
 
 };

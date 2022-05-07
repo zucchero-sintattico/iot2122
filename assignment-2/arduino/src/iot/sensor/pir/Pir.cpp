@@ -1,7 +1,6 @@
 #include "Pir.h"
-#include <Arduino.h>
 
-Pir::Pir(int pin) {
+Pir::Pir(uint8_t pin) {
     this->pin = pin;
 }
 

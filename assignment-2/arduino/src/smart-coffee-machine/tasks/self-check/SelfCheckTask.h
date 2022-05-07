@@ -18,6 +18,7 @@ class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskSta
 
 private:
     int _period = 100;
+
     const int tickForSelfCheck = 1000;
     int elapsedTicks = 0;
 
@@ -25,7 +26,7 @@ private:
     Thermometer* thermometerManager;
 
 public:
-    SelfCheckTask(int motorPin, int thermometer) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
+    SelfCheckTask(uint8_t motorPin, uint8_t thermometer) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
         this->setPeriod(_period);
         this->servoManager = new Servo(motorPin);
         this->thermometerManager = new Thermometer(thermometer);

@@ -1,6 +1,6 @@
 #include "Potentiometer.h"
 
-Potentiometer::Potentiometer(int pin) {
+Potentiometer::Potentiometer(uint8_t pin) {
     this->pin = pin;
 }
 

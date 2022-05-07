@@ -13,18 +13,18 @@ void SelfCheckTask::computeRead() {
 
 void SelfCheckTask::tick() {
     switch (this->getState()) {
-        case SelfCheckTaskState::IDLE:
-            onIdleState();
-            break;
-        case SelfCheckTaskState::MECHANIC_CHECK:
-            onMechanicCheckState();
-            break;
-        case SelfCheckTaskState::TEMPERATURE_CHECK:
-            onTemperatureCheckState();
-            break;
-        case SelfCheckTaskState::ASSISTANCE:
-            onAssistanceState();
-            break;
+    case SelfCheckTaskState::IDLE:
+        onIdleState();
+        break;
+    case SelfCheckTaskState::MECHANIC_CHECK:
+        onMechanicCheckState();
+        break;
+    case SelfCheckTaskState::TEMPERATURE_CHECK:
+        onTemperatureCheckState();
+        break;
+    case SelfCheckTaskState::ASSISTANCE:
+        onAssistanceState();
+        break;
     }
 }
 

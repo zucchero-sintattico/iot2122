@@ -11,7 +11,7 @@ public:
     CoffeeDisplayI2C(int width, int height) : DisplayI2C(width, height) {};
     CoffeeDisplayI2C(int address, int width, int height) : DisplayI2C(address, width, height) {};
 
-
+    virtual void printBootMessage() = 0;
     virtual void printReadyMessage() = 0;
     virtual void printSelectingInfoMessage(AppData* appData) = 0;
     virtual void printSelectingAssistanceMessage() = 0;

@@ -15,17 +15,20 @@
 // Data
 #include "smart-coffee-machine/config/data/AppData.h"
 
-enum class BeverageSelectorTaskState {
+#include <Arduino.h>
+
+enum class BeverageSelectorTaskState : uint8_t {
     IDLE,
     READY,
     SELECTING,
     ASSISTANCE
 };
 
+#define MAX_SELECTING_TIME 5000
+
 class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageSelectorTaskState, MessageType> {
 
 private:
-    static const unsigned long MAX_SELECTING_TIME = 5000;
     int _period = 50;
 
     // Sensors
@@ -43,7 +46,7 @@ private:
 
 
 public:
-    BeverageSelectorTask(AppData* appData, int buttonUpPin, int buttonDownPin, int buttonMakePin, int potentiometerSugarPin) : CommunicablePeriodBasedTaskWithFSM(BeverageSelectorTaskState::IDLE) {
+    BeverageSelectorTask(AppData* appData, uint8_t buttonUpPin, uint8_t buttonDownPin, uint8_t buttonMakePin, uint8_t potentiometerSugarPin) : CommunicablePeriodBasedTaskWithFSM(BeverageSelectorTaskState::IDLE) {
         PeriodBasedTask::setPeriod(this->_period);
         this->appData = appData;
         this->buttonUp = new Button(buttonUpPin);

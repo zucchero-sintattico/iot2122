@@ -1,6 +1,6 @@
 #include "Thermometer.h"
 
-Thermometer::Thermometer(int pin) {
+Thermometer::Thermometer(uint8_t pin) {
     this->pin = pin;
 }
 

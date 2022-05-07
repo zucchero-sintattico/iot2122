@@ -7,11 +7,11 @@
 class Potentiometer : public Sensor {
 
 private:
-    int pin;
+    uint8_t pin;
     int potentiometerValue;
 
 public:
-    Potentiometer(int pin);
+    Potentiometer(uint8_t pin);
     int getValue();
 
     void setup();

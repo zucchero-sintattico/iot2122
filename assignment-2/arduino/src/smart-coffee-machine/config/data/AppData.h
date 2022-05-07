@@ -3,7 +3,9 @@
 
 #include <Arduino.h>
 #define BEVERAGE_COUNT 3
-enum Beverage {
+#define MAX_ITEM_COUNT 3
+
+enum Beverage : uint8_t {
     COFFEE,
     TEA,
     CHOCOLATE
@@ -12,22 +14,19 @@ enum Beverage {
 class AppData {
 
 private:
-
-    static const int MAX_ITEM_COUNT = 3;
-
-    int availableItemCount[BEVERAGE_COUNT] = { MAX_ITEM_COUNT, MAX_ITEM_COUNT, MAX_ITEM_COUNT };
+    uint8_t availableItemCount[BEVERAGE_COUNT] = { MAX_ITEM_COUNT, MAX_ITEM_COUNT, MAX_ITEM_COUNT };
     Beverage selectedBeverage = COFFEE;
-    int sugarLevel = 0; // 0 - 10
+    uint8_t sugarLevel = 0; // 0 - 100
 
 public:
 
     Beverage getSelectedBeverage();
     String getSelectedBeverageToString();
 
-    void setSugarLevel(int sugarLevel);
-    int getSugarLevel();
+    void setSugarLevel(uint8_t sugarLevel);
+    uint8_t getSugarLevel();
 
-    int getAvailableItemCount(Beverage beverage);
+    uint8_t getAvailableItemCount(Beverage beverage);
     bool consumeItem(Beverage beverage);
 
     bool selectNextBeverage();

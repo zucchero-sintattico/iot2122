@@ -2,16 +2,17 @@
 #define _PIR_H_
 
 #include "../Sensor.h"
+#include <Arduino.h>
 
 class Pir : public Sensor {
 
 private:
-    int pin;
+    uint8_t pin;
     bool detection;
     int calibrationTimeMS = 10000;
 
 public:
-    Pir(int pin);
+    Pir(uint8_t pin);
     bool isSomeoneDetected();
 
     void setup();

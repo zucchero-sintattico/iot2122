@@ -10,16 +10,17 @@
 #include "smart-coffee-machine/actuators/fake-coffee-display-i2c/FakeCoffeeDisplayI2C.h"
 
 
+
 enum class BeverageMakerTaskState {
     IDLE,
     MAKING,
     WAITING
 };
 
-class BeverageMakerTask : public CommunicablePeriodBasedTaskWithFSM<BeverageMakerTaskState, MessageType> {
+#define MAX_DISTANCE_IN_CM 40
+#define INCREMENT_PERCENTAGE 1
 
-    static const int MAX_DISTANCE_IN_CM = 40;
-    static const int INCREMENT_PERCENTAGE = 1;
+class BeverageMakerTask : public CommunicablePeriodBasedTaskWithFSM<BeverageMakerTaskState, MessageType> {
 
 private:
     int _period = 50;
@@ -30,14 +31,14 @@ private:
     Sonar* sonar;
 
     // Actuators
-    // Servo* servo;
     CoffeeDisplayI2C* display;
+    // Servo* servo;
 
-    int progressPercentage = 0;
+    uint8_t progressPercentage = 0;
 
 public:
 
-    BeverageMakerTask(AppData* appData, int trigPin, int echoPin, int servoPin) : CommunicablePeriodBasedTaskWithFSM(BeverageMakerTaskState::IDLE) {
+    BeverageMakerTask(AppData* appData, uint8_t trigPin, uint8_t echoPin, uint8_t servoPin) : CommunicablePeriodBasedTaskWithFSM(BeverageMakerTaskState::IDLE) {
 
         PeriodBasedTask::setPeriod(this->_period);
 

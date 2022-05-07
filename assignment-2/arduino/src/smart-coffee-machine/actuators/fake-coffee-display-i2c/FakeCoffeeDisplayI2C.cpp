@@ -11,6 +11,14 @@ FakeCoffeeDisplayI2C* FakeCoffeeDisplayI2C::getInstance() {
     return instance;
 }
 
+void FakeCoffeeDisplayI2C::printBootMessage() {
+    if (lastMessage != BOOT_MESSAGE) {
+        Serial.println("");
+        lastMessage = BOOT_MESSAGE;
+    }
+    Serial.println("\rWelcome to Smart Coffee Machine!");
+}
+
 
 void FakeCoffeeDisplayI2C::printReadyMessage() {
     if (lastMessage != READY_MESSAGE) {

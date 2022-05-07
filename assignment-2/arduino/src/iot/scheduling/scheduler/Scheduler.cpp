@@ -1,5 +1,4 @@
 #include "Scheduler.h"
-#include <Arduino.h>
 
 #include "../strategy/SchedulingStrategies.h"
 

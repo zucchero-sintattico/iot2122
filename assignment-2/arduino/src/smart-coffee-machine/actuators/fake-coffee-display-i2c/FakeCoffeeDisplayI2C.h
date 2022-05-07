@@ -4,6 +4,7 @@
 #include "../coffee-display-i2c/CoffeeDisplayI2C.h"
 
 enum Messages {
+    BOOT_MESSAGE,
     READY_MESSAGE,
     SELECTING_INFO_MESSAGE,
     SELECTING_ASSISTANCE_MESSAGE,
@@ -24,6 +25,7 @@ private:
 public:
     FakeCoffeeDisplayI2C() {};
 
+    void printBootMessage();
     void printReadyMessage();
     void printSelectingInfoMessage(AppData* appData);
     void printSelectingAssistanceMessage();
