@@ -10,24 +10,26 @@
 enum class ApplicationCommunicatorTaskState : uint8_t {
     IDLE,
     SENDING,
-    FIX,
+    RECOVER,
     REFILL
 };
 
 // App -> Arduino
-#define REFILL_MESSAGE "REFILL"
-#define RECOVER_MESSAGE "RECOVER"
+#define REFILL_MESSAGE String("REFILL")
+#define RECOVER_MESSAGE String("RECOVER")
 
 // Arduino -> App
-#define IDLE_MESSAGE "IDLE"
-#define WORKING_MESSAGE "WORKING"
-#define ASSISTANCE_MESSAGE "ASSISTANCE"
+#define MODALITY String("MODALITY:")
+#define IDLE_MESSAGE MODALITY + String("IDLE")
+#define WORKING_MESSAGE MODALITY + String("WORKING")
+#define ASSISTANCE_MESSAGE MODALITY + String("ASSISTANCE")
 #define INFO(COFFEE, TEA, CHOCOLATE) "INFO:" + String(COFFEE) + "," + String(TEA) + "," + String(CHOCOLATE)
+#define SELFCHECK(COUNT) "SELFCHECK:" + String(COUNT)
 
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
 
 private:
-    int _period = 100;
+    int _period = 1000;
     AppData* appData;
     String commandToExecute;
 
@@ -44,7 +46,7 @@ public:
 
     void onIdleState();
     void onSendingState();
-    void onFixState();
+    void onRecoverState();
     void onRefillState();
 };
 
