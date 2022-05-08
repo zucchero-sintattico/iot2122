@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 public class CoffeeMachineManager {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         final JLabel modalityLabel = new JLabel("0");
         final JLabel coffeeLabel = new JLabel("0");
@@ -13,11 +13,11 @@ public class CoffeeMachineManager {
         final JLabel chocolateLabel = new JLabel("0");
         final JLabel selfCheckLabel = new JLabel("0");
 
-        final Consumer<String> modalityConsumer = newModality -> modalityLabel.setText(newModality);
-        final Consumer<String> coffeeConsumer = newModality -> coffeeLabel.setText(newModality);
-        final Consumer<String> teaConsumer = newModality -> teaLabel.setText(newModality);
-        final Consumer<String> chocolateConsumer = newModality -> chocolateLabel.setText(newModality);
-        final Consumer<String> selfCheckConsumer = newModality -> selfCheckLabel.setText(newModality);
+        final Consumer<String> modalityConsumer = modalityLabel::setText;
+        final Consumer<String> coffeeConsumer = coffeeLabel::setText;
+        final Consumer<String> teaConsumer = teaLabel::setText;
+        final Consumer<String> chocolateConsumer = chocolateLabel::setText;
+        final Consumer<String> selfCheckConsumer = selfCheckLabel::setText;
 
         //Logic logic = new LogicImpl(modalityConsumer, coffeeConsumer, teaConsumer, chocolateConsumer, selfCheckConsumer);
 
