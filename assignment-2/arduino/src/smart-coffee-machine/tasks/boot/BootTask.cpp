@@ -21,10 +21,9 @@ void BootTask::onBootState() {
     this->elapsed += this->_period;
     if (this->elapsed >= this->duration) {
         this->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK);
+        this->elapsed = 0;
         this->setState(BootTaskState::IDLE);
     }
 }
 
-void BootTask::onIdleState() {
-    this->elapsed = 0;
-}
+void BootTask::onIdleState() {}

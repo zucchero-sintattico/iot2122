@@ -28,12 +28,12 @@ enum class ApplicationCommunicatorTaskState : uint8_t {
 
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
 
-private:
+    private:
     int _period = 1000;
     AppData* appData;
     String commandToExecute;
 
-public:
+    public:
 
     ApplicationCommunicatorTask(AppData* appdata) : CommunicablePeriodBasedTaskWithFSM(ApplicationCommunicatorTaskState::IDLE) {
         PeriodBasedTask::setPeriod(this->_period);
@@ -48,6 +48,8 @@ public:
     void onSendingState();
     void onRecoverState();
     void onRefillState();
+
+    bool isCommandPresent();
 };
 
 #endif

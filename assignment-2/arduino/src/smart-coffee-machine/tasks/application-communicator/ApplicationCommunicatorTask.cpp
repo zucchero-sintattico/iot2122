@@ -6,7 +6,7 @@ void ApplicationCommunicatorTask::init() {
 
 void ApplicationCommunicatorTask::computeRead() {
     if (this->getState() == ApplicationCommunicatorTaskState::IDLE && MsgService.isMsgAvailable()) {
-        Msg* msg = MsgService.receiveMsg();    
+        Msg* msg = MsgService.receiveMsg();
         this->commandToExecute = String(msg->getContent());
         delete msg;
     }
@@ -31,8 +31,12 @@ void ApplicationCommunicatorTask::tick() {
 }
 
 
+bool ApplicationCommunicatorTask::isCommandPresent() {
+    return this->commandToExecute.length() > 0;
+}
+
 void ApplicationCommunicatorTask::onIdleState() {
-    if (this->commandToExecute != "") {
+    if (isCommandPresent()) {
         if (this->commandToExecute == RECOVER_MESSAGE) {
             this->setState(ApplicationCommunicatorTaskState::RECOVER);
         }
@@ -40,7 +44,8 @@ void ApplicationCommunicatorTask::onIdleState() {
             this->setState(ApplicationCommunicatorTaskState::REFILL);
         }
         this->commandToExecute = "";
-    } else {
+    }
+    else {
         this->setState(ApplicationCommunicatorTaskState::SENDING);
     }
 }
@@ -48,15 +53,17 @@ void ApplicationCommunicatorTask::onIdleState() {
 void ApplicationCommunicatorTask::onSendingState() {
     if (this->appData->getStatus() == Status::IDLE) {
         MsgService.sendMsg(IDLE_MESSAGE);
-    } else if (this->appData->getStatus() == Status::WORKING) {
+    }
+    else if (this->appData->getStatus() == Status::WORKING) {
         MsgService.sendMsg(WORKING_MESSAGE);
-    } else if (this->appData->getStatus() == Status::ASSISTANCE) {
+    }
+    else if (this->appData->getStatus() == Status::ASSISTANCE) {
         MsgService.sendMsg(ASSISTANCE_MESSAGE);
     }
 
     MsgService.sendMsg(INFO(
-        this->appData->getAvailableItemCount(Beverage::COFFEE), 
-        this->appData->getAvailableItemCount(Beverage::TEA), 
+        this->appData->getAvailableItemCount(Beverage::COFFEE),
+        this->appData->getAvailableItemCount(Beverage::TEA),
         this->appData->getAvailableItemCount(Beverage::CHOCOLATE)
     ));
 

@@ -1,2 +1,7 @@
 1) printare durante self-check
     - Display.printMechanicRotationInfo(int percentage)
+2) Add display print during calibration? (not sure if display is setupped yet)
+3) Update addData's status in all Tasks
+4) Add machine's status and number of self-check to INFO message as fourth and fifth parameter
+5) Remove refill from Selector Task because it's already done by the AppCommunicator
+    - quale è più corretto?

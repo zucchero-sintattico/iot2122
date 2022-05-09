@@ -52,12 +52,12 @@ SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<Me
 MemoryCheckTask* memoryCheckTask = new MemoryCheckTask();
 
 // App Tasks
-BootTask* bootTask = new BootTask();
+BootTask* bootTask = new BootTask(device);
+PresenceTask* presenceTask = new PresenceTask(device);
 BeverageSelectorTask* beverageSelectorTask = new BeverageSelectorTask(appData, device);
 BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, device);
 SelfCheckTask* selfCheckTask = new SelfCheckTask(device);
 ApplicationCommunicatorTask* applicationCommunicatorTask = new ApplicationCommunicatorTask(appData);
-PresenceTask* presenceTask = new PresenceTask(device);
 
 #define NTASKS 7
 CommunicablePeriodBasedTask<MessageType>* tasks[NTASKS] = {
