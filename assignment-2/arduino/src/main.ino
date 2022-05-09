@@ -53,7 +53,7 @@ AppData* appData = new AppData();
 SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>();
 
 // Utility Task
-MemoryCheckTask* memoryCheckTask = new MemoryCheckTask();
+MemoryCheckTask* memoryCheckTask = new MemoryCheckTask(appData);
 
 // App Tasks
 BootTask* bootTask = new BootTask(device);

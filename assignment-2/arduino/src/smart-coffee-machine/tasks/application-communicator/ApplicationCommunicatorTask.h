@@ -21,12 +21,10 @@ enum class ApplicationCommunicatorTaskState : uint8_t {
 #define RECOVER_MESSAGE String("RECOVER")
 
 // Arduino -> App
-#define MODALITY String("MODALITY:")
-#define IDLE_MESSAGE MODALITY + String("IDLE")
-#define WORKING_MESSAGE MODALITY + String("WORKING")
-#define ASSISTANCE_MESSAGE MODALITY + String("ASSISTANCE")
-#define INFO(COFFEE, TEA, CHOCOLATE) "INFO:" + String(COFFEE) + "," + String(TEA) + "," + String(CHOCOLATE)
-#define SELFCHECK(COUNT) "SELFCHECK:" + String(COUNT)
+#define IDLE_MODALITY "IDLE"
+#define WORKING_MODALITY "WORKING"
+#define ASSISTANCE_MODALITY "ASSISTANCE"
+#define INFO(MODALITY, COFFEE, TEA, CHOCOLATE, SELF_CHECK_COUNT, FREE_MEMORY) String("INFO:" + MODALITY + "," + COFFEE + "," + TEA + "," + CHOCOLATE + "," + SELF_CHECK_COUNT + "," + FREE_MEMORY)
 
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
 

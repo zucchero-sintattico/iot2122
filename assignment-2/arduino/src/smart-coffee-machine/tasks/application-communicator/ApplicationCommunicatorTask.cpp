@@ -51,23 +51,19 @@ void ApplicationCommunicatorTask::onIdleState() {
 }
 
 void ApplicationCommunicatorTask::onSendingState() {
-    if (this->appData->getStatus() == Status::IDLE) {
-        MsgService.sendMsg(IDLE_MESSAGE);
-    }
-    else if (this->appData->getStatus() == Status::WORKING) {
-        MsgService.sendMsg(WORKING_MESSAGE);
-    }
-    else if (this->appData->getStatus() == Status::ASSISTANCE) {
-        MsgService.sendMsg(ASSISTANCE_MESSAGE);
-    }
+
+    Status status = this->appData->getStatus();
+    String modality = status == Status::IDLE ? IDLE_MODALITY :
+        (status == Status::WORKING ? WORKING_MODALITY : ASSISTANCE_MODALITY);
 
     MsgService.sendMsg(INFO(
+        modality,
         this->appData->getAvailableItemCount(Beverage::COFFEE),
         this->appData->getAvailableItemCount(Beverage::TEA),
-        this->appData->getAvailableItemCount(Beverage::CHOCOLATE)
+        this->appData->getAvailableItemCount(Beverage::CHOCOLATE),
+        this->appData->getSelfCheckPerformedCount(),
+        this->appData->getFreeMemory()
     ));
-
-    MsgService.sendMsg(SELFCHECK(this->appData->getSelfCheckPerformedCount()));
 
     this->setState(ApplicationCommunicatorTaskState::IDLE);
 }

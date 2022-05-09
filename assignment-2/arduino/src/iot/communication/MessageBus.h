@@ -5,18 +5,9 @@
 
 template<typename M>
 class MessageBus {
-private:
+    private:
     List<M>* messages = new List<M>();
-public:
-
-    void print() {
-        Serial.print("Messages: ");
-        for (int i = 0; i < messages->getSize(); i++) {
-            Serial.print(messages->get(i));
-            Serial.print(", ");
-        }
-        Serial.println();
-    }
+    public:
 
     void push(M message) {
         messages->add(message);

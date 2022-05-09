@@ -7,5 +7,5 @@ void MemoryCheckTask::init() {}
 void MemoryCheckTask::computeRead() {}
 
 void MemoryCheckTask::tick() {
-    Serial.println("MEMORY:" + String(freeMemory()));
+    this->appData->setFreeMemory(freeMemory());
 }

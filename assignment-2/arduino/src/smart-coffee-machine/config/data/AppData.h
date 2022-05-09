@@ -19,14 +19,23 @@ enum Status : uint8_t {
 
 class AppData {
 
-private:
+    private:
     uint8_t availableItemCount[BEVERAGE_COUNT] = { MAX_ITEM_COUNT, MAX_ITEM_COUNT, MAX_ITEM_COUNT };
     Beverage selectedBeverage = COFFEE;
     uint8_t sugarLevel = 0; // 0 - 100
     Status status = Status::IDLE;
     int selfCheckPerformedCount = 0;
+    int freeMemory = 0;
 
-public:
+    public:
+
+    void setFreeMemory(int freeMemory) {
+        this->freeMemory = freeMemory;
+    }
+
+    int getFreeMemory() {
+        return this->freeMemory;
+    }
 
     Beverage getSelectedBeverage();
     String getSelectedBeverageToString();
