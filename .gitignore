@@ -1,5 +1,10 @@
 # vscode
 .vscode/
+*.code-workspace
+
+# platformio
+.pio/
+
 
 # java
 out/
