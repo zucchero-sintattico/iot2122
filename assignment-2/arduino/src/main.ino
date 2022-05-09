@@ -17,6 +17,8 @@
 #include "smart-coffee-machine/config/MessageType.h"
 
 // Pin configurations
+#include "smart-coffee-machine/config/device/Device.h"
+#include "smart-coffee-machine/config/device/DeviceBuilder.h"
 #define potentiometerPin A0
 #define thermometerPin A1
 #define buttonMakePin 2
@@ -25,6 +27,20 @@
 #define sonarEchoPin 5
 #define sonarTrigPin 6
 #define servoPin 7
+#define pirPin 8
+
+// Device configuration
+Device* device = (new DeviceBuilder())
+->withButtonUp(new Button(buttonUpPin))
+->withButtonDown(new Button(buttonDownPin))
+->withButtonMake(new Button(buttonMakePin))
+->withSugar(new Sugar(potentiometerPin))
+->withPir(new Pir(pirPin))
+->withThermometer(new Thermometer(thermometerPin))
+->withSonar(new Sonar(sonarTrigPin, sonarEchoPin))
+->withMotor(new Motor(servoPin))
+->withCoffeeDisplayI2C(ProxyCoffeeDisplayI2C::getInstance())
+->build();
 
 // Application data
 AppData* appData = new AppData();
@@ -33,24 +49,26 @@ AppData* appData = new AppData();
 MessageBus<MessageType>* messageBus = new MessageBus<MessageType>();
 SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>(messageBus);
 
-#define NTASKS 6
-
+// Utility Task
 MemoryCheckTask* memoryCheckTask = new MemoryCheckTask();
-BootTask* bootTask = new BootTask();
-BeverageSelectorTask* beverageSelectorTask = new BeverageSelectorTask(appData, buttonUpPin, buttonDownPin, buttonMakePin, potentiometerPin);
-BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, sonarTrigPin, sonarEchoPin, servoPin);
-SelfCheckTask* selfCheckTask = new SelfCheckTask(servoPin, thermometerPin);
-ApplicationCommunicatorTask* applicationCommunicatorTask = new ApplicationCommunicatorTask(appData);
 
+// App Tasks
+BootTask* bootTask = new BootTask();
+BeverageSelectorTask* beverageSelectorTask = new BeverageSelectorTask(appData, device);
+BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, device);
+SelfCheckTask* selfCheckTask = new SelfCheckTask(device);
+ApplicationCommunicatorTask* applicationCommunicatorTask = new ApplicationCommunicatorTask(appData);
+PresenceTask* presenceTask = new PresenceTask(device);
+
+#define NTASKS 7
 CommunicablePeriodBasedTask<MessageType>* tasks[NTASKS] = {
     memoryCheckTask,
     bootTask,
     beverageSelectorTask,
     beverageMakerTask,
     selfCheckTask,
-    applicationCommunicatorTask
-    // new PresenceTask(),
-    // new SelfCheckTask(),
+    applicationCommunicatorTask,
+    presenceTask
 };
 
 void setup() {

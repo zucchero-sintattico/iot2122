@@ -4,10 +4,7 @@
 #include "smart-coffee-machine/config/MessageType.h"
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 
-#include "iot/sensor/sonar/Sonar.h"
-#include "iot/actuator/motor/Motor.h"
-
-#include "smart-coffee-machine/actuators/fake-coffee-display-i2c/FakeCoffeeDisplayI2C.h"
+#include "smart-coffee-machine/config/device/Device.h"
 
 // Data
 #include "smart-coffee-machine/config/data/AppData.h"
@@ -24,7 +21,7 @@ enum class BeverageMakerTaskState {
 
 class BeverageMakerTask : public CommunicablePeriodBasedTaskWithFSM<BeverageMakerTaskState, MessageType> {
 
-private:
+    private:
     int _period = 50;
 
     AppData* appData;
@@ -39,24 +36,22 @@ private:
     uint8_t progressPercentage = 0;
     long elapsedWaitingTime = 0;
 
-public:
+    public:
 
-    BeverageMakerTask(AppData* appData, uint8_t trigPin, uint8_t echoPin, uint8_t servoPin) : CommunicablePeriodBasedTaskWithFSM(BeverageMakerTaskState::IDLE) {
-
+    BeverageMakerTask(AppData* appData, Device* device) : CommunicablePeriodBasedTaskWithFSM(BeverageMakerTaskState::IDLE) {
         PeriodBasedTask::setPeriod(this->_period);
-
         this->appData = appData;
 
-        this->sonar = new Sonar(trigPin, echoPin);
-        this->motor = new Motor(servoPin);
-        this->display = FakeCoffeeDisplayI2C::getInstance();
+        this->sonar = device->getSonar();
+        this->motor = device->getMotor();
+        this->display = device->getCoffeeDisplayI2C();
     }
 
     void init();
     void computeRead();
     void tick();
 
-private:
+    private:
     void onIdleState();
     void onMakingState();
     void onWaitingState();

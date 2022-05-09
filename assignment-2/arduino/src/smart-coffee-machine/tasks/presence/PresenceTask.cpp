@@ -82,11 +82,11 @@ bool PresenceTask::needIdleState() {
 void emptyFunc() {}
 
 void PresenceTask::onSleepState() {
-    enableInterrupt(this->pirPin, &emptyFunc, RISING);
+    enableInterrupt(this->pirManager->getPin(), &emptyFunc, RISING);
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     sleep_enable();
     sleep_mode();
     sleep_disable();
-    disableInterrupt(this->pirPin);
+    disableInterrupt(this->pirManager->getPin());
     this->setState(PresenceTaskState::SOMEONE);
 }

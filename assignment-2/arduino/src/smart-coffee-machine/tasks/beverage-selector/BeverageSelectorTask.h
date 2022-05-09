@@ -4,13 +4,8 @@
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 #include "smart-coffee-machine/config/MessageType.h"
 
-// Sensors
-#include "iot/sensor/button/Button.h"
-#include "smart-coffee-machine/sensors/sugar/Sugar.h"
-
-// Actuators
-#include "smart-coffee-machine/actuators/proxy-coffee-display-i2c/ProxyCoffeeDisplayI2C.h"
-#include "smart-coffee-machine/actuators/fake-coffee-display-i2c/FakeCoffeeDisplayI2C.h"
+// Sensors & Actuator
+#include "smart-coffee-machine/config/device/Device.h"
 
 // Data
 #include "smart-coffee-machine/config/data/AppData.h"
@@ -28,7 +23,7 @@ enum class BeverageSelectorTaskState : uint8_t {
 
 class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageSelectorTaskState, MessageType> {
 
-private:
+    private:
     int _period = 50;
 
     // Sensors
@@ -45,15 +40,15 @@ private:
     long lastIteractionTime;
 
 
-public:
-    BeverageSelectorTask(AppData* appData, uint8_t buttonUpPin, uint8_t buttonDownPin, uint8_t buttonMakePin, uint8_t potentiometerSugarPin) : CommunicablePeriodBasedTaskWithFSM(BeverageSelectorTaskState::IDLE) {
+    public:
+    BeverageSelectorTask(AppData* appData, Device* device) : CommunicablePeriodBasedTaskWithFSM(BeverageSelectorTaskState::IDLE) {
         PeriodBasedTask::setPeriod(this->_period);
         this->appData = appData;
-        this->buttonUp = new Button(buttonUpPin);
-        this->buttonDown = new Button(buttonDownPin);
-        this->buttonMake = new Button(buttonMakePin);
-        this->sugarManager = new Sugar(potentiometerSugarPin);
-        this->display = FakeCoffeeDisplayI2C::getInstance();
+        this->buttonUp = device->getButtonUp();
+        this->buttonDown = device->getButtonDown();
+        this->buttonMake = device->getButtonMake();
+        this->sugarManager = device->getSugar();
+        this->display = device->getCoffeeDisplayI2C();
     }
 
     // Inherited from task
@@ -61,7 +56,7 @@ public:
     void computeRead();
     void tick();
 
-private:
+    private:
 
     void onIdleState();
     void onReadyState();

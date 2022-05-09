@@ -4,10 +4,7 @@
 #include "smart-coffee-machine/config/MessageType.h"
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 
-#include "iot/sensor/thermometer/Thermometer.h"
-#include "iot/actuator/motor/Motor.h"
-#include "smart-coffee-machine/actuators/coffee-display-i2c/CoffeeDisplayI2C.h"
-#include "smart-coffee-machine/actuators/proxy-coffee-display-i2c/ProxyCoffeeDisplayI2C.h"
+#include "smart-coffee-machine/config/device/Device.h"
 
 #define MAX_PERIOD 3000
 
@@ -36,11 +33,11 @@ class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskSta
     Thermometer* thermometerManager;
 
     public:
-    SelfCheckTask(uint8_t motorPin, uint8_t thermometer) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
+    SelfCheckTask(Device* device) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
         PeriodBasedTask::setPeriod(_period);
-        this->motor = new Motor(motorPin);
-        this->thermometerManager = new Thermometer(thermometer);
-        this->display = ProxyCoffeeDisplayI2C::getInstance();
+        this->motor = device->getMotor();
+        this->thermometerManager = device->getThermometer();
+        this->display = device->getCoffeeDisplayI2C();
     }
 
     void init();

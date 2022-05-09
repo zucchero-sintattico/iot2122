@@ -6,13 +6,14 @@
 
 class Pir : public Sensor {
 
-private:
+    private:
     uint8_t pin;
     bool detection;
     int calibrationTimeMS = 10000;
 
-public:
+    public:
     Pir(uint8_t pin);
+    uint8_t getPin();
     bool isSomeoneDetected();
 
     void setup();
