@@ -30,7 +30,7 @@ class ProxyCoffeeDisplayI2C : public CoffeeDisplayI2C {
     ProxyCoffeeDisplayI2C(int width, int height) : CoffeeDisplayI2C(width, height) {};
     ProxyCoffeeDisplayI2C(int address, int width, int height) : CoffeeDisplayI2C(address, width, height) {};
 
-    virtual void printBootMessage();
+    virtual void printWelcomeMessage();
 
     virtual void printReadyMessage();
 

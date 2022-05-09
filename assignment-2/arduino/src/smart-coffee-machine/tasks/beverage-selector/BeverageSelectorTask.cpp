@@ -1,7 +1,6 @@
 #include "BeverageSelectorTask.h"
 
 void BeverageSelectorTask::init() {
-    this->display->setup();
     this->buttonUp->setup();
     this->buttonDown->setup();
     this->buttonMake->setup();

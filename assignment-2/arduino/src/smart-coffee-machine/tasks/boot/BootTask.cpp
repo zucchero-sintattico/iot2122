@@ -17,7 +17,7 @@ void BootTask::tick() {
 }
 
 void BootTask::onBootState() {
-    this->coffeeDisplay->printBootMessage();
+    this->coffeeDisplay->printWelcomeMessage();
     this->elapsed += this->_period;
     if (this->elapsed >= this->duration) {
         this->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK);

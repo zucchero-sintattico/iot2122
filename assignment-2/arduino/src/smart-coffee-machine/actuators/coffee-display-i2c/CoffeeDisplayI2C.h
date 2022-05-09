@@ -10,7 +10,9 @@ class CoffeeDisplayI2C : public DisplayI2C {
     CoffeeDisplayI2C(int width, int height) : DisplayI2C(width, height) {};
     CoffeeDisplayI2C(int address, int width, int height) : DisplayI2C(address, width, height) {};
 
-    virtual void printBootMessage();
+    virtual void setBootingScreen();
+
+    virtual void printWelcomeMessage();
     virtual void printReadyMessage();
 
     virtual void setSelectingInfoScreen();

@@ -61,8 +61,8 @@ BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, device);
 SelfCheckTask* selfCheckTask = new SelfCheckTask(device);
 ApplicationCommunicatorTask* applicationCommunicatorTask = new ApplicationCommunicatorTask(appData);
 
-#define NTASKS 7
-CommunicablePeriodBasedTask<MessageType>* tasks[NTASKS] = {
+#define N_TASKS 7
+CommunicablePeriodBasedTask<MessageType>* tasks[N_TASKS] = {
     memoryCheckTask,
     bootTask,
     beverageSelectorTask,
@@ -73,9 +73,11 @@ CommunicablePeriodBasedTask<MessageType>* tasks[NTASKS] = {
 };
 
 void setup() {
+    device->getCoffeeDisplayI2C()->setup();
+    device->getCoffeeDisplayI2C()->setBootingScreen();
     Serial.begin(9600);
     scheduler->init(25);
-    for (uint8_t i = 0; i < NTASKS; i++)
+    for (uint8_t i = 0; i < N_TASKS; i++)
     {
         CommunicablePeriodBasedTask<MessageType>* task = tasks[i];
         task->init();

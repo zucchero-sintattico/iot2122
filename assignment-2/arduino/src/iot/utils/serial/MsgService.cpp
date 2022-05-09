@@ -22,9 +22,9 @@ Msg* MsgServiceClass::receiveMsg() {
   }
 }
 
-void MsgServiceClass::init() {
+void MsgServiceClass::init(int bufferSize) {
   Serial.begin(9600);
-  content.reserve(256);
+  content.reserve(bufferSize);
   content = "";
   currentMsg = NULL;
   msgAvailable = false;
@@ -37,7 +37,7 @@ void MsgServiceClass::sendMsg(const String& msg) {
 void serialEvent() {
   /* reading the content */
   while (Serial.available() && !MsgService.msgAvailable) {
-    char ch = (char) Serial.read();
+    char ch = (char)Serial.read();
     if (ch == '\r') continue;
     if (ch == '\n') {
       MsgService.currentMsg = new Msg(content);

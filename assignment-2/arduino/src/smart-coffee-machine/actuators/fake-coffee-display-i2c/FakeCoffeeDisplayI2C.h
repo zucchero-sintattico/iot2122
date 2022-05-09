@@ -25,7 +25,7 @@ class FakeCoffeeDisplayI2C : public CoffeeDisplayI2C {
     public:
     FakeCoffeeDisplayI2C() {};
 
-    void printBootMessage();
+    void printWelcomeMessage();
     void printReadyMessage();
     void printSelectingInfoMessage(AppData* appData);
     void printAssistanceMessage();

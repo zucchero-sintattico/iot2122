@@ -6,29 +6,29 @@
 class Msg {
   String content;
 
-public:
-  Msg(String content){
+  public:
+  Msg(String content) {
     this->content = content;
   }
-  
-  String getContent(){
+
+  String getContent() {
     return content;
   }
 };
 
 class Pattern {
-public:
-  virtual boolean match(const Msg& m) = 0;  
+  public:
+  virtual boolean match(const Msg& m) = 0;
 };
 
 class MsgServiceClass {
-    
-public: 
-  
+
+  public:
+
   Msg* currentMsg;
   bool msgAvailable;
 
-  void init();  
+  void init(int bufferSize);
 
   bool isMsgAvailable();
   Msg* receiveMsg();
@@ -37,7 +37,7 @@ public:
 
   /* note: message deallocation is responsibility of the client */
   Msg* receiveMsg(Pattern& pattern);
-  
+
   void sendMsg(const String& msg);
 };
 

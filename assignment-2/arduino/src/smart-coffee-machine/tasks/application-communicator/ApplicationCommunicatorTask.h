@@ -14,6 +14,8 @@ enum class ApplicationCommunicatorTaskState : uint8_t {
     REFILL
 };
 
+#define DEFAULT_BUFFER_SIZE 32
+
 // App -> Arduino
 #define REFILL_MESSAGE String("REFILL")
 #define RECOVER_MESSAGE String("RECOVER")

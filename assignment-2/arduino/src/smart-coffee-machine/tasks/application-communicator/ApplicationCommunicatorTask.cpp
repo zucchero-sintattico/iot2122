@@ -1,7 +1,7 @@
 #include "ApplicationCommunicatorTask.h"
 
 void ApplicationCommunicatorTask::init() {
-    MsgService.init();
+    MsgService.init(DEFAULT_BUFFER_SIZE);
 }
 
 void ApplicationCommunicatorTask::computeRead() {

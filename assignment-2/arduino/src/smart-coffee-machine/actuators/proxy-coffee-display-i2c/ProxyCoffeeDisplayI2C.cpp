@@ -8,10 +8,10 @@ ProxyCoffeeDisplayI2C* ProxyCoffeeDisplayI2C::getInstance() {
     return _instance;
 }
 
-void ProxyCoffeeDisplayI2C::printBootMessage() {
+void ProxyCoffeeDisplayI2C::printWelcomeMessage() {
     if (this->lastMessage != BOOT) {
         this->lastMessage = BOOT;
-        CoffeeDisplayI2C::printBootMessage();
+        CoffeeDisplayI2C::printWelcomeMessage();
     }
 }
 

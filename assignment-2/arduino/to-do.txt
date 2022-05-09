@@ -6,3 +6,4 @@
 5) Remove refill from Selector Task because it's already done by the AppCommunicator
     - quale è più corretto?
 6) il self test disattiva tutti i task?
+7) spegnere il display prima della sleep e riattivarlo subito dopo
