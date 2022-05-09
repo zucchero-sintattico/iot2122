@@ -23,6 +23,10 @@ The machine has a power-saving modality, so that it goes to sleep if it is idle 
 
 The Coffee Machine Manager application is used to monitor and check the state of the machine, as well as to refill it when there are no more products that can be made.
 
+<p align="center">
+  <img src="./img/systemSchema.png" alt="System Schema" width="450" height="300" align="center" />
+</p>
+
 ### Detailed behaviour
 
 - When the machine boots, it displays a welcome message (choose it) for a couple of seconds,  and initialises the number of products that can be delivered – N<sub>max</sub> items for each type.  After this initialisation stage, a message "Ready." is displayed on the display D.
@@ -68,3 +72,6 @@ For any aspect not specified, you are free to choose the approach you consider m
 
 ## Solution
 
+### Board schema
+
+![Board Schema](./img/boardSchema.png)
