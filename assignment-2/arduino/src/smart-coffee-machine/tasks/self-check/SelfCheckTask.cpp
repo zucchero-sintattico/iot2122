@@ -54,8 +54,8 @@ void SelfCheckTask::onMechanicCheckState() {
 }
 
 void SelfCheckTask::onTemperatureCheckState() {
-    if (this->thermometerManager->getTemperature() >= MIN_TEMPERATURE &&
-        this->thermometerManager->getTemperature() <= MAX_TEMPERATURE) {
+    uint8_t temperature = this->thermometerManager->getTemperature();
+    if (temperature >= MIN_TEMPERATURE && temperature <= MAX_TEMPERATURE) {
         this->setState(SelfCheckTaskState::IDLE);
     }
     else {

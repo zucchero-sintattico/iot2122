@@ -7,5 +7,5 @@ void MemoryCheckTask::init() {}
 void MemoryCheckTask::computeRead() {}
 
 void MemoryCheckTask::tick() {
-    Serial.println("\nFree Memory: " + String(freeMemory()));
+    Serial.println("MEMORY:" + String(freeMemory()));
 }

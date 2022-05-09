@@ -16,7 +16,7 @@
 #include "smart-coffee-machine/config/data/AppData.h"
 #include "smart-coffee-machine/config/MessageType.h"
 
-// Pin configurations
+// Device configurations
 #include "smart-coffee-machine/config/device/Device.h"
 #include "smart-coffee-machine/config/device/DeviceBuilder.h"
 #define potentiometerPin A0
@@ -29,7 +29,6 @@
 #define servoPin 7
 #define pirPin 8
 
-// Device configuration
 Device* device = (new DeviceBuilder())
 ->withButtonUp(new Button(buttonUpPin))
 ->withButtonDown(new Button(buttonDownPin))

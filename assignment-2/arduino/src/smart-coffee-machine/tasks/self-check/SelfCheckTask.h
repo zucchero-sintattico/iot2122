@@ -22,8 +22,6 @@ class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskSta
     private:
     int _period = 25;
     int elapsedTime = 0;
-    const int tickForSelfCheck = 1000;
-    int elapsedTicks = 0;
 
     uint8_t angle = 0;
     uint8_t increment = 1;

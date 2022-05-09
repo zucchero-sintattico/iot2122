@@ -1,0 +1,2 @@
+1) printare durante self-check
+    - Display.printMechanicRotationInfo(int percentage)
