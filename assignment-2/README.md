@@ -24,7 +24,7 @@ The machine has a power-saving modality, so that it goes to sleep if it is idle 
 The Coffee Machine Manager application is used to monitor and check the state of the machine, as well as to refill it when there are no more products that can be made.
 
 <p align="center">
-  <img src="./img/systemSchema.png" alt="System Schema" width="450" height="300" align="center" />
+  <img src="./img/systemSchema.png" alt="System Schema" width="450" height="300" />
 </p>
 
 ### Detailed behaviour
@@ -75,3 +75,45 @@ For any aspect not specified, you are free to choose the approach you consider m
 ### Board schema
 
 ![Board Schema](./img/boardSchema.png)
+
+### Tasks
+
+#### Presence task
+
+The presence task check for the user presence using the sonar. If no one is available for a certain amount of time, will send the machine in sleep mode
+
+<p align="center">
+  <img src="./img/tasks/presenceTask.svg" alt="Presence task" />
+</p>
+
+#### Self check task
+
+The self check task check after a certain amount of time, will perform a mechanical check using the motor. Then it checks if the temperature is in the correct range and if not, will send the machine in assistance mode, waiting for the pc app to restore the normal state
+
+<p align="center">
+  <img src="./img/tasks/selfCheckTask.svg" alt="Self check task" />
+</p>
+
+#### App communicator task
+
+The app communicator task is listening to the Serial line for incoming messages. Periodically it send the machine status to the pc app
+
+<p align="center">
+  <img src="./img/tasks/appCommunicatorTask.svg" alt="App communicator task" />
+</p>
+
+#### Beverage selector and maker tasks
+
+These two tasks are sequentially: when a beverage is selected throught the first task, then is made by the second one
+
+<p align="center">
+  <img src="./img/tasks/beverageTask.svg" alt="Beverage selector and maker task" />
+</p>
+
+### Coordination of tasks
+
+This diagram would explain which tasks could be concurrent and which will be sequentially
+
+<p align="center">
+  <img src="./img/tasks/taskCoordination.svg" alt="Coordination beetween tasks" />
+</p>
