@@ -31,6 +31,8 @@
 #define servoPin 9
 #define pirPin 5
 
+CoffeeDisplayI2C* display = new ProxyCoffeeDisplayI2C();
+
 DeviceBuilder* builder = new DeviceBuilder();
 Device* device = builder
 ->withButtonUp(new Button(buttonUpPin))
@@ -41,7 +43,7 @@ Device* device = builder
 ->withThermometer(new Thermometer(thermometerPin))
 ->withSonar(new Sonar(sonarTrigPin, sonarEchoPin))
 ->withMotor(new Motor(servoPin))
-->withCoffeeDisplayI2C(new ProxyCoffeeDisplayI2C())
+->withCoffeeDisplayI2C(display)
 ->build();
 
 // Application data
@@ -73,8 +75,8 @@ CommunicablePeriodBasedTask<MessageType>* tasks[N_TASKS] = {
 };
 
 void setup() {
-    device->getCoffeeDisplayI2C()->setup();
-    device->getCoffeeDisplayI2C()->setBootingScreen();
+    display->setup();
+    display->setBootingScreen();
     Serial.begin(9600);
     scheduler->init(25);
     for (uint8_t i = 0; i < N_TASKS; i++)
