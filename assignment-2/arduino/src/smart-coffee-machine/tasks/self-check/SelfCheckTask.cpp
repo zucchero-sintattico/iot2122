@@ -35,7 +35,7 @@ void SelfCheckTask::tick() {
 
 void SelfCheckTask::onIdleState() {
     this->elapsedTime += this->getPeriod();
-    if (this->elapsedTime == MAX_PERIOD) {
+    if (this->elapsedTime == WAITING_TIME) {
         this->elapsedTime = 0;
         this->setState(SelfCheckTaskState::MECHANIC_CHECK);
     }

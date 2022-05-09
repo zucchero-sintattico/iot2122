@@ -5,3 +5,4 @@
 4) Add machine's status and number of self-check to INFO message as fourth and fifth parameter
 5) Remove refill from Selector Task because it's already done by the AppCommunicator
     - quale è più corretto?
+6) il self test disattiva tutti i task?

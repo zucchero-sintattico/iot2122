@@ -22,8 +22,19 @@ void ProxyCoffeeDisplayI2C::printReadyMessage() {
     }
 }
 
-void ProxyCoffeeDisplayI2C::printSelectingInfoMessage(AppData* appData) {
-    CoffeeDisplayI2C::printSelectingInfoMessage(appData);
+void ProxyCoffeeDisplayI2C::setSelectingInfoScreen() {
+    if (this->lastMessage != SET_SELECTING_INFO) {
+        this->lastMessage = SET_SELECTING_INFO;
+        CoffeeDisplayI2C::setSelectingInfoScreen();
+    }
+}
+
+void ProxyCoffeeDisplayI2C::updateSelectingInfoScreen(AppData* appData) {
+    if (appData->getSelectedBeverage() != this->lastBeverage || appData->getSugarLevel() != this->lastSugarLevel) {
+        this->lastBeverage = appData->getSelectedBeverage();
+        this->lastSugarLevel = appData->getSugarLevel();
+        CoffeeDisplayI2C::updateSelectingInfoScreen(appData);
+    }
 }
 
 void ProxyCoffeeDisplayI2C::printAssistanceMessage() {
@@ -33,8 +44,18 @@ void ProxyCoffeeDisplayI2C::printAssistanceMessage() {
     }
 }
 
-void ProxyCoffeeDisplayI2C::printMakingInfo(AppData* appData, int percentage) {
-    CoffeeDisplayI2C::printMakingInfo(appData, percentage);
+void ProxyCoffeeDisplayI2C::setMakingInfoScreen(AppData* appData) {
+    if (this->lastMessage != SET_MAKING_INFO) {
+        this->lastMessage = SET_MAKING_INFO;
+        CoffeeDisplayI2C::setMakingInfoScreen(appData);
+    }
+}
+
+void ProxyCoffeeDisplayI2C::updateMakingInfo(int percentage) {
+    if (this->lastPercentage != percentage) {
+        this->lastPercentage = percentage;
+        CoffeeDisplayI2C::updateMakingInfo(percentage);
+    }
 }
 
 void ProxyCoffeeDisplayI2C::printWaitingForRetireMessage() {

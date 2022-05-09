@@ -30,6 +30,7 @@ void PresenceTask::tick() {
 }
 
 void PresenceTask::onIdleState() {
+    Serial.println("PRESENCE TASK STATE: IDLE");
     if (this->getMessageBus()->isMessagePresent(MessageType::ACTIVATE_PRESENCE_TASK)) {
         this->getMessageBus()->removeMessage(MessageType::ACTIVATE_PRESENCE_TASK);
         if (this->pirManager->isSomeoneDetected()) {
@@ -42,6 +43,7 @@ void PresenceTask::onIdleState() {
 }
 
 void PresenceTask::onNooneState() {
+    Serial.println("PRESENCE TASK STATE: NO ONE");
     if (this->needIdleState()) {
         this->setState(PresenceTaskState::IDLE);
         return;
@@ -59,6 +61,7 @@ void PresenceTask::onNooneState() {
 }
 
 void PresenceTask::onSomeoneState() {
+    Serial.println("PRESENCE TASK STATE: SOMEONE");
     this->elapsedTickNooneDetected = 0;
 
     if (this->needIdleState()) {
@@ -82,6 +85,7 @@ bool PresenceTask::needIdleState() {
 void emptyFunc() {}
 
 void PresenceTask::onSleepState() {
+    Serial.println("PRESENCE TASK STATE: SLEEP");
     enableInterrupt(this->pirManager->getPin(), &emptyFunc, RISING);
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     sleep_enable();

@@ -15,19 +15,21 @@
 // Configurations import
 #include "smart-coffee-machine/config/data/AppData.h"
 #include "smart-coffee-machine/config/MessageType.h"
-
-// Device configurations
 #include "smart-coffee-machine/config/device/Device.h"
 #include "smart-coffee-machine/config/device/DeviceBuilder.h"
+
+#include "smart-coffee-machine/actuators/fake-coffee-display-i2c/FakeCoffeeDisplayI2C.h"
+
+// Device configurations
 #define potentiometerPin A0
 #define thermometerPin A1
-#define buttonMakePin 2
-#define buttonUpPin 3
-#define buttonDownPin 4
-#define sonarEchoPin 5
-#define sonarTrigPin 6
-#define servoPin 7
-#define pirPin 8
+#define buttonMakePin 3
+#define buttonUpPin 4
+#define buttonDownPin 2
+#define sonarEchoPin 7
+#define sonarTrigPin 8
+#define servoPin 9
+#define pirPin 5
 
 DeviceBuilder* builder = new DeviceBuilder();
 Device* device = builder
@@ -39,7 +41,7 @@ Device* device = builder
 ->withThermometer(new Thermometer(thermometerPin))
 ->withSonar(new Sonar(sonarTrigPin, sonarEchoPin))
 ->withMotor(new Motor(servoPin))
-->withCoffeeDisplayI2C(ProxyCoffeeDisplayI2C::getInstance())
+->withCoffeeDisplayI2C(new ProxyCoffeeDisplayI2C())
 ->build();
 
 // Application data
@@ -72,11 +74,7 @@ CommunicablePeriodBasedTask<MessageType>* tasks[NTASKS] = {
 
 void setup() {
     Serial.begin(9600);
-
-    // Scheduler initialization
-    scheduler->init(50);
-
-    // Tasks initialization
+    scheduler->init(25);
     for (uint8_t i = 0; i < NTASKS; i++)
     {
         CommunicablePeriodBasedTask<MessageType>* task = tasks[i];

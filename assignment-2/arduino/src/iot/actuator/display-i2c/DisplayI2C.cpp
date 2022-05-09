@@ -10,7 +10,7 @@ void DisplayI2C::setup() {
     lcd.backlight();
 }
 
-void DisplayI2C::changeCursor(uint8_t column, uint8_t row) {
+void DisplayI2C::changeCursor(uint8_t row, uint8_t column) {
     this->column = column;
     this->row = row;
 }
@@ -22,4 +22,13 @@ void DisplayI2C::print(String message) {
 
 void DisplayI2C::clear() {
     lcd.clear();
+}
+
+void DisplayI2C::clearLineFromPosition(uint8_t row, uint8_t column) {
+    lcd.setCursor(column, row);
+    String filler = "";
+    for (uint8_t i = column; i < DEFAULT_WIDTH; i++) {
+        filler += " ";
+    }
+    lcd.print(filler);
 }

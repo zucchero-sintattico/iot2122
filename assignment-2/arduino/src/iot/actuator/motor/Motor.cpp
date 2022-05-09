@@ -9,6 +9,7 @@ Motor::Motor(uint8_t pin) {
 
 void Motor::setup() {
   servo.attach(this->pin);
+  //servo.write(current_angle);
 }
 
 void Motor::rotateTo(uint8_t angle) {

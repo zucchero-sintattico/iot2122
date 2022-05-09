@@ -6,7 +6,6 @@
 
 #include "smart-coffee-machine/config/device/Device.h"
 
-#define MAX_PERIOD 3000
 
 enum class SelfCheckTaskState {
     IDLE,
@@ -15,7 +14,8 @@ enum class SelfCheckTaskState {
     ASSISTANCE
 };
 
-#define TIME 3000
+
+#define WAITING_TIME 90000
 
 class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskState, MessageType> {
 

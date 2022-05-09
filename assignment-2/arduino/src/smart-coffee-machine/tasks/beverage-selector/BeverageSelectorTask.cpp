@@ -1,6 +1,7 @@
 #include "BeverageSelectorTask.h"
 
 void BeverageSelectorTask::init() {
+    this->display->setup();
     this->buttonUp->setup();
     this->buttonDown->setup();
     this->buttonMake->setup();
@@ -57,6 +58,7 @@ void BeverageSelectorTask::onReadyState() {
     if (isAnyButtonPressed()) {
         this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);
         this->setState(BeverageSelectorTaskState::SELECTING);
+        this->display->setSelectingInfoScreen();
         if (appData->getAvailableItemCount(appData->getSelectedBeverage()) == 0) {
             this->appData->selectNextBeverage();
         }
@@ -86,7 +88,7 @@ void BeverageSelectorTask::onSelectingState() {
         this->appData->selectPreviousBeverage();
     }
 
-    this->display->printSelectingInfoMessage(this->appData);
+    this->display->updateSelectingInfoScreen(this->appData);
 
     if (isSelectingTimeElapsed()) {
         this->getMessageBus()->push(MessageType::ACTIVATE_PRESENCE_TASK);

@@ -7,9 +7,9 @@
 enum ProxyMessage {
     BOOT,
     READY,
-    SELECTING_INFO,
+    SET_SELECTING_INFO,
+    SET_MAKING_INFO,
     SELECTING_ASSISTANCE,
-    MAKING_INFO,
     WAITING_FOR_RETIRE
 };
 
@@ -22,16 +22,26 @@ class ProxyCoffeeDisplayI2C : public CoffeeDisplayI2C {
 
     private:
     ProxyMessage lastMessage;
+    Beverage lastBeverage = COFFEE;
+    uint8_t lastSugarLevel = 0;
+    uint8_t lastPercentage = 0;
     public:
     ProxyCoffeeDisplayI2C() : CoffeeDisplayI2C() {};
     ProxyCoffeeDisplayI2C(int width, int height) : CoffeeDisplayI2C(width, height) {};
     ProxyCoffeeDisplayI2C(int address, int width, int height) : CoffeeDisplayI2C(address, width, height) {};
 
     virtual void printBootMessage();
+
     virtual void printReadyMessage();
-    virtual void printSelectingInfoMessage(AppData* appData);
+
+    virtual void setSelectingInfoScreen();
+    virtual void updateSelectingInfoScreen(AppData* appData);
+
     virtual void printAssistanceMessage();
-    virtual void printMakingInfo(AppData* appData, int percentage);
+
+    virtual void setMakingInfoScreen(AppData* appData);
+    virtual void updateMakingInfo(int percentage);
+
     virtual void printWaitingForRetireMessage();
 };
 #endif

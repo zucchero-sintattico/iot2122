@@ -47,7 +47,7 @@ void FakeCoffeeDisplayI2C::printAssistanceMessage() {
     Serial.print("\rFakeCoffeeDisplayI2C::printSelectingAssistanceMessage");
 }
 
-void FakeCoffeeDisplayI2C::printMakingInfo(AppData* appData, int percentage) {
+void FakeCoffeeDisplayI2C::updateMakingInfo(AppData* appData, int percentage) {
     if (lastMessage != MAKING_INFO_MESSAGE) {
         Serial.println("");
         lastMessage = MAKING_INFO_MESSAGE;

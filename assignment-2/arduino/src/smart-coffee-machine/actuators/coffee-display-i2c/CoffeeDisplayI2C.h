@@ -10,12 +10,18 @@ class CoffeeDisplayI2C : public DisplayI2C {
     CoffeeDisplayI2C(int width, int height) : DisplayI2C(width, height) {};
     CoffeeDisplayI2C(int address, int width, int height) : DisplayI2C(address, width, height) {};
 
-    virtual void printBootMessage() = 0;
-    virtual void printReadyMessage() = 0;
-    virtual void printSelectingInfoMessage(AppData* appData) = 0;
-    virtual void printAssistanceMessage() = 0;
-    virtual void printMakingInfo(AppData* appData, int percentage) = 0;
-    virtual void printWaitingForRetireMessage() = 0;
+    virtual void printBootMessage();
+    virtual void printReadyMessage();
+
+    virtual void setSelectingInfoScreen();
+    virtual void updateSelectingInfoScreen(AppData* appData);
+
+    virtual void printAssistanceMessage();
+
+    virtual void setMakingInfoScreen(AppData* appData);
+    virtual void updateMakingInfo(int percentage);
+
+    virtual void printWaitingForRetireMessage();
 };
 
 #endif
