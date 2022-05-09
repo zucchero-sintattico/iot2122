@@ -37,24 +37,29 @@ void SelfCheckTask::onIdleState() {
     this->elapsedTime += this->getPeriod();
     if (this->elapsedTime == WAITING_TIME) {
         this->elapsedTime = 0;
+        this->display->setMechanicCheckInfoScreen();
         this->setState(SelfCheckTaskState::MECHANIC_CHECK);
     }
 }
 
 void SelfCheckTask::onMechanicCheckState() {
+    this->totalRotation += 1;
     this->angle += this->increment;
     this->motor->rotateTo(this->angle);
+    this->display->updateMechanicCheckInfo(map(this->totalRotation, 0, 360, 0, 100));
     if (this->angle == MAX_ANGLE) {
-        this->increment = -1;
+        this->increment = -this->increment;
     }
     else if (this->angle == MIN_ANGLE) {
-        this->increment = 1;
+        this->increment = -this->increment;
+        this->totalRotation = 0;
         this->setState(SelfCheckTaskState::TEMPERATURE_CHECK);
     }
 }
 
 void SelfCheckTask::onTemperatureCheckState() {
     uint8_t temperature = this->thermometerManager->getTemperature();
+    Serial.println("TEMPERATURE: " + String(temperature));
     if (temperature >= MIN_TEMPERATURE && temperature <= MAX_TEMPERATURE) {
         this->setState(SelfCheckTaskState::IDLE);
     }
