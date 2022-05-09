@@ -1,5 +1,7 @@
 1) printare durante self-check
     - Display.printMechanicRotationInfo(int percentage)
 2) Aggiornare lo stato dell App in AppData ovunque.
-6) il self test disattiva tutti i task?
-7) spegnere il display prima della sleep e riattivarlo subito dopo
+3) come deve fare il self test a disattivare tutti i task e partire quando non sta facendo niente?
+    potrebbe aspettare stato generale == IDLE
+4) spegnere il display prima della sleep e riattivarlo subito dopo?
+    si puo disabilitare solo la luminosità?
