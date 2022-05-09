@@ -1,9 +1,9 @@
 1) printare durante self-check
     - Display.printMechanicRotationInfo(int percentage)
-2) Add display print during calibration? (not sure if display is setupped yet)
-3) Update addData's status in all Tasks
-4) Add machine's status and number of self-check to INFO message as fourth and fifth parameter
-5) Remove refill from Selector Task because it's already done by the AppCommunicator
-    - quale è più corretto?
-6) il self test disattiva tutti i task?
-7) spegnere il display prima della sleep e riattivarlo subito dopo
+2) Aggiornare lo stato dell App in AppData ovunque.
+3) come deve fare il self test a disattivare tutti i task e partire quando non sta facendo niente?
+    potrebbe aspettare stato generale == IDLE
+    bisogna riavviare i task una volta finito
+4) spegnere il display prima della sleep e riattivarlo subito dopo?
+    si puo disabilitare solo la luminosità?
+5) Aggiornare i nuovi metodi di ProxyDisplay

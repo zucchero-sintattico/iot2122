@@ -24,6 +24,9 @@ class CoffeeDisplayI2C : public DisplayI2C {
     virtual void updateMakingInfo(int percentage);
 
     virtual void printWaitingForRetireMessage();
+
+    virtual void setMechanicCheckInfoScreen();
+    virtual void updateMechanicCheckInfo(int percentage);
 };
 
 #endif

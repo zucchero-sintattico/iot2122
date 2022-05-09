@@ -13,7 +13,6 @@ enum MessageType : uint8_t {
     ACTIVATE_BEVERAGE_MAKER_TASK,
 
     // ApplicationCommunicatorTask's messages
-    REFILL,
     RECOVER,
 
 };

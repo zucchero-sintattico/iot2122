@@ -7,12 +7,13 @@
 #define PRESS_BUTTON_TO_START "(Press any button)"
 #define BEVERAGE "Beverage: "
 #define SUGAR "Sugar: "
-#define PERCENTAGE_SYMBOL " %"
+#define PERCENTAGE_SYMBOL "%"
 #define ASSISTANCE_MESSAGE "Assistance Required!"
 #define PREPARING "Preparing a : "
 #define WATING_FOR "Waiting for"
 #define THE_BEVERAGE "the beverage"
 #define TO_BE_RETIRED "to be retired..."
+#define MECHANIC_CHECK "Mechanic Check: "
 
 void CoffeeDisplayI2C::setBootingScreen() {
     this->clear();
@@ -82,4 +83,16 @@ void CoffeeDisplayI2C::printWaitingForRetireMessage() {
     this->print(THE_BEVERAGE);
     this->changeCursor(2, 2);
     this->print(TO_BE_RETIRED);
+}
+
+void CoffeeDisplayI2C::setMechanicCheckInfoScreen() {
+    this->clear();
+    this->changeCursor(1, 2);
+    this->print(MECHANIC_CHECK);
+}
+
+void CoffeeDisplayI2C::updateMechanicCheckInfo(int percentage) {
+    this->changeCursor(2, 8);
+    this->clearLineFromPosition(2, 8);
+    this->print(String(percentage) + PERCENTAGE_SYMBOL);
 }

@@ -104,10 +104,7 @@ void BeverageSelectorTask::onSelectingState() {
 
 void BeverageSelectorTask::onAssistanceState() {
     this->display->printAssistanceMessage();
-
-    if (this->getMessageBus()->isMessagePresent(MessageType::REFILL)) {
-        this->getMessageBus()->removeMessage(MessageType::REFILL);
-        this->appData->refill();
+    if (!this->appData->isRefillNeeded()) {
         this->setState(BeverageSelectorTaskState::READY);
     }
 }

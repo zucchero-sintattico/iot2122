@@ -15,7 +15,7 @@ enum class SelfCheckTaskState {
 };
 
 
-#define WAITING_TIME 90000
+#define WAITING_TIME 5000
 
 class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskState, MessageType> {
 
@@ -23,6 +23,7 @@ class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskSta
     int _period = 25;
     int elapsedTime = 0;
 
+    int totalRotation = 0;
     uint8_t angle = 0;
     uint8_t increment = 1;
 
