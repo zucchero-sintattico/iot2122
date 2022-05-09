@@ -4,14 +4,14 @@ void BeverageSelectorTask::init() {
     this->buttonUp->setup();
     this->buttonDown->setup();
     this->buttonMake->setup();
-    this->sugarManager->setup();
+    this->potentiometer->setup();
 }
 
 void BeverageSelectorTask::computeRead() {
     this->buttonUp->computeRead();
     this->buttonDown->computeRead();
     this->buttonMake->computeRead();
-    this->sugarManager->computeRead();
+    this->potentiometer->computeRead();
 }
 
 void BeverageSelectorTask::tick() {
@@ -71,9 +71,9 @@ bool BeverageSelectorTask::isSelectingTimeElapsed() {
 
 void BeverageSelectorTask::onSelectingState() {
 
-    if (this->appData->getSugarLevel() != this->sugarManager->getPercentage()) {
+    if (this->appData->getSugarLevel() != this->potentiometer->getPercentage()) {
         this->lastIteractionTime = millis();
-        this->appData->setSugarLevel(this->sugarManager->getPercentage());
+        this->appData->setSugarLevel(this->potentiometer->getPercentage());
     }
 
     if (buttonUp->isPressed()) {

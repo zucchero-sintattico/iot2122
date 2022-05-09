@@ -15,3 +15,7 @@ void Potentiometer::computeRead() {
 int Potentiometer::getValue() {
     return this->potentiometerValue;
 }
+
+uint8_t Potentiometer::getPercentage() {
+    return map(this->getValue(), 0, 1023, 0, 100);
+}

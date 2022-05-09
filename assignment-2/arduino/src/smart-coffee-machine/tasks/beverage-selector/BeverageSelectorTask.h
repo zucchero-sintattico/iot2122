@@ -30,7 +30,7 @@ class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageS
     Button* buttonUp;
     Button* buttonDown;
     Button* buttonMake;
-    Sugar* sugarManager;
+    Potentiometer* potentiometer;
 
     // Actuators
     CoffeeDisplayI2C* display;
@@ -47,7 +47,7 @@ class BeverageSelectorTask : public CommunicablePeriodBasedTaskWithFSM<BeverageS
         this->buttonUp = device->getButtonUp();
         this->buttonDown = device->getButtonDown();
         this->buttonMake = device->getButtonMake();
-        this->sugarManager = device->getSugar();
+        this->potentiometer = device->getPotentiometer();
         this->display = device->getCoffeeDisplayI2C();
     }
 

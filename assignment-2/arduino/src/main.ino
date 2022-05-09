@@ -29,11 +29,12 @@
 #define servoPin 7
 #define pirPin 8
 
-Device* device = (new DeviceBuilder())
+DeviceBuilder* builder = new DeviceBuilder();
+Device* device = builder
 ->withButtonUp(new Button(buttonUpPin))
 ->withButtonDown(new Button(buttonDownPin))
 ->withButtonMake(new Button(buttonMakePin))
-->withSugar(new Sugar(potentiometerPin))
+->withPotentiometer(new Potentiometer(potentiometerPin))
 ->withPir(new Pir(pirPin))
 ->withThermometer(new Thermometer(thermometerPin))
 ->withSonar(new Sonar(sonarTrigPin, sonarEchoPin))
@@ -45,8 +46,7 @@ Device* device = (new DeviceBuilder())
 AppData* appData = new AppData();
 
 // Scheduler and Tasks configurations
-MessageBus<MessageType>* messageBus = new MessageBus<MessageType>();
-SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>(messageBus);
+SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>();
 
 // Utility Task
 MemoryCheckTask* memoryCheckTask = new MemoryCheckTask();

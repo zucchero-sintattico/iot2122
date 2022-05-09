@@ -10,7 +10,7 @@ class DeviceBuilder {
     Button* buttonUp;
     Button* buttonDown;
     Button* buttonMake;
-    Sugar* sugar;
+    Potentiometer* potentiometer;
     Pir* pir;
     Thermometer* thermometer;
     Sonar* sonar;
@@ -36,8 +36,8 @@ class DeviceBuilder {
         return this;
     }
 
-    DeviceBuilder* withSugar(Sugar* sugar) {
-        this->sugar = sugar;
+    DeviceBuilder* withPotentiometer(Potentiometer* potentiometer) {
+        this->potentiometer = potentiometer;
         return this;
     }
 
@@ -67,7 +67,7 @@ class DeviceBuilder {
     }
 
     Device* build() {
-        return new Device(buttonUp, buttonDown, buttonMake, sugar, pir, thermometer, sonar, motor, coffeeDisplayI2C);
+        return new Device(buttonUp, buttonDown, buttonMake, potentiometer, pir, thermometer, sonar, motor, coffeeDisplayI2C);
     }
 };
 
