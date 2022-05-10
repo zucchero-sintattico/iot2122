@@ -2,4 +2,5 @@ Da testare:
     - Aggiornare lo stato dell App in AppData ovunque.
     - Self-Check che avvisa gli altri di non fare niente quando parte.
     - spegnere il display prima della sleep e riattivarlo subito dopo con NoBacklight e Backlight
-2) Aggiornare i nuovi metodi di ProxyDisplay
+1) Aggiornare i nuovi metodi di ProxyDisplay
+2) Aggiornare il report mettendo i giusti periodi nei task e aggiungendo i Task mancanti
