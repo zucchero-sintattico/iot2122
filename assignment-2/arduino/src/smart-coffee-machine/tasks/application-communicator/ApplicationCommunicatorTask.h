@@ -24,7 +24,7 @@ enum class ApplicationCommunicatorTaskState : uint8_t {
 #define IDLE_MODALITY "IDLE"
 #define WORKING_MODALITY "WORKING"
 #define ASSISTANCE_MODALITY "ASSISTANCE"
-#define INFO(MODALITY, COFFEE, TEA, CHOCOLATE, SELF_CHECK_COUNT, FREE_MEMORY) String("INFO:" + MODALITY + "," + COFFEE + "," + TEA + "," + CHOCOLATE + "," + SELF_CHECK_COUNT + "," + FREE_MEMORY)
+#define INFO(MODALITY, COFFEE, TEA, CHOCOLATE, SELF_CHECK_COUNT, FREE_MEMORY) String(MODALITY + "," + COFFEE + "," + TEA + "," + CHOCOLATE + "," + SELF_CHECK_COUNT + "," + FREE_MEMORY)
 
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
 

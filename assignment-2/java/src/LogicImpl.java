@@ -60,25 +60,17 @@ public class LogicImpl implements Logic {
     }
 
     private void acceptData(String data) {
-        if (!data.contains(":")) {
-            System.out.println("Missing values on command");
+        String[] values = data.split(",");
+        if (values.length < 6) {
+            System.out.println("Missing values");
             return;
         }
-        String command = data.split(":")[0];
-        String values = data.split(":")[1];
-        switch (command) {
-            case LogicImpl.MODALITY_MESSAGE -> modalityConsumer.accept(values);
-            case LogicImpl.INFO_MESSAGE -> handleInfo(values);
-            case LogicImpl.SELFCHECK_MESSAGE -> selfCheckConsumer.accept(values);
-            default -> System.out.println("Incorrect command: " + command);
-        }
-    }
-
-    private void handleInfo(String values) {
-        String beverage[] = values.split(",");
-        coffeeConsumer.accept(beverage[0]);
-        teaConsumer.accept(beverage[1]);
-        chocolateConsumer.accept(beverage[2]);
+        modalityConsumer.accept(values[0]);
+        coffeeConsumer.accept(values[1]);
+        teaConsumer.accept(values[2]);
+        chocolateConsumer.accept(values[3]);
+        selfCheckConsumer.accept(values[4]);
+        System.out.println("Free memory: " + values[5]);
     }
 
 }
