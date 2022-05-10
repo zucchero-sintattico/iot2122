@@ -10,6 +10,14 @@ void DisplayI2C::setup() {
     lcd.backlight();
 }
 
+void DisplayI2C::turnOffDisplay() {
+    lcd.noBacklight();
+}
+
+void DisplayI2C::turnOnDisplay() {
+    lcd.backlight();
+}
+
 void DisplayI2C::changeCursor(uint8_t row, uint8_t column) {
     this->column = column;
     this->row = row;

@@ -22,6 +22,8 @@ class DisplayI2C : public Actuator {
     DisplayI2C(uint8_t width, uint8_t height) : DisplayI2C(DEFAULT_ADDRESS, width, height) {};
     DisplayI2C(uint8_t address, uint8_t width, uint8_t height);
     void setup();
+    void turnOffDisplay();
+    void turnOnDisplay();
     void changeCursor(uint8_t row, uint8_t column);
     void print(String message);
     void clear();

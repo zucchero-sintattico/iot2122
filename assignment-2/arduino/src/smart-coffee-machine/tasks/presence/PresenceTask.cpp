@@ -93,11 +93,13 @@ void PresenceTask::onSleepState() {
     if (this->getMessageBus()->isMessagePresent(MessageType::SELF_CHECK_IN_PROGRESS)) {
         return;
     }
+    this->display->turnOffDisplay();
     enableInterrupt(this->pirManager->getPin(), &emptyFunc, RISING);
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     sleep_enable();
     sleep_mode();
     sleep_disable();
     disableInterrupt(this->pirManager->getPin());
+    this->display->turnOnDisplay();
     this->setState(PresenceTaskState::SOMEONE);
 }

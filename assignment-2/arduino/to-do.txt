@@ -1,6 +1,5 @@
 Da testare:
     - Aggiornare lo stato dell App in AppData ovunque.
     - Self-Check che avvisa gli altri di non fare niente quando parte.
-1) spegnere il display prima della sleep e riattivarlo subito dopo?
-    si puo disabilitare solo la luminosità?
+    - spegnere il display prima della sleep e riattivarlo subito dopo con NoBacklight e Backlight
 2) Aggiornare i nuovi metodi di ProxyDisplay

@@ -20,14 +20,16 @@ class PresenceTask : public CommunicablePeriodBasedTaskWithFSM<PresenceTaskState
 
     // Sensors
     Pir* pirManager;
+    CoffeeDisplayI2C* display;
 
     const int tickToSleep = 20;     // 20 tick * 500ms = 10s
     int elapsedTickNooneDetected = 0;
 
     public:
     PresenceTask(Device* device) : CommunicablePeriodBasedTaskWithFSM(PresenceTaskState::IDLE) {
+        PeriodBasedTask::setPeriod(this->_period);
         this->pirManager = device->getPir();
-        this->setPeriod(this->_period);
+        this->display = device->getCoffeeDisplayI2C();
     }
 
     void init();
