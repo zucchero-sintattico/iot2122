@@ -38,6 +38,7 @@ void SelfCheckTask::onIdleState() {
     if (this->elapsedTime == WAITING_TIME) {
         this->elapsedTime = 0;
         this->display->setMechanicCheckInfoScreen();
+        this->appData->setStatus(Status::WORKING);
         this->setState(SelfCheckTaskState::MECHANIC_CHECK);
     }
 }
@@ -58,12 +59,14 @@ void SelfCheckTask::onMechanicCheckState() {
 }
 
 void SelfCheckTask::onTemperatureCheckState() {
+    this->appData->increaseSelfCheckPerformed();
     uint8_t temperature = this->thermometerManager->getTemperature();
-    Serial.println("TEMPERATURE: " + String(temperature));
     if (temperature >= MIN_TEMPERATURE && temperature <= MAX_TEMPERATURE) {
+        this->appData->setStatus(Status::IDLE);
         this->setState(SelfCheckTaskState::IDLE);
     }
     else {
+        this->appData->setStatus(Status::ASSISTANCE);
         this->setState(SelfCheckTaskState::ASSISTANCE);
     }
 }
@@ -72,6 +75,7 @@ void SelfCheckTask::onAssistanceState() {
     this->display->printAssistanceMessage();
     if (this->getMessageBus()->isMessagePresent(MessageType::RECOVER)) {
         this->getMessageBus()->removeMessage(MessageType::RECOVER);
+        this->appData->setStatus(Status::IDLE);
         this->setState(SelfCheckTaskState::IDLE);
     }
 }

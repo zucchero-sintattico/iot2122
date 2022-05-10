@@ -5,6 +5,7 @@
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 
 #include "smart-coffee-machine/config/device/Device.h"
+#include "smart-coffee-machine/config/data/AppData.h"
 
 
 enum class SelfCheckTaskState {
@@ -31,12 +32,15 @@ class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskSta
     Motor* motor;
     Thermometer* thermometerManager;
 
+    AppData* appData;
+
     public:
-    SelfCheckTask(Device* device) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
+    SelfCheckTask(AppData* appData, Device* device) : CommunicablePeriodBasedTaskWithFSM(SelfCheckTaskState::IDLE) {
         PeriodBasedTask::setPeriod(_period);
         this->motor = device->getMotor();
         this->thermometerManager = device->getThermometer();
         this->display = device->getCoffeeDisplayI2C();
+        this->appData = appData;
     }
 
     void init();

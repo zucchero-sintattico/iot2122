@@ -48,6 +48,7 @@ bool BeverageSelectorTask::isAnyButtonPressed() {
 void BeverageSelectorTask::onReadyState() {
     if (appData->isRefillNeeded()) {
         this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);
+        this->appData->setStatus(Status::ASSISTANCE);
         this->setState(BeverageSelectorTaskState::ASSISTANCE);
         return;
     }
@@ -105,6 +106,7 @@ void BeverageSelectorTask::onSelectingState() {
 void BeverageSelectorTask::onAssistanceState() {
     this->display->printAssistanceMessage();
     if (!this->appData->isRefillNeeded()) {
+        this->appData->setStatus(Status::IDLE);
         this->setState(BeverageSelectorTaskState::READY);
     }
 }

@@ -32,6 +32,7 @@ void BeverageMakerTask::onIdleState() {
         this->getMessageBus()->removeMessage(MessageType::ACTIVATE_BEVERAGE_MAKER_TASK);
         this->progressPercentage = 0;
         this->display->setMakingInfoScreen(this->appData);
+        this->appData->setStatus(Status::WORKING);
         this->setState(BeverageMakerTaskState::MAKING);
     }
 }
@@ -55,6 +56,7 @@ void BeverageMakerTask::onWaitingState() {
         this->progressPercentage = 0;
         this->motor->rotateTo(0);
         this->getMessageBus()->push(MessageType::ACTIVATE_BEVERAGE_SELECTOR_TASK);
+        this->appData->setStatus(Status::IDLE);
         this->setState(BeverageMakerTaskState::IDLE);
     }
 }
