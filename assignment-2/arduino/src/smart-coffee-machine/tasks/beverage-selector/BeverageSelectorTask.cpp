@@ -53,7 +53,7 @@ void BeverageSelectorTask::onReadyState() {
         return;
     }
 
-    if (this->getMessageBus()->isMessagePresent(MessageType::SELF_CHECK_IN_PROGRESS)) {
+    if (this->getMessageBus()->isMessagePresent(MessageType::SELF_CHECK_IN_PROGRESS) || this->appData->getStatus() == Status::ASSISTANCE) {
         return;
     }
 

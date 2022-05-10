@@ -8,9 +8,17 @@ ProxyCoffeeDisplayI2C* ProxyCoffeeDisplayI2C::getInstance() {
     return _instance;
 }
 
+
+void ProxyCoffeeDisplayI2C::setBootingScreen() {
+    if (lastMessage != SET_BOOTING_SCREEN) {
+        lastMessage = SET_BOOTING_SCREEN;
+        CoffeeDisplayI2C::setBootingScreen();
+    }
+}
+
 void ProxyCoffeeDisplayI2C::printWelcomeMessage() {
-    if (this->lastMessage != BOOT) {
-        this->lastMessage = BOOT;
+    if (this->lastMessage != WELCOME_MESSAGE) {
+        this->lastMessage = WELCOME_MESSAGE;
         CoffeeDisplayI2C::printWelcomeMessage();
     }
 }
@@ -31,6 +39,7 @@ void ProxyCoffeeDisplayI2C::setSelectingInfoScreen() {
 
 void ProxyCoffeeDisplayI2C::updateSelectingInfoScreen(AppData* appData) {
     if (appData->getSelectedBeverage() != this->lastBeverage || appData->getSugarLevel() != this->lastSugarLevel) {
+        this->lastMessage = UPDATE_SET_SELECTING_INFO;
         this->lastBeverage = appData->getSelectedBeverage();
         this->lastSugarLevel = appData->getSugarLevel();
         CoffeeDisplayI2C::updateSelectingInfoScreen(appData);
@@ -38,8 +47,8 @@ void ProxyCoffeeDisplayI2C::updateSelectingInfoScreen(AppData* appData) {
 }
 
 void ProxyCoffeeDisplayI2C::printAssistanceMessage() {
-    if (this->lastMessage != SELECTING_ASSISTANCE) {
-        this->lastMessage = SELECTING_ASSISTANCE;
+    if (this->lastMessage != ASSISTANCE_MESSAGE) {
+        this->lastMessage = ASSISTANCE_MESSAGE;
         CoffeeDisplayI2C::printAssistanceMessage();
     }
 }
@@ -53,6 +62,7 @@ void ProxyCoffeeDisplayI2C::setMakingInfoScreen(AppData* appData) {
 
 void ProxyCoffeeDisplayI2C::updateMakingInfo(int percentage) {
     if (this->lastPercentage != percentage) {
+        this->lastMessage = UPDATE_MAKING_INFO;
         this->lastPercentage = percentage;
         CoffeeDisplayI2C::updateMakingInfo(percentage);
     }
@@ -62,5 +72,20 @@ void ProxyCoffeeDisplayI2C::printWaitingForRetireMessage() {
     if (this->lastMessage != WAITING_FOR_RETIRE) {
         this->lastMessage = WAITING_FOR_RETIRE;
         CoffeeDisplayI2C::printWaitingForRetireMessage();
+    }
+}
+
+void ProxyCoffeeDisplayI2C::setMechanicCheckInfoScreen() {
+    if (this->lastMessage != SET_MECHANIC_CHECK_INFO) {
+        this->lastMessage = SET_MECHANIC_CHECK_INFO;
+        CoffeeDisplayI2C::setMechanicCheckInfoScreen();
+    }
+}
+
+void ProxyCoffeeDisplayI2C::updateMechanicCheckInfo(int percentage) {
+    if (this->lastPercentage != percentage) {
+        this->lastMessage = UPDATE_MECHANIC_CHECK_INFO;
+        this->lastPercentage = percentage;
+        CoffeeDisplayI2C::updateMechanicCheckInfo(percentage);
     }
 }

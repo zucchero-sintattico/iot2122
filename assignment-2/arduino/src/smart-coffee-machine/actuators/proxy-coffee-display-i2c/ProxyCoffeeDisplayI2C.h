@@ -5,12 +5,17 @@
 
 
 enum ProxyMessage {
-    BOOT,
+    SET_BOOTING_SCREEN,
+    WELCOME_MESSAGE,
     READY,
     SET_SELECTING_INFO,
+    UPDATE_SET_SELECTING_INFO,
     SET_MAKING_INFO,
-    SELECTING_ASSISTANCE,
-    WAITING_FOR_RETIRE
+    UPDATE_MAKING_INFO,
+    ASSISTANCE_MESSAGE,
+    WAITING_FOR_RETIRE,
+    SET_MECHANIC_CHECK_INFO,
+    UPDATE_MECHANIC_CHECK_INFO
 };
 
 class ProxyCoffeeDisplayI2C : public CoffeeDisplayI2C {
@@ -30,8 +35,9 @@ class ProxyCoffeeDisplayI2C : public CoffeeDisplayI2C {
     ProxyCoffeeDisplayI2C(int width, int height) : CoffeeDisplayI2C(width, height) {};
     ProxyCoffeeDisplayI2C(int address, int width, int height) : CoffeeDisplayI2C(address, width, height) {};
 
-    virtual void printWelcomeMessage();
+    virtual void setBootingScreen();
 
+    virtual void printWelcomeMessage();
     virtual void printReadyMessage();
 
     virtual void setSelectingInfoScreen();
@@ -43,5 +49,9 @@ class ProxyCoffeeDisplayI2C : public CoffeeDisplayI2C {
     virtual void updateMakingInfo(int percentage);
 
     virtual void printWaitingForRetireMessage();
+
+    virtual void setMechanicCheckInfoScreen();
+    virtual void updateMechanicCheckInfo(int percentage);
+
 };
 #endif

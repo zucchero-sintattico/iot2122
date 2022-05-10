@@ -63,7 +63,7 @@ BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, device);
 SelfCheckTask* selfCheckTask = new SelfCheckTask(appData, device);
 ApplicationCommunicatorTask* applicationCommunicatorTask = new ApplicationCommunicatorTask(appData);
 
-#define N_TASKS 7
+#define N_TASKS 6
 CommunicablePeriodBasedTask<MessageType>* tasks[N_TASKS] = {
     memoryCheckTask,
     bootTask,
@@ -71,7 +71,7 @@ CommunicablePeriodBasedTask<MessageType>* tasks[N_TASKS] = {
     beverageMakerTask,
     selfCheckTask,
     applicationCommunicatorTask,
-    presenceTask
+    //presenceTask
 };
 
 void setup() {

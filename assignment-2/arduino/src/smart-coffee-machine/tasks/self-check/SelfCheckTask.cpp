@@ -45,7 +45,7 @@ void SelfCheckTask::onIdleState() {
 }
 
 void SelfCheckTask::onMechanicCheckState() {
-    this->totalRotation += 1;
+    this->totalRotation += incrementFactor;
     this->angle += this->increment;
     this->motor->rotateTo(this->angle);
     this->display->updateMechanicCheckInfo(map(this->totalRotation, 0, 360, 0, 100));

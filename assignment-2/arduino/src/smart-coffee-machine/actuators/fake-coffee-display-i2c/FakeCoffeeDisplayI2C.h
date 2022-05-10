@@ -27,6 +27,7 @@ class FakeCoffeeDisplayI2C : public CoffeeDisplayI2C {
 
     void printWelcomeMessage();
     void printReadyMessage();
+
     void printSelectingInfoMessage(AppData* appData);
     void printAssistanceMessage();
     void updateMakingInfo(AppData* appData, int percentage);

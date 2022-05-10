@@ -21,12 +21,13 @@ enum class SelfCheckTaskState {
 class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskState, MessageType> {
 
     private:
-    int _period = 25;
+    int _period = 50;
     int elapsedTime = 0;
 
+    uint8_t incrementFactor = 2;
     int totalRotation = 0;
     uint8_t angle = 0;
-    uint8_t increment = 1;
+    uint8_t increment;
 
     CoffeeDisplayI2C* display;
     Motor* motor;
@@ -41,6 +42,7 @@ class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskSta
         this->thermometerManager = device->getThermometer();
         this->display = device->getCoffeeDisplayI2C();
         this->appData = appData;
+        this->increment = incrementFactor;
     }
 
     void init();

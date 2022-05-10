@@ -30,7 +30,12 @@ void Scheduler::schedule() {
         if (this->tasks[i]->getStrategy()->hasToBeExecuted()) {
             this->tasks[i]->getStrategy()->resetElapsedTime();
             this->tasks[i]->getTask()->computeRead();
+            long start = millis();
             this->tasks[i]->getTask()->tick();
+            long end = millis();
+            if (end - start > 0) {
+                Serial.println("Task " + String(i) + " took " + String(end - start) + "ms to execute");
+            }
         }
     }
 }
