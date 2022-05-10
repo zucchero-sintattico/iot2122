@@ -40,6 +40,7 @@ void SelfCheckTask::onIdleState() {
         this->display->setMechanicCheckInfoScreen();
         this->appData->setStatus(Status::WORKING);
         this->getMessageBus()->push(MessageType::SELF_CHECK_IN_PROGRESS);
+        this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);
         this->setState(SelfCheckTaskState::MECHANIC_CHECK);
     }
 }
@@ -65,6 +66,7 @@ void SelfCheckTask::onTemperatureCheckState() {
     uint8_t temperature = this->thermometerManager->getTemperature();
     if (temperature >= MIN_TEMPERATURE && temperature <= MAX_TEMPERATURE) {
         this->appData->setStatus(Status::IDLE);
+        this->getMessageBus()->push(MessageType::ACTIVATE_PRESENCE_TASK);
         this->setState(SelfCheckTaskState::IDLE);
     }
     else {
@@ -78,6 +80,7 @@ void SelfCheckTask::onAssistanceState() {
     if (this->getMessageBus()->isMessagePresent(MessageType::RECOVER)) {
         this->getMessageBus()->removeMessage(MessageType::RECOVER);
         this->appData->setStatus(Status::IDLE);
+        this->getMessageBus()->push(MessageType::ACTIVATE_PRESENCE_TASK);
         this->setState(SelfCheckTaskState::IDLE);
     }
 }

@@ -42,11 +42,6 @@ void PresenceTask::onIdleState() {
 }
 
 void PresenceTask::onNooneState() {
-
-    if (this->getMessageBus()->isMessagePresent(MessageType::SELF_CHECK_IN_PROGRESS)) {
-        return;
-    }
-
     if (this->needIdleState()) {
         this->setState(PresenceTaskState::IDLE);
         return;
@@ -64,9 +59,6 @@ void PresenceTask::onNooneState() {
 }
 
 void PresenceTask::onSomeoneState() {
-    if (this->getMessageBus()->isMessagePresent(MessageType::SELF_CHECK_IN_PROGRESS)) {
-        return;
-    }
     this->elapsedTickNooneDetected = 0;
 
     if (this->needIdleState()) {
@@ -90,9 +82,6 @@ bool PresenceTask::needIdleState() {
 void emptyFunc() {}
 
 void PresenceTask::onSleepState() {
-    if (this->getMessageBus()->isMessagePresent(MessageType::SELF_CHECK_IN_PROGRESS)) {
-        return;
-    }
     this->display->turnOffDisplay();
     enableInterrupt(this->pirManager->getPin(), &emptyFunc, RISING);
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
