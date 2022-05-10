@@ -1,6 +1,6 @@
-3) come deve fare il self test a disattivare tutti i task e partire quando non sta facendo niente?
-    potrebbe aspettare stato generale == IDLE
-    bisogna riavviare i task una volta finito
-4) spegnere il display prima della sleep e riattivarlo subito dopo?
+Da testare:
+    - Aggiornare lo stato dell App in AppData ovunque.
+    - Self-Check che avvisa gli altri di non fare niente quando parte.
+1) spegnere il display prima della sleep e riattivarlo subito dopo?
     si puo disabilitare solo la luminosità?
-5) Aggiornare i nuovi metodi di ProxyDisplay
+2) Aggiornare i nuovi metodi di ProxyDisplay

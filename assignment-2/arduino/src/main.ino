@@ -60,7 +60,7 @@ BootTask* bootTask = new BootTask(device);
 PresenceTask* presenceTask = new PresenceTask(device);
 BeverageSelectorTask* beverageSelectorTask = new BeverageSelectorTask(appData, device);
 BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, device);
-SelfCheckTask* selfCheckTask = new SelfCheckTask(device);
+SelfCheckTask* selfCheckTask = new SelfCheckTask(appData, device);
 ApplicationCommunicatorTask* applicationCommunicatorTask = new ApplicationCommunicatorTask(appData);
 
 #define N_TASKS 7

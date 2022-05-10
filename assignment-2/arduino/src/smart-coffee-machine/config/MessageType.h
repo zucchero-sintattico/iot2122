@@ -15,6 +15,9 @@ enum MessageType : uint8_t {
     // ApplicationCommunicatorTask's messages
     RECOVER,
 
+    // Self-Check alert message
+    SELF_CHECK_IN_PROGRESS,
+
 };
 
 #endif

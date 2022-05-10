@@ -35,10 +35,11 @@ void SelfCheckTask::tick() {
 
 void SelfCheckTask::onIdleState() {
     this->elapsedTime += this->getPeriod();
-    if (this->elapsedTime == WAITING_TIME) {
+    if (this->elapsedTime >= WAITING_TIME && this->appData->getStatus() == Status::IDLE) {
         this->elapsedTime = 0;
         this->display->setMechanicCheckInfoScreen();
         this->appData->setStatus(Status::WORKING);
+        this->getMessageBus()->push(MessageType::SELF_CHECK_IN_PROGRESS);
         this->setState(SelfCheckTaskState::MECHANIC_CHECK);
     }
 }
@@ -60,6 +61,7 @@ void SelfCheckTask::onMechanicCheckState() {
 
 void SelfCheckTask::onTemperatureCheckState() {
     this->appData->increaseSelfCheckPerformed();
+    this->getMessageBus()->removeMessage(MessageType::SELF_CHECK_IN_PROGRESS);
     uint8_t temperature = this->thermometerManager->getTemperature();
     if (temperature >= MIN_TEMPERATURE && temperature <= MAX_TEMPERATURE) {
         this->appData->setStatus(Status::IDLE);
