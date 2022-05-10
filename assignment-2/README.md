@@ -76,7 +76,40 @@ For any aspect not specified, you are free to choose the approach you consider m
 
 ![Board Schema](./img/boardSchema.png)
 
+### Architecture
+
+The system is composed by many tasks and a **cooperative scheduler** with *period* = 50ms.
+
+Each sensor involved in the task will performe a read in order to minimize discrepancies between collected data from the enviroment and operation.
+
+![Board Schema](./img/sensorsAndActuators.svg)
+
+Each task which has execution constraints (e.g. a self check could not be performed during the making process) includes an IDLE state where it could wait.
+
+A Task can not change the state of another task. In order to realize communication between them, two different approaches are adopted:
+- A shared variable *AppData* to handle the general status of the machine
+- A *Message Bus* where tasks can publish and read messages
+
 ### Tasks
+
+#### Boot task
+
+The boot task will display the boot message for T<sub>boot</sub> time.
+
+<p align="center">
+  <img src="./img/tasks/bootTask.svg" alt="Beverage selector and maker task" />
+</p>
+
+#### Beverage selector and maker tasks
+
+These two tasks are sequentially: when a beverage is selected throught the first task, then is made by the second one.
+
+Selector task start printing "Ready" on the display, waiting for any button pressed. During the selection with the B<sub>up</sub> and B<sub>down</sub> buttons, available beverage are shown on display. At the same time, the sugar level could be selected with the potentiometer. After 5s in without change, machine the task return in ready. When B<sub>make</sub> is pressed, the maker task will start its work, simulating the process and then waiting for the beverage collection. If distance condition is satisfied or T<sub>timeout</sub> is passed, the this task finish his work and the selector is resumed. If no beverage are available, then it goes is assistance modality.
+
+<p align="center">
+  <img src="./img/tasks/beverageTask.svg" alt="Beverage selector and maker task" />
+</p>
+
 
 #### Presence task
 
@@ -102,12 +135,12 @@ The app communicator task is listening to the Serial line for incoming messages.
   <img src="./img/tasks/appCommunicatorTask.svg" alt="App communicator task" />
 </p>
 
-#### Beverage selector and maker tasks
+#### Memory task
 
-These two tasks are sequentially: when a beverage is selected throught the first task, then is made by the second one
+
 
 <p align="center">
-  <img src="./img/tasks/beverageTask.svg" alt="Beverage selector and maker task" />
+  <img src="./img/tasks/memoryTask.svg" alt="Memory task" />
 </p>
 
 ### Coordination of tasks
