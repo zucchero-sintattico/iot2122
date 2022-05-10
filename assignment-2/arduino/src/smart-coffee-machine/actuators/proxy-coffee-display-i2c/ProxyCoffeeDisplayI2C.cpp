@@ -38,7 +38,7 @@ void ProxyCoffeeDisplayI2C::setSelectingInfoScreen() {
 }
 
 void ProxyCoffeeDisplayI2C::updateSelectingInfoScreen(AppData* appData) {
-    if (appData->getSelectedBeverage() != this->lastBeverage || appData->getSugarLevel() != this->lastSugarLevel) {
+    if (lastMessage != UPDATE_SET_SELECTING_INFO || (appData->getSelectedBeverage() != this->lastBeverage || appData->getSugarLevel() != this->lastSugarLevel)) {
         this->lastMessage = UPDATE_SET_SELECTING_INFO;
         this->lastBeverage = appData->getSelectedBeverage();
         this->lastSugarLevel = appData->getSugarLevel();

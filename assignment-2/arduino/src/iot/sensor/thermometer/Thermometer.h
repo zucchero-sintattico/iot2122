@@ -3,15 +3,15 @@
 
 #include <Arduino.h>
 #include "../Sensor.h"
-#define AREF_VOLTAGE 3.3
+#define AREF_VOLTAGE 5
 
 class Thermometer : public Sensor {
 
-private:
+    private:
     uint8_t pin;
     uint8_t temperature;
 
-public:
+    public:
     Thermometer(uint8_t pin);
     void setup();
     void computeRead();

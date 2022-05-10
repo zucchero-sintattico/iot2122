@@ -16,7 +16,7 @@ enum class SelfCheckTaskState {
 };
 
 
-#define WAITING_TIME 5000
+#define WAITING_TIME 30000
 
 class SelfCheckTask : public CommunicablePeriodBasedTaskWithFSM<SelfCheckTaskState, MessageType> {
 

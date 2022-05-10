@@ -43,6 +43,7 @@ void PresenceTask::onIdleState() {
 
 void PresenceTask::onNooneState() {
     if (this->needIdleState()) {
+        this->elapsedTickNooneDetected = 0;
         this->setState(PresenceTaskState::IDLE);
         return;
     }
@@ -60,7 +61,6 @@ void PresenceTask::onNooneState() {
 
 void PresenceTask::onSomeoneState() {
     this->elapsedTickNooneDetected = 0;
-
     if (this->needIdleState()) {
         this->setState(PresenceTaskState::IDLE);
         return;

@@ -44,10 +44,6 @@ bool AppData::consumeItem(Beverage beverage) {
 }
 
 bool AppData::selectNextBeverage() {
-    if (isRefillNeeded()) {
-        return false;
-    }
-
     switch (this->selectedBeverage)
     {
     case COFFEE:

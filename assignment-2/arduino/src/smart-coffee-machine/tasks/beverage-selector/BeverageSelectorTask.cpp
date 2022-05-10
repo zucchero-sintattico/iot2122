@@ -61,6 +61,7 @@ void BeverageSelectorTask::onReadyState() {
 
     if (isAnyButtonPressed()) {
         this->getMessageBus()->push(MessageType::DEACTIVATE_PRESENCE_TASK);
+        this->appData->setStatus(Status::WORKING);
         this->setState(BeverageSelectorTaskState::SELECTING);
         this->display->setSelectingInfoScreen();
         if (appData->getAvailableItemCount(appData->getSelectedBeverage()) == 0) {
@@ -96,6 +97,7 @@ void BeverageSelectorTask::onSelectingState() {
 
     if (isSelectingTimeElapsed()) {
         this->getMessageBus()->push(MessageType::ACTIVATE_PRESENCE_TASK);
+        this->appData->setStatus(Status::IDLE);
         this->setState(BeverageSelectorTaskState::READY);
         return;
     }

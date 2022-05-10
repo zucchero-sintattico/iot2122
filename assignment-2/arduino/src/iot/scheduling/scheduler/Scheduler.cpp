@@ -25,17 +25,32 @@ bool Scheduler::addPeriodBasedTask(PeriodBasedTask* task) {
 
 void Scheduler::schedule() {
     this->timer.waitForNextTick();
+    long roundStartTime = millis();
+    long* taskStartTimes = new long[nTasks];
+    long* taskEndTimes = new long[nTasks];
     for (int i = 0; i < nTasks; i++) {
+        taskStartTimes[i] = millis();
         this->tasks[i]->getStrategy()->addElapsedTime(this->period);
         if (this->tasks[i]->getStrategy()->hasToBeExecuted()) {
             this->tasks[i]->getStrategy()->resetElapsedTime();
             this->tasks[i]->getTask()->computeRead();
-            long start = millis();
             this->tasks[i]->getTask()->tick();
-            long end = millis();
-            if (end - start > 0) {
-                Serial.println("Task " + String(i) + " took " + String(end - start) + "ms to execute");
+        }
+        taskEndTimes[i] = millis();
+    }
+    long roundEndTime = millis();
+    /*
+    if (roundEndTime - roundStartTime > this->period) {
+        Serial.print("Round took " + String(roundEndTime - roundStartTime) + "ms : {");
+        for (int i = 0; i < nTasks; i++) {
+            Serial.print(taskEndTimes[i] - taskStartTimes[i]);
+            if (i < nTasks - 1) {
+                Serial.print(", ");
             }
         }
+        Serial.println("}");
     }
+    */
+    delete[] taskStartTimes;
+    delete[] taskEndTimes;
 }

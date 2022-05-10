@@ -75,7 +75,6 @@ void CoffeeDisplayI2C::updateMakingInfo(int percentage) {
 }
 
 void CoffeeDisplayI2C::printWaitingForRetireMessage() {
-    this->setup();
     this->clear();
     this->changeCursor(0, 4);
     this->print(WATING_FOR);

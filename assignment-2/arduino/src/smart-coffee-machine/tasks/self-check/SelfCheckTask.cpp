@@ -1,6 +1,6 @@
 #include "SelfCheckTask.h"
-#define MAX_TEMPERATURE 24
-#define MIN_TEMPERATURE 17
+#define MAX_TEMPERATURE 30
+#define MIN_TEMPERATURE 20
 #define MIN_ANGLE 0
 #define MAX_ANGLE 180
 
@@ -64,6 +64,7 @@ void SelfCheckTask::onTemperatureCheckState() {
     this->appData->increaseSelfCheckPerformed();
     this->getMessageBus()->removeMessage(MessageType::SELF_CHECK_IN_PROGRESS);
     uint8_t temperature = this->thermometerManager->getTemperature();
+    Serial.println("TEMPERATURE = " + String(temperature));
     if (temperature >= MIN_TEMPERATURE && temperature <= MAX_TEMPERATURE) {
         this->appData->setStatus(Status::IDLE);
         this->getMessageBus()->push(MessageType::ACTIVATE_PRESENCE_TASK);
