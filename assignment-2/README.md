@@ -99,6 +99,18 @@ The class used by the final tasks is *CommunicablePeriodBasedTaskWithFSM* that i
 - Communication (using a shared *MessageBus*)
 - Finite State Machine
 
+#### Message Bus
+
+![Message Bus](./img/message-bus.svg)
+
+The *MessageBus* are a shared variable between tasks that use it to coordinate themselves.
+A task can push a message and everyone can see it and every task check for specific message in the bus to react if needed.
+
+For example:
+- The boot task after its initialization push a *ACTIVATE_BEVERAGE_SELECTOR_TASK* message and the *BeverageSelectorTask* that it's in IDLE state continuously checks for it and when it found the message, it remove it from the bus and switches to the *READY* state.
+- When the *ApplicationCommunicatorTask* receives a *RECOVER* message from the App, it push a *RECOVER* message to the bus and the *SelfCheckTask* receive it, remove it, and switch to *IDLE* making the app working again.
+
+
 #### Sensors & Actuators
 
 ![Sensors & Actuators](./img/sensors%26actuators.svg)
