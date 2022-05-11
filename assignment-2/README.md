@@ -92,7 +92,7 @@ A Task can not change the state of another task. In order to realize communicati
 
 This diagram would explain the architecture of the *Scheduler* and the *Tasks*:
 
-![Architecture](./img/architecture.png)
+![Architecture](./img/architecture.svg)
 
 The class used by the final tasks is *CommunicablePeriodBasedTaskWithFSM* that is based on 3 main topic:
 - Period (using a *PeriodBasedSchedulingStrategy*)
@@ -101,7 +101,7 @@ The class used by the final tasks is *CommunicablePeriodBasedTaskWithFSM* that i
 
 #### Sensors & Actuators
 
-![Sensors & Actuators](./img/sensor%26actuator.png)
+![Sensors & Actuators](./img/sensors%26actuators.svg)
 
 All sensors and actuators are subclasses of a *Setuppable* interface.
 The DisplayI2C actuator is wrapped by the *CoffeeDisplayI2C* that expose more useful methods such as *printWelcomeMessage*.
@@ -110,7 +110,7 @@ The *FakeCoffeeDisplayI2C* class was used during development and what it does wa
 
 #### Device
 
-![Device](./img/device.png)
+![Device](./img/device.svg)
 
 The device class are used to have an unique source of Sensors & Actuators in order to avoid multiple initialization of the same element... 
 For example the Motor is used either by the Self-Check task and by the BeverageMaker task.
@@ -119,7 +119,7 @@ A *DeviceBuilder* is used to create a *Device* object easily.
 
 #### AppData
 
-![AppData](./img/Appdata.png)
+![AppData](./img/appdata.svg)
 
 The *AppData* class is used as a shared variable the handle and make visible the state of the application.
 It contains for example the actual level of sugar, the amount of remaining items, the general status of the application (IDLE, WORKING, ASSISTANCE), etc... 
