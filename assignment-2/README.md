@@ -72,6 +72,16 @@ For any aspect not specified, you are free to choose the approach you consider m
 
 ## Solution
 
+### Architecture
+
+#### Scheduling & Tasks
+
+![Architecture](./img/architecture.png)
+
+#### Device
+
+#### AppData
+
 ### Board schema
 
 ![Board Schema](./img/boardSchema.png)
