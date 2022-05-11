@@ -72,16 +72,6 @@ For any aspect not specified, you are free to choose the approach you consider m
 
 ## Solution
 
-### Architecture
-
-#### Scheduling & Tasks
-
-![Architecture](./img/architecture.png)
-
-#### Device
-
-#### AppData
-
 ### Board schema
 
 ![Board Schema](./img/boardSchema.png)
@@ -92,7 +82,21 @@ The system is composed by many tasks and a **cooperative scheduler** with *perio
 
 Each sensor involved in the task will performe a read in order to minimize discrepancies between collected data from the enviroment and operation.
 
-![Board Schema](./img/sensorsAndActuators.svg)
+#### Scheduling & Tasks
+
+![Architecture](./img/architecture.png)
+
+#### Sensors & Actuators
+
+![Sensors & Actuators](./img/sensorsAndActuators.svg)
+
+#### Device
+
+![Device](./img/device.png)
+
+#### AppData
+
+![AppData](./img/Appdata.png)
 
 Each task which has execution constraints (e.g. a self check could not be performed during the making process) includes an IDLE state where it could wait.
 
