@@ -85,25 +85,44 @@ Each sensor involved in the task will performe a read in order to minimize discr
 Each task which has execution constraints (e.g. a self check could not be performed during the making process) includes an IDLE state where it could wait.
 
 A Task can not change the state of another task. In order to realize communication between them, two different approaches are adopted:
-- A shared variable *AppData* to handle the general status of the machine
-- A *Message Bus* where tasks can publish and read messages
+- A shared variable *AppData* to handle the general status of the machine.
+- A *Message Bus* where tasks can publish and read messages in order to synchronize themselves.
 
 #### Scheduling & Tasks
 
+This diagram would explain the architecture of the *Scheduler* and the *Tasks*:
+
 ![Architecture](./img/architecture.png)
+
+The class used by the final tasks is *CommunicablePeriodBasedTaskWithFSM* that is based on 3 main topic:
+- Period (using a *PeriodBasedSchedulingStrategy*)
+- Communication (using a shared *MessageBus*)
+- Finite State Machine
 
 #### Sensors & Actuators
 
-![Sensors & Actuators](./img/sensorsAndActuators.svg)
+![Sensors & Actuators](./img/sensor%26actuator.png)
+
+All sensors and actuators are subclasses of a *Setuppable* interface.
+The DisplayI2C actuator is wrapped by the *CoffeeDisplayI2C* that expose more useful methods such as *printWelcomeMessage*.
+The real used implementation is *ProxyCoffeeDisplayI2C* that avoid the flashing problem because it saves the previous called print and if it's asked to print it again it doesn't to it because the same message is already on the display.
+The *FakeCoffeeDisplayI2C* class was used during development and what it does was print on the Serial instead of a real display.
 
 #### Device
 
 ![Device](./img/device.png)
 
+The device class are used to have an unique source of Sensors & Actuators in order to avoid multiple initialization of the same element... 
+For example the Motor is used either by the Self-Check task and by the BeverageMaker task.
+
+A *DeviceBuilder* is used to create a *Device* object easily.
+
 #### AppData
 
 ![AppData](./img/Appdata.png)
 
+The *AppData* class is used as a shared variable the handle and make visible the state of the application.
+It contains for example the actual level of sugar, the amount of remaining items, the general status of the application (IDLE, WORKING, ASSISTANCE), etc... 
 
 ### Tasks
 
@@ -151,7 +170,6 @@ The app communicator task is listening to the Serial line for incoming messages.
 </p>
 
 #### Memory task
-
 
 
 <p align="center">
