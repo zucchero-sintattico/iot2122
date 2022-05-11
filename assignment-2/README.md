@@ -159,7 +159,7 @@ Selector task start printing "Ready" on the display, waiting for any button pres
 
 #### Presence task
 
-The presence task check for the user presence using the sonar. If no one is available for a certain amount of time, will send the machine in sleep mode
+The presence task check for the user presence using the sonar. If no one is available for a certain amount of time and the machine is in IDLE state, it will send the machine in sleep mode.
 
 <p align="center">
   <img src="./img/tasks/presenceTask.svg" alt="Presence task" />
@@ -183,6 +183,9 @@ The app communicator task is listening to the Serial line for incoming messages.
 
 #### Memory task
 
+The memory task was used mainly during development in order to monitor the memory available in the Arduino board.
+So if we see that it reduces over time we could notice that we have managed the memory allocation & deallocation wrong in some way.
+Finally we decide to not remove it because it could be useful for future development and we also added the free memory status to the Java application.
 
 <p align="center">
   <img src="./img/tasks/memoryTask.svg" alt="Memory task" />
