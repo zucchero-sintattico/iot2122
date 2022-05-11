@@ -1,5 +1,11 @@
 # Assignment #2 - Smart Coffee Machine
 
+## Group
+
+- Alessandro Mazzoli
+- Manuel Andruccioli
+- Alex Testa
+
 ## Assignment
 
 ### Description
