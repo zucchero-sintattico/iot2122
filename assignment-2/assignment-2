@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-11T08:08:38.900Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36" etag="7rbKv7Hr77aBM-108Y5M" version="18.0.2" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-05-11T08:09:17.361Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36" etag="FLt3FGpw_ZImjLOKfPzW" version="18.0.2" type="github" pages="4">
   <diagram id="Om2Yw1UXd5m7-ycpb1zF" name="General State">
     <mxGraphModel dx="1422" dy="1794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -201,7 +201,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="yt6HqkGsAxtSgg2Xvqfy" name="Sensors">
-    <mxGraphModel dx="1778" dy="2077" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2585" dy="2489" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -284,7 +284,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="bp0mwMo7cnhgV10kYrG3" name="Tasks">
-    <mxGraphModel dx="2881" dy="2137" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3694" dy="2552" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
