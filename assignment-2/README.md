@@ -82,6 +82,12 @@ The system is composed by many tasks and a **cooperative scheduler** with *perio
 
 Each sensor involved in the task will performe a read in order to minimize discrepancies between collected data from the enviroment and operation.
 
+Each task which has execution constraints (e.g. a self check could not be performed during the making process) includes an IDLE state where it could wait.
+
+A Task can not change the state of another task. In order to realize communication between them, two different approaches are adopted:
+- A shared variable *AppData* to handle the general status of the machine
+- A *Message Bus* where tasks can publish and read messages
+
 #### Scheduling & Tasks
 
 ![Architecture](./img/architecture.png)
@@ -98,11 +104,6 @@ Each sensor involved in the task will performe a read in order to minimize discr
 
 ![AppData](./img/Appdata.png)
 
-Each task which has execution constraints (e.g. a self check could not be performed during the making process) includes an IDLE state where it could wait.
-
-A Task can not change the state of another task. In order to realize communication between them, two different approaches are adopted:
-- A shared variable *AppData* to handle the general status of the machine
-- A *Message Bus* where tasks can publish and read messages
 
 ### Tasks
 
