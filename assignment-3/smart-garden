@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-05T14:59:47.602Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="aJFPVriyXA8NebtejBKa" version="20.0.3" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-07-05T15:18:54.784Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="KKYP3uehSfupgyrWSo4R" version="20.0.3" type="github" pages="3">
   <diagram id="2ojkydB_dnCSdHN7llEG" name="Sensorboard">
     <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -41,7 +41,7 @@
         <mxCell id="m9RrWPoNGCWoUMNb08Vp-22" value="Period = eventBased" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="m9RrWPoNGCWoUMNb08Vp-15">
           <mxGeometry y="25" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="m9RrWPoNGCWoUMNb08Vp-34" value="on other Status &lt;br&gt;received from MQTT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="m9RrWPoNGCWoUMNb08Vp-15" source="m9RrWPoNGCWoUMNb08Vp-25" target="m9RrWPoNGCWoUMNb08Vp-28">
+        <mxCell id="m9RrWPoNGCWoUMNb08Vp-34" value="on AUTO Status&lt;br&gt;received from MQTT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="m9RrWPoNGCWoUMNb08Vp-15" source="m9RrWPoNGCWoUMNb08Vp-25" target="m9RrWPoNGCWoUMNb08Vp-28">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="271" y="310" />
@@ -104,7 +104,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="kCWpxkEZAk7PiwnZEdrO" name="Controller">
-    <mxGraphModel dx="1293" dy="689" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1053" dy="561" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -133,10 +133,10 @@
           <mxGeometry x="490" y="400" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="sydxoKRYor-evhbU5duA-1" value="" style="swimlane;" vertex="1" parent="1">
-          <mxGeometry x="350" y="571.6800000000001" width="950" height="560" as="geometry" />
+          <mxGeometry x="360" y="585" width="950" height="1135" as="geometry" />
         </mxCell>
-        <mxCell id="sydxoKRYor-evhbU5duA-2" value="IrrigationManager" style="swimlane;" vertex="1" parent="sydxoKRYor-evhbU5duA-1">
-          <mxGeometry x="60" y="80" width="350" height="420" as="geometry" />
+        <mxCell id="sydxoKRYor-evhbU5duA-2" value="AutomatedIrrigationManager" style="swimlane;" vertex="1" parent="sydxoKRYor-evhbU5duA-1">
+          <mxGeometry x="20" y="75" width="430" height="500" as="geometry" />
         </mxCell>
         <mxCell id="sydxoKRYor-evhbU5duA-3" value="Period = boh" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
           <mxGeometry y="25" width="90" height="30" as="geometry" />
@@ -144,29 +144,133 @@
         <mxCell id="sydxoKRYor-evhbU5duA-4" value="after X minutes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-5" target="sydxoKRYor-evhbU5duA-7">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="271" y="310" />
-              <mxPoint x="271" y="130" />
+              <mxPoint x="360" y="415" />
+              <mxPoint x="360" y="120" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="sydxoKRYor-evhbU5duA-5" value="SLEEP" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
-          <mxGeometry x="125" y="270" width="90" height="90" as="geometry" />
+        <mxCell id="sydxoKRYor-evhbU5duA-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-5" target="sydxoKRYor-evhbU5duA-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-30" value="on MAN/ALARM" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="sydxoKRYor-evhbU5duA-28">
+          <mxGeometry x="0.0308" y="1" relative="1" as="geometry">
+            <mxPoint y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-5" value="CLOSED" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
+          <mxGeometry x="169" y="370" width="90" height="90" as="geometry" />
         </mxCell>
         <mxCell id="sydxoKRYor-evhbU5duA-6" value="after Y seconds" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-7" target="sydxoKRYor-evhbU5duA-5">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="71" y="130" />
-              <mxPoint x="71" y="315" />
+              <mxPoint x="70" y="120" />
+              <mxPoint x="70" y="415" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="sydxoKRYor-evhbU5duA-7" value="WORKING&lt;br&gt;do / irrigate at speed Z" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
-          <mxGeometry x="130" y="90" width="80" height="80" as="geometry" />
+        <mxCell id="sydxoKRYor-evhbU5duA-29" value="on MAN/ALARM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-7" target="sydxoKRYor-evhbU5duA-27">
+          <mxGeometry y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-7" value="OPEN&lt;br&gt;do / irrigate at speed Z" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
+          <mxGeometry x="169" y="80" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="sydxoKRYor-evhbU5duA-16" value="Z = speed read from serial" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
           <mxGeometry x="180" y="25" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="sydxoKRYor-evhbU5duA-15" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;exitX=0.503;exitY=-0.003;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="sydxoKRYor-evhbU5duA-1">
+        <mxCell id="sydxoKRYor-evhbU5duA-31" value="on AUTO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-27" target="sydxoKRYor-evhbU5duA-7">
+          <mxGeometry x="0.4794" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-27" value="IDLE" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
+          <mxGeometry x="169" y="220" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-17" value="LightManager" style="swimlane;" vertex="1" parent="sydxoKRYor-evhbU5duA-1">
+          <mxGeometry x="550" y="80" width="350" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-18" value="Period = boh" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="sydxoKRYor-evhbU5duA-17">
+          <mxGeometry y="25" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="sydxoKRYor-evhbU5duA-17" source="sydxoKRYor-evhbU5duA-20" target="sydxoKRYor-evhbU5duA-24">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="90" y="153" />
+              <mxPoint x="90" y="303" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-20" value="READING&lt;br&gt;do / read values" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-17">
+          <mxGeometry x="130" y="108.32" width="90" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-23" value="Z = speed read from serial" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="sydxoKRYor-evhbU5duA-17">
+          <mxGeometry x="180" y="25" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="sydxoKRYor-evhbU5duA-17" source="sydxoKRYor-evhbU5duA-24" target="sydxoKRYor-evhbU5duA-20">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="303" />
+              <mxPoint x="270" y="153" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-24" value="ACTUATING&lt;br&gt;do / set led values" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-17">
+          <mxGeometry x="130" y="258.31999999999994" width="90" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-32" value="ManualIrrigationManager" style="swimlane;" vertex="1" parent="sydxoKRYor-evhbU5duA-1">
+          <mxGeometry x="20" y="615" width="430" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-33" value="Period = boh" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="sydxoKRYor-evhbU5duA-32">
+          <mxGeometry y="25" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-34" value="after X minutes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="sydxoKRYor-evhbU5duA-32" source="sydxoKRYor-evhbU5duA-37" target="sydxoKRYor-evhbU5duA-40">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="415" />
+              <mxPoint x="360" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="sydxoKRYor-evhbU5duA-32" source="sydxoKRYor-evhbU5duA-37" target="sydxoKRYor-evhbU5duA-43">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-36" value="on AUTO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="sydxoKRYor-evhbU5duA-35">
+          <mxGeometry x="0.0308" y="1" relative="1" as="geometry">
+            <mxPoint y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-37" value="CLOSED" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-32">
+          <mxGeometry x="169" y="370" width="90" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-38" value="after Y seconds" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="sydxoKRYor-evhbU5duA-32" source="sydxoKRYor-evhbU5duA-40" target="sydxoKRYor-evhbU5duA-37">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="70" y="120" />
+              <mxPoint x="70" y="415" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-39" value="on AUTO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="sydxoKRYor-evhbU5duA-32" source="sydxoKRYor-evhbU5duA-40" target="sydxoKRYor-evhbU5duA-43">
+          <mxGeometry y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-40" value="OPEN&lt;br&gt;do / irrigate at speed Z" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-32">
+          <mxGeometry x="169" y="80" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-41" value="Z = speed read from serial" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="sydxoKRYor-evhbU5duA-32">
+          <mxGeometry x="180" y="25" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-42" value="on MAN" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="sydxoKRYor-evhbU5duA-32" source="sydxoKRYor-evhbU5duA-43" target="sydxoKRYor-evhbU5duA-40">
+          <mxGeometry x="0.4794" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-43" value="IDLE" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-32">
+          <mxGeometry x="169" y="220" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-15" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;exitX=0.503;exitY=-0.003;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="sydxoKRYor-evhbU5duA-1" target="sydxoKRYor-evhbU5duA-1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="820" y="601.6800000000001" as="sourcePoint" />
             <mxPoint x="830" y="1131.68" as="targetPoint" />
