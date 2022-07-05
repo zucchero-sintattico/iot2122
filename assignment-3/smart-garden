@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-07-05T13:59:59.454Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="2fikI4UopBOIYNrGzKFm" version="20.0.3" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-07-05T14:59:47.602Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="aJFPVriyXA8NebtejBKa" version="20.0.3" type="github" pages="3">
   <diagram id="2ojkydB_dnCSdHN7llEG" name="Sensorboard">
-    <mxGraphModel dx="2370" dy="1263" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -13,7 +13,7 @@
         <mxCell id="m9RrWPoNGCWoUMNb08Vp-7" value="publish on smart-garden/sensors/*" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="m9RrWPoNGCWoUMNb08Vp-6" target="m9RrWPoNGCWoUMNb08Vp-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="m9RrWPoNGCWoUMNb08Vp-6" value="Esp32" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="m9RrWPoNGCWoUMNb08Vp-6" value="SensorBoard" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="515" y="320" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="m9RrWPoNGCWoUMNb08Vp-10" value="subscribe to smart-garden/status" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="m9RrWPoNGCWoUMNb08Vp-6" target="m9RrWPoNGCWoUMNb08Vp-5">
@@ -98,6 +98,78 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="820" y="531.6800000000001" as="sourcePoint" />
             <mxPoint x="830" y="1061.68" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="kCWpxkEZAk7PiwnZEdrO" name="Controller">
+    <mxGraphModel dx="1293" dy="689" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hCvWdUv6Yb6aBqEyfP_g-1" value="Controller" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=64;" vertex="1" parent="1">
+          <mxGeometry x="805" y="50" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="0zpQwM3vCJjAQPLT9sz5-1" value="send commands" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="1" source="5RwSqDoYk0-PWGPC7mQ4-2" target="5RwSqDoYk0-PWGPC7mQ4-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5RwSqDoYk0-PWGPC7mQ4-2" value="Service" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="765" y="190" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="0zpQwM3vCJjAQPLT9sz5-9" value="notify irrigator&lt;br&gt;status" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="1" source="5RwSqDoYk0-PWGPC7mQ4-4" target="5RwSqDoYk0-PWGPC7mQ4-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5RwSqDoYk0-PWGPC7mQ4-4" value="Controller" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="765" y="400" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="0zpQwM3vCJjAQPLT9sz5-5" value="send commands" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=12;" edge="1" parent="1" source="0zpQwM3vCJjAQPLT9sz5-2" target="5RwSqDoYk0-PWGPC7mQ4-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0zpQwM3vCJjAQPLT9sz5-7" value="require/update status" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startArrow=classic;startFill=1;" edge="1" parent="1" source="0zpQwM3vCJjAQPLT9sz5-2" target="5RwSqDoYk0-PWGPC7mQ4-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0zpQwM3vCJjAQPLT9sz5-2" value="App" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="400" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-1" value="" style="swimlane;" vertex="1" parent="1">
+          <mxGeometry x="350" y="571.6800000000001" width="950" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-2" value="IrrigationManager" style="swimlane;" vertex="1" parent="sydxoKRYor-evhbU5duA-1">
+          <mxGeometry x="60" y="80" width="350" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-3" value="Period = boh" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
+          <mxGeometry y="25" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-4" value="after X minutes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-5" target="sydxoKRYor-evhbU5duA-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="271" y="310" />
+              <mxPoint x="271" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-5" value="SLEEP" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
+          <mxGeometry x="125" y="270" width="90" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-6" value="after Y seconds" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-7" target="sydxoKRYor-evhbU5duA-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="71" y="130" />
+              <mxPoint x="71" y="315" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-7" value="WORKING&lt;br&gt;do / irrigate at speed Z" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
+          <mxGeometry x="130" y="90" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-16" value="Z = speed read from serial" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
+          <mxGeometry x="180" y="25" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sydxoKRYor-evhbU5duA-15" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;exitX=0.503;exitY=-0.003;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="sydxoKRYor-evhbU5duA-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="820" y="601.6800000000001" as="sourcePoint" />
+            <mxPoint x="830" y="1131.68" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
