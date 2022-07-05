@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-05T15:41:59.742Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="cPVHzkcQQH2LN0Dd-WGh" version="20.0.3" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-07-05T15:47:10.100Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="eDR04b4dPwX50mOkA9WN" version="20.0.3" type="github" pages="3">
   <diagram id="2ojkydB_dnCSdHN7llEG" name="Sensorboard">
     <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -104,7 +104,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="kCWpxkEZAk7PiwnZEdrO" name="Controller">
-    <mxGraphModel dx="1185" dy="632" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2031" dy="1083" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -141,15 +141,16 @@
         <mxCell id="sydxoKRYor-evhbU5duA-3" value="Period = boh" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
           <mxGeometry y="25" width="90" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="sydxoKRYor-evhbU5duA-4" value="after X minutes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-5" target="sydxoKRYor-evhbU5duA-7">
+        <mxCell id="sydxoKRYor-evhbU5duA-4" value="after X minutes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=12;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-5">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="360" y="415" />
-              <mxPoint x="360" y="120" />
+              <mxPoint x="360" y="111" />
             </Array>
+            <mxPoint x="260" y="111" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="sydxoKRYor-evhbU5duA-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-5" target="sydxoKRYor-evhbU5duA-27">
+        <mxCell id="sydxoKRYor-evhbU5duA-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-5" target="sydxoKRYor-evhbU5duA-27">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="sydxoKRYor-evhbU5duA-30" value="on MAN/ALARM" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="sydxoKRYor-evhbU5duA-28">
@@ -158,12 +159,12 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="sydxoKRYor-evhbU5duA-5" value="CLOSED&lt;br&gt;entry / notify service" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
-          <mxGeometry x="169" y="370" width="90" height="90" as="geometry" />
+          <mxGeometry x="164" y="370" width="90" height="90" as="geometry" />
         </mxCell>
         <mxCell id="sydxoKRYor-evhbU5duA-6" value="after Y seconds" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="sydxoKRYor-evhbU5duA-2" source="sydxoKRYor-evhbU5duA-7" target="sydxoKRYor-evhbU5duA-5">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="70" y="120" />
+              <mxPoint x="70" y="111" />
               <mxPoint x="70" y="415" />
             </Array>
           </mxGeometry>
@@ -173,7 +174,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="sydxoKRYor-evhbU5duA-7" value="OPEN&lt;br&gt;entry / notify service&lt;br&gt;do / irrigate at speed Z" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
+        <mxCell id="sydxoKRYor-evhbU5duA-7" value="OPEN&lt;br&gt;entry / notify service&lt;br&gt;do / read &amp;amp; irrigate at &lt;br&gt;speed Z" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
           <mxGeometry x="159.5" y="61" width="99" height="99" as="geometry" />
         </mxCell>
         <mxCell id="sydxoKRYor-evhbU5duA-16" value="Z = speed read from serial" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="sydxoKRYor-evhbU5duA-2">
