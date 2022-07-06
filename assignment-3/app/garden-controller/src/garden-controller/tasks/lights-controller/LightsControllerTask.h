@@ -17,7 +17,7 @@ enum class LightsControllerTaskState {
 class LightsControllerTask : public CommunicablePeriodBasedTaskWithFSM<LightsControllerTaskState, MessageType> {
 
     private:
-    int _period = 50;
+    int _period = 100;
 
     AppData* appData;
 

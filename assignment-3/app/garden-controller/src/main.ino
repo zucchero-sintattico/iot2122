@@ -37,9 +37,6 @@ AppData* appData = new AppData();
 // Scheduler and Tasks configurations
 Scheduler* scheduler = new Scheduler();
 
-// Utility Task
-// MemoryCheckTask* memoryCheckTask = new MemoryCheckTask(appData);
-
 // App Tasks
 LightsControllerTask* lightsControllerTask = new LightsControllerTask(appData, device);
 IrrigationControllerTask* irrigationControllerTask = new IrrigationControllerTask(appData, device);
