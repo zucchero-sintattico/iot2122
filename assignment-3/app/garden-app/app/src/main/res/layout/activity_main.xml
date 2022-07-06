@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
@@ -27,7 +27,7 @@
         app:abb_indicatorAppearance="round"
         app:abb_indicatorHeight="4dp"
         app:abb_indicatorMargin="16dp"
-        app:abb_selectedIndex="1"
+        app:abb_selectedIndex="0"
         app:abb_selectedTabType="text"
         app:abb_tabs="@menu/tabs"
         app:abb_tabColorSelected="@color/orange"
