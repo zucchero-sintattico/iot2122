@@ -123,8 +123,9 @@
             android:layout_marginTop="16dp"
             android:contentDescription="@string/slide_to_add_brightness"
             android:stepSize="1"
-            android:valueFrom="0"
+            android:valueFrom="1"
             android:valueTo="5"
+            android:enabled="false"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_led_3"
@@ -137,9 +138,10 @@
             android:layout_marginStart="64dp"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/slide_to_add_brightness"
-            android:valueFrom="0"
+            android:valueFrom="1"
             android:valueTo="5"
             android:stepSize="1"
+            android:enabled="false"
             app:layout_constraintStart_toEndOf="@+id/slider_led_3"
             app:layout_constraintTop_toBottomOf="@+id/btn_led_4" />
 
