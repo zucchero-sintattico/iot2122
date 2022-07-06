@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-06T13:33:31.322Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="cJGn33FEKTitXRGdfvi9" version="20.0.3" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-07-06T14:39:27.449Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="s8N1BRNl5ska-6Y-8uZr" version="20.0.3" type="github" pages="5">
   <diagram id="2ojkydB_dnCSdHN7llEG" name="Sensorboard">
     <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -397,7 +397,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="cqkyiSm6T2jk7R2dx1eo-10" value="PUBLISHING&lt;br&gt;do / notify status to Service" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="cqkyiSm6T2jk7R2dx1eo-2">
+        <mxCell id="cqkyiSm6T2jk7R2dx1eo-10" value="SENDING&lt;br&gt;do / notify status to Service" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="cqkyiSm6T2jk7R2dx1eo-2">
           <mxGeometry x="140" y="364.99999999999994" width="90" height="90" as="geometry" />
         </mxCell>
         <mxCell id="cqkyiSm6T2jk7R2dx1eo-11" value="on AUTO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="cqkyiSm6T2jk7R2dx1eo-2" source="cqkyiSm6T2jk7R2dx1eo-12" target="cqkyiSm6T2jk7R2dx1eo-6">
@@ -435,7 +435,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="cqkyiSm6T2jk7R2dx1eo-18" value="READING&lt;br&gt;do / read values &amp;amp; update AppData" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="cqkyiSm6T2jk7R2dx1eo-14">
+        <mxCell id="cqkyiSm6T2jk7R2dx1eo-18" value="READING&lt;br&gt;do / read values from bluethoot &amp;amp; update AppData" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="cqkyiSm6T2jk7R2dx1eo-14">
           <mxGeometry x="140" y="75" width="90" height="90" as="geometry" />
         </mxCell>
         <mxCell id="cqkyiSm6T2jk7R2dx1eo-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startArrow=none;startFill=0;" edge="1" parent="cqkyiSm6T2jk7R2dx1eo-14" source="cqkyiSm6T2jk7R2dx1eo-22" target="cqkyiSm6T2jk7R2dx1eo-18">
@@ -455,7 +455,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="cqkyiSm6T2jk7R2dx1eo-24" value="IDLE&lt;br&gt;do / wait for bluethoot connection" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="cqkyiSm6T2jk7R2dx1eo-14">
+        <mxCell id="cqkyiSm6T2jk7R2dx1eo-24" value="IDLE" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="cqkyiSm6T2jk7R2dx1eo-14">
           <mxGeometry x="140" y="225" width="90" height="90" as="geometry" />
         </mxCell>
         <mxCell id="cqkyiSm6T2jk7R2dx1eo-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="cqkyiSm6T2jk7R2dx1eo-14" source="cqkyiSm6T2jk7R2dx1eo-14" target="cqkyiSm6T2jk7R2dx1eo-24">
