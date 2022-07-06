@@ -56,7 +56,7 @@ SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<Me
 MemoryCheckTask* memoryCheckTask = new MemoryCheckTask(appData);
 
 // App Tasks
-BootTask* bootTask = new BootTask(device);
+IrrigationControllerTask* bootTask = new IrrigationControllerTask(device);
 PresenceTask* presenceTask = new PresenceTask(device);
 BeverageSelectorTask* beverageSelectorTask = new BeverageSelectorTask(appData, device);
 BeverageMakerTask* beverageMakerTask = new BeverageMakerTask(appData, device);
