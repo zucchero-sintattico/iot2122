@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-06T09:52:31.686Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="dgFeq0hZlqNPevCv-P9a" version="20.0.3" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-07-06T09:57:36.668Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="NaaYVKgLL95NnXBfrGpW" version="20.0.3" type="github" pages="5">
   <diagram id="2ojkydB_dnCSdHN7llEG" name="Sensorboard">
     <mxGraphModel dx="2585" dy="1378" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -376,12 +376,12 @@
     </mxGraphModel>
   </diagram>
   <diagram id="WC708yIkm4znAuVmCizq" name="Service">
-    <mxGraphModel dx="1580" dy="842" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2188" dy="1166" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-28" value="Redis" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
-          <mxGeometry x="460" y="395" width="361" height="190" as="geometry" />
+          <mxGeometry x="770" y="415" width="361" height="190" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-1" value="Backend" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=64;" vertex="1" parent="1">
           <mxGeometry x="805" y="50" width="60" height="30" as="geometry" />
@@ -390,16 +390,16 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-2" value="Broker MQTT" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
-          <mxGeometry x="280" y="220" width="140" height="100" as="geometry" />
+          <mxGeometry x="590" y="240" width="140" height="100" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=55;entryDy=140;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="te4_n8XCJl4l1NrFB6Tc-3" target="te4_n8XCJl4l1NrFB6Tc-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-3" value="SensorBoard" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="50" y="240" width="140" height="70" as="geometry" />
+          <mxGeometry x="360" y="260" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-6" value="Service" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
-          <mxGeometry x="570" y="210" width="140" height="100" as="geometry" />
+          <mxGeometry x="880" y="230" width="140" height="100" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-22" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=60;exitPerimeter=0;entryX=0;entryY=0;entryDx=90;entryDy=70;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="te4_n8XCJl4l1NrFB6Tc-11" target="te4_n8XCJl4l1NrFB6Tc-21">
           <mxGeometry relative="1" as="geometry" />
@@ -408,37 +408,48 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-11" value="Server HTTP" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
-          <mxGeometry x="550" y="660" width="130" height="90" as="geometry" />
+          <mxGeometry x="860" y="680" width="130" height="90" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-15" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=90;entryDy=70;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="te4_n8XCJl4l1NrFB6Tc-14" target="te4_n8XCJl4l1NrFB6Tc-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-14" value="App" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="460" y="800" width="140" height="70" as="geometry" />
+          <mxGeometry x="770" y="820" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-17" value="serial" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=45;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="te4_n8XCJl4l1NrFB6Tc-16" target="te4_n8XCJl4l1NrFB6Tc-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-16" value="Controller" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="860" y="220" width="140" height="70" as="geometry" />
+          <mxGeometry x="1170" y="240" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-20" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=90;entryDy=70;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="te4_n8XCJl4l1NrFB6Tc-18" target="te4_n8XCJl4l1NrFB6Tc-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-18" value="Dashboard" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="630" y="800" width="140" height="70" as="geometry" />
+          <mxGeometry x="940" y="820" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-23" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=60;exitPerimeter=0;entryX=0;entryY=0;entryDx=100;entryDy=75;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="te4_n8XCJl4l1NrFB6Tc-21" target="te4_n8XCJl4l1NrFB6Tc-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-21" value="Redis DB&lt;br&gt;&lt;br&gt;DATA SOURCE" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
-          <mxGeometry x="485" y="450" width="130" height="90" as="geometry" />
+          <mxGeometry x="795" y="470" width="130" height="90" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-27" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=72.5;exitPerimeter=0;entryX=0;entryY=0;entryDx=100;entryDy=75;entryPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="te4_n8XCJl4l1NrFB6Tc-25" target="te4_n8XCJl4l1NrFB6Tc-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="te4_n8XCJl4l1NrFB6Tc-25" value="Redis Communication&lt;br&gt;&lt;br&gt;Sync with Pub/Sub only&amp;nbsp;&lt;br&gt;for Status" style="verticalAlign=top;align=left;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" vertex="1" parent="1">
-          <mxGeometry x="635" y="450" width="155" height="90" as="geometry" />
+          <mxGeometry x="945" y="470" width="155" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Hzx7ZSj-ssnYPWmo9j1r" name="Dashboard">
+    <mxGraphModel dx="569" dy="303" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="DFvc1D70dYQHhyU2Ekr--1" value="Dati da visualizzare:&lt;br&gt;- Stato sistema (AUTO, MANUAL, ALARM)&lt;br&gt;- Livello luminosità (0 - 7)&lt;br&gt;- Livello temperatura (0 - 4)&lt;br&gt;- Luce 1 (on - off)&lt;br&gt;- Luce 2 (on - off)&lt;br&gt;- Luce 3 (0 - 4)&lt;br&gt;- Luce 4 (0 - 4)&lt;br&gt;- Irrigatore (Aperto - Chiuso)&amp;nbsp;&lt;br&gt;- Velocità irrigatore (0 - 4)" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="10" y="10" width="250" height="160" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
