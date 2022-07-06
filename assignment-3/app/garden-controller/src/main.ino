@@ -6,6 +6,7 @@
 // Tasks import
 #include "garden-controller/tasks/lights-controller/LightsControllerTask.h"
 #include "garden-controller/tasks/irrigation-controller/IrrigationControllerTask.h"
+#include "garden-controller/tasks/service-communicator/ServiceCommunicatorTask.h"
 
 // Configurations import
 #include "garden-controller/config/data/AppData.h"
@@ -42,11 +43,14 @@ Scheduler* scheduler = new Scheduler();
 // App Tasks
 LightsControllerTask* lightsControllerTask = new LightsControllerTask(appData, device);
 IrrigationControllerTask* irrigationControllerTask = new IrrigationControllerTask(appData, device);
+ServiceCommunicatorTask* serviceCommunicatorTask = new ServiceCommunicatorTask(appData);
 
-#define N_TASKS 2
+
+#define N_TASKS 3
 CommunicablePeriodBasedTask<MessageType>* tasks[N_TASKS] = {
     lightsControllerTask,
-    irrigationControllerTask
+    irrigationControllerTask,
+    serviceCommunicatorTask
 };
 
 void setup() {
