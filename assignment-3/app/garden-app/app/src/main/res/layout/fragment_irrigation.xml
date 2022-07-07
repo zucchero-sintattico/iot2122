@@ -52,47 +52,17 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.slider.Slider
-            android:id="@+id/slider_led_4"
+            android:id="@+id/slider_irrigation"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/slide_to_add_brightness"
             android:stepSize="1"
-            android:valueFrom="0"
+            android:valueFrom="1"
             android:valueTo="5"
+            android:enabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline_horizontal" />
-
-        <Button
-            android:id="@+id/btn_start_irrigation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/blue"
-            android:padding="16dp"
-            android:text="@string/start"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="TextContrastCheck" />
-
-        <Button
-            android:id="@+id/btn_stop_irrigation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/gray"
-            android:padding="16dp"
-            android:text="@string/stop"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
