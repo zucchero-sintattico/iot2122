@@ -51,6 +51,10 @@ class IrrigationControllerTask : public CommunicablePeriodBasedTaskWithFSM<Irrig
 
     bool hasToBeClosed();
     bool hasToBeOpened();
+
+    void rotate();
+    void changeStateToOpen();
+    void changeStateToClosed();
 };
 
 #endif

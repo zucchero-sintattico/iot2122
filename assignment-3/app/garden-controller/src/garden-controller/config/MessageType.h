@@ -4,24 +4,9 @@
 #include <Arduino.h>
 enum MessageType : uint8_t {
 
-
-    // ServiceCommunicator -> All
-    // Publish and remove at next tick
-    NOTIFY_AUTO_STATUS,
-    NOTIFY_ALARM_STATUS,
-    NOTIFY_MANUAL_STATUS,
-
-    // ServiceCommunicator -> IrrigationManager
+    // ServiceCommunicator -> IrrigationController
     NOTIFY_OPEN_IRRIGATOR,
     NOTIFY_CLOSE_IRRIGATOR,
-
-    // IrrigationManager -> ServiceCommunicator
-    NOTIFY_IRRIGATOR_OPENED,
-    NOTIFY_IRRIGATOR_CLOSED,
-
-
-
-
 
 };
 
