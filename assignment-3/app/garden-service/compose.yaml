@@ -1,0 +1,25 @@
+services:
+  service:
+    build: ./service
+    depends_on:
+      - redis
+      - broker-mqtt
+
+  server-http:
+    build: ./server-http
+    ports:
+      - "80:8080"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+
+  broker-mqtt:
+    image: eclipse-mosquitto:latest
+    ports:
+      - "1883:1883"
+    volumes:
+      - type: bind
+        source: ./broker-mqtt/mqtt.conf
+        target: /mosquitto/config/mosquitto.conf
