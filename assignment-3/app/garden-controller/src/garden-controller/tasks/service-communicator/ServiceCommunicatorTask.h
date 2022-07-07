@@ -6,13 +6,12 @@
 #include "iot/utils/serial/MsgService.h"
 #include "garden-controller/config/data/AppData.h"
 #include "garden-controller/config/MessageType.h"
+
 enum class ServiceCommunicatorTaskState : uint8_t {
     IDLE,
     READING,
     SENDING
 };
-
-#define DEFAULT_BUFFER_SIZE 32
 
 class ServiceCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ServiceCommunicatorTaskState, MessageType> {
 

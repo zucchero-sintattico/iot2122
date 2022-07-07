@@ -25,17 +25,12 @@ void ApplicationCommunicatorTask::tick() {
 }
 
 void ApplicationCommunicatorTask::onIdleState() {
-    if (getMessageBus()->isMessagePresent(MessageType::NOTIFY_MANUAL_STATUS)) {
+    if (appData->getStatus() == Status::MANUAL) {
         setState(ApplicationCommunicatorTaskState::READING);
     }
 }
 
 void ApplicationCommunicatorTask::onReadingState() {
-    if (getMessageBus()->isMessagePresent(MessageType::NOTIFY_AUTO_STATUS)) {
-        setState(ApplicationCommunicatorTaskState::IDLE);
-        return;
-    }
-
     if (isMessagePresent()) {
         if (CommunicationUtilities::isUpdateMessage(message)) {
             UpdateMessage updateMessage = CommunicationUtilities::getUpdateMessage(message);
@@ -55,7 +50,7 @@ void ApplicationCommunicatorTask::onReadingState() {
         }
     }
 
-    if (appData->getStatus() == Status::AUTO) {
+    if (appData->getStatus() == Status::AUTO || appData->getStatus() == Status::ALARM) {
         setState(ApplicationCommunicatorTaskState::IDLE);
     }
 
