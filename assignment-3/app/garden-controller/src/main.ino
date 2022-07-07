@@ -21,6 +21,8 @@
 #define digitalLed2Pin 4
 #define analogLed1Pin 5
 #define analogLed2Pin 6
+#define bluetoothTxPin 7
+#define bluetoothRxPin 8
 #define servoPin 9
 
 DeviceBuilder* builder = new DeviceBuilder();
@@ -42,7 +44,7 @@ Scheduler* scheduler = new Scheduler();
 LightsControllerTask* lightsControllerTask = new LightsControllerTask(appData, device);
 IrrigationControllerTask* irrigationControllerTask = new IrrigationControllerTask(appData, device);
 ServiceCommunicatorTask* serviceCommunicatorTask = new ServiceCommunicatorTask(appData);
-ApplicationCommunicatorTask* applicationCommunicatorTask = new ApplicationCommunicatorTask(appData);
+ApplicationCommunicatorTask* applicationCommunicatorTask = new ApplicationCommunicatorTask(appData, bluetoothRxPin, bluetoothTxPin);
 
 
 #define N_TASKS 4

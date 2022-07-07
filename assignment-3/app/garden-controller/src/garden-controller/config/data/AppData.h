@@ -81,6 +81,14 @@ class AppData {
         this->_isIrrigatorOpen = isOpen;
     }
 
+    void update(bool isDigitalLed1Active, bool isDigitalLed2Active, uint8_t analogLed1Value, uint8_t analogLed2Value, uint8_t irrigationSpeed) {
+        this->setDigitalLed1Active(isDigitalLed1Active);
+        this->setDigitalLed2Active(isDigitalLed2Active);
+        this->setAnalogLed1Value(analogLed1Value);
+        this->setAnalogLed2Value(analogLed2Value);
+        this->setIrrigationSpeed(irrigationSpeed);
+    }
+
 };
 
 #endif

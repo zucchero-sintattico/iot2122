@@ -1,4 +1,5 @@
 #include "ServiceCommunicatorTask.h"
+#include "garden-controller/utilites/CommunicationUtilities.h"
 
 void ServiceCommunicatorTask::init() {
     MsgService.init(DEFAULT_BUFFER_SIZE);
@@ -31,41 +32,10 @@ bool ServiceCommunicatorTask::isMessagePresent() {
     return this->message.length() > 0;
 }
 
-bool ServiceCommunicatorTask::isStatusMessage(String message) {
-    return message.startsWith("STATUS:");
-}
-
-bool ServiceCommunicatorTask::isCommandMessage(String message) {
-    return message.startsWith("COMMAND:");
-}
-
-Status ServiceCommunicatorTask::getNewStatus(String statusMessage) {
-    statusMessage.replace("STATUS:", "");
-    if (statusMessage.equals("AUTO")) {
-        return Status::AUTO;
-    }
-    else if (statusMessage.equals("MANUAL")) {
-        return Status::MANUAL;
-    }
-    else {
-        return Status::ALARM;
-    }
-}
-
-Command ServiceCommunicatorTask::getNewCommand(String commandMessage) {
-    Command command;
-    command.digitalLed1active = commandMessage.substring(8, 9) == "1";
-    command.digitalLed2active = commandMessage.substring(9, 10) == "1";
-    command.analogLed1value = commandMessage.substring(10, 11).toInt();
-    command.analogLed2value = commandMessage.substring(11, 12).toInt();
-    command.irrigatorValue = commandMessage.substring(12, 13).toInt();
-    return command;
-}
-
 void ServiceCommunicatorTask::onIdleState() {
     if (isMessagePresent()) {
-        if (isStatusMessage(this->message)) {
-            Status status = getNewStatus(this->message);
+        if (CommunicationUtilities::isStatusUpdateMessage(this->message)) {
+            Status status = CommunicationUtilities::getStatusUpdateMessage(this->message).status;
             if (status != this->appData->getStatus()) {
                 this->appData->setStatus(status);
                 if (status == Status::AUTO) {
@@ -81,12 +51,13 @@ void ServiceCommunicatorTask::onIdleState() {
             }
         }
     }
+    sendStatusToService();
 }
 
 void ServiceCommunicatorTask::onReadingState() {
     if (isMessagePresent()) {
-        if (isStatusMessage(message)) {
-            Status status = getNewStatus(message);
+        if (CommunicationUtilities::isStatusUpdateMessage(message)) {
+            Status status = CommunicationUtilities::getStatusUpdateMessage(message).status;
             if (status != this->appData->getStatus()) {
                 this->appData->setStatus(status);
                 if (status == Status::MANUAL) {
@@ -98,21 +69,32 @@ void ServiceCommunicatorTask::onReadingState() {
                 setState(ServiceCommunicatorTaskState::IDLE);
             }
         }
-        else if (isCommandMessage(message)) {
-            Command command = getNewCommand(message);
-            this->appData->setDigitalLed1Active(command.digitalLed1active);
-            this->appData->setDigitalLed2Active(command.digitalLed2active);
-            this->appData->setAnalogLed1Value(command.analogLed1value);
-            this->appData->setAnalogLed2Value(command.analogLed2value);
-            this->appData->setIrrigationSpeed(command.irrigatorValue);
+        else if (CommunicationUtilities::isUpdateMessage(message)) {
+            UpdateMessage updateMessage = CommunicationUtilities::getUpdateMessage(message);
+            this->appData->update(updateMessage.digitalLed1active, updateMessage.digitalLed2active, updateMessage.analogLed1value, updateMessage.analogLed2value, updateMessage.irrigatorValue);
         }
     }
     setState(ServiceCommunicatorTaskState::SENDING);
 }
 
 void ServiceCommunicatorTask::onSendingState() {
-    String message = IRRIGATOR_STATUS_MESSAGE(this - appData->isIrrigatorOpen());
+    sendStatusToService();
+    setState(ServiceCommunicatorTaskState::READING);
 }
 
+void ServiceCommunicatorTask::sendStatusToService() {
+    String message = CommunicationUtilities::getStatusMessageFromAppData(this->appData);
+    MsgService.sendMsg(message);
+}
 
+String formatStatusFromAppData(AppData* appData) {
+    return String(
+        String(appData->isDigitalLed1Active() ? "1" : "0") + "," +
+        String(appData->isDigitalLed2Active() ? "1" : "0") + "," +
+        String(appData->getAnalogLed1Value()) + "," +
+        String(appData->getAnalogLed2Value()) + "," +
+        String(appData->isIrrigatorOpen() ? "1" : "0") + "," +
+        String(appData->getIrrigationSpeed())
+    );
+}
 

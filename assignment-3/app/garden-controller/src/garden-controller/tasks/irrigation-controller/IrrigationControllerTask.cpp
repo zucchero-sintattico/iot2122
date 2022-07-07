@@ -67,7 +67,7 @@ bool IrrigationControllerTask::hasToBeClosed() {
         return elapsedTimeSinceOpened > this->OPEN_TIME_MILLISECONDS;
     }
     else if (this->appData->getStatus() == Status::MANUAL) {
-        return getMessageBus()->isMessagePresent(MessageType::CLOSE_IRRIGATOR);
+        return getMessageBus()->isMessagePresent(MessageType::NOTIFY_CLOSE_IRRIGATOR);
     }
     else {
         return false;
@@ -80,7 +80,7 @@ bool IrrigationControllerTask::hasToBeOpened() {
         return elapsedTimeSinceOpened > this->CLOSED_TIME_MILLISECONDS;
     }
     else if (this->appData->getStatus() == Status::MANUAL) {
-        return getMessageBus()->isMessagePresent(MessageType::OPEN_IRRIGATOR);
+        return getMessageBus()->isMessagePresent(MessageType::NOTIFY_OPEN_IRRIGATOR);
     }
     else {
         return false;

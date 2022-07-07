@@ -7,11 +7,11 @@
 #include "iot/utils/serial/MsgService.h"
 #include "garden-controller/config/data/AppData.h"
 #include "garden-controller/config/MessageType.h"
+#include "garden-controller/tasks/service-communicator/ServiceCommunicatorTask.h"
 
 enum class ApplicationCommunicatorTaskState : uint8_t {
     IDLE,
-    READING,
-    SENDING
+    READING
 };
 
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
@@ -34,10 +34,11 @@ class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<Ap
     void computeRead();
     void tick();
 
+    private:
     void onIdleState();
     void onReadingState();
-    void onSendingState();
 
+    bool isMessagePresent();
 };
 
 #endif

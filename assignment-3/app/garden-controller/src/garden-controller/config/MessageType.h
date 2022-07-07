@@ -12,8 +12,8 @@ enum MessageType : uint8_t {
     NOTIFY_MANUAL_STATUS,
 
     // ServiceCommunicator -> IrrigationManager
-    OPEN_IRRIGATOR,
-    CLOSE_IRRIGATOR,
+    NOTIFY_OPEN_IRRIGATOR,
+    NOTIFY_CLOSE_IRRIGATOR,
 
     // IrrigationManager -> ServiceCommunicator
     NOTIFY_IRRIGATOR_OPENED,
