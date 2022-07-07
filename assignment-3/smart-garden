@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-07T13:59:50.933Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="dzJSP1jbDSBhcOvM-FYG" version="20.0.3" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-07-07T14:00:18.269Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36" etag="fRPYQR-Eprh1MHM9AFwf" version="20.0.3" type="github" pages="5">
   <diagram id="2ojkydB_dnCSdHN7llEG" name="Sensorboard">
     <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -104,7 +104,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="kCWpxkEZAk7PiwnZEdrO" name="Controller">
-    <mxGraphModel dx="4063" dy="2166" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2844" dy="1516" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -233,7 +233,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="R8ccPGr7-6HiS5YPRznm-3" value="LightsControllerTask" style="swimlane;" vertex="1" parent="sydxoKRYor-evhbU5duA-1">
+        <mxCell id="R8ccPGr7-6HiS5YPRznm-3" value="LightsController" style="swimlane;" vertex="1" parent="sydxoKRYor-evhbU5duA-1">
           <mxGeometry x="80" y="47.5" width="350" height="490" as="geometry" />
         </mxCell>
         <mxCell id="R8ccPGr7-6HiS5YPRznm-4" value="Period = boh" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="R8ccPGr7-6HiS5YPRznm-3">
@@ -272,7 +272,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="Ye4sQjC4q-f8coWKlTaH-1" value="IrrigationManager" style="swimlane;" vertex="1" parent="sydxoKRYor-evhbU5duA-1">
+        <mxCell id="Ye4sQjC4q-f8coWKlTaH-1" value="IrrigationController" style="swimlane;" vertex="1" parent="sydxoKRYor-evhbU5duA-1">
           <mxGeometry x="530" y="50" width="430" height="500" as="geometry" />
         </mxCell>
         <mxCell id="Ye4sQjC4q-f8coWKlTaH-2" value="Period = boh" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="Ye4sQjC4q-f8coWKlTaH-1">
