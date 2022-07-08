@@ -6,6 +6,8 @@
 class DeviceBuilder {
     private:
 
+    PubSubClient* client;
+
     // Sensors
     Photoresistor* photoresistor;
     Thermometer* thermometer;
@@ -34,8 +36,13 @@ class DeviceBuilder {
         return this;
     }
 
+    DeviceBuilder* withClientMqtt(PubSubClient* client) {
+        this->client = client;
+        return this;
+    }
+
     Device* build() {
-        return new Device(digitalLed, photoresistor, thermometer);
+        return new Device(digitalLed, photoresistor, thermometer, client);
     }
 
 };
