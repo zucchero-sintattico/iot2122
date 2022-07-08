@@ -1,0 +1,3 @@
+const char* ssid = "name";
+const char* password = "password";
+const char* mqtt_server = "server-ip";

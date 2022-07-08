@@ -2,18 +2,13 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 
-#define LED_PIN 25
+#include "garden-sensorboard/device/DeviceBuilder.h"
+#include "./config.h"
+
+#define LED_PIN 2
 #define PHOTORESISTOR_PIN 34
 #define THERMOMETER_PIN 35
 
-#include "garden-sensorboard/device/Device.h"
-#include "garden-sensorboard/device/DeviceBuilder.h"
-
-#include "iot/sensor/photoresistor/Photoresistor.h"
-
-const char* ssid = "Home&Life SuperWiFi-5D91";
-const char* password = "7RR7UY3DG7XT8KMQ";
-const char* mqtt_server = "192.168.1.49";
 WiFiClient wifi;
 PubSubClient mqtt(wifi);
 
@@ -71,7 +66,12 @@ void reconnect() {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
-    Serial.println(length);
+    Serial.print(length);
+    if (strncmp((char *)payload, "ALARM", length) == 0) {
+        device->getDigitalLed()->setActive(false);
+    } else {
+        device->getDigitalLed()->setActive(true);
+    }
 }
 
 void setup(){
