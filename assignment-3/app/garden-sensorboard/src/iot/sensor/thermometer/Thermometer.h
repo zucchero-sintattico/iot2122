@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include "../Sensor.h"
-#define AREF_VOLTAGE 5
+#define AREF_VOLTAGE 3.3
 
 class Thermometer : public Sensor {
 
