@@ -15,4 +15,7 @@
     <string name="start_irrigation_system">Start Irrigation System</string>
     <string name="stop">Stop</string>
     <string name="start">Start</string>
+    <string name="device_found">Device Found</string>
+    <string name="device_name">Device Name</string>
+    <string name="ff_ff_ff_ff_ff_ff">FF:FF:FF:FF:FF:FF</string>
 </resources>

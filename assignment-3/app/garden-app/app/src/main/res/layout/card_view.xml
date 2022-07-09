@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Media -->
+        <ImageView
+            android:id="@+id/card_menu_image"
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
+            app:srcCompat="@drawable/ic_baseline_devices_other_24"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/device_found"
+            />
+
+        <!-- Title, secondary and supporting text -->
+        <TextView
+            android:gravity="center"
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_name"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/mac_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ff_ff_ff_ff_ff_ff"
+            android:textSize="12sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+            />
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
