@@ -54,7 +54,7 @@ void reconnect() {
       // Once connected, publish an announcement...
       // client.publish("outTopic", "hello world");
       // ... and resubscribe
-      mqtt.subscribe("esiot-2122");
+      mqtt.subscribe("smartgarden/status");
     } else {
       Serial.print("failed, rc=");
       Serial.print(mqtt.state());
@@ -98,8 +98,8 @@ void loop() {
         lastMsgTime = now;
         device->computeRead();
 
-        mqtt.publish("smart-garden/light", String(device->getPhotoresistor()->getLight()).c_str());
+        String message = "{\"temperature\":" + String(device->getThermometer()->getTemperature()) + ",\"light\":" + String(device->getPhotoresistor()->getLight()) + "}";
 
-        mqtt.publish("smart-garden/temperature", String(device->getThermometer()->getTemperature()).c_str());
+        mqtt.publish("smart-garden/sensorboard", message.c_str());
     }
 }
