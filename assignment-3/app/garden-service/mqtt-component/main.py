@@ -1,8 +1,6 @@
 import paho.mqtt.client as mqtt
 from config import Topic
-from logic import ServerLogic
 
-logic = ServerLogic()
 mqtt = mqtt.Client()
 
 def on_subscribe(client, userdata, mid, granted_qos):
@@ -10,8 +8,8 @@ def on_subscribe(client, userdata, mid, granted_qos):
 
 def on_message(client, userdata, msg):
     match msg.topic:
-        case Topic.light: logic.setNewLight(msg.payload)
-        case Topic.temperature: logic.setTemperature(msg.payload)
+        case Topic.light: pass # TODO
+        case Topic.temperature: pass # TODO
 
 
 if __name__ == '__main__':

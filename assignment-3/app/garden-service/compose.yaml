@@ -1,14 +1,33 @@
 services:
-  service:
-    build: ./service
+
+  http-component:
+    build: 
+      context: ./http-component
+      dockerfile: ../component.Dockerfile
+    ports:
+      - "80:8080"
+    depends_on:
+      - redis
+
+  logic-component:
+    build: 
+      context: ./logic-component
+      dockerfile: ../component.Dockerfile
+    depends_on:
+      - redis
+
+  mqtt-component:
+    build: 
+      context: ./mqtt-component
+      dockerfile: ../component.Dockerfile
     depends_on:
       - redis
       - broker-mqtt
 
-  server-http:
-    build: ./server-http
-    ports:
-      - "80:8080"
+  serial-component:
+    build: 
+      context: ./serial-component
+      dockerfile: ../component.Dockerfile
     depends_on:
       - redis
 
