@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-11T10:15:50.734Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15" etag="FaDLbB3OCN3ekCdWg0aJ" version="20.0.4" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-07-11T12:20:58.761Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15" etag="1AIzRfl5Rr9vP9WRhRod" version="20.0.4" type="github" pages="5">
   <diagram id="2ojkydB_dnCSdHN7llEG" name="Sensorboard">
     <mxGraphModel dx="868" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -360,7 +360,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="WC708yIkm4znAuVmCizq" name="Service">
-    <mxGraphModel dx="868" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1021" dy="662" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -517,8 +517,8 @@
         <mxCell id="Pje6Lg0uxGNrB5iAHTmP-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=-0.013;exitY=0.546;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="Pje6Lg0uxGNrB5iAHTmP-4" target="Pje6Lg0uxGNrB5iAHTmP-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Pje6Lg0uxGNrB5iAHTmP-4" value="&lt;span style=&quot;text-decoration: none;&quot;&gt;«container»&lt;/span&gt;&lt;span style=&quot;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;br style=&quot;&quot;&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Server HTTP&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="verticalAlign=middle;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" parent="1" vertex="1">
-          <mxGeometry x="2700" y="890" width="130" height="90" as="geometry" />
+        <mxCell id="Pje6Lg0uxGNrB5iAHTmP-4" value="&lt;span style=&quot;text-decoration: none;&quot;&gt;«container»&lt;/span&gt;&lt;span style=&quot;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;br style=&quot;&quot;&gt;&lt;div style=&quot;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;HTTPComponent&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="verticalAlign=middle;align=center;spacingTop=8;spacingLeft=2;spacingRight=12;shape=cube;size=10;direction=south;fontStyle=4;html=1;" parent="1" vertex="1">
+          <mxGeometry x="2660" y="890" width="170" height="90" as="geometry" />
         </mxCell>
         <mxCell id="Pje6Lg0uxGNrB5iAHTmP-5" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;startArrow=none;startFill=0;" parent="1" source="Pje6Lg0uxGNrB5iAHTmP-7" target="Pje6Lg0uxGNrB5iAHTmP-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
