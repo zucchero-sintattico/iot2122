@@ -28,6 +28,8 @@ services:
     build: 
       context: ./serial-component
       dockerfile: ../component.Dockerfile
+    devices:
+      - /dev/tty
     depends_on:
       - redis
 
