@@ -41,7 +41,7 @@ void ServiceCommunicatorTask::onIdleState() {
         this->setState(ServiceCommunicatorTaskState::READING);
     }
     else {
-        this->setState(ServiceCommunicatorTaskState::IDLE);
+        this->setState(ServiceCommunicatorTaskState::SENDING);
     }
 }
 

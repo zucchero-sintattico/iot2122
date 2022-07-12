@@ -15,12 +15,12 @@ enum class ServiceCommunicatorTaskState : uint8_t {
 
 class ServiceCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ServiceCommunicatorTaskState, MessageType> {
 
-    private:
-    int _period = 500;
+private:
+    int _period = 100;
     AppData* appData;
     String message;
 
-    public:
+public:
 
     ServiceCommunicatorTask(AppData* appdata) : CommunicablePeriodBasedTaskWithFSM(ServiceCommunicatorTaskState::IDLE) {
         PeriodBasedTask::setPeriod(this->_period);
@@ -31,7 +31,7 @@ class ServiceCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<Servic
     void computeRead();
     void tick();
 
-    private:
+private:
     void onIdleState();
     void onReadingState();
     void onSendingState();
