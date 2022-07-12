@@ -2,13 +2,17 @@
 #include "garden-controller/utilites/CommunicationUtilities.h"
 
 void ApplicationCommunicatorTask::init() {
-    this->bluetooth->begin(9600);
+    this->bluetooth->init();
 }
 
 void ApplicationCommunicatorTask::computeRead() {
-    if (bluetooth->available()) {
-        this->message = bluetooth->readStringUntil('\n');
-        this->message.replace("\r", "");
+    if (this->bluetooth->isMsgAvailable()) {
+        Msg* msg = this->bluetooth->receiveMsg();
+        this->message = msg->getContent();
+        delete msg;
+    }
+    else {
+        this->message = "";
     }
 }
 
@@ -33,20 +37,28 @@ void ApplicationCommunicatorTask::onIdleState() {
 void ApplicationCommunicatorTask::onReadingState() {
     if (isMessagePresent()) {
         if (CommunicationUtilities::isUpdateMessage(message)) {
-            UpdateMessage updateMessage = CommunicationUtilities::getUpdateMessage(message);
-            this->appData->update(updateMessage.digitalLed1active, updateMessage.digitalLed2active, updateMessage.analogLed1value, updateMessage.analogLed2value, updateMessage.irrigatorValue);
+            UpdateMessage* updateMessage = CommunicationUtilities::getUpdateMessage(message);
+            this->appData->update(updateMessage->digitalLed1active, updateMessage->digitalLed2active, updateMessage->analogLed1value, updateMessage->analogLed2value, updateMessage->irrigatorValue);
+            delete updateMessage;
         }
         else if (CommunicationUtilities::isCommandMessage(message)) {
-            CommandMessage commandMessage = CommunicationUtilities::getCommandMessage(message);
-            switch (commandMessage.command)
+            CommandMessage* commandMessage = CommunicationUtilities::getCommandMessage(message);
+            switch (commandMessage->command)
             {
             case Commands::OPEN_IRRIGATOR:
-                getMessageBus()->push(MessageType::NOTIFY_OPEN_IRRIGATOR);
+                if (!appData->isIrrigatorOpen() && !this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_OPEN_IRRIGATOR)) {
+                    this->getMessageBus()->push(MessageType::NOTIFY_OPEN_IRRIGATOR);
+                }
                 break;
             case Commands::CLOSE_IRRIGATOR:
-                getMessageBus()->push(MessageType::NOTIFY_CLOSE_IRRIGATOR);
+                if (appData->isIrrigatorOpen() && !this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_CLOSE_IRRIGATOR)) {
+                    this->getMessageBus()->push(MessageType::NOTIFY_CLOSE_IRRIGATOR);
+                }
+                break;
+            default:
                 break;
             }
+            delete commandMessage;
         }
     }
 

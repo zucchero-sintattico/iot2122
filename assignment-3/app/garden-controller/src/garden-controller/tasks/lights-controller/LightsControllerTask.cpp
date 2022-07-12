@@ -35,7 +35,7 @@ void LightsControllerTask::onWorkingState() {
     else {
         this->digitalLed1->setActive(this->appData->isDigitalLed1Active());
         this->digitalLed2->setActive(this->appData->isDigitalLed2Active());
-        this->analogLed1->setValue(this->appData->getAnalogLed1Value());
-        this->analogLed2->setValue(this->appData->getAnalogLed2Value());
+        this->analogLed1->setValue(map(this->appData->getAnalogLed1Value(), 0, 4, 0, 255));
+        this->analogLed2->setValue(map(this->appData->getAnalogLed2Value(), 0, 4, 0, 255));
     }
 }

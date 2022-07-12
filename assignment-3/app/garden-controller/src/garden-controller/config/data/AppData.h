@@ -11,7 +11,7 @@ enum Status : uint8_t {
 
 class AppData {
 
-    private:
+private:
     Status status = Status::AUTO;
 
     bool _isDigitalLed1Active = false;
@@ -21,10 +21,17 @@ class AppData {
     uint8_t analogLed2Value = 0; // 0 - 4 to be mapped to 0 - 255
 
     bool _isIrrigatorOpen = false;
-    uint8_t irrigationSpeed = 0; // 0 - 4
+    uint8_t irrigationSpeed = 1; // 1 - 5
 
+public:
 
-    public:
+    AppData() {
+
+    }
+    AppData(Status initialStatus) {
+        this->status = initialStatus;
+    }
+
     Status getStatus() {
         return status;
     }
@@ -88,7 +95,6 @@ class AppData {
         this->setAnalogLed2Value(analogLed2Value);
         this->setIrrigationSpeed(irrigationSpeed);
     }
-
 };
 
 #endif

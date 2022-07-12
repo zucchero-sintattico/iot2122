@@ -12,7 +12,7 @@ struct UpdateMessage {
     uint8_t irrigatorValue;
 };
 
-enum Commands {
+enum Commands : uint8_t {
     OPEN_IRRIGATOR,
     CLOSE_IRRIGATOR,
 };
@@ -42,13 +42,13 @@ public:
         return message.startsWith("UPDATE:");
     }
 
-    static UpdateMessage getUpdateMessage(String message) {
-        UpdateMessage updateMessage;
-        updateMessage.digitalLed1active = message.charAt(7) == '1';
-        updateMessage.digitalLed2active = message.charAt(9) == '1';
-        updateMessage.analogLed1value = message.charAt(11) - '0';
-        updateMessage.analogLed2value = message.charAt(13) - '0';
-        updateMessage.irrigatorValue = message.charAt(15) - '0';
+    static UpdateMessage* getUpdateMessage(String message) {
+        UpdateMessage* updateMessage = new UpdateMessage();
+        updateMessage->digitalLed1active = message.charAt(7) == '1';
+        updateMessage->digitalLed2active = message.charAt(9) == '1';
+        updateMessage->analogLed1value = message.charAt(11) - '0';
+        updateMessage->analogLed2value = message.charAt(13) - '0';
+        updateMessage->irrigatorValue = message.charAt(15) - '0';
         return updateMessage;
     }
 
@@ -56,14 +56,14 @@ public:
         return message.startsWith("COMMAND:");
     }
 
-    static CommandMessage getCommandMessage(String message) {
-        CommandMessage commandMessage;
+    static CommandMessage* getCommandMessage(String message) {
+        CommandMessage* commandMessage = new CommandMessage();
         String commandString = message.substring(8);
-        if (commandString == "OPEN_IRRIGATOR") {
-            commandMessage.command = OPEN_IRRIGATOR;
+        if (commandString.equals("OPEN_IRRIGATOR")) {
+            commandMessage->command = OPEN_IRRIGATOR;
         }
-        else if (commandString == "CLOSE_IRRIGATOR") {
-            commandMessage.command = CLOSE_IRRIGATOR;
+        else if (commandString.equals("CLOSE_IRRIGATOR")) {
+            commandMessage->command = CLOSE_IRRIGATOR;
         }
         return commandMessage;
     }
