@@ -16,7 +16,7 @@ enum class IrrigationControllerTaskState : uint8_t {
 
 class IrrigationControllerTask : public CommunicablePeriodBasedTaskWithFSM<IrrigationControllerTaskState, MessageType> {
 
-    private:
+private:
     int _period = 100;
 
     AppData* appData;
@@ -32,19 +32,20 @@ class IrrigationControllerTask : public CommunicablePeriodBasedTaskWithFSM<Irrig
     long openTimestamp = 0;
     long closeTimestamp = 0;
 
-    public:
+public:
     IrrigationControllerTask(AppData* appData, Device* device) : CommunicablePeriodBasedTaskWithFSM(IrrigationControllerTaskState::OPEN) {
         PeriodBasedTask::setPeriod(this->_period);
         this->appData = appData;
         this->motor = device->getMotor();
         this->openTimestamp = millis();
+        this->appData->setIrrigatorOpen(true);
     }
 
     void init();
     void computeRead();
     void tick();
 
-    private:
+private:
     void onOpenState();
     void onClosedState();
     void onIdleState();

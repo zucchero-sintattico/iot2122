@@ -37,7 +37,7 @@ struct StatusUpdateMessage
 
 class CommunicationUtilities {
 
-    public:
+public:
     static bool isUpdateMessage(String message) {
         return message.startsWith("UPDATE:");
     }
@@ -90,10 +90,15 @@ class CommunicationUtilities {
     static String getStatusMessageFromAppData(AppData* appData) {
         String statusMessage = "STATUS:";
         statusMessage += appData->isDigitalLed1Active() ? "1" : "0";
+        statusMessage += ",";
         statusMessage += appData->isDigitalLed2Active() ? "1" : "0";
+        statusMessage += ",";
         statusMessage += appData->getAnalogLed1Value();
+        statusMessage += ",";
         statusMessage += appData->getAnalogLed2Value();
+        statusMessage += ",";
         statusMessage += appData->isIrrigatorOpen() ? "1" : "0";
+        statusMessage += ",";
         statusMessage += appData->getIrrigationSpeed();
         return statusMessage;
     }

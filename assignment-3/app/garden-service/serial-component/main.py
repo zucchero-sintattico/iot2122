@@ -14,17 +14,15 @@ def update_status_handler(message):
     print(f"Update status : {message}")
 
 def serial_loop():
-    connection = serial.Serial(port = 'COM3', baudrate = 9600)
+    connection = serial.Serial(port = '/dev/ttyS4', baudrate = 9600)
     while True:
-        message = connection.readline()
-        message_type, content = message.split(":")
+        message = connection.readline().decode()
+        if message.startswith("STATUS"):
+            print(f"Message from serial: {message}")
+            content = message.split(":")[1]
+
 
 if __name__ == '__main__':
     pubsub.subscribe(topic = "update-strategy", handler = update_strategy_handler)
     pubsub.subscribe(topic = "update-status", handler = update_status_handler)
-    #serial_loop()
-    while True:
-        pubsub.publish("update-strategy", "test")
-        sleep(.5)
-        pubsub.publish("update-status", "test")
-        sleep(.5)
+    serial_loop()
