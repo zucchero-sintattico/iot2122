@@ -4,9 +4,9 @@ from time import sleep
 from redis_pubsub_wrapper import RedisPubSubWrapper
 
  
-db = redis.Redis("localhost")
+db = redis.Redis("redis")
 pubsub = RedisPubSubWrapper(db)
-connection = serial.Serial(port = '/dev/ttyS4', baudrate = 9600)
+connection = serial.Serial(port = '/dev/tty', baudrate = 9600)
 
 def update_strategy_handler(message):
     strategy = json.loads(message)
