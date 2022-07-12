@@ -44,11 +44,11 @@ public:
 
     static UpdateMessage getUpdateMessage(String message) {
         UpdateMessage updateMessage;
-        updateMessage.digitalLed1active = message.substring(7, 8) == "1";
-        updateMessage.digitalLed2active = message.substring(8, 9) == "1";
-        updateMessage.analogLed1value = message.substring(9, 10).toInt();
-        updateMessage.analogLed2value = message.substring(10, 11).toInt();
-        updateMessage.irrigatorValue = message.substring(11, 12).toInt();
+        updateMessage.digitalLed1active = message.charAt(7) == '1';
+        updateMessage.digitalLed2active = message.charAt(9) == '1';
+        updateMessage.analogLed1value = message.charAt(11) - '0';
+        updateMessage.analogLed2value = message.charAt(13) - '0';
+        updateMessage.irrigatorValue = message.charAt(15) - '0';
         return updateMessage;
     }
 
@@ -69,12 +69,12 @@ public:
     }
 
     static bool isStatusUpdateMessage(String message) {
-        return message.startsWith("STATUS_UPDATE:");
+        return message.startsWith("STATUS_CHANGE:");
     }
 
     static StatusUpdateMessage getStatusUpdateMessage(String message) {
         StatusUpdateMessage statusUpdateMessage;
-        String messageStatus = message.substring(13);
+        String messageStatus = message.substring(14);
         if (messageStatus == "AUTO") {
             statusUpdateMessage.status = Status::AUTO;
         }
@@ -93,13 +93,13 @@ public:
         statusMessage += ",";
         statusMessage += appData->isDigitalLed2Active() ? "1" : "0";
         statusMessage += ",";
-        statusMessage += appData->getAnalogLed1Value();
+        statusMessage += String(appData->getAnalogLed1Value());
         statusMessage += ",";
-        statusMessage += appData->getAnalogLed2Value();
+        statusMessage += String(appData->getAnalogLed2Value());
         statusMessage += ",";
         statusMessage += appData->isIrrigatorOpen() ? "1" : "0";
         statusMessage += ",";
-        statusMessage += appData->getIrrigationSpeed();
+        statusMessage += String(appData->getIrrigationSpeed());
         return statusMessage;
     }
 };
