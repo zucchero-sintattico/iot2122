@@ -13,6 +13,9 @@ void ServiceCommunicatorTask::computeRead() {
         this->message = String(msg->getContent());
         delete msg;
     }
+    else {
+        this->message = "";
+    }
 }
 
 void ServiceCommunicatorTask::tick() {
@@ -52,8 +55,9 @@ void ServiceCommunicatorTask::onReadingState() {
             this->appData->setStatus(status);
         }
         else if (CommunicationUtilities::isUpdateMessage(message)) {
-            UpdateMessage updateMessage = CommunicationUtilities::getUpdateMessage(message);
-            this->appData->update(updateMessage.digitalLed1active, updateMessage.digitalLed2active, updateMessage.analogLed1value, updateMessage.analogLed2value, updateMessage.irrigatorValue);
+            UpdateMessage* updateMessage = CommunicationUtilities::getUpdateMessage(message);
+            this->appData->update(updateMessage->digitalLed1active, updateMessage->digitalLed2active, updateMessage->analogLed1value, updateMessage->analogLed2value, updateMessage->irrigatorValue);
+            delete updateMessage;
         }
     }
 

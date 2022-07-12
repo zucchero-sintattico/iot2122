@@ -4,7 +4,7 @@
 #include "iot/finite-state-machine/CommunicablePeriodBasedTaskWithFSM.h"
 #include <Arduino.h>
 #include <SoftwareSerial.h>
-#include "iot/utils/serial/MsgService.h"
+#include "iot/utils/bluetooth/MsgServiceBT.h"
 #include "garden-controller/config/data/AppData.h"
 #include "garden-controller/config/MessageType.h"
 #include "garden-controller/tasks/service-communicator/ServiceCommunicatorTask.h"
@@ -16,25 +16,26 @@ enum class ApplicationCommunicatorTaskState : uint8_t {
 
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
 
-    private:
+private:
     int _period = 500;
     AppData* appData;
     String message;
-    SoftwareSerial* bluetooth;
+    MsgServiceBT* bluetooth;
 
-    public:
+
+public:
 
     ApplicationCommunicatorTask(AppData* appdata, uint8_t rxPin, uint8_t txPin) : CommunicablePeriodBasedTaskWithFSM(ApplicationCommunicatorTaskState::IDLE) {
         PeriodBasedTask::setPeriod(this->_period);
         this->appData = appdata;
-        this->bluetooth = new SoftwareSerial(rxPin, txPin);
+        this->bluetooth = new MsgServiceBT(txPin, rxPin);
     }
 
     void init();
     void computeRead();
     void tick();
 
-    private:
+private:
     void onIdleState();
     void onReadingState();
 

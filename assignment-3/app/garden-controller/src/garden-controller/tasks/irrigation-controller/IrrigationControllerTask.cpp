@@ -48,53 +48,43 @@ void IrrigationControllerTask::onIdleState() {
 // Utils
 
 bool IrrigationControllerTask::hasToBeClosed() {
-    switch (getState())
-    {
-    case IrrigationControllerTaskState::CLOSED:
+    if (getState() == IrrigationControllerTaskState::CLOSED || getState() == IrrigationControllerTaskState::IDLE) {
         return false;
-    case IrrigationControllerTaskState::IDLE:
-        return false;
-    case IrrigationControllerTaskState::OPEN:
-        switch (appData->getStatus())
-        {
-        case Status::ALARM:
-            return false;
-        case Status::AUTO:
-            long elapsedTimeSinceOpened = millis() - this->openTimestamp;
-            return elapsedTimeSinceOpened > this->OPEN_TIME_MILLISECONDS;
-        case Status::MANUAL:
-            bool isThereCommand = getMessageBus()->isMessagePresent(MessageType::NOTIFY_CLOSE_IRRIGATOR);
-            if (isThereCommand) {
-                getMessageBus()->removeMessage(MessageType::NOTIFY_CLOSE_IRRIGATOR);
-            }
-            return isThereCommand;
-        }
     }
+    if (appData->getStatus() == ALARM) {
+        return true;
+    }
+    if (appData->getStatus() == AUTO) {
+        long elapsedTimeSinceOpened = millis() - this->openTimestamp;
+        return elapsedTimeSinceOpened > this->OPEN_TIME_MILLISECONDS;
+    }
+    bool isThereCommand = this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_CLOSE_IRRIGATOR);
+    if (isThereCommand) {
+        this->getMessageBus()->removeMessage(MessageType::NOTIFY_CLOSE_IRRIGATOR);
+    }
+    return isThereCommand;
 }
 
 bool IrrigationControllerTask::hasToBeOpened() {
-    switch (getState())
-    {
-    case IrrigationControllerTaskState::IDLE:
-        return this->appData->getStatus() == Status::AUTO;
-    case IrrigationControllerTaskState::OPEN:
+    if (getState() == IrrigationControllerTaskState::OPEN) {
         return false;
-    case IrrigationControllerTaskState::CLOSED:
-        switch (appData->getStatus())
-        {
-        case Status::AUTO:
-            long elapsedTimeSinceOpened = millis() - this->closeTimestamp;
-            return elapsedTimeSinceOpened > this->CLOSED_TIME_MILLISECONDS;
-        case Status::MANUAL:
-            bool isThereCommand = getMessageBus()->isMessagePresent(MessageType::NOTIFY_OPEN_IRRIGATOR);
-            if (isThereCommand) {
-                getMessageBus()->removeMessage(MessageType::NOTIFY_OPEN_IRRIGATOR);
-            }
-            return isThereCommand;
-        case Status::ALARM:
-            return false;
-        }
     }
+    if (getState() == IrrigationControllerTaskState::IDLE) {
+        return this->appData->getStatus() == Status::AUTO;
+    }
+    if (appData->getStatus() == ALARM) {
+        return false;
+    }
+    if (appData->getStatus() == AUTO) {
+        long elapsedTimeSinceOpened = millis() - this->closeTimestamp;
+        return elapsedTimeSinceOpened > this->CLOSED_TIME_MILLISECONDS;
+    }
+    bool isThereCommand = this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_OPEN_IRRIGATOR);
+    if (isThereCommand) {
+        this->getMessageBus()->removeMessage(MessageType::NOTIFY_OPEN_IRRIGATOR);
+    }
+    return isThereCommand;
+
 }
 
 void IrrigationControllerTask::rotate() {
@@ -118,6 +108,6 @@ void IrrigationControllerTask::changeStateToOpen() {
 
 void IrrigationControllerTask::changeStateToClosed() {
     this->appData->setIrrigatorOpen(false);
-    closeTimestamp = millis();
+    this->closeTimestamp = millis();
     setState(IrrigationControllerTaskState::CLOSED);
 }

@@ -5,10 +5,9 @@
 
 template<typename M>
 class MessageBus {
-    private:
-    List<M>* messages = new List<M>();
-    public:
+public:
 
+    List<M>* messages = new List<M>();
     void push(M message) {
         messages->add(message);
     }

@@ -8,6 +8,7 @@
 #include "garden-controller/tasks/irrigation-controller/IrrigationControllerTask.h"
 #include "garden-controller/tasks/service-communicator/ServiceCommunicatorTask.h"
 #include "garden-controller/tasks/application-communicator/ApplicationCommunicatorTask.h"
+#include "garden-controller/tasks/memory-check/MemoryCheckTask.h"
 
 // Configurations import
 #include "garden-controller/config/data/AppData.h"
@@ -23,7 +24,7 @@
 #define analogLed2Pin 6
 #define bluetoothTxPin 7
 #define bluetoothRxPin 8
-#define servoPin 9
+#define servoPin 11
 
 DeviceBuilder* builder = new DeviceBuilder();
 Device* device = builder
@@ -35,24 +36,26 @@ Device* device = builder
 ->build();
 
 // Application data
-AppData* appData = new AppData();
+AppData* appData = new AppData(Status::MANUAL);
 
 // Scheduler and Tasks configurations
-Scheduler* scheduler = new Scheduler();
+SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>();
 
 // App Tasks
 LightsControllerTask* lightsControllerTask = new LightsControllerTask(appData, device);
 IrrigationControllerTask* irrigationControllerTask = new IrrigationControllerTask(appData, device);
 ServiceCommunicatorTask* serviceCommunicatorTask = new ServiceCommunicatorTask(appData);
 ApplicationCommunicatorTask* applicationCommunicatorTask = new ApplicationCommunicatorTask(appData, bluetoothRxPin, bluetoothTxPin);
+MemoryCheckTask* memoryCheckTask = new MemoryCheckTask();
 
 
-#define N_TASKS 4
+#define N_TASKS 5
 CommunicablePeriodBasedTask<MessageType>* tasks[N_TASKS] = {
     lightsControllerTask,
     irrigationControllerTask,
     serviceCommunicatorTask,
-    applicationCommunicatorTask
+    applicationCommunicatorTask,
+    memoryCheckTask
 };
 
 void setup() {

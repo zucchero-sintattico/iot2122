@@ -23,12 +23,12 @@ private:
     // Actuators
     Motor* motor;
 
-    uint8_t angle = 0;
-    uint8_t direction = 1;
+    int angle = 0;
+    int direction = 1;
 
     // Constants
     const long OPEN_TIME_MILLISECONDS = 5000;
-    const long CLOSED_TIME_MILLISECONDS = 30000;
+    const long CLOSED_TIME_MILLISECONDS = 5000;
     long openTimestamp = 0;
     long closeTimestamp = 0;
 

@@ -6,7 +6,7 @@ from redis_pubsub_wrapper import RedisPubSubWrapper
  
 db = redis.Redis("localhost")
 pubsub = RedisPubSubWrapper(db)
-connection = serial.Serial(port = '/dev/ttyS4', baudrate = 9600)
+connection = serial.Serial(port = '/dev/ttyS8', baudrate = 9600)
 
 def update_strategy_handler(message):
     strategy = json.loads(message)
@@ -59,9 +59,9 @@ def simulator():
         update_strategy_handler(json.dumps({
             "led1": random.randint(0, 1),
             "led2": random.randint(0, 1),
-            "led3": random.randint(0, 4),
+            "led3": 4,
             "led4": random.randint(0, 4),
-            "irrigator_speed": random.randint(0, 4)
+            "irrigator_speed": random.randint(1, 5)
         }))
         
 if __name__ == '__main__':
