@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-07-13T10:44:58.264Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15" etag="sMMjHWTj0Q2BmbgpK9dR" version="20.0.4" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-07-13T14:01:33.739Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" etag="Wh3qCXsn7OItJ680GtJD" version="20.1.1" type="github" pages="5">
   <diagram id="2ojkydB_dnCSdHN7llEG" name="Sensorboard">
-    <mxGraphModel dx="868" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -104,7 +104,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="kCWpxkEZAk7PiwnZEdrO" name="Controller">
-    <mxGraphModel dx="868" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -278,29 +278,30 @@
         <mxCell id="Ye4sQjC4q-f8coWKlTaH-2" value="Period = boh" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="Ye4sQjC4q-f8coWKlTaH-1" vertex="1">
           <mxGeometry y="25" width="90" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Ye4sQjC4q-f8coWKlTaH-3" value="if AUTO after X minutes&lt;br&gt;if MANUAL on command" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontSize=12;" parent="Ye4sQjC4q-f8coWKlTaH-1" source="Ye4sQjC4q-f8coWKlTaH-6" edge="1">
-          <mxGeometry relative="1" as="geometry">
+        <mxCell id="Ye4sQjC4q-f8coWKlTaH-3" value="after X minutes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fontSize=12;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="Ye4sQjC4q-f8coWKlTaH-1" source="Ye4sQjC4q-f8coWKlTaH-6" edge="1" target="_QGMhw0YLeXMjQ4noaQ5-1">
+          <mxGeometry x="-0.485" relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="309" y="415" />
-              <mxPoint x="309" y="111" />
+              <mxPoint x="230" y="370" />
+              <mxPoint x="230" y="370" />
             </Array>
             <mxPoint x="260" y="111" as="targetPoint" />
+            <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Ye4sQjC4q-f8coWKlTaH-6" value="CLOSED&lt;br&gt;entry / notify service" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="Ye4sQjC4q-f8coWKlTaH-1" vertex="1">
-          <mxGeometry x="164" y="370" width="90" height="90" as="geometry" />
+          <mxGeometry x="184.5" y="390" width="90" height="90" as="geometry" />
         </mxCell>
         <mxCell id="Ye4sQjC4q-f8coWKlTaH-7" value="if AUTO after Y seconds&lt;br&gt;if MANUAL on command&lt;br&gt;on ALARM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" parent="Ye4sQjC4q-f8coWKlTaH-1" source="Ye4sQjC4q-f8coWKlTaH-9" target="Ye4sQjC4q-f8coWKlTaH-6" edge="1">
           <mxGeometry x="0.0615" y="10" relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="109" y="110" />
-              <mxPoint x="109" y="415" />
+              <mxPoint x="79" y="111" />
+              <mxPoint x="79" y="435" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Ye4sQjC4q-f8coWKlTaH-9" value="OPEN&lt;br&gt;entry / notify service&lt;br&gt;do / irrigate at &lt;br&gt;speed Z" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="Ye4sQjC4q-f8coWKlTaH-1" vertex="1">
-          <mxGeometry x="159.5" y="61" width="99" height="99" as="geometry" />
+          <mxGeometry x="180" y="61" width="99" height="99" as="geometry" />
         </mxCell>
         <mxCell id="Ye4sQjC4q-f8coWKlTaH-10" value="Z = speed read from AppData" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="Ye4sQjC4q-f8coWKlTaH-1" vertex="1">
           <mxGeometry x="249" y="25" width="180" height="30" as="geometry" />
@@ -311,6 +312,12 @@
               <mxPoint y="96" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="_QGMhw0YLeXMjQ4noaQ5-2" value="if AUTO on &lt;br&gt;OPEN COMMAND from serrvice&lt;br style=&quot;font-size: 12px;&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;if MANUAL on &lt;br&gt;command from bluetooth&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="Ye4sQjC4q-f8coWKlTaH-1" source="_QGMhw0YLeXMjQ4noaQ5-1" target="Ye4sQjC4q-f8coWKlTaH-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_QGMhw0YLeXMjQ4noaQ5-1" value="IDLE&lt;br&gt;enter / notify ready" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="Ye4sQjC4q-f8coWKlTaH-1">
+          <mxGeometry x="180" y="240" width="99" height="99" as="geometry" />
         </mxCell>
         <mxCell id="sydxoKRYor-evhbU5duA-15" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" parent="1" source="sydxoKRYor-evhbU5duA-1" target="sydxoKRYor-evhbU5duA-1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
