@@ -5,9 +5,9 @@
 #include "garden-sensorboard/device/DeviceBuilder.h"
 #include "./config.h"
 
-#define LED_PIN 2
-#define PHOTORESISTOR_PIN 34
-#define THERMOMETER_PIN 35
+#define LED_PIN 19
+#define PHOTORESISTOR_PIN 13
+#define THERMOMETER_PIN 14
 
 WiFiClient wifi;
 PubSubClient mqtt(wifi);
@@ -20,33 +20,33 @@ Device* device = builder
 ->build();
 
 void setup_wifi() {
-    delay(10);
+  delay(10);
 
-    Serial.println(String("Connecting to ") + ssid);
+  Serial.println(String("Connecting to ") + ssid);
 
-    WiFi.mode(WIFI_STA);
-    WiFi.begin(ssid, password);
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
 
-    while (WiFi.status() != WL_CONNECTED) {
-      delay(500);
-      Serial.print(".");
-    }
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
 
-    Serial.println("");
-    Serial.println("WiFi connected");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
 }
 
 void reconnect() {
-  
+
   // Loop until we're reconnected
-  
+
   while (!mqtt.connected()) {
     Serial.print("Attempting MQTT connection...");
-    
+
     // Create a random client ID
-    String clientId = String("esiot-2122-client-")+String(random(0xffff), HEX);
+    String clientId = String("esiot-2122-client-") + String(random(0xffff), HEX);
 
     // Attempt to connect
     if (mqtt.connect(clientId.c_str())) {
@@ -55,7 +55,8 @@ void reconnect() {
       // client.publish("outTopic", "hello world");
       // ... and resubscribe
       mqtt.subscribe("smartgarden/status");
-    } else {
+    }
+    else {
       Serial.print("failed, rc=");
       Serial.print(mqtt.state());
       Serial.println(" try again in 5 seconds");
@@ -66,40 +67,41 @@ void reconnect() {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
-    Serial.print(length);
-    if (strncmp((char *)payload, "ALARM", length) == 0) {
-        device->getDigitalLed()->setActive(false);
-    } else {
-        device->getDigitalLed()->setActive(true);
-    }
+  Serial.print(length);
+  if (strncmp((char*)payload, "ALARM", length) == 0) {
+    device->getDigitalLed()->setActive(false);
+  }
+  else {
+    device->getDigitalLed()->setActive(true);
+  }
 }
 
-void setup(){
-    Serial.begin(115200);
+void setup() {
+  Serial.begin(115200);
 
-    setup_wifi();
-    randomSeed(micros());
-    mqtt.setServer(mqtt_server, 1883);
-    mqtt.setCallback(callback);
+  setup_wifi();
+  randomSeed(micros());
+  mqtt.setServer(mqtt_server, 1883);
+  mqtt.setCallback(callback);
 
-    device->setup();
+  device->setup();
 }
 
 
 unsigned long lastMsgTime = 0;
 void loop() {
-    if (!mqtt.connected()) {
-        reconnect();
-    }
-    mqtt.loop();
+  if (!mqtt.connected()) {
+    reconnect();
+  }
+  mqtt.loop();
 
-    unsigned long now = millis();
-    if (now - lastMsgTime > 1000) {
-        lastMsgTime = now;
-        device->computeRead();
+  unsigned long now = millis();
+  if (now - lastMsgTime > 1000) {
+    lastMsgTime = now;
+    device->computeRead();
 
-        String message = "{\"temperature\":" + String(device->getThermometer()->getTemperature()) + ",\"light\":" + String(device->getPhotoresistor()->getLight()) + "}";
+    String message = "{\"temperature\":" + String(device->getThermometer()->getTemperature()) + ",\"light\":" + String(device->getPhotoresistor()->getLight()) + "}";
 
-        mqtt.publish("smart-garden/sensorboard", message.c_str());
-    }
+    mqtt.publish("smart-garden/sensorboard", message.c_str());
+  }
 }

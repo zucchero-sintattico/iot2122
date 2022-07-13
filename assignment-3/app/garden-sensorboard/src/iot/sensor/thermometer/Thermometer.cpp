@@ -10,10 +10,10 @@ void Thermometer::setup() {
 }
 
 void Thermometer::computeRead() {
-    int current_temperature = analogRead(this->pin);
-    float voltage = current_temperature * AREF_VOLTAGE;
-    voltage /= 1024.0;
+    float voltage = analogRead(this->pin);
+    voltage /= 1023.0;
     temperature = (voltage - 0.5) * 100;
+    temperature = map(temperature, 10, 60, 0, 4);
 }
 
 uint8_t Thermometer::getTemperature() {

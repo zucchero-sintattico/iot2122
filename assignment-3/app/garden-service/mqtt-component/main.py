@@ -1,23 +1,29 @@
-import redis, json
+import redis
+import json
 import paho.mqtt.client as mqtt
 from threading import Thread
 from config import Config
+from lib.logger import Logger
 
+logger = Logger("MQTT Component")
 db = redis.Redis(host=Config.redis.host)
 mqtt = mqtt.Client()
 
+
 def on_mqtt_message(client, userdata, msg):
     data = json.loads(str(msg.payload.decode("utf-8")))
+    logger.log(f"Message received: {data}")
     if msg.topic == Config.mqtt.sensorboard and Config.temperature in data and Config.light in data:
         db.set(Config.temperature, data[Config.temperature])
         db.set(Config.light, data[Config.light])
         db.publish(
             Config.redis.sensorboard,
             json.dumps({
-                Config.temperature: data[Config.temperature], 
+                Config.temperature: data[Config.temperature],
                 Config.light: data[Config.light]
             })
         )
+
 
 def redis_listener_thread():
     pubsub = db.pubsub()
@@ -26,6 +32,7 @@ def redis_listener_thread():
         message = pubsub.get_message()
         if message and message["type"] == "message":
             mqtt.publish(Config.mqtt.status, message["data"].decode("utf-8"))
+
 
 if __name__ == '__main__':
     try:

@@ -55,7 +55,6 @@ def serial_loop():
             continue
         if message.startswith("STATUS"):
             content = message.split(":")[1]
-            logger.log(f"New status received: {content}")
             l1, l2, l3, l4, irrigator_open, irrigator_speed = content.split(
                 ",")
             update_values_to_db(
