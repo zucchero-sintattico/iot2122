@@ -5,18 +5,19 @@ import random
 from threading import Thread
 from time import sleep
 from lib.redis_pubsub_wrapper import RedisPubSubWrapper
+from lib.logger import Logger
 
-
-db = redis.Redis("redis")
+logger = Logger("Serial Component")
+db = redis.Redis("localhost")
 pubsub = RedisPubSubWrapper(db)
-connection = serial.Serial(port='/dev/tty', baudrate=9600)
+connection = serial.Serial(port='COM8', baudrate=9600)
 
 
 def update_strategy_handler(message):
     strategy = json.loads(message)
-    print(f"New strategy received: {strategy}")
+    logger.log(f"New strategy received: {strategy}")
     strategy_message = f"UPDATE:{strategy['led1']},{strategy['led2']},{strategy['led3']},{strategy['led4']},{strategy['irrigator_speed']}\n"
-    print(f"Strategy message = {strategy_message}")
+    logger.log(f"Strategy message = {strategy_message}")
     connection.write(strategy_message.encode())
 
 
@@ -54,7 +55,7 @@ def serial_loop():
             continue
         if message.startswith("STATUS"):
             content = message.split(":")[1]
-            print(f"New status received: {content}")
+            logger.log(f"New status received: {content}")
             l1, l2, l3, l4, irrigator_open, irrigator_speed = content.split(
                 ",")
             update_values_to_db(
@@ -77,5 +78,5 @@ def simulator():
 if __name__ == '__main__':
     pubsub.subscribe(topic="update-strategy", handler=update_strategy_handler)
     pubsub.subscribe(topic="update-status", handler=update_status_handler)
-    Thread(target=simulator).start()
+    # Thread(target=simulator).start()
     serial_loop()

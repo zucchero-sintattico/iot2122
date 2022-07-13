@@ -24,17 +24,20 @@ services:
       - redis
       - broker-mqtt
 
-  serial-component:
-    build: 
-      context: ./serial-component
-      dockerfile: ../component.Dockerfile
-    devices:
-      - /dev/tty0:/dev/tty
-    depends_on:
-      - redis
+
+#  serial-component:
+#    build: 
+#      context: ./serial-component
+#      dockerfile: ../component.Dockerfile
+#    devices:
+#      - /dev/tty0:/dev/tty
+#    depends_on:
+#      - redis
 
   redis:
     image: redis:alpine
+    ports:
+      - 6379:6379
 
   broker-mqtt:
     image: eclipse-mosquitto:latest

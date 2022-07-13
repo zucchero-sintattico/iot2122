@@ -2,7 +2,9 @@ import redis
 import json
 from lib.redis_pubsub_wrapper import RedisPubSubWrapper
 from lib.garden_repository import GardenRepository, Status
+from lib.logger import Logger
 
+logger = Logger("Logic Component")
 db = redis.Redis("redis")
 pubsub = RedisPubSubWrapper(db)
 garden_repository = GardenRepository(db)
