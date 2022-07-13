@@ -1,7 +1,5 @@
 import redis, json
-from flask import Flask
-from flask import request
-from flask import Response
+from flask import Flask, request, Response, send_from_directory
 
 db = redis.Redis("localhost")
 app = Flask(__name__)
@@ -19,6 +17,14 @@ def post_status():
         return Response("Status changed\n", mimetype='text/plain', status=200)
     else:
         return Response("Error on status\n", mimetype='text/plain', status=400)
+
+@app.route('/garden-dashboard/<path:path>')
+def send_js(path):
+    return send_from_directory('garden-dashboard', path)
+
+@app.route('/')
+def serve_dashboard():
+    return send_from_directory('garden-dashboard', 'index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
