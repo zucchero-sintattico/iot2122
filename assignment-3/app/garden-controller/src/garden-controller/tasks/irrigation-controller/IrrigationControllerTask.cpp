@@ -17,9 +17,6 @@ void IrrigationControllerTask::tick() {
     case IrrigationControllerTaskState::CLOSED:
         this->onClosedState();
         break;
-    case IrrigationControllerTaskState::IDLE:
-        this->onIdleState();
-        break;
     }
 }
 
@@ -38,17 +35,11 @@ void IrrigationControllerTask::onClosedState() {
     }
 }
 
-void IrrigationControllerTask::onIdleState() {
-    if (hasToBeOpened()) {
-        changeStateToOpen();
-    }
-}
-
 
 // Utils
 
 bool IrrigationControllerTask::hasToBeClosed() {
-    if (getState() == IrrigationControllerTaskState::CLOSED || getState() == IrrigationControllerTaskState::IDLE) {
+    if (getState() == IrrigationControllerTaskState::CLOSED) {
         return false;
     }
     if (appData->getStatus() == ALARM) {
@@ -68,9 +59,6 @@ bool IrrigationControllerTask::hasToBeClosed() {
 bool IrrigationControllerTask::hasToBeOpened() {
     if (getState() == IrrigationControllerTaskState::OPEN) {
         return false;
-    }
-    if (getState() == IrrigationControllerTaskState::IDLE) {
-        return this->appData->getStatus() == Status::AUTO;
     }
     if (appData->getStatus() == ALARM) {
         return false;

@@ -10,8 +10,7 @@
 
 enum class IrrigationControllerTaskState : uint8_t {
     OPEN,
-    CLOSED,
-    IDLE
+    CLOSED
 };
 
 class IrrigationControllerTask : public CommunicablePeriodBasedTaskWithFSM<IrrigationControllerTaskState, MessageType> {
@@ -48,7 +47,6 @@ public:
 private:
     void onOpenState();
     void onClosedState();
-    void onIdleState();
 
     bool hasToBeClosed();
     bool hasToBeOpened();
