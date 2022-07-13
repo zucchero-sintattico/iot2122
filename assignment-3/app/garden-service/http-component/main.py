@@ -1,7 +1,8 @@
+from time import sleep
 import redis, json
 from flask import Flask, request, Response, send_from_directory
 
-db = redis.Redis("localhost")
+db = redis.Redis("redis")
 app = Flask(__name__)
 
 @app.route('/status', methods = ['GET'])
@@ -19,12 +20,55 @@ def post_status():
         return Response("Error on status\n", mimetype='text/plain', status=400)
 
 @app.route('/garden-dashboard/<path:path>')
-def send_js(path):
+def get_dashboard_files(path):
     return send_from_directory('garden-dashboard', path)
+
+@app.route('/dashboard-status', methods = ['GET'])
+def get_dashboard_status():
+    status = db.get('status')
+    temperature = db.get('temperature')
+    light = db.get('light')
+
+    return Response(
+        json.dumps({
+            "status": "error" if status is None else status.decode('utf-8'),
+            "temperature": "error" if temperature is None else temperature.decode('utf-8'),
+            "light": "error" if light is None else light.decode('utf-8')
+            # other data
+        }),
+        mimetype='application/json', 
+        status=200
+    )
 
 @app.route('/')
 def serve_dashboard():
     return send_from_directory('garden-dashboard', 'index.html')
+
+@app.route("/sse")
+def stream():
+    
+    def eventStream():
+        pubsub = db.pubsub()
+        pubsub.subscribe("update-status")
+        pubsub.subscribe("update-controllerStatus")
+        pubsub.subscribe("update-sensorboard")
+
+        while True:
+            message = pubsub.get_message()
+            if message and message["type"] == "message":
+                channel = message["channel"].decode('utf-8')
+                
+                if channel == "update-status":
+                    status = message["data"].decode('utf-8')
+                    yield "data: {}\n\n".format(json.dumps({
+                        "status": status
+                    }))
+                elif channel == "update-sensorboard":
+                    yield "data: {}\n\n".format(json.dumps(json.loads(message["data"].decode('utf-8'))))
+                elif channel == "update-controllerStatus":
+                    yield "data: {}\n\n".format(json.dumps(json.loads(message["data"].decode('utf-8'))))
+    
+    return Response(eventStream(), mimetype="text/event-stream")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
