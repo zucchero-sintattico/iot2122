@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-07-13T09:43:06.021Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15" etag="ZREwL4wmEkppIP9ARRhk" version="20.0.4" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-07-13T09:44:47.087Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15" etag="ZA1t-w4w7edHzTPVH2KV" version="20.0.4" type="github" pages="5">
   <diagram id="2ojkydB_dnCSdHN7llEG" name="Sensorboard">
     <mxGraphModel dx="868" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -591,7 +591,7 @@
         <mxCell id="MDMTUMQE4z3xISqa4Dk_-7" value="PUBLISH:&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt; &lt;/span&gt;update-controllerStatus" style="shape=note;size=20;whiteSpace=wrap;html=1;align=left;verticalAlign=top;" parent="1" vertex="1">
           <mxGeometry x="2655" y="210" width="175" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="MDMTUMQE4z3xISqa4Dk_-8" value="PUBLISH:&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt; &lt;/span&gt;change-status" style="shape=note;size=20;whiteSpace=wrap;html=1;align=left;verticalAlign=top;" parent="1" vertex="1">
+        <mxCell id="MDMTUMQE4z3xISqa4Dk_-8" value="PUBLISH:&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt; &lt;/span&gt;update-status" style="shape=note;size=20;whiteSpace=wrap;html=1;align=left;verticalAlign=top;" parent="1" vertex="1">
           <mxGeometry x="2570" y="1000" width="130" height="70" as="geometry" />
         </mxCell>
         <mxCell id="MDMTUMQE4z3xISqa4Dk_-10" value="SUBSCRIBE:&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt; update-status&lt;br/&gt;&lt;span style=&quot;white-space: pre;&quot;&gt; update-statusController&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt; update-sensorboard&lt;/span&gt;&lt;br/&gt;&lt;/span&gt;" style="shape=note;size=20;whiteSpace=wrap;html=1;align=left;verticalAlign=top;" parent="1" vertex="1">
