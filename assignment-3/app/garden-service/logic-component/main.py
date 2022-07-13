@@ -17,18 +17,19 @@ def on_new_sensorboard_values(message):
     def calculate_strategy(data):
         strategy = dict()
         temperature = int(data["temperature"]) + 1  # 0 - 4 --> 1 - 5
-        light = int(data["light"]) + 1  # 0 - 7 --> 1 - 8
+        light = int(data["light"])  # 0 - 7
         if light < 5:
             strategy["led1"] = 1
             strategy["led2"] = 1
-            strategy["led3"] = 5 - light
-            strategy["led4"] = 5 - light
+            strategy["led3"] = 4 - light
+            strategy["led4"] = 4 - light
         else:
             strategy["led1"] = 0
             strategy["led2"] = 0
             strategy["led3"] = 0
             strategy["led4"] = 0
-        strategy["irrigation_speed"] = temperature
+        strategy["irrigator_speed"] = temperature
+        return strategy
 
     def calculate_status(data):
         temperature = int(data["temperature"]) + 1  # 0 - 4 --> 1 - 5
@@ -38,19 +39,23 @@ def on_new_sensorboard_values(message):
             return garden_repository.get_status()
 
     def publish_strategy(strategy):
-        pubsub.publish("update-strategy", strategy)
+        pubsub.publish("update-strategy", json.dumps(strategy))
 
     def save_status_and_publish_if_different(status):
         if (status != garden_repository.get_status()):
             garden_repository.set_status(status)
-            pubsub.publish("update-status", status)
+            pubsub.publish("update-status", status.toString())
 
     data = unpack_message(message)
+    logger.log(f"Received new sensorboard values: {data}")
     strategy = calculate_strategy(data)
+    logger.log(f"Calculated strategy: {strategy}")
     status = calculate_status(data)
+    logger.log(f"Calculated status: {status}")
     publish_strategy(strategy)
     save_status_and_publish_if_different(status)
 
 
 if __name__ == '__main__':
+    garden_repository.set_status(Status.AUTO)
     pubsub.subscribe("update-sensorboard", on_new_sensorboard_values)
