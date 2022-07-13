@@ -5,14 +5,15 @@ cp -R lib mqtt-component
 if [ $# -eq 0 ]
   then
     docker compose up -d --build
-    exit 0
+  else
+    for service in "$@"
+    do
+        docker compose up -d --build --no-deps $service
+    done
 fi
 
-for service in "$@"
-do
-    docker compose up -d --build --no-deps $service
-done
 
-rm -rf logic-component/lib 
-rm -rf serial-component/lib 
-rm -rf mqtt-component/lib
+
+rm -rf logic-component/lib/
+rm -rf serial-component/lib/ 
+rm -rf mqtt-component/lib/
