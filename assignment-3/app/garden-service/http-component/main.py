@@ -49,18 +49,24 @@ def stream():
     
     def eventStream():
         pubsub = db.pubsub()
-        pubsub.psubscribe("update-*")
+        pubsub.subscribe("update-status")
+        pubsub.subscribe("update-controllerStatus")
+        pubsub.subscribe("update-sensorboard")
 
         while True:
             message = pubsub.get_message()
             if message and message["type"] == "message":
-                # TODO check sse format
-                if message["channel"] == "update-status":
+                channel = message["channel"].decode('utf-8')
+                
+                if channel == "update-status":
+                    status = message["data"].decode('utf-8')
                     yield "data: {}\n\n".format(json.dumps({
-                        "status": message["data"].decode('utf-8')
+                        "status": status
                     }))
-                elif message["channel"] == "update-sensorboard":
-                    yield "data: {}\n\n".format(json.dumps(message["data"].decode('utf-8')))
+                elif channel == "update-sensorboard":
+                    yield "data: {}\n\n".format(json.dumps(json.loads(message["data"].decode('utf-8'))))
+                elif channel == "update-controllerStatus":
+                    yield "data: {}\n\n".format(json.dumps(json.loads(message["data"].decode('utf-8'))))
     
     return Response(eventStream(), mimetype="text/event-stream")
 
