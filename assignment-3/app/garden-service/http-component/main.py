@@ -1,7 +1,8 @@
+from time import sleep
 import redis, json
 from flask import Flask, request, Response, send_from_directory
 
-db = redis.Redis("localhost")
+db = redis.Redis("redis")
 app = Flask(__name__)
 
 @app.route('/status', methods = ['GET'])
@@ -19,12 +20,42 @@ def post_status():
         return Response("Error on status\n", mimetype='text/plain', status=400)
 
 @app.route('/garden-dashboard/<path:path>')
-def send_js(path):
+def get_dashboard_files(path):
     return send_from_directory('garden-dashboard', path)
+
+@app.route('/dashboard-status', methods = ['GET'])
+def get_dashboard_status():
+    return Response(
+        json.dumps({
+            "status": db.get('status'),
+            "temperature": db.get('temperature'),
+            "light": db.get('light')
+            # other data
+        }),
+        mimetype='application/json', 
+        status=200
+    )
 
 @app.route('/')
 def serve_dashboard():
     return send_from_directory('garden-dashboard', 'index.html')
+
+@app.route("/sse")
+def stream():
+    
+    def eventStream():
+        pubsub = db.pubsub()
+        pubsub.subscribe("update-status")
+        while True:
+            message = pubsub.get_message()
+            if message and message["type"] == "message":
+                yield 'data: {}\n\n'.format(json.dumps({
+                    'temperature': db.get('temperature').decode('utf-8'),
+                    'light': db.get('light').decode('utf-8'),
+                    'status': db.get('status').decode('utf-8')
+                }))
+    
+    return Response(eventStream(), mimetype="text/event-stream")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
