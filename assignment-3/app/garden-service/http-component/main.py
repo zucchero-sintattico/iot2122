@@ -25,11 +25,15 @@ def get_dashboard_files(path):
 
 @app.route('/dashboard-status', methods = ['GET'])
 def get_dashboard_status():
+    status = db.get('status')
+    temperature = db.get('temperature')
+    light = db.get('light')
+
     return Response(
         json.dumps({
-            "status": db.get('status'),
-            "temperature": db.get('temperature'),
-            "light": db.get('light')
+            "status": "error" if status is None else status.decode('utf-8'),
+            "temperature": "error" if temperature is None else temperature.decode('utf-8'),
+            "light": "error" if light is None else light.decode('utf-8')
             # other data
         }),
         mimetype='application/json', 
@@ -45,15 +49,18 @@ def stream():
     
     def eventStream():
         pubsub = db.pubsub()
-        pubsub.subscribe("update-status")
+        pubsub.psubscribe("update-*")
+
         while True:
             message = pubsub.get_message()
             if message and message["type"] == "message":
-                yield 'data: {}\n\n'.format(json.dumps({
-                    'temperature': db.get('temperature').decode('utf-8'),
-                    'light': db.get('light').decode('utf-8'),
-                    'status': db.get('status').decode('utf-8')
-                }))
+                # TODO check sse format
+                if message["channel"] == "update-status":
+                    yield "data: {}\n\n".format(json.dumps({
+                        "status": message["data"].decode('utf-8')
+                    }))
+                elif message["channel"] == "update-sensorboard":
+                    yield "data: {}\n\n".format(json.dumps(message["data"].decode('utf-8')))
     
     return Response(eventStream(), mimetype="text/event-stream")
 
