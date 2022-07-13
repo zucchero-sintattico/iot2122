@@ -1,6 +1,5 @@
+import redis, json
 import paho.mqtt.client as mqtt
-import redis
-import json
 from threading import Thread
 from config import Config
 

@@ -29,7 +29,7 @@ services:
       context: ./serial-component
       dockerfile: ../component.Dockerfile
     devices:
-      - /dev/tty
+      - /dev/tty0:/dev/tty
     depends_on:
       - redis
 
