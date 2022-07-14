@@ -1,19 +1,21 @@
 from time import sleep
 import redis, json
 from flask import Flask, request, Response, send_from_directory
+from lib.garden_repository import GardenRepository, Status
 
 db = redis.Redis("localhost")
 app = Flask(__name__)
+garden_repository = GardenRepository(db)
 
 @app.route('/status', methods = ['GET'])
 def get_status():
-    return json.dumps({'status': db.get('status').decode('utf-8')}) + "\n"
+    return json.dumps({'status': garden_repository.get_status()}) + "\n"
 
 @app.route('/status', methods = ['POST'])
 def post_status():
     status = request.get_data().decode('utf-8')
-    if status == 'AUTO' or status == 'MANUAL':
-        db.set('status', status)
+    if status == Status.AUTO or status == Status.MANUAL:
+        garden_repository.set_status(status)
         db.publish('update-status', json.dumps({'status': status}))
         return Response("Status changed\n", mimetype='text/plain', status=200)
     else:
@@ -25,27 +27,18 @@ def get_dashboard_files(path):
 
 @app.route('/dashboard-status', methods = ['GET'])
 def get_dashboard_status():
-    status = db.get('status')
-    temperature = db.get('temperature')
-    light = db.get('light')
-    led1 = db.get('l1')
-    led2 = db.get('l1')
-    led3 = db.get('l1')
-    led4 = db.get('l1')
-    irrigator = db.get('irrigator')
-    irrigator_speed = db.get('irrigator_speed')
 
     return Response(
         json.dumps({
-            "status": "error" if status is None else status.decode('utf-8'),
-            "temperature": "error" if temperature is None else temperature.decode('utf-8'),
-            "light": "error" if light is None else light.decode('utf-8'),
-            "led1": "error" if led1 is None else led1.decode('utf-8'),
-            "led2": "error" if led2 is None else led1.decode('utf-8'),
-            "led3": "error" if led3 is None else led1.decode('utf-8'),
-            "led4": "error" if led4 is None else led1.decode('utf-8'),
-            "irrigator": "error" if irrigator is None else irrigator.decode('utf-8'),
-            "irrigator_speed": "error" if irrigator_speed is None else irrigator_speed.decode('utf-8'),
+            "status": garden_repository.get_status(),
+            "temperature": garden_repository.get_temperature(),
+            "light": garden_repository.get_light(),
+            "led1": garden_repository.get_led_1_value(),
+            "led2": garden_repository.get_led_2_value(),
+            "led3": garden_repository.get_led_3_value(),
+            "led4": garden_repository.get_led_4_value(),
+            "irrigator_status": garden_repository.get_irrigator_status(),
+            "irrigation_speed": garden_repository.get_irrigation_speed()
         }),
         mimetype='application/json', 
         status=200

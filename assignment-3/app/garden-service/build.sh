@@ -1,5 +1,6 @@
 cp -R lib logic-component
 cp -R lib mqtt-component
+cp -R lib http-component
 
 if [ $# -eq 0 ]
   then
@@ -11,5 +12,6 @@ if [ $# -eq 0 ]
     done
 fi
 
+rm -rf http-component/lib/
 rm -rf logic-component/lib/
 rm -rf mqtt-component/lib/
