@@ -3,7 +3,7 @@ import redis, json
 from flask import Flask, request, Response, send_from_directory
 from lib.garden_repository import GardenRepository, Status
 
-db = redis.Redis("localhost")
+db = redis.Redis("redis")
 app = Flask(__name__)
 garden_repository = GardenRepository(db)
 
