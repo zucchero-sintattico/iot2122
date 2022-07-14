@@ -48,6 +48,9 @@ def on_new_sensorboard_values(message):
             garden_repository.set_status(status)
             pubsub.publish_new_status(status)
 
+    if garden_repository.get_status() == Status.ALARM or garden_repository.get_status() == Status.MANUAL:
+        return
+
     data = message
     logger.log(f"Received new sensorboard values: {data}")
     strategy = calculate_strategy(data)

@@ -1,6 +1,7 @@
 services:
 
   http-component:
+    container_name: http-component
     build: 
       context: ./http-component
       dockerfile: ../component.Dockerfile
@@ -10,6 +11,7 @@ services:
       - redis
 
   logic-component:
+    container_name: logic-component
     build: 
       context: ./logic-component
       dockerfile: ../component.Dockerfile
@@ -17,6 +19,7 @@ services:
       - redis
 
   mqtt-component:
+    container_name: mqtt-component
     build: 
       context: ./mqtt-component
       dockerfile: ../component.Dockerfile
@@ -35,11 +38,13 @@ services:
 #      - redis
 
   redis:
+    container_name: redis
     image: redis:alpine
     ports:
       - 6379:6379
 
   broker-mqtt:
+    container_name: broker-mqtt
     image: eclipse-mosquitto:latest
     ports:
       - "1883:1883"
