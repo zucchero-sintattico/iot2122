@@ -1,7 +1,13 @@
 const source = new EventSource("/sse");
 source.onmessage = function(event) {
     var data = JSON.parse(event.data);
-    console.log(data);
+
+    for (let key in data) {
+        switch (key) {
+            case "status": updateStatus(data[key]);
+            default: $("#" + key).text(data[key]);
+        }
+    }
 };
 
 // get request to /dashboard-status
@@ -9,7 +15,7 @@ const dashboardStatus = new XMLHttpRequest();
 dashboardStatus.open("GET", "/dashboard-status");
 dashboardStatus.onload = function() {
     const data = JSON.parse(dashboardStatus.responseText);
-    console.log(data);
+
     $("#status").text(data.status);
     updateStatus(data.status);
     
@@ -21,8 +27,8 @@ dashboardStatus.onload = function() {
     $("#led3").text(data.led3);
     $("#led4").text(data.led4);
 
-    $("#irrigator").text(data.irrigator);
-    $("#irrigator_speed").text(data.irrigator_speed);
+    $("#irrigator_status").text(data.irrigator);
+    $("#irrigation_speed").text(data.irrigator_speed);
 }
 dashboardStatus.send();
 
