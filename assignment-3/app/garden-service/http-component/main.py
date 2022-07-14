@@ -30,14 +30,14 @@ def get_dashboard_status():
 
     return Response(
         json.dumps({
-            "status": garden_repository.get_status(),
+            "status": garden_repository.get_status().toString(),
             "temperature": garden_repository.get_temperature(),
             "light": garden_repository.get_light(),
             "led1": garden_repository.get_led_1_value(),
             "led2": garden_repository.get_led_2_value(),
             "led3": garden_repository.get_led_3_value(),
             "led4": garden_repository.get_led_4_value(),
-            "irrigator_status": garden_repository.get_irrigator_status(),
+            "irrigator_status": garden_repository.get_irrigator_status().toString(),
             "irrigation_speed": garden_repository.get_irrigation_speed()
         }),
         mimetype='application/json', 
