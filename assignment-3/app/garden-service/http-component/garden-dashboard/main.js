@@ -7,6 +7,8 @@ source.onmessage = function(event) {
             case "status": updateStatus(data[key]);
             case "led1": $("#led1").text(data[key] == 1 ? "ON" : "OFF"); break;
             case "led2": $("#led2").text(data[key] == 1 ? "ON" : "OFF"); break;
+            case "led3": $("#led3").text(data[key]*25 + "%"); break;
+            case "led4": $("#led4").text(data[key]*25 + "%"); break;
             default: $("#" + key).text(data[key]);
         }
     }
