@@ -85,6 +85,7 @@ void setup() {
   mqtt.setCallback(callback);
 
   device->setup();
+  device->getDigitalLed()->setActive(true);
 }
 
 
