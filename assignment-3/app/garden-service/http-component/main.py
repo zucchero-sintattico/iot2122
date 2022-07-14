@@ -2,7 +2,7 @@ from time import sleep
 import redis, json
 from flask import Flask, request, Response, send_from_directory
 
-db = redis.Redis("redis")
+db = redis.Redis("localhost")
 app = Flask(__name__)
 
 @app.route('/status', methods = ['GET'])
@@ -28,13 +28,24 @@ def get_dashboard_status():
     status = db.get('status')
     temperature = db.get('temperature')
     light = db.get('light')
+    led1 = db.get('l1')
+    led2 = db.get('l1')
+    led3 = db.get('l1')
+    led4 = db.get('l1')
+    irrigator = db.get('irrigator')
+    irrigator_speed = db.get('irrigator_speed')
 
     return Response(
         json.dumps({
             "status": "error" if status is None else status.decode('utf-8'),
             "temperature": "error" if temperature is None else temperature.decode('utf-8'),
-            "light": "error" if light is None else light.decode('utf-8')
-            # other data
+            "light": "error" if light is None else light.decode('utf-8'),
+            "led1": "error" if led1 is None else led1.decode('utf-8'),
+            "led2": "error" if led2 is None else led1.decode('utf-8'),
+            "led3": "error" if led3 is None else led1.decode('utf-8'),
+            "led4": "error" if led4 is None else led1.decode('utf-8'),
+            "irrigator": "error" if irrigator is None else irrigator.decode('utf-8'),
+            "irrigator_speed": "error" if irrigator_speed is None else irrigator_speed.decode('utf-8'),
         }),
         mimetype='application/json', 
         status=200
