@@ -33,7 +33,8 @@ def redis_listener_thread():
     while True:
         message = pubsub.get_message()
         if message and message["type"] == "message":
-            mqtt.publish(Config.mqtt.status, message["data"].decode("utf-8"))
+            data = json.loads(message["data"].decode("utf-8"))
+            mqtt.publish(Config.mqtt.status, data.get("status"))
 
 
 if __name__ == '__main__':
