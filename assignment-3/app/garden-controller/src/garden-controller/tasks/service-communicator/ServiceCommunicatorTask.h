@@ -16,7 +16,7 @@ enum class ServiceCommunicatorTaskState : uint8_t {
 class ServiceCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ServiceCommunicatorTaskState, MessageType> {
 
 private:
-    int _period = 100;
+    int _period = 50;
     AppData* appData;
     String message;
 

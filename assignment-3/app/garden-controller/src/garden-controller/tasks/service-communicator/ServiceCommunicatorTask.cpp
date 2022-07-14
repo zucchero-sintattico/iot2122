@@ -8,14 +8,18 @@ void ServiceCommunicatorTask::init() {
 }
 
 void ServiceCommunicatorTask::computeRead() {
-    if (MsgService.isMsgAvailable()) {
-        Msg* msg = MsgService.receiveMsg();
-        this->message = String(msg->getContent());
-        delete msg;
+    if (this->getState() == ServiceCommunicatorTaskState::IDLE || this->getState() == ServiceCommunicatorTaskState::READING) {
+        if (MsgService.isMsgAvailable()) {
+            Msg* msg = MsgService.receiveMsg();
+            this->message = String(msg->getContent());
+            delete msg;
+        }
+        else {
+            this->message = "";
+        }
     }
-    else {
-        this->message = "";
-    }
+
+
 }
 
 void ServiceCommunicatorTask::tick() {
