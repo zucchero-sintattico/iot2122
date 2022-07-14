@@ -1,6 +1,6 @@
 from redis import Redis
 from lib.redis_pubsub_wrapper import RedisPubSubWrapper
-from lib.garden_repository import Status
+from lib.garden_repository import Status, RedisKeys
 import json
 
 
@@ -35,7 +35,7 @@ class PubSubRepository:
     def publish_new_status(self, status: Status):
         self.pubsub.publish(
             topic=self.config.new_status_channel,
-            message=json.dumps({"status": status.value})
+            message=json.dumps({RedisKeys.STATUS: status.value})
         )
 
     def set_on_new_status_handler(self, handler):
