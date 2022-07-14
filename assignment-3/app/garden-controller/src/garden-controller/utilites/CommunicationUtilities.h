@@ -27,6 +27,7 @@ struct StatusMessage {
     uint8_t analogLed1value;
     uint8_t analogLed2value;
     bool irrigatorOpen;
+    bool irrigatorReady;
     uint8_t irrigatorValue;
 };
 
@@ -97,7 +98,7 @@ public:
         statusMessage += ",";
         statusMessage += String(appData->getAnalogLed2Value());
         statusMessage += ",";
-        statusMessage += appData->isIrrigatorOpen() ? "1" : "0";
+        statusMessage += appData->getIrrigatorStatus();
         statusMessage += ",";
         statusMessage += String(appData->getIrrigationSpeed());
         return statusMessage;

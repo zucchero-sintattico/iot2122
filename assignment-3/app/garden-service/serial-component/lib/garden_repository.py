@@ -21,6 +21,25 @@ class Status(Enum):
         return self.value
 
 
+class IrrigatorStatus(Enum):
+
+    READY = "READY"
+    OPEN = "OPEN"
+    CLOSED = "CLOSED"
+
+    @staticmethod
+    def fromString(status):
+        if status == "READY":
+            return IrrigatorStatus.READY
+        elif status == "OPEN":
+            return IrrigatorStatus.OPEN
+        else:
+            return IrrigatorStatus.CLOSED
+
+    def toString(self):
+        return self.value
+
+
 class GardenRepository():
 
     def __init__(self, db: redis.Redis):
@@ -86,8 +105,8 @@ class GardenRepository():
     def set_irrigation_speed(self, value: int):
         self.db.set("irrigation_speed", str(value))
 
-    def get_irrigator_open(self):
-        return bool(self.db.get("irrigator_open").decode())
+    def get_irrigator_status(self):
+        return IrrigatorStatus.fromString(self.db.get("irrigator_status").decode())
 
-    def set_irrigator_open(self, value: bool):
-        self.db.set("irrigator_open", str(value))
+    def set_irrigator_status(self, status: IrrigatorStatus):
+        self.db.set("irrigator_status", status.toString())

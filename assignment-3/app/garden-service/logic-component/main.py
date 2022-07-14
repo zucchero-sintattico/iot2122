@@ -1,7 +1,7 @@
 import redis
 import json
 from lib.redis_pubsub_wrapper import RedisPubSubWrapper
-from lib.garden_repository import GardenRepository, Status
+from lib.garden_repository import GardenRepository, Status, IrrigatorStatus
 from lib.logger import Logger
 
 logger = Logger("Logic Component")
@@ -28,6 +28,10 @@ def on_new_sensorboard_values(message):
             strategy["led2"] = 0
             strategy["led3"] = 0
             strategy["led4"] = 0
+        if light < 2 and garden_repository.get_irrigator_status() == IrrigatorStatus.READY:
+            strategy["open_irrigator"] = True
+        else:
+            strategy["open_irrigator"] = False
         strategy["irrigator_speed"] = temperature
         return strategy
 

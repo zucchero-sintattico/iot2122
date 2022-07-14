@@ -59,6 +59,15 @@ void ServiceCommunicatorTask::onReadingState() {
             this->appData->update(updateMessage->digitalLed1active, updateMessage->digitalLed2active, updateMessage->analogLed1value, updateMessage->analogLed2value, updateMessage->irrigatorValue);
             delete updateMessage;
         }
+        else if (CommunicationUtilities::isCommandMessage(message)) {
+            CommandMessage* commandMessage = CommunicationUtilities::getCommandMessage(message);
+            if (commandMessage->command == OPEN_IRRIGATOR) {
+                if (appData->getIrrigatorStatus() == READY && !this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_OPEN_IRRIGATOR)) {
+                    this->getMessageBus()->push(MessageType::NOTIFY_OPEN_IRRIGATOR);
+                }
+            }
+            delete commandMessage;
+        }
     }
 
     if (appData->getStatus() == Status::AUTO) {

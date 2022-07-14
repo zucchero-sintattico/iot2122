@@ -46,12 +46,12 @@ void ApplicationCommunicatorTask::onReadingState() {
             switch (commandMessage->command)
             {
             case Commands::OPEN_IRRIGATOR:
-                if (!appData->isIrrigatorOpen() && !this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_OPEN_IRRIGATOR)) {
+                if (appData->getIrrigatorStatus() == READY && !this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_OPEN_IRRIGATOR)) {
                     this->getMessageBus()->push(MessageType::NOTIFY_OPEN_IRRIGATOR);
                 }
                 break;
             case Commands::CLOSE_IRRIGATOR:
-                if (appData->isIrrigatorOpen() && !this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_CLOSE_IRRIGATOR)) {
+                if (appData->getIrrigatorStatus() == OPEN && !this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_CLOSE_IRRIGATOR)) {
                     this->getMessageBus()->push(MessageType::NOTIFY_CLOSE_IRRIGATOR);
                 }
                 break;

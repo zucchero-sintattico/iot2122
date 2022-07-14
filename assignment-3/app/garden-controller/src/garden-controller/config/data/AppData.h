@@ -9,6 +9,13 @@ enum Status : uint8_t {
     ALARM
 };
 
+enum IrrigatorStatus : uint8_t {
+    READY,
+    OPEN,
+    CLOSED
+};
+
+
 class AppData {
 
 private:
@@ -20,7 +27,7 @@ private:
     uint8_t analogLed1Value = 0; // 0 - 4 to be mapped to 0 - 255
     uint8_t analogLed2Value = 0; // 0 - 4 to be mapped to 0 - 255
 
-    bool _isIrrigatorOpen = false;
+    IrrigatorStatus irrigator_status = READY;
     uint8_t irrigationSpeed = 1; // 1 - 5
 
 public:
@@ -72,20 +79,20 @@ public:
         this->analogLed2Value = value;
     }
 
+    IrrigatorStatus getIrrigatorStatus() {
+        return irrigator_status;
+    }
+
+    void setIrrigatorStatus(IrrigatorStatus status) {
+        this->irrigator_status = status;
+    }
+
     uint8_t getIrrigationSpeed() {
         return irrigationSpeed;
     }
 
     void setIrrigationSpeed(uint8_t speed) {
         this->irrigationSpeed = speed;
-    }
-
-    bool isIrrigatorOpen() {
-        return _isIrrigatorOpen;
-    }
-
-    void setIrrigatorOpen(bool isOpen) {
-        this->_isIrrigatorOpen = isOpen;
     }
 
     void update(bool isDigitalLed1Active, bool isDigitalLed2Active, uint8_t analogLed1Value, uint8_t analogLed2Value, uint8_t irrigationSpeed) {

@@ -9,6 +9,7 @@
 #include <Arduino.h>
 
 enum class IrrigationControllerTaskState : uint8_t {
+    READY,
     OPEN,
     CLOSED
 };
@@ -16,7 +17,7 @@ enum class IrrigationControllerTaskState : uint8_t {
 class IrrigationControllerTask : public CommunicablePeriodBasedTaskWithFSM<IrrigationControllerTaskState, MessageType> {
 
 private:
-    int _period = 100;
+    int _period = 50;
 
     AppData* appData;
     // Actuators
@@ -32,12 +33,12 @@ private:
     long closeTimestamp = 0;
 
 public:
-    IrrigationControllerTask(AppData* appData, Device* device) : CommunicablePeriodBasedTaskWithFSM(IrrigationControllerTaskState::OPEN) {
+    IrrigationControllerTask(AppData* appData, Device* device) : CommunicablePeriodBasedTaskWithFSM(IrrigationControllerTaskState::READY) {
         PeriodBasedTask::setPeriod(this->_period);
         this->appData = appData;
         this->motor = device->getMotor();
         this->openTimestamp = millis();
-        this->appData->setIrrigatorOpen(true);
+        this->appData->setIrrigatorStatus(IrrigatorStatus::READY);
     }
 
     void init();
@@ -45,11 +46,9 @@ public:
     void tick();
 
 private:
+    void onReadyState();
     void onOpenState();
     void onClosedState();
-
-    bool hasToBeClosed();
-    bool hasToBeOpened();
 
     void rotate();
     void changeStateToOpen();

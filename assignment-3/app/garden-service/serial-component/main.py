@@ -6,9 +6,11 @@ from threading import Thread
 from time import sleep
 from lib.redis_pubsub_wrapper import RedisPubSubWrapper
 from lib.logger import Logger
+from lib.garden_repository import GardenRepository, IrrigatorStatus
 
 logger = Logger("Serial Component")
 db = redis.Redis("localhost")
+garden_repository = GardenRepository(db)
 pubsub = RedisPubSubWrapper(db)
 connection = serial.Serial(port='COM8', baudrate=9600)
 
@@ -17,32 +19,37 @@ def update_strategy_handler(message):
     strategy = json.loads(message)
     logger.log(f"New strategy received: {strategy}")
     strategy_message = f"UPDATE:{strategy['led1']},{strategy['led2']},{strategy['led3']},{strategy['led4']},{strategy['irrigator_speed']}\n"
-    logger.log(f"Strategy message = {strategy_message}")
+    logger.log(f"Sending strategy = {strategy_message}")
     connection.write(strategy_message.encode())
+    if strategy["open_irrigator"]:
+        command = f"COMMAND:OPEN_IRRIGATOR\n"
+        logger.log(f"Sending command = {command}")
+        connection.write(command.encode())
 
 
 def update_status_handler(message):
     status_message = f"STATUS_CHANGE:{message}\n"
+    logger.log(f"Sending status change = {status_message}")
     connection.write(status_message.encode())
 
 
 def serial_loop():
 
-    def update_values_to_db(l1, l2, l3, l4, irrigator_open, irrigator_speed):
-        db.set("led1", l1)
-        db.set("led2", l2)
-        db.set("led3", l3)
-        db.set("led4", l4)
-        db.set("irrigator_open", irrigator_open)
-        db.set("irrigator_speed", irrigator_speed)
+    def update_values_to_db(l1, l2, l3, l4, irrigator_status, irrigator_speed):
+        garden_repository.set_led_1_value(l1)
+        garden_repository.set_led_2_value(l2)
+        garden_repository.set_led_3_value(l3)
+        garden_repository.set_led_4_value(l4)
+        garden_repository.set_irrigator_status(irrigator_status)
+        garden_repository.set_irrigation_speed(irrigator_speed)
 
-    def notify_new_values(l1, l2, l3, l4, irrigator_open, irrigator_speed):
+    def notify_new_values(l1, l2, l3, l4, irrigator_status: IrrigatorStatus, irrigator_speed):
         pubsub.publish("update-controllerStatus", json.dumps({
             "led1": l1,
             "led2": l2,
             "led3": l3,
             "led4": l4,
-            "irrigator_open": irrigator_open,
+            "irrigator_status": irrigator_status.toString(),
             "irrigator_speed": irrigator_speed
         }))
 
@@ -53,29 +60,27 @@ def serial_loop():
             message = message.strip().replace("\n", "")
         except:
             continue
-        if message.startswith("STATUS"):
+        if not message.startswith("STATUS"):
+            logger.log(f"Received message = {message}")
+        else:
             content = message.split(":")[1]
-            l1, l2, l3, l4, irrigator_open, irrigator_speed = content.split(
+            l1, l2, l3, l4, status, irrigator_speed = content.split(
                 ",")
+            irrigator_status = None
+            if status == "0":
+                irrigator_status = IrrigatorStatus.READY
+            elif status == "1":
+                irrigator_status = IrrigatorStatus.OPEN
+            else:
+                irrigator_status = IrrigatorStatus.CLOSED
+
             update_values_to_db(
-                l1, l2, l3, l4, irrigator_open, irrigator_speed)
-            notify_new_values(l1, l2, l3, l4, irrigator_open, irrigator_speed)
-
-
-def simulator():
-    while True:
-        sleep(5)
-        update_strategy_handler(json.dumps({
-            "led1": random.randint(0, 1),
-            "led2": random.randint(0, 1),
-            "led3": 4,
-            "led4": random.randint(0, 4),
-            "irrigator_speed": random.randint(1, 5)
-        }))
+                l1, l2, l3, l4, irrigator_status, irrigator_speed)
+            notify_new_values(
+                l1, l2, l3, l4, irrigator_status, irrigator_speed)
 
 
 if __name__ == '__main__':
     pubsub.subscribe(topic="update-strategy", handler=update_strategy_handler)
     pubsub.subscribe(topic="update-status", handler=update_status_handler)
-    # Thread(target=simulator).start()
     serial_loop()

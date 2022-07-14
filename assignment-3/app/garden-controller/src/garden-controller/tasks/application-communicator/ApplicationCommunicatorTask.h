@@ -17,7 +17,7 @@ enum class ApplicationCommunicatorTaskState : uint8_t {
 class ApplicationCommunicatorTask : public CommunicablePeriodBasedTaskWithFSM<ApplicationCommunicatorTaskState, MessageType> {
 
 private:
-    int _period = 500;
+    int _period = 100;
     AppData* appData;
     String message;
     MsgServiceBT* bluetooth;
