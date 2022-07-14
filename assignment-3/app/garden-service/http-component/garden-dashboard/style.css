@@ -1,0 +1,116 @@
+* {
+    font-family: monospace;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+hr {
+    border-top: 2px solid black;
+}
+
+.auto {
+    background-color: rgb(192, 255, 192);
+}
+
+.manual {
+    background-color: rgb(255, 192, 128);
+}
+
+.alarm {
+    background-color: rgb(255, 128, 128);
+}
+
+.title {
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+span {
+    margin-bottom: .25em;
+}
+
+.status {
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.status > h2 {
+    width: 100%;
+    font-size: 2.5em;
+    text-align: center;
+}
+
+.container_line {
+    margin-top: 2em;
+    padding: 1em;
+    border: 2px solid black;
+}
+
+body > div > div > h2 {
+    font-size: 2.5em;
+    text-align: center;
+}
+
+.line {
+    display: inline-block;
+    margin-top: 1em;
+    text-align: center;
+    font-weight: bold;
+}
+
+.sensorboard {
+    width: 50%;
+}
+
+.sensorboard > h3 {
+    display: inline-block;
+    width: 100%;
+    font-size: 2em;
+}
+
+.sensorboard > span {
+    display: inline-block;
+    width: 100%;
+    font-size: 3em;
+}
+
+.leds {
+    width: 50%;
+}
+
+.leds > h3 {
+    display: inline-block;
+    width: 100%;
+    font-size: 2em;
+}
+
+.leds > span {
+    display: inline-block;
+    width: 100%;
+    font-size: 3em;
+}
+
+.irrigator {
+    width: 50%;
+}
+
+.irrigator > h3 {
+    display: inline-block;
+    width: 100%;
+    font-size: 2em;
+}
+
+.irrigator > span {
+    display: inline-block;
+    width: 100%;
+    font-size: 3em;
+}

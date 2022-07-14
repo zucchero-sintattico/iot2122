@@ -5,9 +5,50 @@
     <title>Dashboard</title>
     <base href="/garden-dashboard/">
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
     <script src="main.js" defer></script>
 </head>
-<body>
-    <h1>Dashboard</h1>
+<body class="auto">
+    <h1 class="title">Dashboard</h1>
+    
+    <div id="container">
+        <div class="status">
+            <h2>Status: <span id="status"></span></h2> 
+        </div>
+
+        <div class="container_line">
+            <h2>Sensorboard</h2>
+            <div class="line sensorboard">
+                <h3>Light (0-7)</h3>
+                <span id="light"></span>
+            </div><div class="line sensorboard">
+                <h3>Temperature (0-4)</h3> 
+                <span id="temperature"></span>
+            </div>
+        </div>
+
+        <div class="container_line">
+            <h2>Led</h2>
+            <div class="line leds">
+                <h3>LED 1 (ON, OFF)</h3> <span id="led1"></span>
+            </div><div class="line leds">
+                <h3>LED 2 (ON, OFF)</h3> <span id="led2"></span>
+            </div><div class="line leds">
+                <h3>LED 3 (0-4)</h3> <span id="led3"></span>
+            </div><div class="line leds">
+                <h3>LED 4 (0-4)</h3> <span id="led4"></span>
+            </div>
+        </div>
+
+        <div class="container_line">
+            <h2>Irrigator</h2>
+            <div class="line irrigator">
+                <h3>Irrigator (OPEN, CLOSED)</h3> <span id="irrigator"></span>
+            </div><div class="line irrigator">
+                <h3>Irrigator speed (0-4)</h3> <span id="irrigator_speed"></span>
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>
