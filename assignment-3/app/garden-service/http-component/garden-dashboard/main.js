@@ -1,7 +1,7 @@
 const source = new EventSource("/sse");
 source.onmessage = function(event) {
     var data = JSON.parse(event.data);
-
+    
     for (let key in data) {
         switch (key) {
             case "status": updateStatus(data[key]);
@@ -16,6 +16,8 @@ dashboardStatus.open("GET", "/dashboard-status");
 dashboardStatus.onload = function() {
     const data = JSON.parse(dashboardStatus.responseText);
 
+    console.log(data);
+
     $("#status").text(data.status);
     updateStatus(data.status);
     
@@ -27,8 +29,8 @@ dashboardStatus.onload = function() {
     $("#led3").text(data.led3);
     $("#led4").text(data.led4);
 
-    $("#irrigator_status").text(data.irrigator);
-    $("#irrigation_speed").text(data.irrigator_speed);
+    $("#irrigator_status").text(data.irrigator_status);
+    $("#irrigation_speed").text(data.irrigation_speed);
 }
 dashboardStatus.send();
 
