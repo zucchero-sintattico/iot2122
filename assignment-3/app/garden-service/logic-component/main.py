@@ -14,7 +14,7 @@ garden_repository = GardenRepository(db)
 def on_new_sensorboard_values(message):
     def calculate_strategy(data):
         strategy = dict()
-        temperature = int(data["temperature"]) + 1  # 0 - 4 --> 1 - 5
+        temperature = int(data["temperature"])  # 1 - 5
         light = int(data["light"])  # 0 - 7
         if light < 5:
             strategy["led1"] = 1

@@ -13,7 +13,13 @@ void Thermometer::computeRead() {
     float voltage = analogRead(this->pin);
     voltage /= 1023.0;
     temperature = (voltage - 0.5) * 100;
-    temperature = map(temperature, 10, 60, 0, 4);
+    if (temperature < 10) {
+        temperature = 10;
+    }
+    else if (temperature > 60) {
+        temperature = 60;
+    }
+    temperature = map(temperature, 10, 60, 1, 5);
 }
 
 uint8_t Thermometer::getTemperature() {
