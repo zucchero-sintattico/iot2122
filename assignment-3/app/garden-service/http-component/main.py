@@ -14,7 +14,7 @@ def post_status():
     status = request.get_data().decode('utf-8')
     if status == 'AUTO' or status == 'MANUAL':
         db.set('status', status)
-        db.publish('update-status', status)
+        db.publish('update-status', json.dumps({'status': status}))
         return Response("Status changed\n", mimetype='text/plain', status=200)
     else:
         return Response("Error on status\n", mimetype='text/plain', status=400)
@@ -67,17 +67,7 @@ def stream():
         while True:
             message = pubsub.get_message()
             if message and message["type"] == "message":
-                channel = message["channel"].decode('utf-8')
-                
-                if channel == "update-status":
-                    status = message["data"].decode('utf-8')
-                    yield "data: {}\n\n".format(json.dumps({
-                        "status": status
-                    }))
-                elif channel == "update-sensorboard":
-                    yield "data: {}\n\n".format(json.dumps(json.loads(message["data"].decode('utf-8'))))
-                elif channel == "update-controllerStatus":
-                    yield "data: {}\n\n".format(json.dumps(json.loads(message["data"].decode('utf-8'))))
+                yield "data: {}\n\n".format(json.dumps(json.loads(message["data"].decode('utf-8'))))
     
     return Response(eventStream(), mimetype="text/event-stream")
 

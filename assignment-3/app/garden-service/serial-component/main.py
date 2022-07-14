@@ -28,7 +28,8 @@ def update_strategy_handler(message):
 
 
 def update_status_handler(message):
-    status_message = f"STATUS_CHANGE:{message}\n"
+    data = json.loads(message.decode("utf-8"))
+    status_message = f"STATUS_CHANGE:{data.get('status')}\n"
     logger.log(f"Sending status change = {status_message}")
     connection.write(status_message.encode())
 
