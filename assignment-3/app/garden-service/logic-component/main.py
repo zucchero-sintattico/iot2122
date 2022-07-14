@@ -48,7 +48,7 @@ def on_new_sensorboard_values(message):
     def save_status_and_publish_if_different(status):
         if (status != garden_repository.get_status()):
             garden_repository.set_status(status)
-            pubsub.publish("update-status", status.toString())
+            pubsub.publish("update-status", json.dumps({"status": status}))
 
     data = unpack_message(message)
     logger.log(f"Received new sensorboard values: {data}")
