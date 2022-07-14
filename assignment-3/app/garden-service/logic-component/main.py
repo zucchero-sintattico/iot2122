@@ -1,19 +1,17 @@
 import redis
 import json
-from lib.redis_pubsub_wrapper import RedisPubSubWrapper
 from lib.garden_repository import GardenRepository, Status, IrrigatorStatus
+from lib.pubsub_repository import PubSubRepository
 from lib.logger import Logger
 
 logger = Logger("Logic Component")
+
 db = redis.Redis("redis")
-pubsub = RedisPubSubWrapper(db)
+pubsub = PubSubRepository(db)
 garden_repository = GardenRepository(db)
 
 
 def on_new_sensorboard_values(message):
-    def unpack_message(msg):
-        return json.loads(msg)
-
     def calculate_strategy(data):
         strategy = dict()
         temperature = int(data["temperature"]) + 1  # 0 - 4 --> 1 - 5
@@ -43,14 +41,14 @@ def on_new_sensorboard_values(message):
             return garden_repository.get_status()
 
     def publish_strategy(strategy):
-        pubsub.publish("update-strategy", json.dumps(strategy))
+        pubsub.publish_new_strategy(strategy)
 
     def save_status_and_publish_if_different(status):
         if (status != garden_repository.get_status()):
             garden_repository.set_status(status)
-            pubsub.publish("update-status", json.dumps({"status": status}))
+            pubsub.publish_new_status(status)
 
-    data = unpack_message(message)
+    data = message
     logger.log(f"Received new sensorboard values: {data}")
     strategy = calculate_strategy(data)
     logger.log(f"Calculated strategy: {strategy}")
@@ -62,4 +60,4 @@ def on_new_sensorboard_values(message):
 
 if __name__ == '__main__':
     garden_repository.set_status(Status.AUTO)
-    pubsub.subscribe("update-sensorboard", on_new_sensorboard_values)
+    pubsub.set_on_new_sensorboard_values_handler(on_new_sensorboard_values)

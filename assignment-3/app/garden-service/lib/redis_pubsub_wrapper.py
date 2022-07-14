@@ -1,5 +1,8 @@
 from threading import Thread
-from time import sleep 
+from time import sleep
+import json
+
+
 class RedisPubSubWrapper():
     def __init__(self, database):
         self.database = database
@@ -15,11 +18,10 @@ class RedisPubSubWrapper():
         while True:
             message = self.pubsub.get_message()
             if message:
-                type = message["type"]
-                if (type == "subscribe"):
+                if (message["type"] == "subscribe"):
                     continue
                 topic = message["channel"].decode()
-                data = message["data"].decode()
+                data = json.loads(message["data"].decode())
                 self.channelMap[topic](data)
             sleep(0.01)
 

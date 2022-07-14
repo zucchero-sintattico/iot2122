@@ -7,16 +7,16 @@ from time import sleep
 from lib.redis_pubsub_wrapper import RedisPubSubWrapper
 from lib.logger import Logger
 from lib.garden_repository import GardenRepository, IrrigatorStatus
+from lib.pubsub_repository import PubSubRepository
 
 logger = Logger("Serial Component")
 db = redis.Redis("localhost")
+pubsub = PubSubRepository(db)
 garden_repository = GardenRepository(db)
-pubsub = RedisPubSubWrapper(db)
 connection = serial.Serial(port='COM8', baudrate=9600)
 
 
-def update_strategy_handler(message):
-    strategy = json.loads(message)
+def update_strategy_handler(strategy):
     logger.log(f"New strategy received: {strategy}")
     strategy_message = f"UPDATE:{strategy['led1']},{strategy['led2']},{strategy['led3']},{strategy['led4']},{strategy['irrigator_speed']}\n"
     logger.log(f"Sending strategy = {strategy_message}")
@@ -27,8 +27,7 @@ def update_strategy_handler(message):
         connection.write(command.encode())
 
 
-def update_status_handler(message):
-    data = json.loads(message.decode("utf-8"))
+def update_status_handler(data):
     status_message = f"STATUS_CHANGE:{data.get('status')}\n"
     logger.log(f"Sending status change = {status_message}")
     connection.write(status_message.encode())
@@ -45,14 +44,14 @@ def serial_loop():
         garden_repository.set_irrigation_speed(irrigator_speed)
 
     def notify_new_values(l1, l2, l3, l4, irrigator_status: IrrigatorStatus, irrigator_speed):
-        pubsub.publish("update-controllerStatus", json.dumps({
+        pubsub.publish_new_controller_values({
             "led1": l1,
             "led2": l2,
             "led3": l3,
             "led4": l4,
             "irrigator_status": irrigator_status.toString(),
             "irrigator_speed": irrigator_speed
-        }))
+        })
 
     while True:
         message = connection.readline()
@@ -82,6 +81,6 @@ def serial_loop():
 
 
 if __name__ == '__main__':
-    pubsub.subscribe(topic="update-strategy", handler=update_strategy_handler)
-    pubsub.subscribe(topic="update-status", handler=update_status_handler)
+    pubsub.set_on_new_strategy_handler(handler=update_strategy_handler)
+    pubsub.set_on_new_status_handler(handler=update_status_handler)
     serial_loop()
