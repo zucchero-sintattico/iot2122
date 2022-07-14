@@ -5,6 +5,8 @@ source.onmessage = function(event) {
     for (let key in data) {
         switch (key) {
             case "status": updateStatus(data[key]);
+            case "led1": $("#led1").text(data[key] == 1 ? "ON" : "OFF"); break;
+            case "led2": $("#led2").text(data[key] == 1 ? "ON" : "OFF"); break;
             default: $("#" + key).text(data[key]);
         }
     }
@@ -16,16 +18,14 @@ dashboardStatus.open("GET", "/dashboard-status");
 dashboardStatus.onload = function() {
     const data = JSON.parse(dashboardStatus.responseText);
 
-    console.log(data);
-
     $("#status").text(data.status);
     updateStatus(data.status);
     
     $("#light").text(data.light);
     $("#temperature").text(data.temperature);
 
-    $("#led1").text(data.led1);
-    $("#led2").text(data.led2);
+    $("#led1").text(data.led1 == 1 ? "ON" : "OFF");
+    $("#led2").text(data.led2 == 1 ? "ON" : "OFF");
     $("#led3").text(data.led3);
     $("#led4").text(data.led4);
 
