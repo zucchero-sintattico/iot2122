@@ -44,7 +44,7 @@ services:
       - 6379:6379
 
   broker-mqtt:
-    container_name: broker-mqtt
+    container_name: mosquitto
     image: eclipse-mosquitto:latest
     ports:
       - "1883:1883"

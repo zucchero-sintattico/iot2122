@@ -48,6 +48,7 @@ def on_new_sensorboard_values(message):
             garden_repository.set_status(status)
             pubsub.publish_new_status(status)
 
+    # Do not calculate the strategy if the system is not on AUTO status
     if garden_repository.get_status() == Status.ALARM or garden_repository.get_status() == Status.MANUAL:
         return
 
