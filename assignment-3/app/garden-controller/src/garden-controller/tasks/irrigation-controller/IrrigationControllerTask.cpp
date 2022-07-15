@@ -62,11 +62,17 @@ void IrrigationControllerTask::onOpenState() {
 }
 
 void IrrigationControllerTask::onClosedState() {
+    if (getMessageBus()->isMessagePresent(MessageType::NOTIFY_OPEN_IRRIGATOR)) {
+        getMessageBus()->removeMessage(MessageType::NOTIFY_OPEN_IRRIGATOR);
+        changeStateToOpen();
+        return;
+    }
     long elapsedTimeSinceOpened = millis() - this->closeTimestamp;
     if (elapsedTimeSinceOpened > this->CLOSED_TIME_MILLISECONDS) {
         this->appData->setIrrigatorStatus(IrrigatorStatus::READY);
         setState(IrrigationControllerTaskState::READY);
     }
+
 }
 
 
