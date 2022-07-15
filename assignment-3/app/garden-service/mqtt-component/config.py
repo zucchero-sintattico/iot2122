@@ -1,6 +1,6 @@
 class Config:
     class mqtt:
-        host = "broker-mqtt"
+        host = "mosquitto"
         sensorboard = "smart-garden/sensorboard"
         status = "smart-garden/status"
     
