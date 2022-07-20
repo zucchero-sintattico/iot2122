@@ -1,12 +1,16 @@
 package com.mazzo.andru.testa.gardenapp.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import com.google.android.material.slider.Slider
 import com.mazzo.andru.testa.gardenapp.R
+import com.mazzo.andru.testa.gardenapp.Utils
+import com.mazzo.andru.testa.gardenapp.model.Led
+import com.mazzo.andru.testa.gardenapp.model.ManageComponents
 import com.mazzo.andru.testa.gardenapp.model.UIComponents
 
 
@@ -25,7 +29,29 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
         if(activity != null){
             this.bindAllComponents()
             this.setAllListeners()
+            Log.d("connect", Utils.btSocket.toString())
+
+            if(Utils.btSocket != null){
+                ManageComponents.socket = Utils.btSocket
+                this.enableAll()
+            }else{
+                this.disableAll()
+            }
         }
+    }
+
+    private fun disableAll() {
+        this.btnLed1.isEnabled = false
+        this.btnLed2.isEnabled = false
+        this.btnLed3.isEnabled = false
+        this.btnLed4.isEnabled = false
+    }
+
+    private fun enableAll() {
+        this.btnLed1.isEnabled = true
+        this.btnLed2.isEnabled = true
+        this.btnLed3.isEnabled = true
+        this.btnLed4.isEnabled = true
     }
 
     override fun bindAllComponents() {
@@ -40,17 +66,29 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
     override fun setAllListeners() {
         this.btnLed1.setOnClickListener{
             this.switchButton(this.btnLed1)
+            ManageComponents.switchLedStatus(Led.ONE)
         }
         this.btnLed2.setOnClickListener{
             this.switchButton(this.btnLed2)
+            ManageComponents.switchLedStatus(Led.TWO)
         }
         this.btnLed3.setOnClickListener{
             this.switchButton(this.btnLed3)
             this.switchSlider(this.btnLed3, this.slider3)
+            ManageComponents.switchLedStatus(Led.THREE)
         }
         this.btnLed4.setOnClickListener{
             this.switchButton(this.btnLed4)
             this.switchSlider(this.btnLed4, this.slider4)
+            ManageComponents.switchLedStatus(Led.FOUR)
+        }
+
+        this.slider3.addOnChangeListener { _, value, _ ->
+            ManageComponents.switchSlider(Led.THREE, value.toInt())
+        }
+
+        this.slider4.addOnChangeListener { _, value, _ ->
+            ManageComponents.switchSlider(Led.FOUR, value.toInt())
         }
     }
 
@@ -76,6 +114,9 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
 
     private fun switchSlider(button: Button, slider: Slider){
         slider.isEnabled = !this.isButtonInactive(button)
+        if(!slider.isEnabled){
+            slider.value = 1f
+        }
     }
 
     private fun isButtonInactive(button : Button) : Boolean{
