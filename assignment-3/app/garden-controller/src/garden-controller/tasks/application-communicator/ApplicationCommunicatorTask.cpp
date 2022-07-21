@@ -36,6 +36,7 @@ void ApplicationCommunicatorTask::onIdleState() {
 
 void ApplicationCommunicatorTask::onReadingState() {
     if (isMessagePresent()) {
+        Serial.println("Message from BT: " + message);
         if (CommunicationUtilities::isUpdateMessage(message)) {
             UpdateMessage* updateMessage = CommunicationUtilities::getUpdateMessage(message);
             this->appData->update(updateMessage->digitalLed1active, updateMessage->digitalLed2active, updateMessage->analogLed1value, updateMessage->analogLed2value, updateMessage->irrigatorValue);
@@ -46,7 +47,7 @@ void ApplicationCommunicatorTask::onReadingState() {
             switch (commandMessage->command)
             {
             case Commands::OPEN_IRRIGATOR:
-                if (appData->getIrrigatorStatus() == READY && !this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_OPEN_IRRIGATOR)) {
+                if ((appData->getIrrigatorStatus() == READY || appData->getStatus() == Status::MANUAL) && !this->getMessageBus()->isMessagePresent(MessageType::NOTIFY_OPEN_IRRIGATOR)) {
                     this->getMessageBus()->push(MessageType::NOTIFY_OPEN_IRRIGATOR);
                 }
                 break;

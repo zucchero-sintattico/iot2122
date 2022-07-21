@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.Toast
 import com.google.android.material.slider.Slider
 import com.mazzo.andru.testa.gardenapp.R
+import com.mazzo.andru.testa.gardenapp.Utils
+import com.mazzo.andru.testa.gardenapp.model.ManageComponents
 import com.mazzo.andru.testa.gardenapp.model.UIComponents
 
 class IrrigationFragment : Fragment(R.layout.fragment_irrigation), UIComponents {
@@ -20,6 +22,13 @@ class IrrigationFragment : Fragment(R.layout.fragment_irrigation), UIComponents 
         if(activity != null){
             this.bindAllComponents()
             this.setAllListeners()
+
+            if(Utils.btSocket != null){
+                ManageComponents.socket = Utils.btSocket
+                this.irrigationButton.isEnabled = true
+            }else{
+                this.irrigationButton.isEnabled = false
+            }
         }
     }
 
@@ -31,7 +40,11 @@ class IrrigationFragment : Fragment(R.layout.fragment_irrigation), UIComponents 
     override fun setAllListeners() {
         this.irrigationButton.setOnClickListener {
             this.switchButton(this.irrigationButton)
+            ManageComponents.switchIrrigationStatus()
             this.switchSlider(this.irrigationButton, this.slider)
+            this.slider.addOnChangeListener { _, value, _ ->
+                ManageComponents.changeValueOfIrrigation(value.toInt())
+            }
         }
     }
 

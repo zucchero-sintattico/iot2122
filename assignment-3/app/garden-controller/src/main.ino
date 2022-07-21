@@ -36,7 +36,7 @@ Device* device = builder
 ->build();
 
 // Application data
-AppData* appData = new AppData(Status::AUTO);
+AppData* appData = new AppData(Status::MANUAL);
 
 // Scheduler and Tasks configurations
 SchedulerWithMessageBus<MessageType>* scheduler = new SchedulerWithMessageBus<MessageType>();
