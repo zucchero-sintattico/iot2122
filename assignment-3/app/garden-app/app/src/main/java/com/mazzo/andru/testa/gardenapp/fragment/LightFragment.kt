@@ -9,9 +9,11 @@ import android.widget.Toast
 import com.google.android.material.slider.Slider
 import com.mazzo.andru.testa.gardenapp.R
 import com.mazzo.andru.testa.gardenapp.Utils
+import com.mazzo.andru.testa.gardenapp.model.AllarmStatus
 import com.mazzo.andru.testa.gardenapp.model.Led
 import com.mazzo.andru.testa.gardenapp.model.ManageComponents
 import com.mazzo.andru.testa.gardenapp.model.UIComponents
+import kotlinx.coroutines.*
 
 
 class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
@@ -20,8 +22,10 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
     private  lateinit var btnLed2 : Button
     private  lateinit var btnLed3 : Button
     private  lateinit var btnLed4 : Button
+    private  lateinit var btnManual : Button
     private lateinit var slider3 : Slider
     private lateinit var slider4 : Slider
+    private var allarmStatus = AllarmStatus("192.168.74.207")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,14 +33,14 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
         if(activity != null){
             this.bindAllComponents()
             this.setAllListeners()
-            Log.d("connect", Utils.btSocket.toString())
-
-            if(Utils.btSocket != null){
-                ManageComponents.socket = Utils.btSocket
-                this.enableAll()
-            }else{
-                this.disableAll()
+            this.refreshView()
+            this.allarmStatus.getAllarmStatus {
+                if(it == "ALARM"){
+                    //Color Bell
+                }
             }
+            Log.d("connect", Utils.btSocket.toString())
+            this.disableAll()
         }
     }
 
@@ -61,6 +65,7 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
         this.btnLed4 = requireActivity().findViewById(R.id.btn_led_4)
         this.slider3 = requireActivity().findViewById(R.id.slider_led_3)
         this.slider4 = requireActivity().findViewById(R.id.slider_led_4)
+        this.btnManual = requireActivity().findViewById(R.id.btn_manual)
     }
 
     override fun setAllListeners() {
@@ -89,6 +94,18 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
 
         this.slider4.addOnChangeListener { _, value, _ ->
             ManageComponents.switchSlider(Led.FOUR, value.toInt())
+        }
+
+        this.btnManual.setOnClickListener {
+            if(Utils.btSocket != null) {
+                this.allarmStatus.setManualMode()
+                CoroutineScope(Dispatchers.IO).launch {
+                    delay(1500)
+                    withContext(Dispatchers.Main) {
+                        enableAll()
+                    }
+                }
+            }
         }
     }
 
@@ -121,5 +138,18 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
 
     private fun isButtonInactive(button : Button) : Boolean{
         return button.currentTextColor != requireActivity().getColor(R.color.orange)
+    }
+
+    private fun refreshView(){
+        if(ManageComponents.ledOneStauts != 0) this.switchButton(this.btnLed1)
+        if(ManageComponents.ledTwoStauts != 0) this.switchButton(this.btnLed2)
+        if(ManageComponents.ledThreeStauts != 0) {
+            this.switchButton(this.btnLed3)
+            this.switchSlider(this.btnLed3, this.slider3)
+        }
+        if(ManageComponents.ledFourStauts != 0) {
+            this.switchButton(this.btnLed4)
+            this.switchSlider(this.btnLed4, this.slider4)
+        }
     }
 }

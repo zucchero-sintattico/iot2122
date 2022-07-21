@@ -101,7 +101,7 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_led_2" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_manual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

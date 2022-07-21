@@ -1,16 +1,18 @@
 package com.mazzo.andru.testa.gardenapp.model
 
 import android.bluetooth.BluetoothSocket
+import android.util.Log
 
-class ManageComponents() {
+class ManageComponents{
 
     companion object{
         var socket: BluetoothSocket? = null
-        private var ledOneStauts = 0
-        private var ledTwoStauts = 0
-        private var ledThreeStauts = 0
-        private var ledFourStauts = 0
-        private var irrigatorStatus = 0
+        var ledOneStauts = 0
+        var ledTwoStauts = 0
+        var ledThreeStauts = 0
+        var ledFourStauts = 0
+        var irrigatorStatus = 1
+        var irrigatorEnabled = false
 
 
         fun switchLedStatus(led : Led){
@@ -36,12 +38,13 @@ class ManageComponents() {
 
 
         fun switchIrrigationStatus(){
-            if(irrigatorStatus == 0){
+            irrigatorEnabled = if(!irrigatorEnabled){
                 sendOpenIrrigation()
+                true
             }else{
                 sendCloseIrrigation()
+                false
             }
-            sendMessage()
         }
 
         fun changeValueOfIrrigation(value: Int){
@@ -52,26 +55,31 @@ class ManageComponents() {
         }
 
         private fun sendMessage(){
+            val message = ("UPDATE:$ledOneStauts," +
+                    "$ledTwoStauts," +
+                    "$ledThreeStauts," +
+                    "$ledFourStauts," +
+                    "$irrigatorStatus\n")
             if(this.socket != null){
-                this.socket!!.outputStream.write(("UPDATE:$ledOneStauts," +
-                        "$ledTwoStauts," +
-                        "$ledThreeStauts," +
-                        "$ledFourStauts" +
-                        "$irrigatorStatus\n").toByteArray())
+                this.socket!!.outputStream.write(message.toByteArray())
+                Log.d("message", message)
             }
         }
 
         private fun sendOpenIrrigation(){
+            val message = "COMMAND:OPEN_IRRIGATOR\n"
             if(this.socket != null){
                 irrigatorStatus = 1
-                this.socket!!.outputStream.write("COMMAND:OPEN_IRRIGATOR".toByteArray())
+                this.socket!!.outputStream.write(message.toByteArray())
+                Log.d("message", message)
             }
         }
 
         private fun sendCloseIrrigation(){
+            val message = "COMMAND:CLOSE_IRRIGATOR\n"
             if(this.socket != null){
-                irrigatorStatus = 0
-                this.socket!!.outputStream.write("COMMAND:CLOSE_IRRIGATOR".toByteArray())
+                irrigatorStatus = 1
+                this.socket!!.outputStream.write(message.toByteArray())
             }
         }
     }

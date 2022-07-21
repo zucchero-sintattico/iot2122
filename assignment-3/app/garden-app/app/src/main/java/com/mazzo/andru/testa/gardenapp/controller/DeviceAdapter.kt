@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.mazzo.andru.testa.gardenapp.R
 import com.mazzo.andru.testa.gardenapp.Utils
+import com.mazzo.andru.testa.gardenapp.model.ManageComponents
 import java.io.IOException
 
 class DeviceAdapter(private var device : MutableList<BluetoothDevice>,
@@ -70,6 +71,7 @@ class DeviceAdapter(private var device : MutableList<BluetoothDevice>,
                     Toast.makeText(context, "Dispositivo Connesso", Toast.LENGTH_SHORT).show()
                     // The connection attempt succeeded. Perform work associated with
                     // the connection in a separate thread.
+                    ManageComponents.socket = socket
                     Utils.btSocket = socket
                 }
             }else{

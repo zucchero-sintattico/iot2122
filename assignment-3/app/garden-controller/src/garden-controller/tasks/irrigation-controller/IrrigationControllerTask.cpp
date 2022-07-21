@@ -48,8 +48,8 @@ void IrrigationControllerTask::onOpenState() {
         if (getMessageBus()->isMessagePresent(MessageType::NOTIFY_CLOSE_IRRIGATOR)) {
             getMessageBus()->removeMessage(MessageType::NOTIFY_CLOSE_IRRIGATOR);
             changeStateToClosed();
-            return;
         }
+        break;
     case AUTO:
         long elapsedTimeSinceOpened = millis() - this->openTimestamp;
         if (elapsedTimeSinceOpened > OPEN_TIME_MILLISECONDS) {
