@@ -12,7 +12,7 @@ garden_repository = GardenRepository(db)
 
 @app.route('/status', methods=['GET'])
 def get_status():
-    return json.dumps({RedisKeys.STATUS: garden_repository.get_status()}) + "\n"
+    return garden_repository.get_status().toString()
 
 
 @app.route('/status', methods=['POST'])
