@@ -50,7 +50,7 @@ def serial_loop():
             "led3": l3,
             "led4": l4,
             "irrigator_status": irrigator_status.toString(),
-            "irrigator_speed": irrigator_speed
+            "irrigation_speed": irrigator_speed
         })
 
     while True:

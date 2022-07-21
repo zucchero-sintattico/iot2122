@@ -1,15 +1,27 @@
 const source = new EventSource("/sse");
 source.onmessage = function(event) {
     var data = JSON.parse(event.data);
-    
+
     for (let key in data) {
         switch (key) {
-            case "status": updateStatus(data[key]);
-            case "led1": $("#led1").text(data[key] == 1 ? "ON" : "OFF"); break;
-            case "led2": $("#led2").text(data[key] == 1 ? "ON" : "OFF"); break;
-            case "led3": $("#led3").text(data[key]*25 + "%"); break;
-            case "led4": $("#led4").text(data[key]*25 + "%"); break;
-            default: $("#" + key).text(data[key]);
+            case "status":
+                updateStatus(data[key]);
+                $("#status").text(data[key]);
+                break;
+            case "led1":
+                $("#led1").text(data[key] == 1 ? "ON" : "OFF");
+                break;
+            case "led2":
+                $("#led2").text(data[key] == 1 ? "ON" : "OFF");
+                break;
+            case "led3":
+                $("#led3").text(data[key] * 25 + "%");
+                break;
+            case "led4":
+                $("#led4").text(data[key] * 25 + "%");
+                break;
+            default:
+                $("#" + key).text(data[key]);
         }
     }
 };
@@ -22,7 +34,7 @@ dashboardStatus.onload = function() {
 
     $("#status").text(data.status);
     updateStatus(data.status);
-    
+
     $("#light").text(data.light);
     $("#temperature").text(data.temperature);
 
@@ -32,7 +44,7 @@ dashboardStatus.onload = function() {
     $("#led4").text(data.led4);
 
     $("#irrigator_status").text(data.irrigator_status);
-    $("#irrigation_speed").text(data.irrigation_speed);
+    $("#irrigator_speed").text(data.irrigation_speed);
 }
 dashboardStatus.send();
 
