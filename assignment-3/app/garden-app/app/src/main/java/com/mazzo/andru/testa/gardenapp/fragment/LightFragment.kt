@@ -25,6 +25,7 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
     private  lateinit var btnManual : Button
     private lateinit var slider3 : Slider
     private lateinit var slider4 : Slider
+    private lateinit var alarm : Button
     private var allarmStatus = AllarmStatus("192.168.74.207")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,10 +38,19 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
             this.allarmStatus.getAllarmStatus {
                 if(it == "ALARM"){
                     //Color Bell
+                    alarm.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_baseline_alarm_orange,0,0)
+                }else{
+                    alarm.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_baseline_alarm_24,0,0)
                 }
             }
             Log.d("connect", Utils.btSocket.toString())
             this.disableAll()
+
+            if(ManageComponents.socket != null){
+                this.enableAll()
+            }else{
+                this.disableAll()
+            }
         }
     }
 
@@ -66,6 +76,7 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
         this.slider3 = requireActivity().findViewById(R.id.slider_led_3)
         this.slider4 = requireActivity().findViewById(R.id.slider_led_4)
         this.btnManual = requireActivity().findViewById(R.id.btn_manual)
+        this.alarm = requireActivity().findViewById(R.id.alarm)
     }
 
     override fun setAllListeners() {
@@ -98,6 +109,7 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
 
         this.btnManual.setOnClickListener {
             if(Utils.btSocket != null) {
+                alarm.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_baseline_alarm_24,0,0)
                 this.allarmStatus.setManualMode()
                 CoroutineScope(Dispatchers.IO).launch {
                     delay(1500)
@@ -106,6 +118,17 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
                     }
                 }
             }
+        }
+
+        this.alarm.setOnClickListener {
+                this.allarmStatus.setAutoMode()
+                alarm.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_baseline_alarm_24,0,0)
+                CoroutineScope(Dispatchers.IO).launch {
+                    delay(1500)
+                    withContext(Dispatchers.Main) {
+                        disableAll()
+                    }
+                }
         }
     }
 
