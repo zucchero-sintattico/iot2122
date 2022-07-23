@@ -51,6 +51,7 @@ class LightFragment : Fragment(R.layout.fragment_light), UIComponents {
             }else{
                 this.disableAll()
             }
+            this.enableAll()
         }
     }
 

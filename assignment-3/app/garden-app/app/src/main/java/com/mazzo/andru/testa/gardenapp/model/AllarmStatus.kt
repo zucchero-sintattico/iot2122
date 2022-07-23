@@ -49,7 +49,7 @@ class AllarmStatus(ip : String) {
         httpAsync.join()
     }
 
-    fun setAutoMode(){
+    fun setAutoMode(onComplete: () -> Unit = {}){
         val httpAsync = completeUrl
             .httpPost()
             .body("AUTO")
@@ -64,6 +64,7 @@ class AllarmStatus(ip : String) {
                         Log.d("request", data)
                     }
                 }
+                onComplete()
             }
         httpAsync.join()
     }

@@ -29,6 +29,7 @@ class IrrigationFragment : Fragment(R.layout.fragment_irrigation), UIComponents 
             }else{
                 this.irrigationButton.isEnabled = false
             }
+            this.irrigationButton.isEnabled = true
         }
     }
 
